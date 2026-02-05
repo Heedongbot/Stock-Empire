@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import { Search, Newspaper, TrendingUp, TrendingDown, Filter, Zap, Lock, ChevronRight, Activity, Globe, X } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { translations } from '@/lib/translations';
+import { useAuth } from '@/lib/AuthContext';
 
-/* --------------------------------------------------------------------------------
- * Interfaces matching public/us-news-tiered.json
- * -------------------------------------------------------------------------------- */
 interface TierData {
     summary_kr?: string;
     ai_analysis?: {
@@ -39,21 +37,23 @@ interface NewsItem {
 export default function NewsPage() {
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
     const t = translations[lang];
+    const { user } = useAuth();
+    const userTier = user?.tier || 'FREE';
+
     const [filter, setFilter] = useState<'ALL' | 'BULLISH' | 'BEARISH'>('ALL');
     const [newsData, setNewsData] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [visibleCount, setVisibleCount] = useState(6);
-    const [userTier, setUserTier] = useState<'FREE' | 'VIP' | 'VVIP'>('FREE');
     const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
-    // Fetch Real Data
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                // Use the new tiered JSON
                 const res = await fetch(`/us-news-tiered.json?t=${Date.now()}`);
                 const data = await res.json();
-                setNewsData(data);
+                if (Array.isArray(data)) {
+                    setNewsData(data);
+                }
             } catch (error) {
                 console.error("Failed to fetch news", error);
             } finally {
@@ -63,7 +63,6 @@ export default function NewsPage() {
         fetchNews();
     }, []);
 
-    // Filter Logic
     const filteredNews = newsData.filter(item => {
         if (filter === 'ALL') return true;
         return item.sentiment === filter;
@@ -94,58 +93,39 @@ export default function NewsPage() {
                 </div>
             </div>
 
-            {/* 2. Header */}
             <SiteHeader lang={lang} setLang={setLang} />
 
-            {/* 3. Main Content */}
             <main className="max-w-7xl mx-auto px-6 py-12">
-                <div className="mb-12 text-center relative">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-indigo-500/10 blur-[100px] -z-10 rounded-full" />
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+                    <div>
+                        <h1 className="text-4xl font-black italic tracking-tighter text-white mb-2 uppercase underline decoration-indigo-500 underline-offset-8 decoration-4">
+                            AI Newsroom
+                        </h1>
+                        <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">
+                            Real-time Global Market Analysis
+                        </p>
+                    </div>
 
-                    <div className="flex justify-center gap-2 mb-6">
-                        {['FREE', 'VIP', 'VVIP'].map((tier) => (
+                    <div className="flex items-center gap-3 bg-slate-900/50 p-1.5 rounded-2xl border border-slate-800">
+                        {(['ALL', 'BULLISH', 'BEARISH'] as const).map((f) => (
                             <button
-                                key={tier}
-                                onClick={() => setUserTier(tier as any)}
-                                className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${userTier === tier ? 'bg-indigo-500 text-white border-indigo-500' : 'bg-slate-900 text-slate-500 border-slate-800'}`}
+                                key={f}
+                                onClick={() => setFilter(f)}
+                                className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === f ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-500 hover:text-slate-300'}`}
                             >
-                                View as {tier}
+                                {f}
                             </button>
                         ))}
                     </div>
-
-                    <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter text-white mb-6">
-                        {t.newsPage.title}
-                    </h1>
-                    <p className="text-lg text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed">
-                        {t.newsPage.subtitle}
-                    </p>
-                </div>
-
-                <div className="flex justify-center gap-2 mb-12">
-                    {['ALL', 'BULLISH', 'BEARISH'].map(tabId => (
-                        <button
-                            key={tabId}
-                            onClick={() => { setFilter(tabId as any); setVisibleCount(6); }}
-                            className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all border ${filter === tabId
-                                ? tabId === 'BULLISH' ? 'bg-green-500/10 border-green-500 text-green-500'
-                                    : tabId === 'BEARISH' ? 'bg-red-500/10 border-red-500 text-red-500'
-                                        : 'bg-indigo-500/10 border-indigo-500 text-indigo-400'
-                                : 'bg-slate-900 border-slate-800 text-slate-500 hover:border-slate-600'
-                                }`}
-                        >
-                            {tabId}
-                        </button>
-                    ))}
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-20">
-                        <Activity className="w-10 h-10 text-indigo-500 animate-spin mx-auto mb-4" />
-                        <p className="text-slate-500 font-bold">브리핑 데이터를 불러오는 중...</p>
+                    <div className="flex flex-col items-center justify-center py-40">
+                        <LoaderIcon className="w-12 h-12 text-indigo-500 animate-spin mb-4" />
+                        <p className="text-slate-500 text-xs font-black uppercase tracking-[0.3em] animate-pulse">Decrypting Market Data...</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {displayedNews.map((news, idx) => (
                             <div
                                 key={idx}
@@ -155,7 +135,7 @@ export default function NewsPage() {
                                 <div className={`h-1.5 w-full ${news.sentiment === 'BULLISH' ? 'bg-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500' : 'bg-slate-500'}`} />
                                 <div className="p-6 flex flex-col h-full">
                                     <div className="flex justify-between items-start mb-4">
-                                        <span className="px-3 py-1 bg-slate-950 rounded-lg text-xs font-black text-indigo-400 border border-slate-800">{news.ticker}</span>
+                                        <span className="px-3 py-1 bg-slate-950 rounded-lg text-xs font-black text-indigo-400 border border-slate-800 uppercase tracking-widest">{news.ticker}</span>
                                         <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${news.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500' : 'bg-slate-700/50 text-slate-400'}`}>
                                             {news.sentiment}
                                         </span>
@@ -164,16 +144,16 @@ export default function NewsPage() {
                                         {news.free_tier.title}
                                     </h3>
                                     <div className="text-sm text-slate-400 mb-6 line-clamp-3 leading-relaxed">
-                                        {userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.ai_analysis?.summary_kr || news.free_tier.summary_kr)}
+                                        {userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.summary_kr || news.free_tier.summary_kr)}
                                     </div>
                                     <div className="mt-auto pt-4 border-t border-slate-800/50">
                                         <div className="flex items-center gap-2 mb-2">
                                             <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                                             <span className="text-xs font-black text-yellow-500 uppercase tracking-wider">AI Insight</span>
                                         </div>
-                                        <div className={`relative ${userTier === 'FREE' ? 'filter blur-[4px] opacity-50' : ''}`}>
+                                        <div className={`relative ${userTier === 'FREE' ? 'filter blur-[4px] opacity-50 select-none' : ''}`}>
                                             <p className="text-xs text-slate-300 font-medium">
-                                                {news.vip_tier?.ai_analysis?.investment_insight || "분석 데이터를 불러오는 중..."}
+                                                {news.vip_tier?.ai_analysis?.investment_insight || "Premium analysis pending..."}
                                             </p>
                                         </div>
                                     </div>
@@ -185,8 +165,8 @@ export default function NewsPage() {
 
                 {!loading && displayedNews.length < filteredNews.length && (
                     <div className="mt-12 text-center">
-                        <button onClick={() => setVisibleCount(prev => prev + 6)} className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold transition-all border border-slate-700 mx-auto">
-                            더 많은 뉴스 보기
+                        <button onClick={() => setVisibleCount(prev => prev + 6)} className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold transition-all border border-slate-700 mx-auto uppercase text-xs tracking-widest">
+                            Load More Intelligence
                         </button>
                     </div>
                 )}
@@ -208,7 +188,7 @@ export default function NewsPage() {
                                     <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Summary</h4>
                                     <p className="text-slate-300 leading-relaxed">{selectedNews.free_tier.summary_kr}</p>
                                 </div>
-                                <div className={`p-6 rounded-2xl bg-slate-950 border border-slate-800 relative ${userTier === 'FREE' ? 'filter blur-[8px] select-none' : ''}`}>
+                                <div className={`p-6 rounded-2xl bg-slate-950 border border-slate-800 relative ${userTier === 'FREE' ? 'filter blur-[8px] select-none shadow-inner' : ''}`}>
                                     <div className="flex items-center gap-2 mb-4">
                                         <Zap className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                                         <h4 className="text-sm font-black text-white uppercase tracking-widest">Premium AI Analysis</h4>
@@ -225,7 +205,7 @@ export default function NewsPage() {
                                         </div>
                                     </div>
                                     {userTier === 'FREE' && (
-                                        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/20">
+                                        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-transparent">
                                             <Lock className="w-10 h-10 text-indigo-500 mb-2" />
                                             <button className="px-6 py-2 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Upgrade to Unlock</button>
                                         </div>
@@ -234,7 +214,7 @@ export default function NewsPage() {
                             </div>
                             <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
                                 <span className="text-xs text-slate-500 font-bold uppercase tracking-widest">Published: {new Date(selectedNews.published_at).toLocaleString()}</span>
-                                <a href={selectedNews.free_tier.link} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2">
+                                <a href={selectedNews.free_tier.link} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 uppercase tracking-wide">
                                     Original Source <ChevronRight className="w-4 h-4" />
                                 </a>
                             </div>
@@ -243,5 +223,13 @@ export default function NewsPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+function LoaderIcon({ className }: { className?: string }) {
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+        </svg>
     );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  Globe, Zap, ArrowUpRight, Play, UserPlus,
+  Globe, Zap, ArrowUpRight, UserPlus,
   ChevronRight, TrendingUp, Database, Cpu,
   Activity, BarChart3, Users, Flame, Clock, ShieldAlert,
   ChevronDown, Sparkles, BookOpen, ExternalLink,
@@ -14,6 +14,8 @@ import Link from "next/link";
 import { translations } from "@/lib/translations";
 import { Ticker } from "@/components/Ticker";
 import { QuizWidget } from "@/components/QuizWidget";
+import SiteHeader from "@/components/SiteHeader";
+import { useAuth } from "@/lib/AuthContext";
 
 // --- Interfaces for Alpha Signals ---
 interface AlphaSignal {
@@ -99,43 +101,47 @@ function PaymentModal({ isOpen, onClose, plan, onComplete }: { isOpen: boolean; 
                   value={cardNumber}
                   onChange={(e) => setCardNumber(e.target.value)}
                 />
-                <div className="flex justify-between">
-                  <div>
-                    <div className="text-[10px] text-slate-500 uppercase font-bold mb-1">Card Holder</div>
-                    <div className="text-sm font-bold text-slate-300">INVESTOR</div>
-                  </div>
-                  <div className="flex gap-4">
-                    <div>
-                      <div className="text-[10px] text-slate-500 uppercase font-bold mb-1">Expires</div>
-                      <input type="text" placeholder="MM/YY" maxLength={5} className="w-16 bg-transparent text-sm font-bold text-white placeholder-slate-600 focus:outline-none" value={expiry} onChange={(e) => setExpiry(e.target.value)} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-500 uppercase font-bold mb-1">CVC</div>
-                      <input type="text" placeholder="123" maxLength={3} className="w-10 bg-transparent text-sm font-bold text-white placeholder-slate-600 focus:outline-none" value={cvc} onChange={(e) => setCvc(e.target.value)} />
-                    </div>
-                  </div>
+                <div className="flex gap-4">
+                  <input
+                    type="text"
+                    placeholder="MM/YY"
+                    maxLength={5}
+                    className="w-1/2 bg-transparent text-lg font-mono text-white placeholder-slate-600 focus:outline-none tracking-widest"
+                    value={expiry}
+                    onChange={(e) => setExpiry(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="CVC"
+                    maxLength={3}
+                    className="w-1/2 bg-transparent text-lg font-mono text-white placeholder-slate-600 text-right focus:outline-none tracking-widest"
+                    value={cvc}
+                    onChange={(e) => setCvc(e.target.value)}
+                  />
                 </div>
               </div>
-              <button onClick={handlePay} className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-black text-lg transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
-                <Lock className="w-4 h-4" /> Pay Now
+              <button
+                onClick={handlePay}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2"
+              >
+                Complete Payment
               </button>
             </div>
           )}
           {step === 'PROCESSING' && (
-            <div className="text-center py-12">
-              <div className="relative w-20 h-20 mx-auto mb-6">
-                <div className="absolute inset-0 border-4 border-slate-700 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-t-blue-500 rounded-full animate-spin"></div>
-              </div>
-              <h3 className="text-xl font-black text-white mb-2">Processing Payment...</h3>
+            <div className="py-12 flex flex-col items-center justify-center text-center">
+              <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-6" />
+              <h4 className="text-xl font-black text-white uppercase italic tracking-widest">Encrypting Session</h4>
+              <p className="text-slate-500 text-xs mt-2">Connecting to secure financial network...</p>
             </div>
           )}
           {step === 'SUCCESS' && (
-            <div className="text-center py-12 animate-fade-in-up">
-              <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-10 h-10 text-white fill-white" />
+            <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in">
+              <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
+                <CheckCircle2 className="w-10 h-10 text-green-500" />
               </div>
-              <h3 className="text-2xl font-black text-white mb-2">Upgrade Complete!</h3>
+              <h4 className="text-2xl font-black text-white uppercase italic tracking-widest">Access Granted</h4>
+              <p className="text-slate-400 text-sm mt-2 font-bold uppercase tracking-tighter">Welcome to the Elite Tier</p>
             </div>
           )}
         </div>
@@ -144,236 +150,160 @@ function PaymentModal({ isOpen, onClose, plan, onComplete }: { isOpen: boolean; 
   );
 }
 
-// --- MAIN HOME PAGE ---
-export default function Home() {
-  const [lang, setLang] = useState<'ko' | 'en'>('ko');
+// --- MAIN LANDING PAGE ---
+export default function LandingPage() {
+  const [lang, setLang] = useState<"ko" | "en">("ko");
   const t = translations[lang];
-  const [userTier, setUserTier] = useState<"FREE" | "VIP" | "VVIP">("FREE");
-  const [alphaSignals, setAlphaSignals] = useState<AlphaSignal[]>([]);
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<'VIP' | 'VVIP' | ''>('');
+  const { user, updateTier } = useAuth();
+  const userTier = user?.tier || 'FREE';
 
-  const openPayment = (plan: 'VIP' | 'VVIP') => {
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
+  const [signals, setSignals] = useState<AlphaSignal[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSignals = async () => {
+      try {
+        const res = await fetch(`/alpha-signals.json?t=${Date.now()}`);
+        if (res.ok) {
+          const data = await res.json();
+          setSignals(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch alpha signals", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSignals();
+  }, []);
+
+  const openPayment = (plan: string) => {
     setSelectedPlan(plan);
     setIsPaymentOpen(true);
   };
 
   const handleUpgradeComplete = () => {
-    setUserTier(selectedPlan as any);
-    try {
-      localStorage.setItem('stock-empire-tier', selectedPlan);
-    } catch (e) { }
+    updateTier(selectedPlan as 'VIP' | 'VVIP');
   };
 
-  useEffect(() => {
-    // 1. Load Tier from LocalStorage
-    const savedTier = localStorage.getItem('stock-empire-tier');
-    if (savedTier) setUserTier(savedTier as any);
-
-    // 2. Fetch Alpha Signals
-    const fetchAlpha = async () => {
-      try {
-        const res = await fetch(`/alpha-signals.json?t=${Date.now()}`);
-        if (res.ok) {
-          const data = await res.json();
-          setAlphaSignals(data);
-        }
-      } catch (e) { console.error(e); }
-    };
-    fetchAlpha();
-  }, []);
-
   return (
-    <div className={`min-h-screen pb-20 bg-[#050b14] text-[#e2e8f0] ${lang === 'ko' ? 'font-sans' : ''}`}>
-      <div className="fixed top-0 left-0 w-full z-[60]">
-        <Ticker />
-      </div>
-
-      <nav className="sticky top-14 z-50 bg-[#050b14]/80 backdrop-blur-xl border-b border-slate-800/60 px-8 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-12">
-          <h1 className="text-2xl font-black tracking-tighter uppercase italic flex items-center gap-2">
-            <Globe className="w-8 h-8 text-[#d4af37]" /> Stock Empire
-          </h1>
-          <div className="hidden md:flex gap-8 text-[11px] font-bold text-slate-400 tracking-widest uppercase">
-            <Link href="/dashboard" className="hover:text-white transition-colors">{t.nav.dashboard}</Link>
-            <Link href="/news" className="hover:text-white transition-colors">{t.nav.news}</Link>
-            <Link href="/analysis" className="hover:text-blue-400 transition-colors">{t.nav.analysis}</Link>
-            <Link href="/market" className="hover:text-red-500 transition-colors font-black">{t.nav.market}</Link>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          {userTier !== 'FREE' && (
-            <span className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest flex items-center gap-1 ${userTier === 'VVIP' ? 'bg-yellow-500 text-slate-900 border border-yellow-400' : 'bg-blue-600 text-white'}`}>
-              {userTier === 'VVIP' ? <Crown className="w-3 h-3" /> : <Zap className="w-3 h-3" />} {userTier}
-            </span>
-          )}
-          <button onClick={() => setLang(prev => prev === 'ko' ? 'en' : 'ko')} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700 hover:bg-slate-800 transition-all text-sm font-bold">
-            <span>{lang === 'ko' ? '🇰🇷 KO' : '🇺🇸 EN'}</span>
-          </button>
-        </div>
-      </nav>
+    <div className={`min-h-screen pb-20 bg-[#050b14] text-[#e2e8f0] ${lang === 'ko' ? 'font-sans' : 'font-sans'}`}>
+      <Ticker />
+      <SiteHeader lang={lang} setLang={setLang} />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-8 max-w-7xl mx-auto text-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-700 mb-8">
-          <Sparkles className="w-4 h-4 text-yellow-400" />
-          <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">Access Top 1% Investment Insights</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter mb-8 leading-[1.1] bg-gradient-to-b from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">
-          {lang === 'ko' ? (<>데이터로 증명하는<br /><span className="block mt-2 font-black italic">1%의 투자 위너</span></>) : t.hero.title}
-        </h1>
-        <p className="text-xl text-slate-400 font-medium max-w-3xl mx-auto mb-12">
-          {t.hero.subtitle}
-        </p>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-          <Link href="/dashboard" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl font-black text-lg shadow-xl shadow-blue-500/20 transition-all flex items-center gap-3">
-            {t.hero.cta} <ArrowUpRight className="w-6 h-6" />
-          </Link>
-          <button className="px-8 py-4 bg-slate-900/50 text-white rounded-xl font-bold text-lg border border-slate-700">
-            <Play className="w-5 h-5 fill-current inline mr-2" /> {t.hero.watchDemo}
-          </button>
+      <section className="relative pt-20 pb-40 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-radial from-indigo-900/20 via-transparent to-transparent opacity-50 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-[10px] font-black tracking-widest uppercase text-indigo-400 mb-8 animate-fade-in">
+            <Sparkles className="w-3 h-3" /> System V4.0 Online
+          </div>
+          <h1 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-8 leading-[0.9] text-white">
+            UNLEASH THE <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-indigo-600">ALPHA EMPIRE</span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-medium mb-12 leading-relaxed">
+            {t.hero.subtitle}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/news" className="px-10 py-5 bg-indigo-600 hover:bg-indigo-500 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-3 group">
+              {t.hero.cta} <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* --- VVIP ALPHA CHOICE SECTION (REAL-TIME) --- */}
-      <section className="py-24 px-8 max-w-7xl mx-auto border-t border-slate-800/50">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="bg-yellow-500/10 p-2 rounded-lg"><Crown className="w-6 h-6 text-yellow-500" /></div>
-              <h2 className="text-4xl font-black italic tracking-tighter uppercase text-white">VVIP 알파의 선택</h2>
+      {/* VVIP Alpha Choice Section */}
+      <section className="max-w-7xl mx-auto px-8 -mt-20 relative z-20">
+        <div className="bg-slate-900/50 backdrop-blur-3xl border border-slate-800 rounded-[3rem] p-12 shadow-2xl overflow-hidden relative group">
+          <div className="absolute -top-10 -right-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-[80px]" />
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Crown className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                <span className="text-xs font-black text-yellow-500 uppercase tracking-widest">VVIP Alpha Intelligence</span>
+              </div>
+              <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">Today's Alpha Choice</h2>
             </div>
-            <p className="text-slate-400 font-bold">상위 1% 투자자만을 위한 실시간 고확신 셋업 (Live Data)</p>
+            <Link href="/analysis" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
+              View All Signals <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
-          <div className="flex items-center gap-4 bg-slate-900/50 p-2 rounded-2xl border border-slate-800">
-            <button
-              className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${userTier === 'VVIP' ? 'bg-yellow-500 text-slate-900' : 'text-slate-500 hover:text-white'}`}
-              onClick={() => setUserTier('VVIP')}
-            >
-              VVIP 시점
-            </button>
-            <button
-              className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all ${userTier !== 'VVIP' ? 'bg-slate-700 text-white' : 'text-slate-500'}`}
-              onClick={() => setUserTier('FREE')}
-            >
-              일반인 시점
-            </button>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {alphaSignals.slice(0, 3).map((stock, idx) => (
-            <div key={idx} className="relative group perspective-1000">
-              <div className="bg-[#0f172a] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:border-yellow-500/50 group-hover:shadow-yellow-500/10">
-
-                {/* Sentiment Header */}
-                <div className={`flex justify-between items-center p-4 border-b border-slate-800/50 ${stock.sentiment === 'BULLISH' ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{stock.name}</span>
-                  <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${stock.sentiment === 'BULLISH' ? 'bg-green-500 text-green-950' : 'bg-red-500 text-red-950'}`}>
-                    {stock.sentiment === 'BULLISH' ? 'BUY' : 'SELL RISK'} | {stock.impact_score}%
-                  </span>
-                </div>
-
-                <div className="p-8">
-                  <div className="flex justify-between items-end mb-8">
-                    <div>
-                      <div className="text-xs font-bold text-slate-500 border border-slate-800 px-2 py-0.5 rounded inline-block mb-1">{stock.ticker}</div>
-                      <h3 className="text-3xl font-black text-white">{stock.ticker}</h3>
+          {loading ? (
+            <div className="flex justify-center py-20"><Loader2 className="w-10 h-10 text-indigo-500 animate-spin" /></div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {signals.slice(0, 4).map((sig, idx) => (
+                <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-yellow-500/30 transition-all group/card">
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</span>
+                    <span className={`flex items-center gap-1 text-[10px] font-black ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
+                      {sig.sentiment === 'BULLISH' ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                      {sig.change_pct}%
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-black text-white mb-6 uppercase tracking-tight">{sig.name}</h3>
+                  <div className="space-y-4 mb-8">
+                    <div className="flex justify-between items-end">
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Target Price</span>
+                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-green-400'}`}>
+                        ${sig.target_price}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs font-bold text-slate-500 mb-1">Live Price</div>
-                      <div className="text-2xl font-black text-white">${stock.price}</div>
-                      <div className={`text-xs font-black ${stock.change_pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {stock.change_pct > 0 ? '+' : ''}{stock.change_pct}%
+                    <div className="flex justify-between items-end">
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Stop Loss</span>
+                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-red-400'}`}>
+                        ${sig.stop_loss}
                       </div>
                     </div>
                   </div>
-
-                  {/* Target / Stop Loss (VVIP Locked) */}
-                  <div className="grid grid-cols-2 gap-4 mb-8">
-                    <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 relative overflow-hidden group/target">
-                      <span className="text-[10px] font-black text-green-500 uppercase tracking-widest mb-1 block">Target</span>
-                      <div className={`text-xl font-black text-green-400 ${userTier !== 'VVIP' ? 'filter blur-[8px]' : ''}`}>
-                        ${stock.target_price}
-                      </div>
-                      {userTier !== 'VVIP' && <div className="absolute inset-0 flex items-center justify-center"><Lock className="w-4 h-4 text-slate-600" /></div>}
-                    </div>
-                    <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 relative overflow-hidden group/stop">
-                      <span className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-1 block">Stop Loss</span>
-                      <div className={`text-xl font-black text-red-400 ${userTier !== 'VVIP' ? 'filter blur-[8px]' : ''}`}>
-                        ${stock.stop_loss}
-                      </div>
-                      {userTier !== 'VVIP' && <div className="absolute inset-0 flex items-center justify-center"><Lock className="w-4 h-4 text-slate-600" /></div>}
-                    </div>
-                  </div>
-
-                  {/* AI Reasoning (VVIP Locked) */}
-                  <div className="relative">
-                    <h4 className="text-[10px] font-black text-yellow-500 uppercase tracking-widest mb-2 flex items-center gap-2">
-                      <Zap className="w-3 h-3 fill-yellow-500" /> AI 분석 근거
-                    </h4>
-                    <p className={`text-xs font-medium text-slate-400 leading-relaxed min-h-[60px] ${userTier !== 'VVIP' ? 'filter blur-[6px] select-none' : ''}`}>
-                      {stock.ai_reason}
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative">
+                    <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-2">AI Logic</span>
+                    <p className={`text-[11px] leading-relaxed text-slate-300 ${userTier === 'FREE' ? 'blur-[5px] line-clamp-2 select-none' : 'line-clamp-2'}`}>
+                      {sig.ai_reason}
                     </p>
-                    {userTier !== 'VVIP' && (
-                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2">
-                        <Crown className="w-6 h-6 text-yellow-500/50" />
-                        <button
-                          onClick={() => openPayment('VVIP')}
-                          className="px-4 py-1.5 bg-yellow-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg shadow-yellow-900/20 hover:bg-yellow-500 transition-colors"
-                        >
-                          Unlock VVIP Signal
-                        </button>
+                    {userTier === 'FREE' && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Lock className="w-5 h-5 text-indigo-500/50" />
                       </div>
                     )}
                   </div>
                 </div>
-
-                <div className="p-4 bg-slate-950 border-t border-slate-800/50 flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-[9px] text-slate-500 font-bold uppercase">Real-time Engine Active</span>
-                  </div>
-                  <span className="text-[9px] text-slate-600 font-mono italic">Update: {new Date(stock.updated_at).toLocaleTimeString()}</span>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
 
-        <div className="mt-12 text-center text-[10px] text-slate-600 font-bold max-w-2xl mx-auto flex items-start gap-2 justify-center">
-          <ShieldAlert className="w-4 h-4 text-slate-700 flex-shrink-0" />
-          <p>DISCLAIMER: 본 서비스에서 제공하는 모든 AI 분석 정보는 투자 판단을 위한 참고 자료일 뿐이며, 투자 결과에 대한 법적 책임은 사용자 본인에게 있습니다.</p>
+          {userTier === 'FREE' && (
+            <div className="mt-12 pt-12 border-t border-slate-800/50 text-center animate-pulse">
+              <button
+                onClick={() => openPayment('VVIP')}
+                className="inline-flex items-center gap-2 px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl shadow-yellow-500/20 transition-all font-black"
+              >
+                Unlock Premium Alpha <Lock size={14} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Stats Summary Section */}
-      <section className="relative -mt-20 z-10 px-4 max-w-7xl mx-auto">
-        <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center p-4">
-              <h3 className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">Market Sentiment</h3>
-              <div className="text-4xl font-black text-green-500">78</div>
-              <span className="text-[10px] font-bold text-green-400 mt-2">EXTREME GREED</span>
-            </div>
-            <div className="p-4 border-x border-slate-800">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                <h3 className="text-blue-400 font-bold uppercase tracking-widest text-xs">AI Daily Briefing</h3>
-              </div>
-              <p className="text-sm font-bold text-slate-300">"연준의 금리 동결 가능성이 커지면서 기술주의 매수 모멘텀이 강화되고 있습니다. AI 핵심주 중심의 비중 확대 전략이 유효합니다."</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[9px] text-slate-500 uppercase font-black">AI Accuracy</span>
-                <div className="text-lg font-black text-green-500">94.2%</div>
-              </div>
-              <div className="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                <span className="text-[9px] text-slate-500 uppercase font-black">Active Nodes</span>
-                <div className="text-lg font-black text-blue-500">128</div>
-              </div>
-            </div>
+      <section className="py-24 px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center uppercase">
+          <div>
+            <div className="text-4xl font-black text-white mb-2 tracking-tighter">94.2%</div>
+            <div className="text-[10px] font-black text-slate-500 tracking-widest italic">AI Average Accuracy</div>
+          </div>
+          <div className="border-x border-slate-800">
+            <div className="text-4xl font-black text-indigo-400 mb-2 tracking-tighter">1.2M+</div>
+            <div className="text-[10px] font-black text-slate-500 tracking-widest italic">Analyzed Data Points</div>
+          </div>
+          <div>
+            <div className="text-4xl font-black text-green-500 mb-2 tracking-tighter">₩4.2B+</div>
+            <div className="text-[10px] font-black text-slate-500 tracking-widest italic">User Simulated Profits</div>
           </div>
         </div>
       </section>
@@ -381,48 +311,57 @@ export default function Home() {
       {/* Pricing Section */}
       <section id="pricing" className="py-24 px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black italic tracking-tighter mb-4 text-white uppercase">Choose Your Agent</h2>
+          <h2 className="text-4xl font-black italic tracking-tighter mb-4 text-white uppercase underline decoration-indigo-500 underline-offset-8">Choose Your Tier</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           {/* FREE PLAN */}
-          <div className="p-8 rounded-3xl border border-slate-800 bg-slate-900/40 flex flex-col">
-            <span className="text-[10px] text-slate-500 uppercase font-black mb-2 tracking-widest">Starter</span>
-            <div className="text-4xl font-black text-white mb-6">₩0 <span className="text-sm font-medium text-slate-600">/ mo</span></div>
+          <div className="p-8 rounded-[2rem] border border-slate-800 bg-slate-900/20 flex flex-col hover:border-slate-700 transition-all">
+            <span className="text-[10px] text-slate-500 uppercase font-black mb-2 tracking-widest">Entry</span>
+            <div className="text-4xl font-black text-white mb-6 tracking-tighter">₩0</div>
             <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-slate-400"><CheckCircle2 className="w-4 h-4 text-slate-600" /> 뉴스 요약 (일 3회)</li>
-              <li className="flex items-center gap-2 text-xs text-slate-400"><CheckCircle2 className="w-4 h-4 text-slate-600" /> 기본 시세 확인</li>
+              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> Basic News Feed</li>
+              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> Delayed Charts</li>
             </ul>
-            <button className="w-full py-3 rounded-xl border border-slate-700 text-xs font-black uppercase text-slate-400 hover:bg-slate-800 transition-all">Current Plan</button>
+            <button className="w-full py-4 rounded-xl border border-slate-700 text-[10px] font-black uppercase text-slate-500 cursor-default">Current Tier</button>
           </div>
+
           {/* VIP PLAN */}
-          <div className="p-8 rounded-3xl border border-blue-500/50 bg-blue-900/10 flex flex-col relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4"><Zap className="w-4 h-4 text-blue-500 fill-blue-500" /></div>
-            <span className="text-[10px] text-blue-400 uppercase font-black mb-2 tracking-widest">VIP Trader</span>
-            <div className="text-4xl font-black text-white mb-6">₩19,900 <span className="text-sm font-medium text-slate-600">/ mo</span></div>
+          <div className="p-8 rounded-[2rem] border border-blue-500/30 bg-blue-950/10 flex flex-col relative group hover:border-blue-500 transition-all">
+            <div className="absolute top-6 right-8"><Zap className="w-5 h-5 text-blue-500 fill-blue-500" /></div>
+            <span className="text-[10px] text-blue-500 uppercase font-black mb-2 tracking-widest">VIP Trader</span>
+            <div className="text-4xl font-black text-white mb-6 tracking-tighter">₩19,900</div>
             <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-slate-200"><CheckCircle2 className="w-4 h-4 text-blue-500" /> 무제한 실시간 분석</li>
-              <li className="flex items-center gap-2 text-xs text-slate-200"><CheckCircle2 className="w-4 h-4 text-blue-500" /> AI 매매 시그널</li>
+              <li className="flex items-center gap-2 text-xs text-slate-200 font-bold uppercase italic"><CheckCircle2 className="w-4 h-4 text-blue-500" /> Unlimited Real-time News</li>
+              <li className="flex items-center gap-2 text-xs text-slate-200 font-bold uppercase italic"><CheckCircle2 className="w-4 h-4 text-blue-500" /> standard AI Signals</li>
             </ul>
-            <button onClick={() => openPayment('VIP')} className="w-full py-3 rounded-xl bg-blue-600 text-xs font-black uppercase text-white hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/20">Upgrade Now</button>
+            <button onClick={() => openPayment('VIP')} className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-[10px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-blue-600/20">Upgrade to VIP</button>
           </div>
+
           {/* VVIP PLAN */}
-          <div className="p-8 rounded-3xl border border-yellow-500 bg-gradient-to-br from-yellow-900/20 to-slate-900/60 flex flex-col relative group">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-900 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Recommended</div>
+          <div className="p-8 rounded-[2rem] border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-950/10 to-slate-900/40 flex flex-col relative group hover:border-yellow-500 transition-all">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-950 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">Top 1% Choice</div>
             <span className="text-[10px] text-yellow-500 uppercase font-black mb-2 tracking-widest">VVIP Alpha</span>
-            <div className="text-4xl font-black text-white mb-6">₩49,900 <span className="text-sm font-medium text-slate-600">/ mo</span></div>
+            <div className="text-4xl font-black text-white mb-6 tracking-tighter">₩49,900</div>
             <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-white font-bold"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> 실시간 알파 픽 (Real-time)</li>
-              <li className="flex items-center gap-2 text-xs text-white"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> 목표가/손절가 완전 공개</li>
-              <li className="flex items-center gap-2 text-xs text-white"><CheckCircle2 className="w-4 h-4 text-yellow-500" /> 1:1 AI 포트폴리오 진단</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> Real-time Alpha Picks</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> Institutional Insider Logic</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> Full Alpha Analysis Access</li>
             </ul>
-            <button onClick={() => openPayment('VVIP')} className="w-full py-3 rounded-xl bg-yellow-500 text-xs font-black uppercase text-slate-900 hover:bg-yellow-400 transition-all font-black">Join Alpha Club</button>
+            <button onClick={() => openPayment('VVIP')} className="w-full py-4 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-[10px] font-black uppercase tracking-widest text-slate-950 transition-all shadow-xl shadow-yellow-500/30">Join Alpha Club</button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-12 text-center text-slate-600 text-[10px] font-black uppercase tracking-widest">
-        &copy; 2026 STOCK EMPIRE. Built for the top 1%.
+      <footer className="border-t border-slate-800 py-20 text-center animate-fade-in">
+        <div className="flex justify-center gap-8 mb-8 text-slate-500">
+          <BookOpen className="w-5 h-5 hover:text-white cursor-pointer" />
+          <MessageSquare className="w-5 h-5 hover:text-white cursor-pointer" />
+          <Award className="w-5 h-5 hover:text-white cursor-pointer" />
+        </div>
+        <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em]">
+          &copy; 2026 STOCK EMPIRE INC. Global Financial Innovation.
+        </p>
       </footer>
 
       {/* Modals & Ticker components */}

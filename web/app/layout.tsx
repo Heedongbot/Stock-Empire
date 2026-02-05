@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "0 to 100 Million: Zero Capital Automated Investment System",
 };
 
+import { AuthProvider } from "@/lib/AuthContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,8 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        <BreakingNewsToast />
+        <AuthProvider>
+          {children}
+          <BreakingNewsToast />
+        </AuthProvider>
       </body>
     </html>
   );
