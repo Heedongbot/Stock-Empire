@@ -9,6 +9,18 @@ import {
 import { useEffect, useState, useRef, use } from "react";
 import Link from "next/link";
 
+interface NewsItem {
+    id: string;
+    market: string;
+    ticker: string;
+    title: string;
+    title_kr: string;
+    sentiment: string;
+    free_tier: {
+        title: string;
+    };
+}
+
 export default function AnalysisPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
     const [insights, setInsights] = useState<any>(null);
@@ -30,9 +42,9 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                 const market = parts[1]?.toUpperCase(); // US or KR
                 const index = parseInt(parts[2]);
 
-                let selectedNews = null;
+                let selectedNews: NewsItem | null = null;
                 if (market && !isNaN(index)) {
-                    const filteredNews = newsData.filter((n: any) => n.market === market);
+                    const filteredNews = newsData.filter((item: NewsItem) => item.market === market);
                     selectedNews = filteredNews[index];
                 }
                 setNewsItem(selectedNews);
@@ -101,7 +113,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
             <div className="fixed top-24 right-4 z-[100] flex flex-col gap-2 scale-90">
                 <div className="bg-[#0f172a] p-3 rounded-2xl shadow-2xl border border-slate-800">
                     <p className="text-[10px] font-black text-slate-500 mb-2 uppercase text-center">Preview Mode</p>
-                    {(['free', 'vip', 'vvip'] as const).map((t) => (
+                    {(['free', 'vip', 'vvip'] as const).map((t: "free" | "vip" | "vvip") => (
                         <button key={t} onClick={() => setTier(t)} className={`w-full text-left px-4 py-2 rounded-xl text-[11px] font-bold uppercase transition-all mb-1 ${tier === t ? 'bg-primary text-white' : 'text-slate-500 hover:bg-slate-800'}`}>
                             {t} {t === 'vvip' && '👑'}
                         </button>
@@ -188,7 +200,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                                     "{loading ? '빅데이터 분석 엔진 가동 중...' : (report?.summary?.replace(/###/g, '').trim() || '분석 데이터를 불러오고 있습니다.')}"
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
-                                    {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '').split(',').slice(0, 4).map((tag: any, i: number) => (
+                                    {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '').split(',').slice(0, 4).map((tag: string, i: number) => (
                                         <div key={i} className="bg-white/5 px-4 py-2 rounded-xl text-[11px] font-black text-white/70 border border-white/10 uppercase tracking-tight">
                                             #{tag.trim()}
                                         </div>
@@ -202,7 +214,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                 {/* DATA TABS SECTION */}
                 <section className="mb-12">
                     <div className="flex border-b border-slate-800 mb-10 overflow-x-auto gap-12">
-                        {['Backtesting Matrix', 'Macro Signals', 'Theme Transfer Map'].map((tab, i) => (
+                        {['Backtesting Matrix', 'Macro Signals', 'Theme Transfer Map'].map((tab: string, i: number) => (
                             <button key={i} onClick={() => setActiveTab(i)} className={`pb-5 text-[12px] font-black transition-all relative whitespace-nowrap uppercase tracking-[0.2em] ${activeTab === i ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
                                 {tab}
                                 {activeTab === i && <div className="absolute bottom-[-1px] left-0 right-0 h-1 bg-blue-500 rounded-t-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" />}
@@ -229,7 +241,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                                             "{report?.similarity || "Loading Similarity..."}"
                                         </p>
                                         <div className="w-full max-w-xl h-32 flex items-end gap-2 px-10">
-                                            {[40, 70, 45, 90, 65, 80, 55, 95, 85, 100].map((h, i) => {
+                                            {[40, 70, 45, 90, 65, 80, 55, 95, 85, 100].map((h: number, i: number) => {
                                                 // Randomize bar height based on title length seed if available
                                                 const seed = newsItem?.title?.length || 0;
                                                 const randomHeight = seed ? Math.min(100, Math.max(20, h + (seed * (i + 1) % 40) - 20)) : h;

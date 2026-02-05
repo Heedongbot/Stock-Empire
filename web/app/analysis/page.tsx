@@ -81,7 +81,7 @@ export default function AnalysisPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-2 p-2 bg-slate-900/50 rounded-2xl border border-slate-800">
-                        {STRATEGIES.map((strat) => (
+                        {STRATEGIES.map((strat: any) => (
                             <button
                                 key={strat.id}
                                 onClick={() => setFilter(strat.id)}
@@ -101,7 +101,7 @@ export default function AnalysisPage() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredSignals.map((sig, idx) => (
+                        {filteredSignals.map((sig: AlphaSignal, idx: number) => (
                             <div
                                 key={idx}
                                 onClick={() => setSelectedSignal(sig)}
