@@ -1,0 +1,377 @@
+[
+  {
+    "id": "-3426790928464025364",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T12:10:38Z",
+    "free_tier": {
+      "title": "미국 연준, 스트레스 테스트 업데이트를 2027년까지 연기",
+      "title_en": "US Fed delays stress test updates until 2027",
+      "summary_kr": "미국 연준, 스트레스 테스트 업데이트를 2027년까지 연기",
+      "link": "https://finance.yahoo.com/news/us-fed-delays-stress-test-121038786.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '미국 연준, 스트레스 테스트 업데이트를 2027년까지 연기' 입니다.",
+        "impact_score": 74
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-2868452253421624687",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T02:23:33Z",
+    "free_tier": {
+      "title": "Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인이 70,000달러 아래로 떨어졌습니다.",
+      "title_en": "Bitcoin sinks below $70,000 after Bessent says the US government can't tell banks to bail out crypto",
+      "summary_kr": "Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인이 70,000달러 아래로 떨어졌습니다.",
+      "link": "https://finance.yahoo.com/news/bitcoin-sinks-below-70000-after-bessent-says-the-us-government-cant-tell-banks-to-bail-out-crypto-022333140.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인이 70,000달러 아래로 떨어졌습니다.' 입니다.",
+        "impact_score": 60
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "4354558348536044254",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T12:00:00Z",
+    "free_tier": {
+      "title": "트럭 운전사들은 Sysco를 상대로 5,200만 달러 규모의 내부 고발자 보복 판결을 받았습니다.",
+      "title_en": "Truck drivers win $52M whistleblower retaliation verdict against Sysco",
+      "summary_kr": "트럭 운전사들은 Sysco를 상대로 5,200만 달러 규모의 내부 고발자 보복 판결을 받았습니다.",
+      "link": "https://finance.yahoo.com/news/truck-drivers-win-52m-whistleblower-120000539.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '트럭 운전사들은 Sysco를 상대로 5,200만 달러 규모의 내부 고발자 보복 판결을 받았습니다.' 입니다.",
+        "impact_score": 71
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6872322129287648943",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T12:00:00Z",
+    "free_tier": {
+      "title": "부업으로 돈을 버는 근로자는 강력한 저축 도구를 놓칠 수 있습니다. 솔로 401(k)에 대해 알아야 할 사항",
+      "title_en": "Workers making money from side gigs may be missing out on a powerful savings tool. What to know about the solo 401(k)",
+      "summary_kr": "부업으로 돈을 버는 근로자는 강력한 저축 도구를 놓칠 수 있습니다. 솔로 401(k)에 대해 알아야 할 사항",
+      "link": "https://finance.yahoo.com/news/workers-making-money-side-gigs-120000151.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '부업으로 돈을 버는 근로자는 강력한 저축 도구를 놓칠 수 있습니다. 솔로 401(k)에 대해 알아야 할 사항' 입니다.",
+        "impact_score": 69
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6492312836745665580",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:49:11Z",
+    "free_tier": {
+      "title": "Texas Instruments Incorporated(TXN): 황소 사례 이론",
+      "title_en": "Texas Instruments Incorporated (TXN): A Bull Case Theory",
+      "summary_kr": "Texas Instruments Incorporated(TXN): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/texas-instruments-incorporated-txn-bull-014911532.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Texas Instruments Incorporated(TXN): 황소 사례 이론' 입니다.",
+        "impact_score": 79
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "164392173312256981",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T12:07:07Z",
+    "free_tier": {
+      "title": "비트코인 가격은 이번 주 21% 폭락 후 70,000달러 아래로 하락",
+      "title_en": "Bitcoin Price Falls Below $70,000 After Crashing 21% This Week",
+      "summary_kr": "비트코인 가격은 이번 주 21% 폭락 후 70,000달러 아래로 하락",
+      "link": "https://finance.yahoo.com/news/bitcoin-price-falls-below-70-120707788.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 가격은 이번 주 21% 폭락 후 70,000달러 아래로 하락' 입니다.",
+        "impact_score": 67
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1017220333600503427",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:50:52Z",
+    "free_tier": {
+      "title": "IREN Limited(IREN): 황소 사례 이론",
+      "title_en": "IREN Limited (IREN): A Bull Case Theory",
+      "summary_kr": "IREN Limited(IREN): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/iren-limited-iren-bull-case-015052210.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'IREN Limited(IREN): 황소 사례 이론' 입니다.",
+        "impact_score": 83
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8424091083373730370",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:49:33Z",
+    "free_tier": {
+      "title": "Teradyne, Inc.(TER): 황소 사례 이론",
+      "title_en": "Teradyne, Inc. (TER): A Bull Case Theory",
+      "summary_kr": "Teradyne, Inc.(TER): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/teradyne-inc-ter-bull-case-014933356.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Teradyne, Inc.(TER): 황소 사례 이론' 입니다.",
+        "impact_score": 94
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-5028367807578842739",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:51:09Z",
+    "free_tier": {
+      "title": "Flagstar Bank, National Association(FLG): 황소 사례 이론",
+      "title_en": "Flagstar Bank, National Association (FLG): A Bull Case Theory",
+      "summary_kr": "Flagstar Bank, National Association(FLG): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/flagstar-bank-national-association-flg-015109191.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Flagstar Bank, National Association(FLG): 황소 사례 이론' 입니다.",
+        "impact_score": 69
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "7532450625949465647",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:51:20Z",
+    "free_tier": {
+      "title": "CoreWeave, Inc.(CRWV): 황소 사례 이론",
+      "title_en": "CoreWeave, Inc. (CRWV): A Bull Case Theory",
+      "summary_kr": "CoreWeave, Inc.(CRWV): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/coreweave-inc-crwv-bull-case-015120024.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'CoreWeave, Inc.(CRWV): 황소 사례 이론' 입니다.",
+        "impact_score": 80
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1386994665452194903",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T12:05:00Z",
+    "free_tier": {
+      "title": "워렌 버핏은 은퇴하기 전에 이 6개 주식을 팔고 이 고수익 투자에 쌓였습니다",
+      "title_en": "Before Retiring, Warren Buffett Sold These 6 Stocks and Piled Into This High-Yield Investment",
+      "summary_kr": "워렌 버핏은 은퇴하기 전에 이 6개 주식을 팔고 이 고수익 투자에 쌓였습니다",
+      "link": "https://finance.yahoo.com/news/retiring-warren-buffett-sold-6-120500784.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '워렌 버핏은 은퇴하기 전에 이 6개 주식을 팔고 이 고수익 투자에 쌓였습니다' 입니다.",
+        "impact_score": 93
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6131343052040056462",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:52:18Z",
+    "free_tier": {
+      "title": "Brightstar Lottery PLC(BRSL): 황소 사례 이론",
+      "title_en": "Brightstar Lottery PLC (BRSL): A Bull Case Theory",
+      "summary_kr": "Brightstar Lottery PLC(BRSL): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/brightstar-lottery-plc-brsl-bull-015218795.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Brightstar Lottery PLC(BRSL): 황소 사례 이론' 입니다.",
+        "impact_score": 64
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "5307514052591713937",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:52:27Z",
+    "free_tier": {
+      "title": "BlackBerry Limited(BB): 강세 사례 이론",
+      "title_en": "BlackBerry Limited (BB): A Bull Case Theory",
+      "summary_kr": "BlackBerry Limited(BB): 강세 사례 이론",
+      "link": "https://finance.yahoo.com/news/blackberry-limited-bb-bull-case-015227795.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'BlackBerry Limited(BB): 강세 사례 이론' 입니다.",
+        "impact_score": 69
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4032077649189733934",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:50:29Z",
+    "free_tier": {
+      "title": "Itron, Inc.(ITRI): 강세 사례 이론",
+      "title_en": "Itron, Inc. (ITRI): A Bull Case Theory",
+      "summary_kr": "Itron, Inc.(ITRI): 강세 사례 이론",
+      "link": "https://finance.yahoo.com/news/itron-inc-itri-bull-case-015029456.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Itron, Inc.(ITRI): 강세 사례 이론' 입니다.",
+        "impact_score": 83
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-7619622481494404184",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T01:54:50Z",
+    "free_tier": {
+      "title": "Ondas Inc.(ONDS): 황소 사례 이론",
+      "title_en": "Ondas Inc. (ONDS): A Bull Case Theory",
+      "summary_kr": "Ondas Inc.(ONDS): 황소 사례 이론",
+      "link": "https://finance.yahoo.com/news/ondas-inc-onds-bull-case-015450408.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Ondas Inc.(ONDS): 황소 사례 이론' 입니다.",
+        "impact_score": 75
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  }
+]
