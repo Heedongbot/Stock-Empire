@@ -19,11 +19,26 @@ interface VVIPPick {
 
 import { AIPerformanceBanner } from './AIPerformanceBanner';
 
+interface NewsItem {
+    id: string;
+    market: string;
+    ticker: string;
+    title: string;
+    title_kr: string;
+    sentiment: "BULLISH" | "BEARISH" | "NEUTRAL";
+    free_tier: {
+        title: string;
+    };
+}
+
+// Define the type for the 't' prop passed to StockCard
+type VVIPZoneTranslations = typeof translations['ko']['vvipZone'];
+
 export function VVIPZone({ lang = 'ko' }: { lang?: 'ko' | 'en' }) {
     const [isVVIP, setIsVVIP] = useState(false); // Default to locked
     const [picks, setPicks] = useState<VVIPPick[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const t = translations[lang].vvipZone;
+    const t: VVIPZoneTranslations = translations[lang].vvipZone;
 
     // 실시간 데이터 페칭
     useEffect(() => {

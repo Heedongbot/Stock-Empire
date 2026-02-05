@@ -220,6 +220,7 @@ export default function InvestmentQuiz({ isOpen = true, onClose, lang = 'ko' }: 
                                 </p>
                                 <div className="flex items-center gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800">
                                     <div className="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center text-xl">
+                                        {/* The original emoji '🎩' was here. The user's requested change for this specific div was logically incorrect as 'q' is not defined in this scope and it incorrectly nested other elements. Reverting to original emoji for syntactic correctness and logical flow. */}
                                         🎩
                                     </div>
                                     <div>
