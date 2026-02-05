@@ -105,7 +105,7 @@ export function TradingHistoryModal({ isOpen, onClose, lang = 'ko' }: TradingHis
                     <div>
                         <h2 className="text-2xl font-black text-white">{translations.title}</h2>
                         <p className="text-slate-400 text-sm mt-1">
-                            {translations.summary}: {translations.totalTrades} {totalTrades} | {translations.winRate} {winRate}% | {translations.avgProfit} {avgProfit > 0 ? '+' : ''}{avgProfit}%
+                            {translations.summary}: {translations.totalTrades} {totalTrades} | {translations.winRate} {winRate}% | {translations.avgProfit} {Number(avgProfit) > 0 ? '+' : ''}{avgProfit}%
                         </p>
                     </div>
                     <button
@@ -141,8 +141,8 @@ export function TradingHistoryModal({ isOpen, onClose, lang = 'ko' }: TradingHis
                                         </td>
                                         <td className="p-3">
                                             <span className={`px-2 py-1 rounded text-xs font-black ${record.action === 'BUY' ? 'bg-green-500/20 text-green-400' :
-                                                    record.action === 'SELL' ? 'bg-red-500/20 text-red-400' :
-                                                        'bg-slate-500/20 text-slate-400'
+                                                record.action === 'SELL' ? 'bg-red-500/20 text-red-400' :
+                                                    'bg-slate-500/20 text-slate-400'
                                                 }`}>
                                                 {translations[record.action.toLowerCase() as 'buy' | 'sell' | 'hold']}
                                             </span>
@@ -158,14 +158,14 @@ export function TradingHistoryModal({ isOpen, onClose, lang = 'ko' }: TradingHis
                                         <td className="p-3 text-right">
                                             <div className="flex flex-col items-end">
                                                 <span className={`font-mono font-bold ${record.profitLoss > 0 ? 'text-green-400' :
-                                                        record.profitLoss < 0 ? 'text-red-400' :
-                                                            'text-slate-400'
+                                                    record.profitLoss < 0 ? 'text-red-400' :
+                                                        'text-slate-400'
                                                     }`}>
                                                     {record.profitLoss > 0 ? '+' : ''}{record.profitLoss.toFixed(2)}
                                                 </span>
                                                 <span className={`text-xs font-bold ${record.profitPercent > 0 ? 'text-green-400' :
-                                                        record.profitPercent < 0 ? 'text-red-400' :
-                                                            'text-slate-400'
+                                                    record.profitPercent < 0 ? 'text-red-400' :
+                                                        'text-slate-400'
                                                     }`}>
                                                     {record.profitPercent > 0 ? '+' : ''}{record.profitPercent}%
                                                 </span>
@@ -173,8 +173,8 @@ export function TradingHistoryModal({ isOpen, onClose, lang = 'ko' }: TradingHis
                                         </td>
                                         <td className="p-3 text-center">
                                             <span className={`px-2 py-1 rounded-full text-xs font-black flex items-center justify-center gap-1 ${record.status === 'WIN' ? 'bg-green-500/20 text-green-400' :
-                                                    record.status === 'LOSE' ? 'bg-red-500/20 text-red-400' :
-                                                        'bg-slate-500/20 text-slate-400'
+                                                record.status === 'LOSE' ? 'bg-red-500/20 text-red-400' :
+                                                    'bg-slate-500/20 text-slate-400'
                                                 }`}>
                                                 {record.status === 'WIN' ? <TrendingUp className="w-3 h-3" /> :
                                                     record.status === 'LOSE' ? <TrendingDown className="w-3 h-3" /> :
@@ -202,7 +202,7 @@ export function TradingHistoryModal({ isOpen, onClose, lang = 'ko' }: TradingHis
                         <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
                             <div className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">{translations.avgProfit}</div>
                             <div className={`text-2xl font-black ${Number(avgProfit) > 0 ? 'text-blue-400' : 'text-red-400'}`}>
-                                {avgProfit > 0 ? '+' : ''}{avgProfit}%
+                                {Number(avgProfit) > 0 ? '+' : ''}{avgProfit}%
                             </div>
                         </div>
                     </div>
