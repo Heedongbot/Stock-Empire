@@ -23,15 +23,16 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState<User | null>(() => {
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem('stock-empire-user');
+            return saved ? JSON.parse(saved) : null;
+        }
+        return null;
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        // Load auth from localStorage on mount
-        const savedUser = localStorage.getItem('stock-empire-user');
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        }
         setIsLoading(false);
     }, []);
 
