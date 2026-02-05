@@ -30,6 +30,6 @@ jobs:
         run: |
           git config --global user.name "Empire-Bot"
           git config --global user.email "bot@stockempire.ai"
-          git add web/public/us-news-tiered.json web/public/alpha-signals.json
+          git add public/us-news-tiered.json public/alpha-signals.json
           git commit -m "chore: auto-update market data [skip ci]" || echo "No changes to commit"
           git push
