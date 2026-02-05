@@ -353,7 +353,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                                 <div className="flex flex-wrap justify-center gap-6 max-w-4xl">
                                     {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '')
                                         .split(/,|\||\n/)
-                                        .filter(s => s.trim().length > 0)
+                                        .filter((s: string) => s.trim().length > 0)
                                         .map((stock: string, i: number) => (
                                             <div key={i} className="bg-slate-950 border border-slate-800 p-6 rounded-3xl shadow-lg hover:border-blue-500/50 transition-all flex items-center gap-6 min-w-[200px] group">
                                                 <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center font-black text-xs text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">{i + 1}</div>

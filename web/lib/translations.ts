@@ -140,7 +140,9 @@ export const translations = {
                 institutions: "기관 수급",
                 trendReversal: "추세 반전",
                 riskAlert: "리스크 알림"
-            }
+            },
+            fearGreed: "공포와 탐욕 지수",
+            fearGreedDesc: "실시간 시장 심리를 수치화하여 극단적 공포와 탐욕 상태를 진단합니다."
         },
         vvipZone: {
             title: "VIP 알파의 선택",
@@ -308,7 +310,9 @@ export const translations = {
                 institutions: "Institutional Flow",
                 trendReversal: "Trend Reversal",
                 riskAlert: "Risk Alert"
-            }
+            },
+            fearGreed: "Fear & Greed Index",
+            fearGreedDesc: "Quantifying real-time market sentiment to diagnose extreme fear and greed states."
         },
         vvipZone: {
             title: "VIP ALPHA PICKS",
