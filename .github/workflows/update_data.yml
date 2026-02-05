@@ -1,0 +1,35 @@
+name: Update Market Data
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Run every 30 minutes
+  workflow_dispatch: # Allow manual run
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install yfinance pandas beautifulsoup4 requests lxml deep-translator
+
+      - name: Run Scrapers
+        run: |
+          python crawler/us_news_crawler.py
+          python crawler/alpha_analyzer.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "Empire-Bot"
+          git config --global user.email "bot@stockempire.ai"
+          git add web/public/us-news-tiered.json web/public/alpha-signals.json
+          git commit -m "chore: auto-update market data [skip ci]" || echo "No changes to commit"
+          git push
