@@ -271,37 +271,65 @@ export default function LandingPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {signals.slice(0, 4).map((sig, idx) => (
-                <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-yellow-500/30 transition-all group/card">
-                  <div className="flex justify-between items-start mb-4">
+                <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-yellow-500/50 transition-all group/card relative overflow-hidden">
+                  {/* Golden Glow Effect on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none" />
+
+                  <div className="flex justify-between items-start mb-4 relative z-10">
                     <span className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</span>
-                    <span className={`flex items-center gap-1 text-[10px] font-black ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
-                      {sig.sentiment === 'BULLISH' ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                      {sig.change_pct}%
-                    </span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className={`flex items-center gap-1 text-[10px] font-black ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
+                        {sig.sentiment === 'BULLISH' ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                        {sig.change_pct}%
+                      </span>
+                      {/* New Premium Badge */}
+                      <span className="text-[9px] font-black text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">
+                        WHALE ACTIVE
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-black text-white mb-6 uppercase tracking-tight">{sig.name}</h3>
-                  <div className="space-y-4 mb-8">
+
+                  <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tight relative z-10">{sig.name}</h3>
+
+                  {/* Confidence Score Bar */}
+                  <div className="mb-6 relative z-10">
+                    <div className="flex justify-between text-[9px] font-black text-slate-500 mb-1 uppercase tracking-widest">
+                      <span>AI Confidence</span>
+                      <span className="text-indigo-400">{sig.impact_score}%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                        style={{ width: `${sig.impact_score}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 mb-8 relative z-10">
                     <div className="flex justify-between items-end">
                       <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.vvipZone.targetPrice}</span>
-                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-green-400'}`}>
+                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none text-slate-600' : 'text-green-400'}`}>
                         ${sig.target_price}
                       </div>
                     </div>
                     <div className="flex justify-between items-end">
                       <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.vvipZone.stopPrice}</span>
-                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-red-400'}`}>
+                      <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none text-slate-600' : 'text-red-400'}`}>
                         ${sig.stop_loss}
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative">
-                    <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-2">{t.vvipZone.aiRationale}</span>
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative z-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Zap size={12} className="text-yellow-500 fill-yellow-500" />
+                      <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">{t.vvipZone.aiRationale}</span>
+                    </div>
                     <p className={`text-[11px] leading-relaxed text-slate-300 ${userTier === 'FREE' ? 'blur-[5px] line-clamp-2 select-none' : 'line-clamp-2'}`}>
                       {sig.ai_reason}
                     </p>
                     {userTier === 'FREE' && (
                       <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-[2px]">
-                        <Lock className="w-5 h-5 text-indigo-500/50" />
+                        <Lock className="w-5 h-5 text-yellow-500/50" />
                       </div>
                     )}
                   </div>
