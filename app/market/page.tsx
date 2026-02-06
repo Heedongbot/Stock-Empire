@@ -88,7 +88,7 @@ export default function MarketSignalsPage() {
 
     const handleSearch = () => {
         if (marketSearchTerm.trim()) {
-            router.push(`/analysis?q=${encodeURIComponent(marketSearchTerm)}`);
+            router.push(`/notebook?q=${encodeURIComponent(marketSearchTerm)}`);
         }
     };
 
@@ -125,7 +125,7 @@ export default function MarketSignalsPage() {
                             <input
                                 type="text"
                                 className="block w-full pl-11 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm font-bold text-white placeholder-slate-600 transition-all shadow-lg"
-                                placeholder={lang === 'ko' ? "종목 심층 분석 검색 (예: Samsung, TSLA)" : "Deep Analyzer Search (e.g. Samsung, TSLA)"}
+                                placeholder={lang === 'ko' ? "NotebookLM 기반 심층 분석 (예: Samsung, TSLA)" : "NotebookLM Deep Analysis (e.g. Samsung, TSLA)"}
                                 value={marketSearchTerm}
                                 onChange={(e) => setMarketSearchTerm(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
