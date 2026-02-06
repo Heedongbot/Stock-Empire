@@ -1,46 +1,46 @@
 [
   {
-    "id": "-3306628700481850574",
+    "id": "-3670533719577606931",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T14:23:00Z",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:47:00Z",
     "free_tier": {
-      "title": "강력한 예약과 사용자 증가로 Roblox 급증",
-      "title_en": "Roblox surges on strong bookings, user growth",
-      "summary_kr": "강력한 예약과 사용자 증가로 Roblox 급증",
-      "link": "https://finance.yahoo.com/news/roblox-surges-strong-bookings-user-142300147.html",
+      "title": "모든 메타 플랫폼 투자자가 알아야 할 3가지",
+      "title_en": "3 Things Every Meta Platforms Investor Needs to Know",
+      "summary_kr": "모든 메타 플랫폼 투자자가 알아야 할 3가지",
+      "link": "https://finance.yahoo.com/news/3-things-every-meta-platforms-144700811.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '강력한 예약과 사용자 증가로 Roblox 급증' 입니다.",
-        "impact_score": 87
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '모든 메타 플랫폼 투자자가 알아야 할 3가지' 입니다.",
+        "impact_score": 65
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "-8898943911878651872",
+    "id": "1051729995953848778",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": true,
-    "published_at": "2026-02-06T14:08:58Z",
+    "published_at": "2026-02-06T14:45:00Z",
     "free_tier": {
-      "title": "실시간 수익: 월스트리트가 가이던스에 집중함에 따라 아마존 주가 하락, 필립 모리스 후퇴, Reddit 급등",
-      "title_en": "Earnings live: Amazon stock sinks, Philip Morris retreats, Reddit spikes as Wall Street focuses on guidance",
-      "summary_kr": "실시간 수익: 월스트리트가 가이던스에 집중함에 따라 아마존 주가 하락, 필립 모리스 후퇴, Reddit 급등",
-      "link": "https://finance.yahoo.com/news/live/earnings-live-amazon-stock-sinks-philip-morris-retreats-reddit-spikes-as-wall-street-focuses-on-guidance-140858850.html",
+      "title": "LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법",
+      "title_en": "LA mom of 2 faces $180K income loss after husband goes to prison. How Ramsey Show hosts say she can secure her finances",
+      "summary_kr": "LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법",
+      "link": "https://finance.yahoo.com/news/la-mom-2-faces-180k-144500792.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '실시간 수익: 월스트리트가 가이던스에 집중함에 따라 아마존 주가 하락, 필립 모리스 후퇴, Reddit 급등' 입니다.",
-        "impact_score": 85
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법' 입니다.",
+        "impact_score": 84
       },
       "trading_strategy": {
         "action": "매도",
@@ -50,22 +50,47 @@
     }
   },
   {
-    "id": "5841061478546075325",
+    "id": "2752311676047307733",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:08:51Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T14:44:43Z",
     "free_tier": {
-      "title": "ServiceNow(NOW)의 쇠퇴는 지나쳤다고 Jim Cramer가 말했습니다.",
-      "title_en": "ServiceNow (NOW)’s Decline is Overdone, Says Jim Cramer",
-      "summary_kr": "ServiceNow(NOW)의 쇠퇴는 지나쳤다고 Jim Cramer가 말했습니다.",
-      "link": "https://finance.yahoo.com/news/servicenow-now-decline-overdone-says-140851091.html",
+      "title": "비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업",
+      "title_en": "Bitcoin Miner IREN Deepens Dig On Q2 Miss; AI Services Pick Up",
+      "summary_kr": "비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업",
+      "link": "https://www.investors.com/news/iren-earnings-q2-2026-bitcoin-miner-ai-artificial-intelligence-iren-stock/?src=A00220&yptr=yahoo",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'ServiceNow(NOW)의 쇠퇴는 지나쳤다고 Jim Cramer가 말했습니다.' 입니다.",
-        "impact_score": 86
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업' 입니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-5429220642408895312",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:44:26Z",
+    "free_tier": {
+      "title": "분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.",
+      "title_en": "Analysis-ECB's safety net is part of EU plan to court new allies",
+      "summary_kr": "분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.",
+      "link": "https://finance.yahoo.com/news/analysis-ecbs-safety-net-part-143648052.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.' 입니다.",
+        "impact_score": 93
       },
       "trading_strategy": {
         "action": "관망",
@@ -75,22 +100,22 @@
     }
   },
   {
-    "id": "-8937255678541154204",
+    "id": "690313787688624741",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T14:08:41Z",
+    "published_at": "2026-02-06T14:42:23Z",
     "free_tier": {
-      "title": "Jim Cramer는 “Tesla(TSLA)는 정말 훌륭했습니다.”라고 말합니다.",
-      "title_en": "“Tesla (TSLA) Was Fabulous,” Says Jim Cramer",
-      "summary_kr": "Jim Cramer는 “Tesla(TSLA)는 정말 훌륭했습니다.”라고 말합니다.",
-      "link": "https://finance.yahoo.com/news/tesla-tsla-fabulous-says-jim-140841060.html",
+      "title": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
+      "title_en": "Stock Market Today: Dow Rallies, Bitcoin Bounces; Amazon Dives On Earnings Results (Live Coverage)",
+      "summary_kr": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-bitcoin-price-amazon-stock-amzn/?src=A00220&yptr=yahoo",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Jim Cramer는 “Tesla(TSLA)는 정말 훌륭했습니다.”라고 말합니다.' 입니다.",
-        "impact_score": 92
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)' 입니다.",
+        "impact_score": 68
       },
       "trading_strategy": {
         "action": "관망",
@@ -100,32 +125,7 @@
     }
   },
   {
-    "id": "8917463309039204621",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:08:30Z",
-    "free_tier": {
-      "title": "Lam Research(LRCX)가 미래라고 Jim Cramer는 말합니다.",
-      "title_en": "Lam Research (LRCX) Is the Future, Says Jim Cramer",
-      "summary_kr": "Lam Research(LRCX)가 미래라고 Jim Cramer는 말합니다.",
-      "link": "https://finance.yahoo.com/news/lam-research-lrcx-future-says-140830321.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Lam Research(LRCX)가 미래라고 Jim Cramer는 말합니다.' 입니다.",
-        "impact_score": 92
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-5843903351774807732",
+    "id": "-4434063841423728023",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -140,7 +140,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술적 평가: 중기 강세' 입니다.",
-        "impact_score": 64
+        "impact_score": 78
       },
       "trading_strategy": {
         "action": "매수",
@@ -150,124 +150,74 @@
     }
   },
   {
-    "id": "-5910370946672905828",
+    "id": "8751438539655375583",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:21:08Z",
-    "free_tier": {
-      "title": "Synaptics (SYNA) 2025년 1분기 실적 통화 기록",
-      "title_en": "Synaptics (SYNA) Q1 2025 Earnings Call Transcript",
-      "summary_kr": "Synaptics (SYNA) 2025년 1분기 실적 통화 기록",
-      "link": "https://finance.yahoo.com/news/synaptics-syna-q1-2025-earnings-142108807.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Synaptics (SYNA) 2025년 1분기 실적 통화 기록' 입니다.",
-        "impact_score": 71
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6410295887336893316",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:08:18Z",
-    "free_tier": {
-      "title": "마이크론(MU) CEO 짐 크레이머(Jim Cramer)는 앞으로 무슨 일이 일어날지 목격했다고 말했습니다.",
-      "title_en": "Micron (MU) CEO Saw What Was Coming, Says Jim Cramer",
-      "summary_kr": "마이크론(MU) CEO 짐 크레이머(Jim Cramer)는 앞으로 무슨 일이 일어날지 목격했다고 말했습니다.",
-      "link": "https://finance.yahoo.com/news/micron-mu-ceo-saw-coming-140818849.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '마이크론(MU) CEO 짐 크레이머(Jim Cramer)는 앞으로 무슨 일이 일어날지 목격했다고 말했습니다.' 입니다.",
-        "impact_score": 80
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4251348571361687494",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
+    "sentiment": "BULLISH",
     "is_breaking": true,
-    "published_at": "2026-02-06T14:08:09Z",
+    "published_at": "2026-02-06T14:41:21Z",
     "free_tier": {
-      "title": "Salesforce(CRM)의 다운은 충격적이었다고 Jim Cramer는 말합니다.",
-      "title_en": "Salesforce (CRM) Being Down Was Shocking, Says Jim Cramer",
-      "summary_kr": "Salesforce(CRM)의 다운은 충격적이었다고 Jim Cramer는 말합니다.",
-      "link": "https://finance.yahoo.com/news/salesforce-crm-being-down-shocking-140809082.html",
+      "title": "Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출",
+      "title_en": "Amazon downgraded, Roblox upgraded: Wall Street's top analyst calls",
+      "summary_kr": "Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출",
+      "link": "https://finance.yahoo.com/news/amazon-downgraded-roblox-upgraded-wall-144121688.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'Salesforce(CRM)의 다운은 충격적이었다고 Jim Cramer는 말합니다.' 입니다.",
-        "impact_score": 63
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6444616321588708652",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:07:42Z",
-    "free_tier": {
-      "title": "Agnico Eagle(AEM)은 가장 안전한 곳에 지뢰를 가지고 있다고 Jim Cramer는 말합니다.",
-      "title_en": "Agnico Eagle (AEM) Has Mines In the Safest Places, Says Jim Cramer",
-      "summary_kr": "Agnico Eagle(AEM)은 가장 안전한 곳에 지뢰를 가지고 있다고 Jim Cramer는 말합니다.",
-      "link": "https://finance.yahoo.com/news/agnico-eagle-aem-mines-safest-140742039.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Agnico Eagle(AEM)은 가장 안전한 곳에 지뢰를 가지고 있다고 Jim Cramer는 말합니다.' 입니다.",
-        "impact_score": 60
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7399380181526526186",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:07:25Z",
-    "free_tier": {
-      "title": "IBM(International Business Machines) CEO, Jim Cramer가 내 모자를 쓰고 있다고 말합니다.",
-      "title_en": "My Hat’s Off to International Business Machines (IBM) CEO, Says Jim Cramer",
-      "summary_kr": "IBM(International Business Machines) CEO, Jim Cramer가 내 모자를 쓰고 있다고 말합니다.",
-      "link": "https://finance.yahoo.com/news/hat-off-international-business-machines-140725254.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'IBM(International Business Machines) CEO, Jim Cramer가 내 모자를 쓰고 있다고 말합니다.' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출' 입니다.",
         "impact_score": 94
       },
       "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-7653585958644309333",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T14:39:17Z",
+    "free_tier": {
+      "title": "Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다",
+      "title_en": "Cathie Wood Loads Up On Bullish After Earnings, Sells Coinbase",
+      "summary_kr": "Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다",
+      "link": "https://www.investors.com/news/cathie-wood-loads-up-on-bullish-after-earnings-sells-coinbase/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다' 입니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6974191399269422126",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:35:16Z",
+    "free_tier": {
+      "title": "CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)",
+      "title_en": "CarMax, Inc. (KMX) Turns to Pricing and Marketing Actions to Revitalize Sales (Corrected)",
+      "summary_kr": "CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)",
+      "link": "https://finance.yahoo.com/news/carmax-inc-kmx-turns-pricing-104416036.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)' 입니다.",
+        "impact_score": 83
+      },
+      "trading_strategy": {
         "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
@@ -275,7 +225,57 @@
     }
   },
   {
-    "id": "-2092285917956832350",
+    "id": "4460647534041788143",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-04T17:30:54Z",
+    "free_tier": {
+      "title": "아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락",
+      "title_en": "Amazon plans $200B AI spending surge, sinking stock after earnings",
+      "summary_kr": "아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락",
+      "link": "https://finance.yahoo.com/news/amazon-plans-200b-ai-spending-surge-sinking-stock-after-earnings-173054820.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락' 입니다.",
+        "impact_score": 83
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-9092845343809282939",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T00:07:11Z",
+    "free_tier": {
+      "title": "오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승",
+      "title_en": "Stock market today: Dow, S&P 500, Nasdaq rise after tech rout as Wall Street rethinks AI risks",
+      "summary_kr": "오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승",
+      "link": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-rise-after-tech-rout-as-wall-street-rethinks-ai-risks-000711263.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승' 입니다.",
+        "impact_score": 90
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6241553375381263470",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -290,7 +290,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석가 보고서: Idex Corporation' 입니다.",
-        "impact_score": 72
+        "impact_score": 76
       },
       "trading_strategy": {
         "action": "관망",
@@ -300,75 +300,75 @@
     }
   },
   {
-    "id": "7206649564201674004",
+    "id": "2581812302337730563",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:21:04Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T14:41:00Z",
     "free_tier": {
-      "title": "2026년이 투자를 시작하는 해라면, 이 머니 전문가가 추천하는 것은 다음과 같습니다.",
-      "title_en": "If 2026 Is the Year You Start Investing, Here’s What This Money Expert Recommends",
-      "summary_kr": "2026년이 투자를 시작하는 해라면, 이 머니 전문가가 추천하는 것은 다음과 같습니다.",
-      "link": "https://finance.yahoo.com/news/2026-start-investing-money-expert-142104047.html",
+      "title": "Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.",
+      "title_en": "Stellantis slumps as EV missteps trigger record €22B charge",
+      "summary_kr": "Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.",
+      "link": "https://finance.yahoo.com/news/stellantis-slumps-ev-missteps-trigger-144100837.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '2026년이 투자를 시작하는 해라면, 이 머니 전문가가 추천하는 것은 다음과 같습니다.' 입니다.",
-        "impact_score": 72
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.' 입니다.",
+        "impact_score": 68
       },
       "trading_strategy": {
-        "action": "관망",
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "4743711250343653413",
+    "id": "1430433630739788370",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:07:15Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T14:31:18Z",
     "free_tier": {
-      "title": "Caterpillar(CAT)는 데이터 센터 산업에서 중요한 역할을 하고 있다고 Jim Cramer는 말합니다.",
-      "title_en": "Caterpillar (CAT) Is Playing a Key Role In the Data Center Industry, Says Jim Cramer",
-      "summary_kr": "Caterpillar(CAT)는 데이터 센터 산업에서 중요한 역할을 하고 있다고 Jim Cramer는 말합니다.",
-      "link": "https://finance.yahoo.com/news/caterpillar-cat-playing-key-role-140715025.html",
+      "title": "AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표",
+      "title_en": "Bloom Energy, The Clean Energy Choice For AI Data Centers, Soars On Outlook; Amazon Announces AI Spending",
+      "summary_kr": "AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표",
+      "link": "https://www.investors.com/news/bloom-energy-stock-q4-earning-ai-data-centers-play/?src=A00220&yptr=yahoo",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Caterpillar(CAT)는 데이터 센터 산업에서 중요한 역할을 하고 있다고 Jim Cramer는 말합니다.' 입니다.",
-        "impact_score": 74
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표' 입니다.",
+        "impact_score": 94
       },
       "trading_strategy": {
-        "action": "관망",
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "3228522241290914747",
+    "id": "6546362076953825313",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:06:58Z",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T03:00:51Z",
     "free_tier": {
-      "title": "Vertiv(VRT)는 \"불의 집\"이라고 Jim Cramer는 말합니다.",
-      "title_en": "Vertiv (VRT) Is “A House of Fire,” Says Jim Cramer",
-      "summary_kr": "Vertiv(VRT)는 \"불의 집\"이라고 Jim Cramer는 말합니다.",
-      "link": "https://finance.yahoo.com/news/vertiv-vrt-house-fire-says-140658512.html",
+      "title": "기술주 하락과 비트코인 ​​급락으로 월스트리트 강타",
+      "title_en": "Falling tech stocks and a plunge for bitcoin hit Wall Street",
+      "summary_kr": "기술주 하락과 비트코인 ​​급락으로 월스트리트 강타",
+      "link": "https://finance.yahoo.com/news/asian-shares-drop-wall-street-030051126.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Vertiv(VRT)는 \"불의 집\"이라고 Jim Cramer는 말합니다.' 입니다.",
-        "impact_score": 77
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술주 하락과 비트코인 ​​급락으로 월스트리트 강타' 입니다.",
+        "impact_score": 87
       },
       "trading_strategy": {
-        "action": "관망",
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }

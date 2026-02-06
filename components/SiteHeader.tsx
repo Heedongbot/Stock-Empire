@@ -2,7 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, LogIn, LogOut, User, ShieldCheck, UserPlus, X } from 'lucide-react';
+import {
+    Menu, X, ChevronRight, Globe, ShieldCheck,
+    LayoutDashboard, Newspaper, BarChart3, PieChart,
+    LogOut, User, Settings, Crown, LogIn, UserPlus
+} from "lucide-react";
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import { useState } from 'react';
@@ -61,11 +65,11 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     };
 
     const NAV_ITEMS = [
+        { id: 'vvip_alpha', path: '/vvip-alpha' },
         { id: 'dashboard', path: '/dashboard' },
         { id: 'news', path: '/news' },
         { id: 'analysis', path: '/analysis' },
         { id: 'themes', path: '/themes' },
-        { id: 'vvip_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
         { id: 'portfolio', path: '/portfolio' },
     ];
@@ -85,14 +89,32 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                     </Link>
 
                     {/* Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden md:flex items-center gap-6">
                         {NAV_ITEMS.map((item) => {
                             const isActive = pathname === item.path;
+                            const isVVIP = item.id === 'vvip_alpha';
+
+                            if (isVVIP) {
+                                return (
+                                    <Link
+                                        key={item.id}
+                                        href={item.path}
+                                        className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border whitespace-nowrap ${isActive
+                                            ? 'bg-yellow-500 border-yellow-400 text-slate-900 shadow-lg shadow-yellow-500/20'
+                                            : 'bg-yellow-500/10 border-yellow-500/30 text-yellow-500 hover:bg-yellow-500 hover:text-slate-900 shadow-lg shadow-yellow-500/10'
+                                            }`}
+                                    >
+                                        <Crown className={`w-3 h-3 ${isActive ? 'fill-slate-900' : 'fill-yellow-500'}`} />
+                                        {t.nav[item.id as keyof typeof t.nav]}
+                                    </Link>
+                                );
+                            }
+
                             return (
                                 <Link
                                     key={item.id}
                                     href={item.path}
-                                    className={`text-sm font-black uppercase tracking-widest transition-colors relative group ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
+                                    className={`text-[10px] font-bold uppercase tracking-widest transition-colors relative group whitespace-nowrap ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
                                         }`}
                                 >
                                     {t.nav[item.id as keyof typeof t.nav]}
@@ -105,7 +127,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                         {user?.role === 'ADMIN' && (
                             <Link
                                 href="/admin"
-                                className="px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg shadow-red-500/20 flex items-center gap-2"
+                                className="px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg shadow-red-500/20 flex items-center gap-2 whitespace-nowrap"
                             >
                                 <ShieldCheck className="w-3 h-3" /> {t.auth.hq}
                             </Link>

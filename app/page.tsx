@@ -374,20 +374,68 @@ export default function LandingPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { id: 'ai-revolution', name: lang === 'ko' ? 'AI 혁명' : 'AI Revolution', icon: Cpu, color: 'from-purple-600/20 to-indigo-600/5' },
-            { id: 'ev-energy', name: lang === 'ko' ? 'EV & 클린 에너지' : 'EV & Clean Energy', icon: Zap, color: 'from-green-600/20 to-emerald-600/5' },
-            { id: 'semiconductors', name: lang === 'ko' ? '반도체 가이츠' : 'Semiconductor', icon: Activity, color: 'from-blue-600/20 to-cyan-600/5' },
-            { id: 'fintech-crypto', name: lang === 'ko' ? '핀테크 & 크립토' : 'Fintech & Crypto', icon: Milestone, color: 'from-orange-600/20 to-amber-600/5' }
+            {
+              id: 'ai-revolution',
+              name: lang === 'ko' ? 'AI 혁명' : 'AI Revolution',
+              icon: Cpu,
+              color: 'from-purple-600/20 to-indigo-600/5',
+              preview: ['NVDA', 'MSFT', 'PLTR']
+            },
+            {
+              id: 'ev-energy',
+              name: lang === 'ko' ? 'EV & 클린 에너지' : 'EV & Clean Energy',
+              icon: Zap,
+              color: 'from-green-600/20 to-emerald-600/5',
+              preview: ['TSLA', 'RIVN', 'ENPH']
+            },
+            {
+              id: 'semiconductors',
+              name: lang === 'ko' ? '반도체 가이츠' : 'Semiconductor',
+              icon: Activity,
+              color: 'from-blue-600/20 to-cyan-600/5',
+              preview: ['NVDA', 'AMD', 'AVGO']
+            },
+            {
+              id: 'fintech-crypto',
+              name: lang === 'ko' ? '핀테크 & 크립토' : 'Fintech & Crypto',
+              icon: Milestone,
+              color: 'from-orange-600/20 to-amber-600/5',
+              preview: ['COIN', 'PYPL', 'SQ']
+            }
           ].map((theme, i) => (
             <Link
               key={i}
               href={`/themes?id=${theme.id}`}
-              className={`group p-8 rounded-[2rem] bg-gradient-to-br ${theme.color} border border-slate-800 hover:border-blue-500/50 transition-all relative overflow-hidden`}
+              className={`group p-8 rounded-[2rem] bg-gradient-to-br ${theme.color} border border-slate-800 hover:border-blue-500/50 hover:bg-slate-800/40 transition-all relative overflow-hidden flex flex-col h-full`}
             >
-              <theme.icon className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-lg font-black text-white uppercase italic tracking-tighter mb-2">{theme.name}</h3>
-              <div className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-white transition-colors">
-                {lang === 'ko' ? '종목 스캔' : 'SCAN SECTOR'} <ArrowUpRight size={12} />
+              {/* Background Glow */}
+              <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-all duration-500"></div>
+
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-slate-950/50 rounded-2xl border border-slate-800 group-hover:scale-110 transition-transform duration-500">
+                  <theme.icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex items-center gap-1.5 translate-y-1">
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                  <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest group-hover:text-green-400 transition-colors">Live Scan</span>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-xl font-black text-white uppercase italic tracking-tighter mb-4 group-hover:text-blue-400 transition-colors leading-tight">
+                  {theme.name}
+                </h3>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {theme.preview.map(ticker => (
+                    <span key={ticker} className="px-2 py-0.5 bg-slate-950/80 border border-slate-800 rounded group-hover:border-slate-700 transition-colors text-[9px] font-black text-slate-400">
+                      {ticker}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-white transition-all">
+                {lang === 'ko' ? '섹터 인스펙션' : 'SECTOR INSPECTION'} <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
             </Link>
           ))}
