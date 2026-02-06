@@ -15,29 +15,76 @@ function NotebookContent() {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
 
     useEffect(() => {
-        // Auto-detect language
         const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
         if (savedLang) setLang(savedLang);
-
-        // Initial analysis if query exists
         if (query) {
             handleAnalysis(query);
         }
     }, [query]);
 
+    const fetchQuote = async (symbol: string) => {
+        try {
+            const res = await fetch(`/api/quote?symbol=${symbol}`);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (e) {
+            return null;
+        }
+    };
+
+    const generateDynamicResponse = (q: string, data: any, lang: 'ko' | 'en') => {
+        if (!data) {
+            return lang === 'ko'
+                ? `죄송합니다. **${q}**에 대한 실시간 데이터를 찾을 수 없습니다. 티커(Symbol)를 정확히 입력했는지 확인해주세요.`
+                : `Sorry, I couldn't find real-time data for **${q}**. Please check if the ticker symbol is correct.`;
+        }
+
+        const price = data.regularMarketPrice;
+        const change = data.regularMarketChangePercent;
+        const isBullish = change > 0;
+        const volume = (data.regularMarketVolume / 1000000).toFixed(2); // Million
+        const marketCap = (data.marketCap / 1000000000).toFixed(2); // Billion
+        const peRatio = data.trailingPE ? data.trailingPE.toFixed(2) : 'N/A';
+
+        const trend = isBullish ? (lang === 'ko' ? '상승세' : 'Upward') : (lang === 'ko' ? '하락세' : 'Downward');
+        const sentiment = isBullish ? (lang === 'ko' ? '긍정적' : 'Positive') : (lang === 'ko' ? '보수적' : 'Conservative');
+
+        if (lang === 'ko') {
+            return `**${data.shortName || q} (${data.symbol})**에 대한 실시간 NotebookLM 분석 결과입니다.\n\n` +
+                `현재 주가는 **$${price}**로 전일 대비 **${change.toFixed(2)}% ${isBullish ? '상승' : '하락'}**했습니다.\n\n` +
+                `**📊 실시간 데이터 기반 핵심 요약:**\n` +
+                `1. **시장 추세**: 현재 **${trend}**를 보이고 있으며, 거래량은 **${volume}M**입니다.\n` +
+                `2. **밸류에이션**: 시가총액 **$${marketCap}B**, P/E 비율은 **${peRatio}**입니다.\n` +
+                `3. **AI 종합 의견**: 최근 데이터 패턴을 분석할 때 **${sentiment}** 관점이 유효해 보입니다. ${Math.abs(change) > 2 ? '변동성이 크므로 주의가 필요합니다.' : '안정적인 흐름을 유지하고 있습니다.'}\n\n` +
+                `더 자세한 재무제표 분석이나 뉴스 영향도가 궁금하다면 말씀해주세요.`;
+        } else {
+            return `Here is the real-time NotebookLM analysis for **${data.shortName || q} (${data.symbol})**.\n\n` +
+                `The stock is currently trading at **$${price}**, **${isBullish ? 'up' : 'down'} ${change.toFixed(2)}%** from the previous close.\n\n` +
+                `**📊 Data-Driven Key Takeaways:**\n` +
+                `1. **Market Trend**: Showing a **${trend}** trend with a volume of **${volume}M**.\n` +
+                `2. **Valuation**: Market Cap is **$${marketCap}B** with a P/E Ratio of **${peRatio}**.\n` +
+                `3. **AI Verdict**: Based on recent patterns, a **${sentiment}** outlook is suggested. ${Math.abs(change) > 2 ? 'High volatility detected, proceed with caution.' : 'Maintaining a stable flow.'}\n\n` +
+                `Let me know if you need deeper financial analysis or news impact assessments.`;
+        }
+    };
+
     const handleAnalysis = async (q: string) => {
         setIsAnalyzing(true);
-        setMessages(prev => [...prev, { role: 'user', content: q }]);
+        // Only add user message if it's a new input (not initial load)
+        if (q !== query || messages.length > 0) {
+            setMessages(prev => [...prev, { role: 'user', content: q }]);
+        } else if (messages.length === 0) {
+            // For initial load via URL, we might want to show the query as a user message or just the result
+            setMessages([{ role: 'user', content: q }]);
+        }
 
-        // Mock API call simulation
+        const quoteData = await fetchQuote(q);
+
         setTimeout(() => {
-            const response = lang === 'ko'
-                ? `**${q}**에 대한 NotebookLM 심층 분석 결과입니다.\n\n학습된 문서 12개를 기반으로 분석한 결과, 해당 종목은 현재 **상승 골든크로스** 패턴을 보이고 있습니다. 특히 최근 기관 매수세 유입(120만 주)과 관련 뉴스(3건)가 긍정적 시그널을 보내고 있습니다.\n\n**핵심 요약:**\n1. 매출 성장률: 전년 대비 +15% (예상 상회)\n2. 리스크 요인: 금리 인상에 따른 단기 변동성\n3. 기술적 지표: RSI 65 (매수 유효 구간)\n\n추가 질문이 있으시면 언제든 물어봐주세요.`
-                : `Here is the NotebookLM deep analysis for **${q}**.\n\nBased on 12 trained documents, this asset is showing a **Bullish Golden Cross** pattern. Recent institutional inflows (1.2M shares) and related news (3 items) are signaling positive momentum.\n\n**Key Takeaways:**\n1. Revenue Growth: +15% YoY (Beating estimates)\n2. Risk Factors: Short-term volatility due to rate hikes\n3. Technicals: RSI 65 (Buy zone)\n\nFeel free to ask follow-up questions.`;
-
+            const response = generateDynamicResponse(q, quoteData, lang);
             setMessages(prev => [...prev, { role: 'assistant', content: response }]);
             setIsAnalyzing(false);
-        }, 2500);
+        }, 1500); // Slight delay for effect
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -47,6 +94,7 @@ function NotebookContent() {
             setInput('');
         }
     };
+
 
     return (
         <div className="min-h-screen bg-[#050b14] text-white font-sans flex flex-col">
@@ -88,8 +136,8 @@ function NotebookContent() {
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap shadow-lg ${msg.role === 'user'
-                                        ? 'bg-slate-800 text-white rounded-tr-none'
-                                        : 'bg-indigo-900/20 border border-indigo-500/20 text-slate-200 rounded-tl-none'
+                                    ? 'bg-slate-800 text-white rounded-tr-none'
+                                    : 'bg-indigo-900/20 border border-indigo-500/20 text-slate-200 rounded-tl-none'
                                     }`}>
                                     {msg.content}
                                 </div>
