@@ -11,6 +11,7 @@ import {
   CheckCircle2, Crown, X, CreditCard, Loader2, TrendingDown, Award, ShieldCheck
 } from "lucide-react";
 import NewsTeaser from "@/components/NewsTeaser";
+import AdLeaderboard from "@/components/ads/AdLeaderboard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { translations } from "@/lib/translations";
@@ -377,6 +378,9 @@ export default function LandingPage() {
             <div className="text-[10px] font-black text-slate-500 tracking-widest italic">{t.stats.revenue}</div>
           </div>
         </div>
+
+        {/* AdSense Leaderboard Placement */}
+        <AdLeaderboard />
       </section>
 
       {/* Pricing Section */}

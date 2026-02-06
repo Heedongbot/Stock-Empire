@@ -3,6 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BreakingNewsToast from "./components/BreakingNewsToast";
 
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

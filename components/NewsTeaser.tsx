@@ -3,10 +3,13 @@
 import { Lock, Newspaper, FileText, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { useState } from 'react';
+import { useDailyLimit } from '@/hooks/useDailyLimit';
+import AdInFeed from './ads/AdInFeed';
 
 export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', openPayment: (plan: string) => void }) {
     const { user } = useAuth();
     const isFree = user?.tier === 'FREE' || !user;
+    const { count, visibleLimit } = useDailyLimit();
 
     const newsData = [
         {
@@ -65,58 +68,61 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {newsData.map((news) => (
-                    <div key={news.id} className="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden group hover:border-slate-700 transition-all">
-                        <div className="flex justify-between items-start mb-4">
-                            <span className="text-[10px] font-black text-slate-500 bg-slate-950 px-2 py-1 rounded">NEWS #{news.id}</span>
-                            <span className="text-[10px] font-black text-indigo-400 flex items-center gap-1">
-                                <FileText size={12} /> SUMMARY
-                            </span>
-                        </div>
+                {newsData.map((news, idx) => (
+                    <>
+                        <div key={news.id} className="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden group hover:border-slate-700 transition-all">
+                            <div className="flex justify-between items-start mb-4">
+                                <span className="text-[10px] font-black text-slate-500 bg-slate-950 px-2 py-1 rounded">NEWS #{news.id}</span>
+                                <span className="text-[10px] font-black text-indigo-400 flex items-center gap-1">
+                                    <FileText size={12} /> SUMMARY
+                                </span>
+                            </div>
 
-                        <h3 className="text-lg font-black text-white mb-4 leading-tight group-hover:text-indigo-400 transition-colors">
-                            {news.title}
-                        </h3>
+                            <h3 className="text-lg font-black text-white mb-4 leading-tight group-hover:text-indigo-400 transition-colors">
+                                {news.title}
+                            </h3>
 
-                        <p className="text-xs text-slate-400 font-medium mb-6 leading-relaxed border-l-2 border-indigo-500/20 pl-4">
-                            {news.summary}
-                        </p>
-
-                        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 relative">
-                            <h4 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                🤖 AI Insight
-                            </h4>
-
-                            <p className="text-xs text-slate-300 font-bold mb-1">
-                                "{news.ai_analysis_preview}"
+                            <p className="text-xs text-slate-400 font-medium mb-6 leading-relaxed border-l-2 border-indigo-500/20 pl-4">
+                                {news.summary}
                             </p>
 
-                            <div className="relative mt-2">
-                                <p className={`text-xs text-slate-500 leading-relaxed font-medium transition-all duration-500 ${isFree ? 'blur-sm select-none opacity-50' : ''}`}>
-                                    {news.ai_analysis_full}
+                            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 relative">
+                                <h4 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                    🤖 AI Insight
+                                </h4>
+
+                                <p className="text-xs text-slate-300 font-bold mb-1">
+                                    "{news.ai_analysis_preview}"
                                 </p>
 
-                                {isFree && (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                                        <Lock className="w-5 h-5 text-indigo-500 mb-2" />
-                                        <button
-                                            onClick={() => openPayment('VIP')}
-                                            className="px-4 py-2 bg-slate-900 border border-indigo-500/30 text-indigo-400 text-[10px] font-black rounded-lg hover:bg-indigo-600 hover:text-white transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl"
-                                        >
-                                            UNLOCK <ArrowRight size={10} />
-                                        </button>
-                                    </div>
-                                )}
+                                <div className="relative mt-2">
+                                    <p className={`text-xs text-slate-500 leading-relaxed font-medium transition-all duration-500 ${isFree ? 'blur-sm select-none opacity-50' : ''}`}>
+                                        {news.ai_analysis_full}
+                                    </p>
+
+                                    {isFree && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                                            <Lock className="w-5 h-5 text-indigo-500 mb-2" />
+                                            <button
+                                                onClick={() => openPayment('VIP')}
+                                                className="px-4 py-2 bg-slate-900 border border-indigo-500/30 text-indigo-400 text-[10px] font-black rounded-lg hover:bg-indigo-600 hover:text-white transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl"
+                                            >
+                                                UNLOCK <ArrowRight size={10} />
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {isFree && idx === 1 && <AdInFeed />}
+                    </>
                 ))}
             </div>
 
             {isFree && (
                 <div className="mt-8 text-center bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-4 max-w-md mx-auto animate-pulse">
                     <p className="text-xs font-bold text-indigo-300 mb-1">
-                        ⏰ {lang === 'ko' ? "오늘 무료 분석 한도: 1/3건" : "Free Analysis Limit: 1/3"}
+                        ⏰ {lang === 'ko' ? `오늘 무료 분석 한도: ${count}/${visibleLimit}건` : `Free Analysis Limit: ${count}/${visibleLimit}`}
                     </p>
                     <p className="text-[10px] text-slate-500 uppercase tracking-wider">
                         {lang === 'ko' ? "내일 00:00에 초기화됩니다" : "Resets tomorrow at 00:00"}
