@@ -2,7 +2,7 @@ name: Update Market Data
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Run every 30 minutes
+    - cron: '0 * * * *' # Run every 1 hour (Reduced from 30m to avoid notification fatigue)
   workflow_dispatch: # Allow manual run
 
 jobs:
