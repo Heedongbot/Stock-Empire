@@ -1,4 +1,5 @@
 "use client";
+// Vercel Build Trigger: v1.0.1
 
 import {
   Globe, Zap, ArrowUpRight, UserPlus,
