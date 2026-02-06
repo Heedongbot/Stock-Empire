@@ -353,10 +353,6 @@ export default function LandingPage() {
         </div>
 
 
-        // ... existing code ...
-
-        {/* VVIP Alpha Choice Section */}
-        {/* ... existing VVIP section ... */}
       </section>
 
       {/* NEW: News Teaser Section */}
