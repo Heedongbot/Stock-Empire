@@ -30,30 +30,33 @@ class StockNewsCrawler:
             print(f"[WARN] Translation failed: {e}")
             return text
 
-    def crawl_yahoo_rss(self, limit=20):
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling Yahoo Finance RSS...")
+    def crawl_all_sources(self, limit=20):
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling Unified Global Market Sources...")
         news_list = []
-        rss_urls = [
-            'https://finance.yahoo.com/news/rssindex',
-            'https://finance.yahoo.com/rss/topstories'
+        sources = [
+            {'name': 'Yahoo Finance', 'url': 'https://finance.yahoo.com/news/rssindex'},
+            {'name': 'Yahoo Top Stories', 'url': 'https://finance.yahoo.com/rss/topstories'},
+            {'name': 'Investing.com', 'url': 'https://www.investing.com/rss/news.rss'},
+            {'name': 'Seeking Alpha', 'url': 'https://seekingalpha.com/feed.xml'},
+            {'name': 'MarketWatch', 'url': 'https://www.marketwatch.com/rss/topstories'}
         ]
         
-        for url in rss_urls:
+        for src in sources:
             try:
-                response = requests.get(url, headers=self.headers, timeout=10)
+                print(f" -> Fetching {src['name']}...")
+                response = requests.get(src['url'], headers=self.headers, timeout=10)
                 if response.status_code != 200: continue
                     
                 soup = BeautifulSoup(response.content, 'xml')
-                items = soup.find_all('item', limit=limit)
+                items = soup.find_all('item', limit=8) # Get top 8 from each to mix
                 
                 for item in items:
                     title = item.find('title').text.strip()
                     link = item.find('link').text.strip()
                     desc = item.find('description').text.strip() if item.find('description') else title
                     
-                    # --- NOISE FILTER START ---
-                    # Filter out personal finance, lifestyle, and irrelevant human interest stories
-                    # NEW: Added newsletter/clickbait filtering
+                    # --- NOISE FILTER ---
+                    # (Keep the logic we built before)
                     noise_keywords = [
                         'prison', 'mom of', 'divorce', 'ramsey', 'lifestyle', 'family',
                         'personal finance', 'how to save', 'scam', 'police', 'accident',
@@ -63,24 +66,20 @@ class StockNewsCrawler:
                         'barchart brief', 'motley fool', 'zacks', 'analyst report:'
                     ]
                     content_to_check = (title + " " + desc).lower()
-                    if any(x in content_to_check for x in noise_keywords):
-                        print(f"[FILTERED] Skipping noise/clickbait item: {title[:50]}...")
+                    if any(x in content_to_check for x in noise_keywords) or title.strip().endswith('?'):
                         continue
                         
-                    # Also skip if title ends with a question mark (common clickbait pattern)
-                    if title.strip().endswith('?'):
-                         print(f"[FILTERED] Skipping question-based clickbait: {title[:50]}...")
-                         continue
-                    # --- NOISE FILTER END ---
-                    
                     pub_date = item.find('pubDate').text.strip() if item.find('pubDate') else datetime.now().isoformat()
-                    news_list.append(self._format_news_item(title, desc, link, pub_date, "Yahoo Finance"))
+                    formatted = self._format_news_item(title, desc, link, pub_date, src['name'])
+                    if formatted:
+                        news_list.append(formatted)
                     
-                if len(news_list) >= limit: break
             except Exception as e:
-                print(f"[WARN] Yahoo RSS error: {e}")
+                print(f"[WARN] {src['name']} error: {e}")
                 
-        return news_list
+        # Shuffle to mix sources
+        random.shuffle(news_list)
+        return news_list[:limit]
 
     def _format_news_item(self, title, summary, link, date, source):
         # 1. Financial Term Correction (Fix bad machine translation)
@@ -189,7 +188,7 @@ def main():
     
     while True:
         try:
-            news = crawler.crawl_yahoo_rss(limit=15)
+            news = crawler.crawl_all_sources(limit=15)
             crawler.save(news)
         except Exception as e:
             print(f"[ERROR] Main loop error: {e}")
