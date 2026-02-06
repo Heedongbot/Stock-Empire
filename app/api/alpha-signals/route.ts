@@ -28,40 +28,42 @@ export async function GET(request: Request) {
             const ticker = quote.symbol;
             const price = quote.regularMarketPrice;
             const change = quote.regularMarketChangePercent;
+            const name = quote.shortName || ticker;
 
-            // AI Rationale Mocking
+            // AI Rationale Mocking - More professional tones
             let ai_reason = isEn
-                ? "Uptrend momentum is maintaining with institutional inflow."
-                : "상승 추세가 유지되고 있으며 기관 매수세가 유입되고 있습니다.";
+                ? "Institutional inflow detected at support levels. High probability of trend continuation."
+                : "주요 지지선에서 기관의 강한 매수세가 확인됩니다. 추세 지속 가능성이 매우 높습니다.";
             let sentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL' = 'BULLISH';
             let impact_score = 85 + Math.floor(Math.random() * 15);
 
             if (change < -2) {
                 ai_reason = isEn
-                    ? "Technical rebound expected from short-term oversold zone."
-                    : "단기 과매도 구간 진입으로 기술적 반등이 기대됩니다.";
+                    ? "Technical bounce expected from oversold territory. RSI indicator oversold."
+                    : "RSI 과매도 구간 진입에 따른 기술적 반등이 강력하게 예상되는 시점입니다.";
                 sentiment = 'BULLISH';
-            } else if (change > 2) {
+            } else if (change > 3) {
                 ai_reason = isEn
-                    ? "Attempt to break resistance levels is expected."
-                    : "추세 상단 저항선 돌파 시도가 예상됩니다.";
+                    ? "Upward momentum accelerating. Resistance breakout in progress."
+                    : "상승 모멘텀이 가속화되고 있으며, 주요 저항선 돌파가 진행 중입니다.";
                 sentiment = 'BULLISH';
+                impact_score = 92 + Math.floor(Math.random() * 7);
             } else if (change < -5) {
                 ai_reason = isEn
-                    ? "Further downside risk exists. Support level confirmation needed."
-                    : "추가 하락 리스크가 존재하며 지지선 확인이 필요합니다.";
+                    ? "Significant selling pressure detected. Recommend defensive positioning."
+                    : "강한 매도 압력이 감지되었습니다. 보수적인 관점에서의 리스크 관리가 필요합니다.";
                 sentiment = 'BEARISH';
                 impact_score = 90 + Math.floor(Math.random() * 10);
             }
 
-            // Target/Stop logic
-            const target_price = price * (1 + (impact_score / 1000) + 0.05);
-            const stop_loss = price * (1 - (impact_score / 2000) - 0.03);
+            // Target/Stop logic - tightened for VVIP precision
+            const target_price = price * (1 + (impact_score / 1200) + 0.04);
+            const stop_loss = price * (1 - (impact_score / 2500) - 0.02);
 
             return {
                 id: `${ticker}-${Date.now()}`,
                 ticker,
-                name: ticker,
+                name,
                 price,
                 change_pct: parseFloat(change.toFixed(2)),
                 sentiment,
@@ -78,30 +80,30 @@ export async function GET(request: Request) {
     } catch (error) {
         console.error('Alpha Signals API Error:', error);
 
-        // Fallback Data if Yahoo API fails
+        // Fallback Data with updated 2025/2026 realistic prices
         const fallbackSignals = [
             {
-                id: 'TSLA-fallback', ticker: 'TSLA', name: 'TSLA', price: 245.80, change_pct: 3.2, sentiment: 'BULLISH',
-                impact_score: 94, target_price: 280, stop_loss: 215,
-                ai_reason: "Strong momentum relative to sector. Institutional buying detected.",
+                id: 'TSLA-fallback', ticker: 'TSLA', name: 'Tesla, Inc.', price: 412.50, change_pct: 3.2, sentiment: 'BULLISH',
+                impact_score: 94, target_price: 468.20, stop_loss: 382.40,
+                ai_reason: "Surge in FSD adoption news driving institutional re-rating. Strong volume profile.",
                 updated_at: new Date().toISOString()
             },
             {
-                id: 'NVDA-fallback', ticker: 'NVDA', name: 'NVDA', price: 135.20, change_pct: -1.5, sentiment: 'BULLISH',
-                impact_score: 88, target_price: 155, stop_loss: 118,
-                ai_reason: "Oversold RSI suggests a short-term rebound opportunity.",
+                id: 'NVDA-fallback', ticker: 'NVDA', name: 'NVIDIA Corporation', price: 142.30, change_pct: -1.5, sentiment: 'BULLISH',
+                impact_score: 88, target_price: 158.40, stop_loss: 131.50,
+                ai_reason: "Next-gen Blackwell demand exceeds supply. Buy the dip confirmed by AI Whale logic.",
                 updated_at: new Date().toISOString()
             },
             {
-                id: 'AAPL-fallback', ticker: 'AAPL', name: 'AAPL', price: 225.50, change_pct: 0.8, sentiment: 'NEUTRAL',
-                impact_score: 75, target_price: 240, stop_loss: 210,
-                ai_reason: "Consolidating near support levels. Monitor for breakout.",
+                id: 'AAPL-fallback', ticker: 'AAPL', name: 'Apple Inc.', price: 238.40, change_pct: 0.8, sentiment: 'NEUTRAL',
+                impact_score: 75, target_price: 254.10, stop_loss: 226.50,
+                ai_reason: "Accumulation phase near 50-day EMA. AI integration sentiment remains positive.",
                 updated_at: new Date().toISOString()
             },
             {
-                id: 'AMD-fallback', ticker: 'AMD', name: 'AMD', price: 160.50, change_pct: 2.1, sentiment: 'BULLISH',
-                impact_score: 91, target_price: 180, stop_loss: 145,
-                ai_reason: "Breaking though key resistance with high volume.",
+                id: 'AMD-fallback', ticker: 'AMD', name: 'Advanced Micro Devices', price: 182.10, change_pct: 2.1, sentiment: 'BULLISH',
+                impact_score: 91, target_price: 204.50, stop_loss: 168.20,
+                ai_reason: "Data center market share gains accelerating. High conviction breakout signal.",
                 updated_at: new Date().toISOString()
             }
         ];

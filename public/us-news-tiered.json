@@ -1,21 +1,21 @@
 [
   {
-    "id": "-3670533719577606931",
+    "id": "9017284750460004139",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T14:47:00Z",
+    "published_at": "2026-02-06T15:01:01Z",
     "free_tier": {
-      "title": "모든 메타 플랫폼 투자자가 알아야 할 3가지",
-      "title_en": "3 Things Every Meta Platforms Investor Needs to Know",
-      "summary_kr": "모든 메타 플랫폼 투자자가 알아야 할 3가지",
-      "link": "https://finance.yahoo.com/news/3-things-every-meta-platforms-144700811.html",
+      "title": "투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨",
+      "title_en": "AI trade splinters as investors get more selective",
+      "summary_kr": "투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨",
+      "link": "https://finance.yahoo.com/news/ai-trade-splinters-investors-more-150101291.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '모든 메타 플랫폼 투자자가 알아야 할 3가지' 입니다.",
-        "impact_score": 65
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨' 입니다.",
+        "impact_score": 74
       },
       "trading_strategy": {
         "action": "관망",
@@ -25,7 +25,32 @@
     }
   },
   {
-    "id": "1051729995953848778",
+    "id": "-6894845389999613704",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:59:48Z",
+    "free_tier": {
+      "title": "랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향",
+      "title_en": "Ralph Lauren beats holiday forecasts and raises full-year outlook",
+      "summary_kr": "랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향",
+      "link": "https://finance.yahoo.com/news/ralph-lauren-beats-holiday-forecasts-145948523.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향' 입니다.",
+        "impact_score": 61
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-7055364363817409781",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": true,
@@ -40,7 +65,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법' 입니다.",
-        "impact_score": 84
+        "impact_score": 93
       },
       "trading_strategy": {
         "action": "매도",
@@ -50,7 +75,7 @@
     }
   },
   {
-    "id": "2752311676047307733",
+    "id": "-2243058445295559423",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -65,7 +90,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업' 입니다.",
-        "impact_score": 65
+        "impact_score": 81
       },
       "trading_strategy": {
         "action": "매수",
@@ -75,7 +100,7 @@
     }
   },
   {
-    "id": "-5429220642408895312",
+    "id": "4767927212548184790",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -90,7 +115,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.' 입니다.",
-        "impact_score": 93
+        "impact_score": 87
       },
       "trading_strategy": {
         "action": "관망",
@@ -100,32 +125,7 @@
     }
   },
   {
-    "id": "690313787688624741",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:42:23Z",
-    "free_tier": {
-      "title": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
-      "title_en": "Stock Market Today: Dow Rallies, Bitcoin Bounces; Amazon Dives On Earnings Results (Live Coverage)",
-      "summary_kr": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
-      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-bitcoin-price-amazon-stock-amzn/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)' 입니다.",
-        "impact_score": 68
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4434063841423728023",
+    "id": "-5843903351774807732",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -140,7 +140,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술적 평가: 중기 강세' 입니다.",
-        "impact_score": 78
+        "impact_score": 77
       },
       "trading_strategy": {
         "action": "매수",
@@ -150,32 +150,57 @@
     }
   },
   {
-    "id": "8751438539655375583",
+    "id": "-6693793795723454236",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T14:41:21Z",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:42:23Z",
     "free_tier": {
-      "title": "Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출",
-      "title_en": "Amazon downgraded, Roblox upgraded: Wall Street's top analyst calls",
-      "summary_kr": "Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출",
-      "link": "https://finance.yahoo.com/news/amazon-downgraded-roblox-upgraded-wall-144121688.html",
+      "title": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
+      "title_en": "Stock Market Today: Dow Rallies, Bitcoin Bounces; Amazon Dives On Earnings Results (Live Coverage)",
+      "summary_kr": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-bitcoin-price-amazon-stock-amzn/?src=A00220&yptr=yahoo",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Amazon 다운그레이드, Roblox 업그레이드: 월스트리트의 최고 분석가 호출' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)' 입니다.",
         "impact_score": 94
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "-7653585958644309333",
+    "id": "-8187529792124240136",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T14:58:49Z",
+    "free_tier": {
+      "title": "S&W, 브리스톨의 새로운 세금 파트너와 팀 확장",
+      "title_en": "S&W expands team with new tax partner in Bristol",
+      "summary_kr": "S&W, 브리스톨의 새로운 세금 파트너와 팀 확장",
+      "link": "https://finance.yahoo.com/news/w-expands-team-tax-partner-145849628.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'S&W, 브리스톨의 새로운 세금 파트너와 팀 확장' 입니다.",
+        "impact_score": 94
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-3653692503614272650",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -190,7 +215,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다' 입니다.",
-        "impact_score": 70
+        "impact_score": 63
       },
       "trading_strategy": {
         "action": "매수",
@@ -200,7 +225,7 @@
     }
   },
   {
-    "id": "-6974191399269422126",
+    "id": "-8922326321541488226",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -215,7 +240,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)' 입니다.",
-        "impact_score": 83
+        "impact_score": 73
       },
       "trading_strategy": {
         "action": "관망",
@@ -225,7 +250,7 @@
     }
   },
   {
-    "id": "4460647534041788143",
+    "id": "-815490249709048047",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -250,7 +275,32 @@
     }
   },
   {
-    "id": "-9092845343809282939",
+    "id": "-5267896725545097751",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06T12:11:35Z",
+    "free_tier": {
+      "title": "분석가 보고서: Raymond James Financial, Inc.",
+      "title_en": "Analyst Report: Raymond James Financial, Inc.",
+      "summary_kr": "분석가 보고서: Raymond James Financial, Inc.",
+      "link": "https://finance.yahoo.com/research/reports/ARGUS_4217_AnalystReport_1770379895000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석가 보고서: Raymond James Financial, Inc.' 입니다.",
+        "impact_score": 76
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4983746892994051929",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -265,7 +315,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승' 입니다.",
-        "impact_score": 90
+        "impact_score": 65
       },
       "trading_strategy": {
         "action": "매수",
@@ -275,21 +325,21 @@
     }
   },
   {
-    "id": "-6241553375381263470",
+    "id": "7611933065557567802",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T12:11:35Z",
+    "published_at": "2026-02-06T14:50:55Z",
     "free_tier": {
-      "title": "분석가 보고서: Idex Corporation",
-      "title_en": "Analyst Report: Idex Corporation",
-      "summary_kr": "분석가 보고서: Idex Corporation",
-      "link": "https://finance.yahoo.com/research/reports/ARGUS_4072_AnalystReport_1770379895000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+      "title": "Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각",
+      "title_en": "Eastern Bankshares Chief Information Officer Sells 21,000 Shares for $427,000",
+      "summary_kr": "Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각",
+      "link": "https://finance.yahoo.com/news/eastern-bankshares-chief-information-officer-145055735.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석가 보고서: Idex Corporation' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각' 입니다.",
         "impact_score": 76
       },
       "trading_strategy": {
@@ -300,32 +350,7 @@
     }
   },
   {
-    "id": "2581812302337730563",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T14:41:00Z",
-    "free_tier": {
-      "title": "Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.",
-      "title_en": "Stellantis slumps as EV missteps trigger record €22B charge",
-      "summary_kr": "Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.",
-      "link": "https://finance.yahoo.com/news/stellantis-slumps-ev-missteps-trigger-144100837.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Stellantis는 EV 실수로 기록적인 220억 유로의 충전이 발생하면서 하락세를 보이고 있습니다.' 입니다.",
-        "impact_score": 68
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "1430433630739788370",
+    "id": "7232253053151088599",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -340,35 +365,10 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표' 입니다.",
-        "impact_score": 94
+        "impact_score": 62
       },
       "trading_strategy": {
         "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6546362076953825313",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T03:00:51Z",
-    "free_tier": {
-      "title": "기술주 하락과 비트코인 ​​급락으로 월스트리트 강타",
-      "title_en": "Falling tech stocks and a plunge for bitcoin hit Wall Street",
-      "summary_kr": "기술주 하락과 비트코인 ​​급락으로 월스트리트 강타",
-      "link": "https://finance.yahoo.com/news/asian-shares-drop-wall-street-030051126.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술주 하락과 비트코인 ​​급락으로 월스트리트 강타' 입니다.",
-        "impact_score": 87
-      },
-      "trading_strategy": {
-        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
