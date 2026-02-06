@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { TrendingUp, TrendingDown, ArrowRight, Lock, Activity, BarChart3, PieChart, DollarSign, Zap, RefreshCw, Target, ArrowUpRight, ArrowDownRight, ShieldCheck, Globe, Search } from 'lucide-react';
 import { translations } from '@/lib/translations';
 import SiteHeader from '@/components/SiteHeader';
@@ -82,6 +83,15 @@ export default function MarketSignalsPage() {
         }
     };
 
+    const [marketSearchTerm, setMarketSearchTerm] = useState('');
+    const router = useRouter(); // Import useRouter from next/navigation at top of file if not present
+
+    const handleSearch = () => {
+        if (marketSearchTerm.trim()) {
+            router.push(`/analysis?q=${encodeURIComponent(marketSearchTerm)}`);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#0a0f1a] text-white">
             <SiteHeader lang={lang} setLang={setLang} />
@@ -116,13 +126,19 @@ export default function MarketSignalsPage() {
                                 type="text"
                                 className="block w-full pl-11 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm font-bold text-white placeholder-slate-600 transition-all shadow-lg"
                                 placeholder={lang === 'ko' ? "종목 심층 분석 검색 (예: Samsung, TSLA)" : "Deep Analyzer Search (e.g. Samsung, TSLA)"}
+                                value={marketSearchTerm}
+                                onChange={(e) => setMarketSearchTerm(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                             />
                             <div className="absolute inset-y-0 right-0 pr-10 flex items-center pointer-events-none">
                                 <span className="text-[10px] font-black text-slate-700 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">AI</span>
                             </div>
                             {/* Search Button */}
                             <div className="absolute inset-y-0 right-1 flex items-center">
-                                <button className="p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg shadow-lg shadow-indigo-600/20 transition-all">
+                                <button
+                                    onClick={handleSearch}
+                                    className="p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg shadow-lg shadow-indigo-600/20 transition-all"
+                                >
                                     <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>

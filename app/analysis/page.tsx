@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
     Activity, Zap, Target, ShieldAlert, ChevronRight,
     ArrowUpRight, Lock, Crown, BarChart3, TrendingUp, TrendingDown,
@@ -28,7 +28,12 @@ interface AlphaSignal {
 
 
 
-export default function AnalysisPage() {
+import { useRouter, useSearchParams } from 'next/navigation';
+
+function AnalysisContent() {
+    const searchParams = useSearchParams();
+    const initialSearch = searchParams.get('q') || '';
+
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
     const t = (translations as any)[lang];
     const { user } = useAuth();
@@ -38,6 +43,7 @@ export default function AnalysisPage() {
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('ALL');
     const [selectedSignal, setSelectedSignal] = useState<AlphaSignal | null>(null);
+    const [searchTerm, setSearchTerm] = useState(initialSearch);
 
     // Auto-detect User Locale with Persistence
     useEffect(() => {
@@ -76,7 +82,7 @@ export default function AnalysisPage() {
         fetchSignals();
     }, []);
 
-    const [searchTerm, setSearchTerm] = useState('');
+
 
     const filteredSignals = signals.filter(s =>
         (filter === 'ALL' || s.strategy === filter) &&
@@ -262,5 +268,13 @@ export default function AnalysisPage() {
 
             <QuizWidget />
         </div >
+    );
+}
+
+export default function AnalysisPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#050b14] flex items-center justify-center text-white font-black uppercase tracking-widest">Loading Alpha Intelligence...</div>}>
+            <AnalysisContent />
+        </Suspense>
     );
 }
