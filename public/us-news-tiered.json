@@ -1,21 +1,21 @@
 [
   {
-    "id": "9017284750460004139",
+    "id": "-8710041096597590061",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T15:01:01Z",
+    "published_at": "2026-02-05T16:00:10Z",
     "free_tier": {
-      "title": "투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨",
-      "title_en": "AI trade splinters as investors get more selective",
-      "summary_kr": "투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨",
-      "link": "https://finance.yahoo.com/news/ai-trade-splinters-investors-more-150101291.html",
+      "title": "Huntington Ingalls(HII) 수입 통화 기록",
+      "title_en": "Huntington Ingalls (HII) Earnings Call Transcript",
+      "summary_kr": "Huntington Ingalls(HII) 수입 통화 기록",
+      "link": "https://finance.yahoo.com/news/huntington-ingalls-hii-earnings-call-160010644.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '투자자들이 더 선택적으로 변하면서 AI 거래가 분열됨' 입니다.",
-        "impact_score": 74
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Huntington Ingalls(HII) 수입 통화 기록' 입니다.",
+        "impact_score": 76
       },
       "trading_strategy": {
         "action": "관망",
@@ -25,22 +25,47 @@
     }
   },
   {
-    "id": "-6894845389999613704",
+    "id": "5307971810930677799",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:59:48Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T16:01:19Z",
     "free_tier": {
-      "title": "랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향",
-      "title_en": "Ralph Lauren beats holiday forecasts and raises full-year outlook",
-      "summary_kr": "랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향",
-      "link": "https://finance.yahoo.com/news/ralph-lauren-beats-holiday-forecasts-145948523.html",
+      "title": "긍정적인 트럼프-시 회담 이후 대두 가격은 얼마나 오를 수 있을까?",
+      "title_en": "How Much Higher Can Soybean Prices Go After Positive Trump-Xi Talks?",
+      "summary_kr": "긍정적인 트럼프-시 회담 이후 대두 가격은 얼마나 오를 수 있을까?",
+      "link": "https://finance.yahoo.com/news/much-higher-soybean-prices-positive-160119256.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '랄프 로렌, 휴가 전망을 뛰어넘고 연간 전망 상향' 입니다.",
-        "impact_score": 61
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '긍정적인 트럼프-시 회담 이후 대두 가격은 얼마나 오를 수 있을까?' 입니다.",
+        "impact_score": 66
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-8810046925694542144",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:00:00Z",
+    "free_tier": {
+      "title": "대만, 무역 협상 타결 후 미국산 LNG 수입량 늘릴 예정",
+      "title_en": "Taiwan to Hike U.S. LNG Imports After Reaching Trade Deal",
+      "summary_kr": "대만, 무역 협상 타결 후 미국산 LNG 수입량 늘릴 예정",
+      "link": "https://finance.yahoo.com/news/taiwan-hike-u-lng-imports-160000762.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '대만, 무역 협상 타결 후 미국산 LNG 수입량 늘릴 예정' 입니다.",
+        "impact_score": 82
       },
       "trading_strategy": {
         "action": "관망",
@@ -50,22 +75,47 @@
     }
   },
   {
-    "id": "-7055364363817409781",
+    "id": "-3906192845349497729",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T15:59:46Z",
+    "free_tier": {
+      "title": "Hims and Hers Health의 복합 Wegovy 알약은 시장 불안에 연료를 공급합니다.",
+      "title_en": "Hims and Hers Health's compounded Wegovy pill offering fuels market jitters",
+      "summary_kr": "Hims and Hers Health의 복합 Wegovy 알약은 시장 불안에 연료를 공급합니다.",
+      "link": "https://finance.yahoo.com/news/hims-hers-healths-compounded-wegovy-155946221.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Hims and Hers Health의 복합 Wegovy 알약은 시장 불안에 연료를 공급합니다.' 입니다.",
+        "impact_score": 80
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4252356026827556377",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": true,
-    "published_at": "2026-02-06T14:45:00Z",
+    "published_at": "2026-02-05T16:02:25Z",
     "free_tier": {
-      "title": "LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법",
-      "title_en": "LA mom of 2 faces $180K income loss after husband goes to prison. How Ramsey Show hosts say she can secure her finances",
-      "summary_kr": "LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법",
-      "link": "https://finance.yahoo.com/news/la-mom-2-faces-180k-144500792.html",
+      "title": "Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인 ​​가격이 67,000달러 아래로 떨어졌습니다.",
+      "title_en": "Bitcoin price sinks below $67,000 after Bessent says the US government can't tell banks to bail out crypto",
+      "summary_kr": "Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인 ​​가격이 67,000달러 아래로 떨어졌습니다.",
+      "link": "https://finance.yahoo.com/news/bitcoin-price-sinks-below-67000-after-bessent-says-the-us-government-cant-tell-banks-to-bail-out-crypto-022333428.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'LA의 두 아이 엄마는 남편이 감옥에 간 후 $180,000의 수입 손실을 입게 됩니다. Ramsey Show 진행자가 재정을 확보할 수 있다고 말하는 방법' 입니다.",
-        "impact_score": 93
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'Bessent가 미국 정부가 은행에 암호화폐를 구제하라고 말할 수 없다고 말한 후 비트코인 ​​가격이 67,000달러 아래로 떨어졌습니다.' 입니다.",
+        "impact_score": 64
       },
       "trading_strategy": {
         "action": "매도",
@@ -75,74 +125,49 @@
     }
   },
   {
-    "id": "-2243058445295559423",
+    "id": "-7407348716556583111",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T14:44:43Z",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:01:11Z",
     "free_tier": {
-      "title": "비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업",
-      "title_en": "Bitcoin Miner IREN Deepens Dig On Q2 Miss; AI Services Pick Up",
-      "summary_kr": "비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업",
-      "link": "https://www.investors.com/news/iren-earnings-q2-2026-bitcoin-miner-ai-artificial-intelligence-iren-stock/?src=A00220&yptr=yahoo",
+      "title": "Jim Cramer는 Bitcoin 'Line In The Sand'를 설정하고 Michael Saylor에게 Strategy의 4분기 수익이 발생하기 전에 조치를 취할 것을 촉구합니다.",
+      "title_en": "Jim Cramer Sets Bitcoin 'Line In The Sand,' Urges Michael Saylor To Act Before Strategy's Q4 Earnings",
+      "summary_kr": "Jim Cramer는 Bitcoin 'Line In The Sand'를 설정하고 Michael Saylor에게 Strategy의 4분기 수익이 발생하기 전에 조치를 취할 것을 촉구합니다.",
+      "link": "https://finance.yahoo.com/news/jim-cramer-sets-bitcoin-line-160111156.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 채굴자 IREN, 2분기 실패에 대한 심층 분석; AI 서비스 픽업' 입니다.",
-        "impact_score": 81
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Jim Cramer는 Bitcoin 'Line In The Sand'를 설정하고 Michael Saylor에게 Strategy의 4분기 수익이 발생하기 전에 조치를 취할 것을 촉구합니다.' 입니다.",
+        "impact_score": 75
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "4767927212548184790",
+    "id": "6409056815696757985",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:44:26Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T16:03:55Z",
     "free_tier": {
-      "title": "분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.",
-      "title_en": "Analysis-ECB's safety net is part of EU plan to court new allies",
-      "summary_kr": "분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.",
-      "link": "https://finance.yahoo.com/news/analysis-ecbs-safety-net-part-143648052.html",
+      "title": "Western Digital 주식은 새로운 스트리트 최고 가격 목표를 달성했습니다. 지금 WDC를 구매해야 할까요?",
+      "title_en": "Western Digital Stock Just Got a New Street-High Price Target. Should You Buy WDC Now?",
+      "summary_kr": "Western Digital 주식은 새로운 스트리트 최고 가격 목표를 달성했습니다. 지금 WDC를 구매해야 할까요?",
+      "link": "https://finance.yahoo.com/news/western-digital-stock-just-got-160355429.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석 - ECB의 안전망은 새로운 동맹국을 유치하려는 EU 계획의 일부입니다.' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Western Digital 주식은 새로운 스트리트 최고 가격 목표를 달성했습니다. 지금 WDC를 구매해야 할까요?' 입니다.",
         "impact_score": 87
       },
       "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-5843903351774807732",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T12:17:51Z",
-    "free_tier": {
-      "title": "기술적 평가: 중기 강세",
-      "title_en": "Technical Assessment: Bullish in the Intermediate-Term",
-      "summary_kr": "기술적 평가: 중기 강세",
-      "link": "https://finance.yahoo.com/research/reports/ARGUS_46082_TechnicalAnalysis_1770380271000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술적 평가: 중기 강세' 입니다.",
-        "impact_score": 77
-      },
-      "trading_strategy": {
         "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
@@ -150,225 +175,200 @@
     }
   },
   {
-    "id": "-6693793795723454236",
+    "id": "5651029869217738669",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:42:23Z",
-    "free_tier": {
-      "title": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
-      "title_en": "Stock Market Today: Dow Rallies, Bitcoin Bounces; Amazon Dives On Earnings Results (Live Coverage)",
-      "summary_kr": "오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)",
-      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-bitcoin-price-amazon-stock-amzn/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 다우 랠리, 비트코인 ​​반등; Amazon의 수익 결과에 대한 다이빙(실시간 보도)' 입니다.",
-        "impact_score": 94
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8187529792124240136",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:58:49Z",
-    "free_tier": {
-      "title": "S&W, 브리스톨의 새로운 세금 파트너와 팀 확장",
-      "title_en": "S&W expands team with new tax partner in Bristol",
-      "summary_kr": "S&W, 브리스톨의 새로운 세금 파트너와 팀 확장",
-      "link": "https://finance.yahoo.com/news/w-expands-team-tax-partner-145849628.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'S&W, 브리스톨의 새로운 세금 파트너와 팀 확장' 입니다.",
-        "impact_score": 94
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-3653692503614272650",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
+    "sentiment": "BEARISH",
     "is_breaking": true,
-    "published_at": "2026-02-06T14:39:17Z",
+    "published_at": "2026-02-05T15:54:10Z",
     "free_tier": {
-      "title": "Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다",
-      "title_en": "Cathie Wood Loads Up On Bullish After Earnings, Sells Coinbase",
-      "summary_kr": "Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다",
-      "link": "https://www.investors.com/news/cathie-wood-loads-up-on-bullish-after-earnings-sells-coinbase/?src=A00220&yptr=yahoo",
+      "title": "Google 모회사가 대규모 AI 베팅을 통해 2026년에 1,800억 달러 지출 계획을 발표한 후 알파벳 주가 하락",
+      "title_en": "Alphabet stock sinks after Google parent announces $180 billion spending plan for 2026 in massive AI bet",
+      "summary_kr": "Google 모회사가 대규모 AI 베팅을 통해 2026년에 1,800억 달러 지출 계획을 발표한 후 알파벳 주가 하락",
+      "link": "https://finance.yahoo.com/news/alphabet-stock-sinks-after-google-parent-announces-180-billion-spending-plan-for-2026-in-massive-ai-bet-155410864.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Cathie Wood는 수익 후 강세를 보이고 Coinbase를 판매합니다' 입니다.",
-        "impact_score": 63
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8922326321541488226",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:35:16Z",
-    "free_tier": {
-      "title": "CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)",
-      "title_en": "CarMax, Inc. (KMX) Turns to Pricing and Marketing Actions to Revitalize Sales (Corrected)",
-      "summary_kr": "CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)",
-      "link": "https://finance.yahoo.com/news/carmax-inc-kmx-turns-pricing-104416036.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'CarMax, Inc.(KMX)는 판매 활성화를 위해 가격 책정 및 마케팅 활동으로 전환(수정됨)' 입니다.",
-        "impact_score": 73
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-815490249709048047",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-04T17:30:54Z",
-    "free_tier": {
-      "title": "아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락",
-      "title_en": "Amazon plans $200B AI spending surge, sinking stock after earnings",
-      "summary_kr": "아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락",
-      "link": "https://finance.yahoo.com/news/amazon-plans-200b-ai-spending-surge-sinking-stock-after-earnings-173054820.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '아마존, 2000억 달러 규모의 AI 지출 급증 계획, 실적 후 주가 급락' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'Google 모회사가 대규모 AI 베팅을 통해 2026년에 1,800억 달러 지출 계획을 발표한 후 알파벳 주가 하락' 입니다.",
         "impact_score": 83
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "-5267896725545097751",
+    "id": "3704912956424003043",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T12:11:35Z",
+    "published_at": "2025-02-19T20:23:52Z",
     "free_tier": {
-      "title": "분석가 보고서: Raymond James Financial, Inc.",
-      "title_en": "Analyst Report: Raymond James Financial, Inc.",
-      "summary_kr": "분석가 보고서: Raymond James Financial, Inc.",
-      "link": "https://finance.yahoo.com/research/reports/ARGUS_4217_AnalystReport_1770379895000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+      "title": "주택담보대출로 얼마까지 빌릴 수 있나요?",
+      "title_en": "How much can you borrow with a home equity loan?",
+      "summary_kr": "주택담보대출로 얼마까지 빌릴 수 있나요?",
+      "link": "https://finance.yahoo.com/personal-finance/mortgages/article/how-much-home-equity-loan-can-i-get-202352727.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석가 보고서: Raymond James Financial, Inc.' 입니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4983746892994051929",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T00:07:11Z",
-    "free_tier": {
-      "title": "오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승",
-      "title_en": "Stock market today: Dow, S&P 500, Nasdaq rise after tech rout as Wall Street rethinks AI risks",
-      "summary_kr": "오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승",
-      "link": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-rise-after-tech-rout-as-wall-street-rethinks-ai-risks-000711263.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '오늘의 주식 시장: 월스트리트가 AI 위험을 다시 생각하면서 기술 대패 이후 Dow, S&P 500, Nasdaq 상승' 입니다.",
-        "impact_score": 65
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7611933065557567802",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T14:50:55Z",
-    "free_tier": {
-      "title": "Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각",
-      "title_en": "Eastern Bankshares Chief Information Officer Sells 21,000 Shares for $427,000",
-      "summary_kr": "Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각",
-      "link": "https://finance.yahoo.com/news/eastern-bankshares-chief-information-officer-145055735.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Eastern Bankshares 최고 정보 책임자(CIO), 21,000주를 $427,000에 매각' 입니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7232253053151088599",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T14:31:18Z",
-    "free_tier": {
-      "title": "AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표",
-      "title_en": "Bloom Energy, The Clean Energy Choice For AI Data Centers, Soars On Outlook; Amazon Announces AI Spending",
-      "summary_kr": "AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표",
-      "link": "https://www.investors.com/news/bloom-energy-stock-q4-earning-ai-data-centers-play/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'AI 데이터 센터를 위한 청정 에너지 선택 Bloom Energy, 전망 급상승; 아마존, AI 지출 발표' 입니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '주택담보대출로 얼마까지 빌릴 수 있나요?' 입니다.",
         "impact_score": 62
       },
       "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6646291718217321011",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T15:48:57Z",
+    "free_tier": {
+      "title": "인텔과 소프트뱅크가 핫한 메모리 시장에서 파트너십을 맺었습니다. 지금 INTC 주식을 어떻게 플레이해야 할까요?",
+      "title_en": "Intel and SoftBank Are Partnering Up in the Red-Hot Memory Market. How Should You Play INTC Stock Now?",
+      "summary_kr": "인텔과 소프트뱅크가 핫한 메모리 시장에서 파트너십을 맺었습니다. 지금 INTC 주식을 어떻게 플레이해야 할까요?",
+      "link": "https://finance.yahoo.com/news/intel-softbank-partnering-red-hot-154857475.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '인텔과 소프트뱅크가 핫한 메모리 시장에서 파트너십을 맺었습니다. 지금 INTC 주식을 어떻게 플레이해야 할까요?' 입니다.",
+        "impact_score": 86
+      },
+      "trading_strategy": {
         "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6672577291430366780",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:02:13Z",
+    "free_tier": {
+      "title": "인플레이션, 금리, Mandelson, Warsh에 대한 BOE의 베일리",
+      "title_en": "BOE's Bailey on Inflation, Rates, Mandelson, Warsh",
+      "summary_kr": "인플레이션, 금리, Mandelson, Warsh에 대한 BOE의 베일리",
+      "link": "https://finance.yahoo.com/video/boes-bailey-inflation-rates-mandelson-160213735.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '인플레이션, 금리, Mandelson, Warsh에 대한 BOE의 베일리' 입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "1470922207637430021",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:10:45Z",
+    "free_tier": {
+      "title": "Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.",
+      "title_en": "Amazon Earnings On Deck. AI Spending In Focus After Meta, Microsoft, Google Go Big On CapEx.",
+      "summary_kr": "Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.",
+      "link": "https://www.investors.com/news/technology/amazon-stock-q4-preview/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.' 입니다.",
+        "impact_score": 78
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "1220475357120481633",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:11:48Z",
+    "free_tier": {
+      "title": "디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?",
+      "title_en": "What Are Wall Street Analysts' Target Price for Digital Realty Trust Stock?",
+      "summary_kr": "디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?",
+      "link": "https://finance.yahoo.com/news/wall-street-analysts-target-price-161148082.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?' 입니다.",
+        "impact_score": 83
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-3044842922681114255",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T15:46:05Z",
+    "free_tier": {
+      "title": "Chevron, 고위 경영진의 은퇴 발표로 최고 리더십 개편",
+      "title_en": "Chevron Reshuffles Top Leadership as Senior Executives Announce Retirements",
+      "summary_kr": "Chevron, 고위 경영진의 은퇴 발표로 최고 리더십 개편",
+      "link": "https://finance.yahoo.com/news/chevron-reshuffles-top-leadership-senior-154605415.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Chevron, 고위 경영진의 은퇴 발표로 최고 리더십 개편' 입니다.",
+        "impact_score": 88
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6451609946942396776",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T16:14:01Z",
+    "free_tier": {
+      "title": "기술주 하락과 미국 노동시장 약화로 주가 하락",
+      "title_en": "Stocks Retreat as Tech Stocks Fall and the US Labor Market Weakens",
+      "summary_kr": "기술주 하락과 미국 노동시장 약화로 주가 하락",
+      "link": "https://finance.yahoo.com/news/stocks-retreat-tech-stocks-fall-161401997.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술주 하락과 미국 노동시장 약화로 주가 하락' 입니다.",
+        "impact_score": 88
+      },
+      "trading_strategy": {
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }

@@ -49,12 +49,29 @@ class StockNewsCrawler:
                 for item in items:
                     title = item.find('title').text.strip()
                     link = item.find('link').text.strip()
-                    # Skip if already processed in this session (optional optimization)
-                    # if str(hash(link)) in self.cached_ids: continue
-                    
                     desc = item.find('description').text.strip() if item.find('description') else title
-                    pub_date = item.find('pubDate').text.strip() if item.find('pubDate') else datetime.now().isoformat()
                     
+                    # --- NOISE FILTER START ---
+                    # Filter out personal finance, lifestyle, and irrelevant human interest stories
+                    noise_keywords = [
+                        'prison', 'mom of', 'divorce', 'ramsey', 'lifestyle', 'family',
+                        'personal finance', 'how to save', 'scam', 'police', 'accident',
+                        'parenting', 'celebrity', 'wedding', 'dating', 'inheritance'
+                    ]
+                    content_to_check = (title + " " + desc).lower()
+                    if any(x in content_to_check for x in noise_keywords):
+                        print(f"[FILTERED] Skipping noise item: {title[:50]}...")
+                        continue
+                        
+                    # Focus on Market/Finance focus
+                    finance_keywords = ['stock', 'market', 'nasdaq', 'dow', 'fed', 'rate', 'ai', 'tech', 'revenue', 'earnings', 'ticker', 'shares', 'index']
+                    if not any(x in content_to_check for x in finance_keywords):
+                        # If it doesn't have finance keywords, it might be noise too.
+                        # But we'll be lenient to catch broad econ news.
+                        pass
+                    # --- NOISE FILTER END ---
+                    
+                    pub_date = item.find('pubDate').text.strip() if item.find('pubDate') else datetime.now().isoformat()
                     news_list.append(self._format_news_item(title, desc, link, pub_date, "Yahoo Finance"))
                     
                 if len(news_list) >= limit: break
@@ -72,11 +89,15 @@ class StockNewsCrawler:
         elif any(x in keywords for x in ['fall', 'drop', 'plunge', 'sink', 'loss', 'low', 'bear', 'crash', 'down', 'crisis', 'risk']):
             sentiment = "BEARISH"
             
-        # 2. Breaking News Detection (Simple Rule)
+        # 2. Breaking News Detection (Higher Threshold)
         is_breaking = False
-        if "breaking" in keywords or "alert" in keywords or "urgent" in keywords:
-            is_breaking = True
-        if sentiment != "NEUTRAL": # Strong sentiment can be breaking
+        # Only flag if it's explicitly 'breaking/alert' or contains critical macro indicators
+        critical_keywords = [
+            'breaking', 'urgent', 'alert', 'fomc', 'fed', 'cpi', 'pce', 'gdp', 
+            'payrolls', 'unemployment', 'rate hike', 'rate cut', 'inflation',
+            'earnings report', 'guidance', 'black swan', 'sanctions', 'merger'
+        ]
+        if any(x in keywords for x in critical_keywords):
             is_breaking = True
 
         # 3. Translation (Only if English detected roughly)
