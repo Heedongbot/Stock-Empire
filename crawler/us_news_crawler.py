@@ -53,22 +53,24 @@ class StockNewsCrawler:
                     
                     # --- NOISE FILTER START ---
                     # Filter out personal finance, lifestyle, and irrelevant human interest stories
+                    # NEW: Added newsletter/clickbait filtering
                     noise_keywords = [
                         'prison', 'mom of', 'divorce', 'ramsey', 'lifestyle', 'family',
                         'personal finance', 'how to save', 'scam', 'police', 'accident',
-                        'parenting', 'celebrity', 'wedding', 'dating', 'inheritance'
+                        'parenting', 'celebrity', 'wedding', 'dating', 'inheritance',
+                        'newsletter', 'subscribe', 'sign up', 'exclusive offer', 'free brief',
+                        'what does this mean', 'should you buy', 'is it time to', 'why is it',
+                        'barchart brief', 'motley fool', 'zacks', 'analyst report:'
                     ]
                     content_to_check = (title + " " + desc).lower()
                     if any(x in content_to_check for x in noise_keywords):
-                        print(f"[FILTERED] Skipping noise item: {title[:50]}...")
+                        print(f"[FILTERED] Skipping noise/clickbait item: {title[:50]}...")
                         continue
                         
-                    # Focus on Market/Finance focus
-                    finance_keywords = ['stock', 'market', 'nasdaq', 'dow', 'fed', 'rate', 'ai', 'tech', 'revenue', 'earnings', 'ticker', 'shares', 'index']
-                    if not any(x in content_to_check for x in finance_keywords):
-                        # If it doesn't have finance keywords, it might be noise too.
-                        # But we'll be lenient to catch broad econ news.
-                        pass
+                    # Also skip if title ends with a question mark (common clickbait pattern)
+                    if title.strip().endswith('?'):
+                         print(f"[FILTERED] Skipping question-based clickbait: {title[:50]}...")
+                         continue
                     # --- NOISE FILTER END ---
                     
                     pub_date = item.find('pubDate').text.strip() if item.find('pubDate') else datetime.now().isoformat()
