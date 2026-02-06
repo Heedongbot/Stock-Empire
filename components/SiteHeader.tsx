@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, LogIn, LogOut, User } from 'lucide-react';
+import { Globe, LogIn, LogOut, User, ShieldCheck } from 'lucide-react';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import { useState } from 'react';
@@ -16,8 +16,12 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     const pathname = usePathname();
     const t = translations[lang];
     const { user, login, logout, isLoading } = useAuth();
-    const [loginEmail, setLoginEmail] = useState('');
+
+    // Auth States
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const toggleLang = () => {
         if (setLang) {
@@ -28,9 +32,15 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         if (loginEmail) {
-            login(loginEmail, 'FREE');
-            setShowLoginModal(false);
-            setLoginEmail('');
+            const res = login(loginEmail, loginPassword, 'FREE');
+            if (res.success) {
+                setShowLoginModal(false);
+                setLoginEmail('');
+                setLoginPassword('');
+                setLoginError('');
+            } else {
+                setLoginError(res.message || 'Login Failed');
+            }
         }
     };
 
@@ -89,11 +99,16 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                             user ? (
                                 <div className="flex items-center gap-3">
                                     <div className="hidden sm:flex flex-col items-end">
-                                        <span className="text-[10px] font-black text-white">{user.name}</span>
-                                        <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-tighter">{user.tier} MEMBER</span>
+                                        <div className="flex items-center gap-1">
+                                            {user.role === 'ADMIN' && <ShieldCheck className="w-3 h-3 text-red-500 animate-pulse" />}
+                                            <span className="text-[10px] font-black text-white">{user.name}</span>
+                                        </div>
+                                        <span className={`text-[9px] font-bold uppercase tracking-tighter ${user.role === 'ADMIN' ? 'text-red-500' : 'text-indigo-400'}`}>
+                                            {user.role === 'ADMIN' ? 'COMMANDER' : `${user.tier} MEMBER`}
+                                        </span>
                                     </div>
                                     <div className="relative group/avatar">
-                                        <img src={user.avatar} alt="Avatar" className="w-9 h-9 rounded-xl border border-slate-700 bg-slate-800" />
+                                        <img src={user.avatar} alt="Avatar" className={`w-9 h-9 rounded-xl border bg-slate-800 ${user.role === 'ADMIN' ? 'border-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'border-slate-700'}`} />
                                         <button
                                             onClick={logout}
                                             className="absolute top-full right-0 mt-2 p-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-500 hover:text-red-400 opacity-0 group-hover/avatar:opacity-100 transition-opacity whitespace-nowrap text-[10px] font-black uppercase"
@@ -120,21 +135,34 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowLoginModal(false)} />
                     <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-8">
-                        <h3 className="text-xl font-black text-white italic mb-6 uppercase tracking-widest">Welcome Back</h3>
+                        <h3 className="text-xl font-black text-white italic mb-6 uppercase tracking-widest">Portal Access</h3>
                         <form onSubmit={handleLogin} className="space-y-4">
                             <div>
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">E-mail Address</label>
+                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Identity</label>
                                 <input
                                     type="email"
                                     required
-                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition-colors"
                                     placeholder="your@email.com"
                                     value={loginEmail}
                                     onChange={(e) => setLoginEmail(e.target.value)}
                                 />
                             </div>
-                            <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg">
-                                Enter Empire
+                            <div>
+                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Access Key</label>
+                                <input
+                                    type="password"
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                                    placeholder="••••••••"
+                                    value={loginPassword}
+                                    onChange={(e) => setLoginPassword(e.target.value)}
+                                />
+                            </div>
+                            {loginError && (
+                                <p className="text-red-500 text-[10px] font-bold uppercase tracking-tighter">{loginError}</p>
+                            )}
+                            <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
+                                Initialize Login
                             </button>
                         </form>
                     </div>
