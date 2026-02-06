@@ -8,8 +8,9 @@ import {
   ChevronDown, Sparkles, BookOpen, ExternalLink,
   Milestone, BarChart, PieChart as PieChartIcon, MonitorSmartphone,
   Briefcase, MessageSquare, Lock, Target,
-  CheckCircle2, Crown, X, CreditCard, Loader2, TrendingDown, Award
+  CheckCircle2, Crown, X, CreditCard, Loader2, TrendingDown, Award, ShieldCheck
 } from "lucide-react";
+import NewsTeaser from "@/components/NewsTeaser";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { translations } from "@/lib/translations";
@@ -349,7 +350,16 @@ export default function LandingPage() {
             </div>
           )}
         </div>
+
+
+        // ... existing code ...
+
+        {/* VVIP Alpha Choice Section */}
+        {/* ... existing VVIP section ... */}
       </section>
+
+      {/* NEW: News Teaser Section */}
+      <NewsTeaser lang={lang} openPayment={openPayment} />
 
       {/* Stats Summary Section */}
       <section className="py-24 px-8 max-w-7xl mx-auto">
@@ -414,15 +424,40 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-20 text-center animate-fade-in">
-        <div className="flex justify-center gap-8 mb-8 text-slate-500">
-          <BookOpen className="w-5 h-5 hover:text-white cursor-pointer" />
-          <MessageSquare className="w-5 h-5 hover:text-white cursor-pointer" />
-          <Award className="w-5 h-5 hover:text-white cursor-pointer" />
+      <footer className="border-t border-slate-900 bg-[#020617] py-20 text-center animate-fade-in relative z-10">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Security Badges */}
+          <div className="flex justify-center gap-6 mb-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex items-center gap-2 px-4 py-2 border border-slate-800 rounded bg-slate-900/50">
+              <ShieldCheck className="w-4 h-4 text-green-500" />
+              <span className="text-[10px] font-bold text-slate-400">Secured by SSL</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 border border-slate-800 rounded bg-slate-900/50">
+              <Lock className="w-4 h-4 text-blue-500" />
+              <span className="text-[10px] font-bold text-slate-400">256-bit Encryption</span>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-8 mb-8 text-slate-600">
+            <BookOpen className="w-5 h-5 hover:text-indigo-400 cursor-pointer transition-colors" />
+            <MessageSquare className="w-5 h-5 hover:text-indigo-400 cursor-pointer transition-colors" />
+            <Award className="w-5 h-5 hover:text-indigo-400 cursor-pointer transition-colors" />
+          </div>
+
+          <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em] mb-8">
+            &copy; 2026 STOCK EMPIRE INC. {lang === 'ko' ? '글로벌 금융 혁신' : 'Global Financial Innovation'}.
+          </p>
+
+          {/* Legal Disclaimer */}
+          <div className="max-w-3xl mx-auto border-t border-slate-900 pt-8">
+            <p className="text-[10px] text-slate-600 leading-relaxed font-medium text-balance">
+              {lang === 'ko'
+                ? "본 서비스는 투자 자문·권유가 아닌 정보 제공 목적이며, 모든 투자 결정 및 손실의 책임은 이용자 본인에게 있습니다. 과거 성과는 미래 수익을 보장하지 않습니다. STOCK EMPIRE는 제공된 정보의 무결성을 보장하지 않으며, 시스템 오류나 지연으로 인한 손실에 대해 책임을 지지 않습니다."
+                : "This service is for informational purposes only and does not constitute investment advice or solicitation. All investment decisions and losses are the sole responsibility of the user. Past performance does not guarantee future results."}
+            </p>
+          </div>
         </div>
-        <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em]">
-          &copy; 2026 STOCK EMPIRE INC. {lang === 'ko' ? '글로벌 금융 혁신' : 'Global Financial Innovation'}.
-        </p>
       </footer>
 
       {/* Modals & Ticker components */}

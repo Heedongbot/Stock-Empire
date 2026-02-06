@@ -21,6 +21,8 @@ export const metadata: Metadata = {
 import { AuthProvider } from "@/lib/AuthContext";
 import Script from "next/script";
 
+import TickerTape from "@/components/TickerTape";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,6 +41,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <AuthProvider>
+          <TickerTape />
           {children}
           <BreakingNewsToast />
         </AuthProvider>
