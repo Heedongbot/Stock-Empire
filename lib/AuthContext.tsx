@@ -77,12 +77,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     const updateTier = (tier: UserTier) => {
-        if (user) {
+        if (user && user.role === 'ADMIN') {
             const updatedUser = { ...user, tier };
             setUser(updatedUser);
             localStorage.setItem('stock-empire-user', JSON.stringify(updatedUser));
         }
     };
+
+    const isAdmin = user?.role === 'ADMIN';
 
     return (
         <AuthContext.Provider value={{ user, login, logout, updateTier, isLoading }}>

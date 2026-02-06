@@ -12,17 +12,17 @@ export async function GET(request: Request) {
 
         // 한국 뉴스 로드
         if (market === 'ALL' || market === 'KR') {
-            const krDataPath = path.join(process.cwd(), '../../global_news_feed.json');
+            const krDataPath = path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', 'kr_news_latest.json');
             if (fs.existsSync(krDataPath)) {
                 const krContent = fs.readFileSync(krDataPath, 'utf-8');
-                const krNews = JSON.parse(krContent).filter((item: any) => item.market === 'KR');
+                const krNews = JSON.parse(krContent);
                 allNews = [...allNews, ...krNews];
             }
         }
 
         // 미국 뉴스 로드
         if (market === 'ALL' || market === 'US') {
-            const usDataPath = path.join(process.cwd(), 'public/us-news.json');
+            const usDataPath = path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', 'us_news_latest.json');
             if (fs.existsSync(usDataPath)) {
                 const usContent = fs.readFileSync(usDataPath, 'utf-8');
                 const usNews = JSON.parse(usContent);

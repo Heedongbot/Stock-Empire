@@ -46,12 +46,34 @@ export default function NewsPage() {
     const [visibleCount, setVisibleCount] = useState(6);
     const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
+    // Auto-detect User Locale with Persistence
+    useEffect(() => {
+        const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
+        if (savedLang) {
+            setLang(savedLang);
+        } else {
+            const userLang = navigator.language || navigator.languages[0];
+            if (userLang.startsWith('ko')) {
+                setLang('ko');
+            } else {
+                setLang('ko'); // Default to Korean
+            }
+        }
+    }, []);
+
+    const handleSetLang = (newLang: 'ko' | 'en') => {
+        setLang(newLang);
+        localStorage.setItem('stock-empire-lang', newLang);
+    };
+
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const res = await fetch(`/us-news-tiered.json?t=${Date.now()}`);
+                const res = await fetch(`/api/market-news?t=${Date.now()}`);
                 const data = await res.json();
-                if (Array.isArray(data)) {
+                if (data.reports && Array.isArray(data.reports)) {
+                    setNewsData(data.reports);
+                } else if (Array.isArray(data)) {
                     setNewsData(data);
                 }
             } catch (error) {
@@ -93,7 +115,7 @@ export default function NewsPage() {
                 </div>
             </div>
 
-            <SiteHeader lang={lang} setLang={setLang} />
+            <SiteHeader lang={lang} setLang={handleSetLang} />
 
             <main className="max-w-7xl mx-auto px-6 py-12">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
@@ -141,19 +163,25 @@ export default function NewsPage() {
                                         </span>
                                     </div>
                                     <h3 className="text-lg font-bold text-white mb-3 line-clamp-2 leading-snug group-hover:text-indigo-300 transition-colors">
-                                        {news.free_tier.title}
+                                        {lang === 'en' && news.free_tier.title_en ? news.free_tier.title_en : news.free_tier.title}
                                     </h3>
                                     <div className="text-sm text-slate-400 mb-6 line-clamp-3 leading-relaxed">
-                                        {userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.summary_kr || news.free_tier.summary_kr)}
+                                        {lang === 'en'
+                                            ? (news.free_tier.title_en || "Click for details")
+                                            : (userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.summary_kr || news.free_tier.summary_kr))
+                                        }
                                     </div>
                                     <div className="mt-auto pt-4 border-t border-slate-800/50">
                                         <div className="flex items-center gap-2 mb-2">
                                             <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                                            <span className="text-xs font-black text-yellow-500 uppercase tracking-wider">AI Insight</span>
+                                            <span className="text-xs font-black text-yellow-500 uppercase tracking-wider">{t.newsPage.aiInsight}</span>
                                         </div>
                                         <div className={`relative ${userTier === 'FREE' ? 'filter blur-[4px] opacity-50 select-none' : ''}`}>
                                             <p className="text-xs text-slate-300 font-medium">
-                                                {news.vip_tier?.ai_analysis?.investment_insight || "Premium analysis pending..."}
+                                                {lang === 'en'
+                                                    ? "AI analysis is currently processing this event for market impact."
+                                                    : (news.vip_tier?.ai_analysis?.investment_insight || "프리미엄 분석 대기 중...")
+                                                }
                                             </p>
                                         </div>
                                     </div>

@@ -26,16 +26,11 @@ interface AlphaSignal {
     strategy: string;
 }
 
-const STRATEGIES = [
-    { id: 'ALL', name: '전체 전략', icon: Activity },
-    { id: 'Golden Cross', name: '골든크로스', icon: Zap },
-    { id: 'RSI Rebound', name: 'RSI 반등', icon: TrendingUp },
-    { id: 'Volume Surge', name: '거래량 폭증', icon: BarChart3 }
-];
+
 
 export default function AnalysisPage() {
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
-    const t = translations[lang];
+    const t = (translations as any)[lang];
     const { user } = useAuth();
     const userTier = user?.tier || 'FREE';
 
@@ -43,6 +38,26 @@ export default function AnalysisPage() {
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('ALL');
     const [selectedSignal, setSelectedSignal] = useState<AlphaSignal | null>(null);
+
+    // Auto-detect User Locale with Persistence
+    useEffect(() => {
+        const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
+        if (savedLang) {
+            setLang(savedLang);
+        } else {
+            const userLang = navigator.language || navigator.languages[0];
+            if (userLang.startsWith('ko')) {
+                setLang('ko');
+            } else {
+                setLang('ko'); // Default to Korean as per user preference
+            }
+        }
+    }, []);
+
+    const handleSetLang = (newLang: 'ko' | 'en') => {
+        setLang(newLang);
+        localStorage.setItem('stock-empire-lang', newLang);
+    };
 
     useEffect(() => {
         const fetchSignals = async () => {
@@ -61,11 +76,23 @@ export default function AnalysisPage() {
         fetchSignals();
     }, []);
 
-    const filteredSignals = signals.filter(s => filter === 'ALL' || s.strategy === filter);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredSignals = signals.filter(s =>
+        (filter === 'ALL' || s.strategy === filter) &&
+        (s.name.toLowerCase().includes(searchTerm.toLowerCase()) || s.ticker.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+
+    const STRATEGIES = [
+        { id: 'ALL', name: lang === 'ko' ? '전체 전략' : 'All Strategies', icon: Activity },
+        { id: 'Golden Cross', name: lang === 'ko' ? '골든크로스' : 'Golden Cross', icon: Zap },
+        { id: 'RSI Rebound', name: lang === 'ko' ? 'RSI 반등' : 'RSI Rebound', icon: TrendingUp },
+        { id: 'Volume Surge', name: lang === 'ko' ? '거래량 폭증' : 'Volume Surge', icon: BarChart3 }
+    ];
 
     return (
         <div className="min-h-screen bg-[#050b14] text-slate-200 font-sans">
-            <SiteHeader lang={lang} setLang={setLang} />
+            <SiteHeader lang={lang} setLang={handleSetLang} />
 
             <main className="max-w-7xl mx-auto px-6 py-12">
                 {/* Dashboard Header */}
@@ -73,143 +100,167 @@ export default function AnalysisPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-4">
                             <Cpu className="w-5 h-5 text-indigo-400" />
-                            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em]">AI Strategy Dashboard</span>
+                            <span className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em]">{t.analysisPage.strategyDashboard}</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter text-white uppercase leading-none">
-                            Market <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">Intelligence</span>
+                            Market <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">{t.analysisPage.marketIntelligence}</span>
                         </h1>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 p-2 bg-slate-900/50 rounded-2xl border border-slate-800">
-                        {STRATEGIES.map((strat: any) => (
-                            <button
-                                key={strat.id}
-                                onClick={() => setFilter(strat.id)}
-                                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === strat.id ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-500 hover:text-slate-300'}`}
-                            >
-                                <strat.icon size={14} />
-                                {strat.name}
-                            </button>
-                        ))}
+                    <div className="flex flex-col gap-6 w-full md:w-auto items-end">
+                        {/* Search Bar - "Deep Analyzer" */}
+                        <div className="relative w-full md:w-80 group">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <Search className="h-4 w-4 text-slate-500 group-focus-within:text-indigo-400 transition-colors" />
+                            </div>
+                            <input
+                                type="text"
+                                className="block w-full pl-11 pr-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm font-bold text-white placeholder-slate-600 transition-all shadow-lg"
+                                placeholder={lang === 'ko' ? "종목 검색 (예: TSLA)" : "Search Ticker (e.g. TSLA)"}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <span className="text-[10px] font-black text-slate-700 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">CMD+K</span>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 p-2 bg-slate-900/50 rounded-2xl border border-slate-800">
+                            {STRATEGIES.map((strat: any) => (
+                                <button
+                                    key={strat.id}
+                                    onClick={() => setFilter(strat.id)}
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filter === strat.id ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-500 hover:text-slate-300'}`}
+                                >
+                                    <strat.icon size={14} />
+                                    {strat.name}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {loading ? (
-                    <div className="flex flex-col items-center justify-center py-40">
-                        <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-6" />
-                        <p className="text-slate-500 text-xs font-black uppercase tracking-[0.5em] animate-pulse">Syncing Alpha Nodes...</p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredSignals.map((sig: AlphaSignal, idx: number) => (
-                            <div
-                                key={idx}
-                                onClick={() => setSelectedSignal(sig)}
-                                className="group relative bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:border-indigo-500/50 transition-all cursor-pointer hover:shadow-2xl hover:shadow-indigo-500/10 overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <Activity className="w-24 h-24 text-white" />
-                                </div>
 
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</div>
-                                    <div className={`text-[10px] font-black flex items-center gap-1 uppercase tracking-widest ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
-                                        {sig.sentiment} {sig.change_pct}%
+                {
+                    loading ? (
+                        <div className="flex flex-col items-center justify-center py-40">
+                            <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-6" />
+                            <p className="text-slate-500 text-xs font-black uppercase tracking-[0.5em] animate-pulse">{t.analysisPage.syncingAlpha}</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredSignals.map((sig: AlphaSignal, idx: number) => (
+                                <div
+                                    key={idx}
+                                    onClick={() => setSelectedSignal(sig)}
+                                    className="group relative bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:border-indigo-500/50 transition-all cursor-pointer hover:shadow-2xl hover:shadow-indigo-500/10 overflow-hidden"
+                                >
+                                    <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                                        <Activity className="w-24 h-24 text-white" />
+                                    </div>
+
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</div>
+                                        <div className={`text-[10px] font-black flex items-center gap-1 uppercase tracking-widest ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
+                                            {sig.sentiment} {sig.change_pct}%
+                                        </div>
+                                    </div>
+
+                                    <h3 className="text-xl font-black text-white mb-2 uppercase tracking-tight">{sig.name}</h3>
+                                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-8">{sig.strategy}</p>
+
+                                    <div className="grid grid-cols-2 gap-4 mb-8">
+                                        <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
+                                            <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">{t.analysis.impact}</div>
+                                            <div className="text-lg font-black text-indigo-400">{sig.impact_score}%</div>
+                                        </div>
+                                        <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
+                                            <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">Signal</div>
+                                            <div className="text-lg font-black text-white">{t.analysisPage.ready}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center justify-between group-hover:translate-x-1 transition-transform">
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 italic">{t.analysisPage.deepAnalysis}</span>
+                                        <ChevronRight className="w-4 h-4 text-indigo-400" />
                                     </div>
                                 </div>
-
-                                <h3 className="text-xl font-black text-white mb-2 uppercase tracking-tight">{sig.name}</h3>
-                                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-8">{sig.strategy}</p>
-
-                                <div className="grid grid-cols-2 gap-4 mb-8">
-                                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                                        <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">Impact</div>
-                                        <div className="text-lg font-black text-indigo-400">{sig.impact_score}%</div>
-                                    </div>
-                                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                                        <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">Signal</div>
-                                        <div className="text-lg font-black text-white">READY</div>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center justify-between group-hover:translate-x-1 transition-transform">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 italic">Deep Analysis Available</span>
-                                    <ChevronRight className="w-4 h-4 text-indigo-400" />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </main>
+                            ))}
+                        </div>
+                    )
+                }
+            </main >
 
             {/* Signal Detail Modal */}
-            {selectedSignal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setSelectedSignal(null)} />
-                    <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl animate-fade-in-up">
-                        <div className="bg-slate-900/50 p-8 border-b border-slate-800 flex justify-between items-center">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-600/20">
-                                    <Zap className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-black text-white italic uppercase tracking-tighter">{selectedSignal.ticker}</h3>
-                                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{selectedSignal.strategy}</p>
-                                </div>
-                            </div>
-                            <button onClick={() => setSelectedSignal(null)} className="text-slate-500 hover:text-white transition-colors">
-                                <X className="w-6 h-6" />
-                            </button>
-                        </div>
-
-                        <div className="p-10">
-                            <div className="grid grid-cols-2 gap-6 mb-10">
-                                <div className="p-6 rounded-3xl bg-slate-950 border border-slate-800">
-                                    <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">Target Price</div>
-                                    <div className={`text-2xl font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-green-500'}`}>
-                                        ${selectedSignal.target_price}
+            {
+                selectedSignal && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setSelectedSignal(null)} />
+                        <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl animate-fade-in-up">
+                            <div className="bg-slate-900/50 p-8 border-b border-slate-800 flex justify-between items-center">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-600/20">
+                                        <Zap className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-black text-white italic uppercase tracking-tighter">{selectedSignal.ticker}</h3>
+                                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{selectedSignal.strategy}</p>
                                     </div>
                                 </div>
-                                <div className="p-6 rounded-3xl bg-slate-950 border border-slate-800">
-                                    <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">Stop Loss</div>
-                                    <div className={`text-2xl font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-red-500'}`}>
-                                        ${selectedSignal.stop_loss}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mb-10">
-                                <div className="flex items-center gap-2 mb-4">
-                                    <Activity className="w-4 h-4 text-indigo-400" />
-                                    <h4 className="text-xs font-black text-white uppercase tracking-widest">AI Rationale</h4>
-                                </div>
-                                <div className={`relative p-8 rounded-3xl bg-slate-900/50 border border-slate-800 ${userTier === 'FREE' ? 'blur-lg select-none' : ''}`}>
-                                    <p className="text-slate-300 leading-relaxed italic">"{selectedSignal.ai_reason}"</p>
-                                </div>
-                                {userTier === 'FREE' && (
-                                    <div className="flex flex-col items-center justify-center mt-[-80px] relative z-10">
-                                        <div className="p-4 bg-indigo-600 rounded-full mb-4 shadow-xl">
-                                            <Lock className="w-6 h-6 text-white" />
-                                        </div>
-                                        <button className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20">Upgrade to VVIP Access</button>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="flex justify-between items-center pt-8 border-t border-slate-800">
-                                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-                                    Last Updated: {new Date(selectedSignal.updated_at).toLocaleTimeString()}
-                                </div>
-                                <button className="flex items-center gap-2 text-xs font-black text-indigo-400 hover:text-white transition-colors uppercase tracking-widest">
-                                    Full Market Report <ArrowUpRight className="w-4 h-4" />
+                                <button onClick={() => setSelectedSignal(null)} className="text-slate-500 hover:text-white transition-colors">
+                                    <X className="w-6 h-6" />
                                 </button>
+                            </div>
+
+                            <div className="p-10">
+                                <div className="grid grid-cols-2 gap-6 mb-10">
+                                    <div className="p-6 rounded-3xl bg-slate-950 border border-slate-800">
+                                        <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">{lang === 'ko' ? '목표가' : 'Target Price'}</div>
+                                        <div className={`text-2xl font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-green-500'}`}>
+                                            ${selectedSignal.target_price}
+                                        </div>
+                                    </div>
+                                    <div className="p-6 rounded-3xl bg-slate-950 border border-slate-800">
+                                        <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">{lang === 'ko' ? '손절가' : 'Stop Loss'}</div>
+                                        <div className={`text-2xl font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none' : 'text-red-500'}`}>
+                                            ${selectedSignal.stop_loss}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mb-10">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Activity className="w-4 h-4 text-indigo-400" />
+                                        <h4 className="text-xs font-black text-white uppercase tracking-widest">{t.analysisPage.rationale}</h4>
+                                    </div>
+                                    <div className={`relative p-8 rounded-3xl bg-slate-900/50 border border-slate-800 ${userTier === 'FREE' ? 'blur-lg select-none' : ''}`}>
+                                        <p className="text-slate-300 leading-relaxed italic">"{selectedSignal.ai_reason}"</p>
+                                    </div>
+                                    {userTier === 'FREE' && (
+                                        <div className="flex flex-col items-center justify-center mt-[-80px] relative z-10">
+                                            <div className="p-4 bg-indigo-600 rounded-full mb-4 shadow-xl">
+                                                <Lock className="w-6 h-6 text-white" />
+                                            </div>
+                                            <button className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20">{t.analysisPage.upgradeVvip}</button>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="flex justify-between items-center pt-8 border-t border-slate-800">
+                                    <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+                                        {lang === 'ko' ? '마지막 업데이트' : 'Last Updated'}: {new Date(selectedSignal.updated_at).toLocaleTimeString()}
+                                    </div>
+                                    <button className="flex items-center gap-2 text-xs font-black text-indigo-400 hover:text-white transition-colors uppercase tracking-widest">
+                                        {lang === 'ko' ? '전체 시장 리포트' : 'Full Market Report'} <ArrowUpRight className="w-4 h-4" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             <QuizWidget />
-        </div>
+        </div >
     );
 }

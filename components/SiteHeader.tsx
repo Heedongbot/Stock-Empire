@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, LogIn, LogOut, User, ShieldCheck } from 'lucide-react';
+import { Globe, LogIn, LogOut, User, ShieldCheck, UserPlus, X } from 'lucide-react';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import { useState } from 'react';
@@ -18,10 +18,11 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     const { user, login, logout, isLoading } = useAuth();
 
     // Auth States
-    const [showLoginModal, setShowLoginModal] = useState(false);
-    const [loginEmail, setLoginEmail] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-    const [loginError, setLoginError] = useState('');
+    const [authMode, setAuthMode] = useState<'LOGIN' | 'SIGNUP' | null>(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [error, setError] = useState('');
 
     const toggleLang = () => {
         if (setLang) {
@@ -29,19 +30,34 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
         }
     };
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (loginEmail) {
-            const res = login(loginEmail, loginPassword, 'FREE');
+        setError('');
+
+        if (authMode === 'LOGIN') {
+            const res = login(email, password, 'FREE');
             if (res.success) {
-                setShowLoginModal(false);
-                setLoginEmail('');
-                setLoginPassword('');
-                setLoginError('');
+                setAuthMode(null);
+                resetForm();
             } else {
-                setLoginError(res.message || 'Login Failed');
+                setError(res.message || 'Login Failed');
+            }
+        } else {
+            // 회원가입 로직 (현재는 목업으로 로그인과 동일하게 처리)
+            const res = login(email, password, 'FREE');
+            if (res.success) {
+                setAuthMode(null);
+                resetForm();
+                alert(lang === 'ko' ? '회원가입이 완료되었습니다!' : 'Signup Complete!');
             }
         }
+    };
+
+    const resetForm = () => {
+        setEmail('');
+        setPassword('');
+        setName('');
+        setError('');
     };
 
     const NAV_ITEMS = [
@@ -84,6 +100,14 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                                 </Link>
                             );
                         })}
+                        {user?.role === 'ADMIN' && (
+                            <Link
+                                href="/admin"
+                                className="px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg shadow-red-500/20 flex items-center gap-2"
+                            >
+                                <ShieldCheck className="w-3 h-3" /> {t.auth.hq}
+                            </Link>
+                        )}
                     </nav>
 
                     {/* Right Actions */}
@@ -104,7 +128,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                                             <span className="text-[10px] font-black text-white">{user.name}</span>
                                         </div>
                                         <span className={`text-[9px] font-bold uppercase tracking-tighter ${user.role === 'ADMIN' ? 'text-red-500' : 'text-indigo-400'}`}>
-                                            {user.role === 'ADMIN' ? 'COMMANDER' : `${user.tier} MEMBER`}
+                                            {user.role === 'ADMIN' ? t.auth.commander : `${user.tier} ${t.auth.member}`}
                                         </span>
                                     </div>
                                     <div className="relative group/avatar">
@@ -113,57 +137,98 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                                             onClick={logout}
                                             className="absolute top-full right-0 mt-2 p-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-500 hover:text-red-400 opacity-0 group-hover/avatar:opacity-100 transition-opacity whitespace-nowrap text-[10px] font-black uppercase"
                                         >
-                                            <LogOut className="w-3 h-3 inline mr-1" /> Logout
+                                            <LogOut className="w-3 h-3 inline mr-1" /> {t.auth.logout}
                                         </button>
                                     </div>
                                 </div>
                             ) : (
-                                <button
-                                    onClick={() => setShowLoginModal(true)}
-                                    className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20"
-                                >
-                                    <LogIn className="w-4 h-4" /> {lang === 'ko' ? '로그인' : 'Login'}
-                                </button>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => setAuthMode('LOGIN')}
+                                        className="flex items-center gap-2 px-5 py-2 hover:text-white text-slate-400 text-xs font-black uppercase tracking-widest transition-all"
+                                    >
+                                        <LogIn className="w-4 h-4" /> {t.auth.portalAccess}
+                                    </button>
+                                    <button
+                                        onClick={() => setAuthMode('SIGNUP')}
+                                        className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20"
+                                    >
+                                        <UserPlus className="w-4 h-4" /> {t.auth.createIdentity}
+                                    </button>
+                                </div>
                             )
                         )}
                     </div>
                 </div>
             </header>
 
-            {/* Simple Login Modal */}
-            {showLoginModal && (
+            {/* Auth Modal */}
+            {authMode && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowLoginModal(false)} />
+                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setAuthMode(null)} />
                     <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-8">
-                        <h3 className="text-xl font-black text-white italic mb-6 uppercase tracking-widest">Portal Access</h3>
-                        <form onSubmit={handleLogin} className="space-y-4">
+                        <button onClick={() => setAuthMode(null)} className="absolute top-4 right-4 text-slate-500 hover:text-white">
+                            <X size={20} />
+                        </button>
+
+                        <h3 className="text-xl font-black text-white italic mb-6 uppercase tracking-widest">
+                            {authMode === 'LOGIN' ? t.auth.portalAccess : t.auth.createIdentity}
+                        </h3>
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            {authMode === 'SIGNUP' && (
+                                <div>
+                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">{t.auth.fullName}</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                                        placeholder="John Doe"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                </div>
+                            )}
                             <div>
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Identity</label>
+                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">{t.auth.emailAddress}</label>
                                 <input
                                     type="email"
                                     required
                                     className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition-colors"
                                     placeholder="your@email.com"
-                                    value={loginEmail}
-                                    onChange={(e) => setLoginEmail(e.target.value)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Access Key</label>
+                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">{t.auth.accessKey}</label>
                                 <input
                                     type="password"
+                                    required
                                     className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition-colors"
                                     placeholder="••••••••"
-                                    value={loginPassword}
-                                    onChange={(e) => setLoginPassword(e.target.value)}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            {loginError && (
-                                <p className="text-red-500 text-[10px] font-bold uppercase tracking-tighter">{loginError}</p>
+
+                            {error && (
+                                <p className="text-red-500 text-[10px] font-bold uppercase tracking-tighter">{error}</p>
                             )}
+
                             <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
-                                Initialize Login
+                                {authMode === 'LOGIN' ? t.auth.initializeLogin : t.auth.registerIdentity}
                             </button>
+
+                            <div className="text-center mt-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setAuthMode(authMode === 'LOGIN' ? 'SIGNUP' : 'LOGIN')}
+                                    className="text-[10px] font-black text-slate-500 hover:text-indigo-400 uppercase tracking-widest"
+                                >
+                                    {authMode === 'LOGIN' ? t.auth.noId : t.auth.haveId}
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

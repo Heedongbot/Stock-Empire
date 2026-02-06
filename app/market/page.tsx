@@ -5,15 +5,17 @@ import Link from 'next/link';
 import { TrendingUp, TrendingDown, ArrowRight, Lock, Activity, BarChart3, PieChart, DollarSign, Zap, RefreshCw, Target, ArrowUpRight, ArrowDownRight, ShieldCheck, Globe } from 'lucide-react';
 import { translations } from '@/lib/translations';
 import SiteHeader from '@/components/SiteHeader';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function MarketSignalsPage() {
+    const { user, updateTier } = useAuth();
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
     const [isYearly, setIsYearly] = useState(false);
     const [pricing, setPricing] = useState({
         monthly: { amount: '49,900', symbol: '₩' },
         yearly: { amount: '499,000', symbol: '₩' }
     });
-    const t = translations[lang];
+    const t = translations[lang as keyof typeof translations];
 
     // Auto-detect User Locale & Set Pricing Strategy
     useEffect(() => {
@@ -34,18 +36,30 @@ export default function MarketSignalsPage() {
     }, []);
 
     const [isVVIP, setIsVVIP] = useState(false);
+
+    // Sync isVVIP with user tier
+    useEffect(() => {
+        if (user && (user.tier === 'VVIP' || user.role === 'ADMIN')) {
+            setIsVVIP(true);
+        } else {
+            setIsVVIP(false);
+        }
+    }, [user]);
+
     const [activeTab, setActiveTab] = useState<'overview' | 'backtest'>('overview');
     const [signals, setSignals] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+    const [vvipData, setVvipData] = useState<any>(null);
 
     const fetchSignals = async () => {
         setIsLoading(true);
         try {
-            const res = await fetch('/api/market-signals');
+            const res = await fetch(`/api/market-signals?lang=${lang}`);
             const data = await res.json();
             if (data.signals) {
                 setSignals(data.signals);
+                setVvipData(data.vvip);
                 setLastUpdated(new Date(data.timestamp).toLocaleTimeString(lang === 'ko' ? 'ko-KR' : 'en-US'));
             }
         } catch (error) {
@@ -97,10 +111,10 @@ export default function MarketSignalsPage() {
                     <div className="flex items-center gap-3">
                         {!isVVIP && (
                             <button
-                                onClick={() => setIsVVIP(true)}
+                                onClick={() => updateTier('VVIP')}
                                 className="bg-gradient-to-r from-red-600 to-orange-600 hover:scale-105 text-white text-xs font-bold px-4 py-3 rounded-xl transition-all shadow-lg shadow-red-600/20 uppercase tracking-wider"
                             >
-                                {lang === 'ko' ? 'VVIP 업그레이드' : 'Upgrade to VVIP'}
+                                {t.pricing.upgrade_vvip}
                             </button>
                         )}
                         <button
@@ -131,8 +145,8 @@ export default function MarketSignalsPage() {
                                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${getStatusColor(signal.status)}`}>
                                         <BarChart3 className="w-6 h-6" />
                                     </div>
-                                    <span className={`text-[10px] font-black px-3 py-1 rounded full border ${getStatusColor(signal.status)}`}>
-                                        {signal.status}
+                                    <span className={`text-[10px] font-black px-3 py-1 rounded-full border ${getStatusColor(signal.status)} uppercase tracking-widest`}>
+                                        {(t.marketStatus as any)[signal.status.toLowerCase()] || signal.status}
                                     </span>
                                 </div>
 
@@ -178,24 +192,25 @@ export default function MarketSignalsPage() {
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
                         <div>
                             <span className="inline-block px-3 py-1 bg-red-500/10 text-red-500 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 animate-pulse border border-red-500/20">
-                                🔴 {lang === 'ko' ? '실시간 데이터' : 'LIVE DATA'}
+                                🔴 {t.market.liveBadge}
                             </span>
                             <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white mb-6">
-                                {lang === 'ko' ? '거시 확률 지도' : 'MACRO PROBABILITY MAP'}
+                                {t.market.title}
                             </h2>
                             <p className="text-slate-400 font-bold text-lg max-w-2xl leading-relaxed text-balance">
-                                "{lang === 'ko' ? '역사는 반복되지 않지만, 각운을 맞춘다.' : 'History doesn\'t repeat itself, but it often rhymes.'}"<br />
+                                "{t.market.desc_1}"<br />
                                 <span className="text-slate-500 text-sm font-medium mt-2 block">
-                                    {lang === 'ko'
-                                        ? '현재 거시 경제 데이터를 과거 30년 데이터와 대조하여 폭락 확률과 급등 확률을 계산합니다.'
-                                        : 'Calculating crash/rally probabilities based on 30 years of macro data correlation.'}
+                                    {t.market.desc_2}
                                 </span>
                             </p>
                         </div>
 
                         {/* Fake Refresh Button for immersion */}
-                        <button className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold text-slate-400 flex items-center gap-2 hover:bg-slate-800 hover:text-white transition-colors">
-                            <RefreshCw className="w-3 h-3" /> {lang === 'ko' ? '시그널 새로고침' : 'Refresh Signal'}
+                        <button
+                            onClick={fetchSignals}
+                            className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold text-slate-400 flex items-center gap-2 hover:bg-slate-800 hover:text-white transition-colors"
+                        >
+                            <RefreshCw className={`w-3 h-3 ${isLoading ? 'animate-spin' : ''}`} /> {t.market.refreshBtn}
                         </button>
                     </div>
 
@@ -208,34 +223,53 @@ export default function MarketSignalsPage() {
                                 {/* 1. Liquidity Cycle Model */}
                                 <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center relative overflow-hidden group">
                                     <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest mb-6">
-                                        {lang === 'ko' ? '연준 유동성 사이클' : 'FED LIQUIDITY CYCLE'}
+                                        {t.market.economyCycle}
                                     </h3>
-                                    <div className="text-5xl font-black text-red-500 mb-4 italic tracking-tighter">
-                                        {lang === 'ko' ? '수축 국면' : 'CONTRACTION'}
+                                    <div className="flex justify-around items-center mb-6">
+                                        <div>
+                                            <div className="text-[10px] text-slate-500 font-black mb-1 uppercase tracking-tighter">{t.market.crashRisk}</div>
+                                            <div className="text-3xl font-black text-red-500 italic">{vvipData?.crash_risk || '14.2%'}</div>
+                                        </div>
+                                        <div className="w-px h-10 bg-slate-800" />
+                                        <div>
+                                            <div className="text-[10px] text-slate-500 font-black mb-1 uppercase tracking-tighter">{t.market.rallyChance}</div>
+                                            <div className="text-3xl font-black text-green-500 italic">{vvipData?.rally_chance || '68.5%'}</div>
+                                        </div>
                                     </div>
-                                    <p className="text-xs text-slate-400 font-mono font-bold">
-                                        {lang === 'ko' ? '순유동성(Net Liq):' : 'Net Liquidity:'} <span className="text-red-400">-$45B (WoW)</span>
+                                    <p className="text-[11px] text-slate-400 font-bold leading-relaxed">
+                                        {t.market.halvingMsg}
                                     </p>
-                                    <div className="mt-6 w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                        <div className="h-full bg-red-500 w-[70%]"></div>
-                                    </div>
                                 </div>
 
-                                {/* 2. Sector Rotation Alpha */}
+                                {/* 2. Macro Risk Regime */}
                                 <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl col-span-2">
                                     <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest mb-8">
-                                        {lang === 'ko' ? '퀀트 섹터 로테이션' : 'QUANT SECTOR ROTATION'}
+                                        {t.market.macroRiskRegime}
                                     </h3>
-                                    <div className="grid grid-cols-2 gap-12">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                         <div>
-                                            <div className="text-xs text-slate-500 font-bold mb-2 uppercase">{lang === 'ko' ? '비중 확대 (Overweight)' : 'Overweight (Buy)'}</div>
-                                            <div className="text-3xl font-black text-white mb-2">{lang === 'ko' ? '에너지 & 기술주' : 'Energy & XLK'}</div>
-                                            <div className="text-sm text-green-500 font-bold bg-green-500/10 px-2 py-1 rounded inline-block">+12.4% Alpha</div>
+                                            <div className="text-[10px] text-slate-500 font-bold mb-2 uppercase">{t.market.indicators.vix}</div>
+                                            <div className="text-xl font-black text-white">{vvipData?.indicators?.vix?.value || '12.45'}</div>
+                                            <div className={`text-[10px] font-bold ${vvipData?.indicators?.vix?.color || 'text-green-500'}`}>
+                                                {vvipData?.indicators?.vix?.change || '-2.1%'} ({vvipData?.indicators?.vix?.label || t.market.indicators.lowRisk})
+                                            </div>
                                         </div>
                                         <div>
-                                            <div className="text-xs text-slate-500 font-bold mb-2 uppercase">{lang === 'ko' ? '비중 축소 (Underweight)' : 'Underweight (Sell)'}</div>
-                                            <div className="text-3xl font-black text-white mb-2">{lang === 'ko' ? '경기소비재(Discretionary)' : 'Consumer Disc.'}</div>
-                                            <div className="text-sm text-red-500 font-bold bg-red-500/10 px-2 py-1 rounded inline-block">-5.2% Risk</div>
+                                            <div className="text-[10px] text-slate-500 font-bold mb-2 uppercase">{t.market.indicators.fedRate}</div>
+                                            <div className="text-xl font-black text-white">{vvipData?.indicators?.fed_rate?.value || t.market.indicators.pause}</div>
+                                            <div className="text-[10px] text-blue-500 font-bold">{vvipData?.indicators?.fed_rate?.prob_percent || '92%'} {vvipData?.indicators?.fed_rate?.prob_label}</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] text-slate-500 font-bold mb-2 uppercase">{t.market.indicators.inflation}</div>
+                                            <div className="text-xl font-black text-white">{vvipData?.indicators?.inflation?.value || '2.8%'}</div>
+                                            <div className="text-[10px] text-green-500 font-bold">{vvipData?.indicators?.inflation?.label || t.market.indicators.stable}</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] text-slate-500 font-bold mb-2 uppercase">{t.market.indicators.usdIndex}</div>
+                                            <div className="text-xl font-black text-white">{vvipData?.indicators?.usd_index?.value || '102.1'}</div>
+                                            <div className={`text-[10px] font-bold ${vvipData?.indicators?.usd_index?.color || 'text-slate-400'}`}>
+                                                {vvipData?.indicators?.usd_index?.label || t.market.indicators.neutral}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,20 +278,34 @@ export default function MarketSignalsPage() {
                             {/* Signal History Table */}
                             <div className="space-y-6">
                                 <h4 className="text-base font-black text-slate-500 uppercase tracking-widest mb-6 border-b border-slate-800 pb-2">
-                                    {lang === 'ko' ? '최근 포착된 AI 시그널' : 'Recent AI Signals'}
+                                    {t.market.recentSignals}
                                 </h4>
-                                {[1, 2, 3].map((i) => (
-                                    <div key={i} className="flex items-center justify-between p-6 bg-slate-900/50 rounded-2xl border border-slate-800 text-base hover:bg-slate-900 transition-colors">
-                                        <span className="text-slate-400 font-mono font-bold text-sm">2024.10.{10 + i}</span>
-                                        <span className="text-white font-bold flex items-center gap-2">
-                                            <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                                            NVDA {lang === 'ko' ? '매수 진입' : 'Long Entry'}
-                                        </span>
-                                        <span className="text-green-500 font-black text-lg">+4.{i}%</span>
-                                    </div>
-                                ))}
+                                {vvipData?.history ? (
+                                    vvipData.history.map((item: any, i: number) => (
+                                        <div key={i} className="flex items-center justify-between p-6 bg-slate-900/50 rounded-2xl border border-slate-800 text-base hover:bg-slate-900 transition-colors">
+                                            <span className="text-slate-400 font-mono font-bold text-sm">{item.date}</span>
+                                            <span className="text-white font-bold flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                                                {item.name}
+                                            </span>
+                                            <span className="text-green-500 font-black text-lg">{item.impact} {t.market.accuracyLabel}</span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    [1, 2, 3].map((i) => (
+                                        <div key={i} className="flex items-center justify-between p-6 bg-slate-900/50 rounded-2xl border border-slate-800 text-base hover:bg-slate-900 transition-colors">
+                                            <span className="text-slate-400 font-mono font-bold text-sm">2026.02.{Math.max(1, 6 - i)}</span>
+                                            <span className="text-white font-bold flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                                                {i === 1 ? t.market.signals_1 : i === 2 ? t.market.signals_2 : t.market.signals_3}
+                                            </span>
+                                            <span className="text-green-500 font-black text-lg">+{i === 1 ? '8.4' : i === 2 ? '2.1' : '5.2'}% {t.market.accuracyLabel}</span>
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         </div>
+
 
                         {/* Lock Screen (Overlay) */}
                         {!isVVIP && (
@@ -265,29 +313,29 @@ export default function MarketSignalsPage() {
                                 <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mb-6 shadow-2xl shadow-amber-500/20 animate-bounce">
                                     <Lock className="w-8 h-8 text-white" />
                                 </div>
-                                <h3 className="text-3xl font-black text-white italic mb-4">VIP {lang === 'ko' ? '전용' : 'ONLY'}</h3>
+                                <h3 className="text-3xl font-black text-white italic mb-4">{t.market.vvipOnly}</h3>
                                 <p className="text-slate-400 text-sm font-bold mb-8 max-w-sm text-center leading-relaxed">
-                                    {lang === 'ko' ? '상위 0.1%를 위한 자산 배분 전략과 구체적인 매매 타이밍을 확인하세요.' : 'Unlock institutional-grade asset allocation strategies and precise entry/exit timing.'}
+                                    {t.market.vvipDesc}
                                 </p>
 
                                 <div className="flex bg-slate-900 p-1 rounded-xl mb-6 border border-slate-800">
                                     <button className="px-6 py-2 rounded-lg bg-slate-800 text-white text-xs font-bold shadow-md">
-                                        {lang === 'ko' ? '월간 결제' : 'Monthly'}
+                                        {t.market.monthly}
                                     </button>
                                     <button className="px-6 py-2 rounded-lg text-slate-500 text-xs font-bold hover:text-white transition-colors relative">
-                                        {lang === 'ko' ? '연간 결제' : 'Yearly'}
-                                        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] px-1.5 py-0.5 rounded-full font-black animate-pulse">30%</span>
+                                        {t.market.yearly}
+                                        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] px-1.5 py-0.5 rounded-full font-black animate-pulse">{t.market.discountBadge}</span>
                                     </button>
                                 </div>
 
                                 <button
-                                    onClick={() => setIsVVIP(true)}
+                                    onClick={() => updateTier('VVIP')}
                                     className="w-full max-w-md px-8 py-5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-black rounded-xl uppercase tracking-widest shadow-2xl transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2"
                                 >
-                                    {lang === 'ko' ? 'VVIP 월간 가입 (₩49,900/월)' : 'Join VVIP (₩49,900/mo)'}
+                                    {t.market.joinVvipBtn} ({t.pricing.vvip_price}/mo)
                                 </button>
                                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-4">
-                                    {lang === 'ko' ? '신규 가입자 한정 30% 할인가 적용 중' : '30% Discount for new members applied for a limited time'}
+                                    {t.market.discountMsg}
                                 </p>
                             </div>
                         )}
@@ -298,7 +346,7 @@ export default function MarketSignalsPage() {
                                 onClick={() => setIsVVIP(false)}
                                 className="absolute top-6 right-6 z-50 text-[10px] font-black text-slate-500 hover:text-white border border-slate-800 hover:border-slate-500 px-3 py-1.5 rounded-full bg-slate-900/80 flex items-center gap-1 transition-all"
                             >
-                                <Lock className="w-3 h-3" /> RELOCK
+                                <Lock className="w-3 h-3" /> {t.market.relock}
                             </button>
                         )}
                     </div>

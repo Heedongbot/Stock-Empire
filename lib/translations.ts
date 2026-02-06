@@ -86,7 +86,12 @@ export const translations = {
             strongBuy: "강력 매수",
             sellRisk: "매도 위험",
             neutral: "중립",
-            caution: "주의"
+            caution: "주의",
+            safe: "안전",
+            critical: "위험",
+            safe_desc: "정상",
+            caution_desc: "경계",
+            critical_desc: "심각"
         },
         market: {
             title: "거시 확률 지도",
@@ -94,9 +99,36 @@ export const translations = {
             desc_2: "현재 거시 경제 데이터를 과거 30년 데이터와 대조하여 폭락 확률과 급등 확률을 계산합니다.",
             refreshBtn: "시그널 새로고침",
             liveBadge: "실시간 데이터",
-            crashRisk: "시장 하락 위험",
-            rallyChance: "시장 상승 기회",
-            threshold: "임계값"
+            crashRisk: "폭락 위험도",
+            rallyChance: "상승 확률",
+            economyCycle: "유동성 순환 모델",
+            macroRiskRegime: "거시 경제 리스크 체제",
+            recentSignals: "최근 거시 시그널 이력",
+            vvipOnly: "VVIP 한정 제공",
+            vvipDesc: "거시 경제 리스크 및 기관용 확률 맵에 접근하려면 VVIP 티어가 필요합니다.",
+            monthly: "월간",
+            yearly: "연간 (최대 할인)",
+            joinVvipBtn: "VVIP 멤버쉽 시작하기",
+            discountMsg: "언제든 취소 가능하며, 보안 금융 서포트를 제공합니다.",
+            halvingMsg: "반감기 데이터 및 온체인 유동성 분석 결과입니다.",
+            signals_1: "S&P 500 강세장 체제 포착",
+            signals_2: "달러 과매수 경고 시그널",
+            signals_3: "기술주 섹터 알파 알림",
+            accuracy: "정확도 포착",
+            indicators: {
+                vix: "VIX 변동성 지수",
+                fedRate: "Fed 금리 (3월)",
+                inflation: "인플레이션 (YoY)",
+                usdIndex: "달러 지수",
+                lowRisk: "저위험",
+                pause: "동결",
+                stable: "안정",
+                neutral: "중립"
+            },
+            relock: "다시 잠금",
+            accuracyLabel: "수익률 기록",
+            discountBadge: "30% 할인",
+            threshold: "임계점"
         },
         analysis: {
             title: "AI 심층 분석",
@@ -166,6 +198,135 @@ export const translations = {
             aiInsight: "AI 투자 인사이트",
             source: "출처",
             readMore: "원문 보기"
+        },
+        pricing: {
+            title: "멤버십 플랜 선택",
+            entry: "엔트리 (ENTRY)",
+            vip: "VIP 트레이더",
+            vvip: "VVIP 알파",
+            free_price: "₩0",
+            vip_price: "₩19,900",
+            vvip_price: "₩49,900",
+            current_tier: "현재 사용 중",
+            upgrade_vip: "VIP 업그레이드",
+            upgrade_vvip: "VVIP 업그레이드",
+            join_vvip: "VVIP 알파 가입",
+            top_choice: "상위 1%의 선택",
+            features: {
+                news: "실시간 뉴스 피드",
+                delayed_charts: "지연 차트 제공",
+                unlimited_news: "제한 없는 실시간 속보",
+                standard_signals: "표준 AI 시그널",
+                alpha_picks: "실시간 고확신 알파 픽",
+                insider_logic: "기관용 인사이더 로직",
+                full_access: "고급 분석 리포트 전체 접근"
+            }
+        },
+        analysisPage: {
+            navHome: "터미널 홈",
+            premiumTitle: "프리미엄 분석 리포트",
+            saveReport: "리포트 저장",
+            liveUsers: "실시간 열람 중",
+            vvipExclusive: "VVIP 전용 분석",
+            masterBuffett: "워렌 버핏 관점",
+            validFor: "유효 시간",
+            macroRisk: "매크로 리스크",
+            sentimentScore: "AI 감성 점수",
+            sentimentLabel: {
+                aggressive: "공격적 매수",
+                caution: "매수 주의/공매도",
+                stable: "안정적 중립"
+            },
+            winRate: "과거 승률 (Win Rate)",
+            avgProfit: "평균 수익률",
+            summaryTitle: "AI 요약 인사이트",
+            tabs: {
+                backtest: "백테스팅 매트릭스",
+                macro: "매크로 시그널",
+                themes: "테마 전이 목록"
+            },
+            backtesting: {
+                chartTitle: "과거 차트 유사도 오버레이",
+                probability: "반등 확률 (Win Rate)",
+                mdd: "긴급: 최대 하위 리스크 (MDD)",
+                locked: "과거 유사 차트 데이터 잠금",
+                unlockMsg: "유료 결제 시 1초 만에 원본 데이터가 공개됩니다.",
+                viewChart: "멤버십 가입하고 차트 보기",
+                statsDesc: "회 이상의 확률로 수익 구간 진입이 확인되었습니다.",
+                mddDesc: "현재 매크로 환경에서 발생 가능한 최대 하락폭입니다. 손절점 설정 권장."
+            },
+            macro: {
+                executiveInsight: "경영진 딥 인사이트",
+                intentTitle: "경영진 발언: 숨겨진 의도",
+                ibConsensus: "IB 컨센서스 점수",
+                ibDesc: "주요 5개 IB(골드만삭스, MS 등) 의견 수치화",
+                locked: "VVIP 전용 기밀 분석",
+                unlockMsg: "글로벌 큰손들과 경영진의 심리적 의도는 VVIP 가입 시 즉시 공개됩니다.",
+                joinVvip: "VVIP 멤버십 가입하기",
+                macroWeight: "매크로 가중치 중심"
+            },
+            action: {
+                title: "액션 가이드라인",
+                bestCase: "최고의 시나리오",
+                baseCase: "기본 시나리오",
+                worstCase: "최악의 시나리오",
+                locked: "멤버십으로 전 시나리오 확인하기",
+                loading: "데이터 분석 중..."
+            },
+            paywall: {
+                scenariosBtn: "VIP 업그레이드하고 시나리오 전체 보기"
+            },
+            footer: {
+                terminal: "Stock Empire 지능형 터미널",
+                disclaimer: "본 리포트의 정보는 투자 권유가 아니며, 최종 투자 책임은 본인에게 있습니다."
+            },
+            chartLogic: "AI 유사도 패턴",
+            probabilityTitle: "성공 확률",
+            mddTitle: "최대 하락 리스크",
+            themeTitle: "섹터 테마 전이 지도",
+            themeDesc: "현재 뉴스가 시장에 미치는 영향이 어떤 섹터로 전이되는지 시각화합니다.",
+            quantGuideTitle: "퀀트 전략 가이드 (Beta)",
+            quantGuideDesc: "AI가 제안하는 구체적인 퀀트 진입 시점과 청산 전략을 확인하세요.",
+            unlockQuantBtn: "퀀트 가이드 잠금 해제",
+            terminalHome: "터미널 홈",
+            strategyDashboard: "AI 전략 대시보드",
+            marketIntelligence: "시장 지능",
+            syncingAlpha: "알파 노드 동기화 중...",
+            ready: "준비됨",
+            deepAnalysis: "심층 분석 가능",
+            rationale: "AI 투자 근거",
+            upgradeVvip: "VVIP 업그레이드",
+            masterWarren: "워렌 버핏 관점",
+            liveReading: "실시간 열람 중",
+            master: "마스터: 워렌 버핏 관점"
+        },
+        payment: {
+            checkout: "안전 결제 (SECURE)",
+            selectedPlan: "선택한 플랜",
+            cardLabel: "신용 / 체크카드",
+            cardInfo: "카드 정보를 모두 입력해주세요.",
+            mockInfo: "(테스트용: 아무 숫자나 입력 가능)",
+            complete: "결제 완료하기",
+            processing: "보안 세션 암호화 중",
+            processingDesc: "보안 금융 네트워크에 연결 중입니다...",
+            success: "권한 승인 완료",
+            successDesc: "엘리트 티어에 오신 것을 환영합니다"
+        },
+        auth: {
+            portalAccess: "포탈 접속",
+            createIdentity: "신원 생성",
+            fullName: "성함",
+            emailAddress: "이메일 주소",
+            accessKey: "액세스 키 (비밀번호)",
+            initializeLogin: "로그인 초기화",
+            registerIdentity: "신원 등록하기",
+            noId: "ID가 없으신가요? 생성하기",
+            haveId: "이미 ID가 있으신가요? 로그인",
+            logout: "로그아웃",
+            member: "멤버",
+            commander: "최고 사령관",
+            hq: "사령부 (HQ)",
+            loginError: "로그인에 실패했습니다."
         }
     },
     en: {
@@ -256,7 +417,12 @@ export const translations = {
             strongBuy: "STRONG BUY",
             sellRisk: "SELL RISK",
             neutral: "NEUTRAL",
-            caution: "CAUTION"
+            caution: "CAUTION",
+            safe: "SAFE",
+            critical: "CRITICAL",
+            safe_desc: "NORMAL",
+            caution_desc: "WARNING",
+            critical_desc: "DANGER"
         },
         market: {
             title: "Macro Probability Map",
@@ -264,8 +430,35 @@ export const translations = {
             desc_2: "We calculate crash and rally probabilities by comparing current macro data with 30 years of historical data.",
             refreshBtn: "Refresh Signals",
             liveBadge: "Live Data",
-            crashRisk: "Market Crash Risk",
-            rallyChance: "Market Rally Chance",
+            crashRisk: "Crash Risk",
+            rallyChance: "Rally Chance",
+            economyCycle: "Liquidity Cycle Model",
+            macroRiskRegime: "Macro Risk Regime",
+            recentSignals: "Recent Macro Signal History",
+            vvipOnly: "VVIP Exclusive Content",
+            vvipDesc: "VVIP tier is required to access macro economic risk assessments and institutional-grade probability maps.",
+            monthly: "Monthly",
+            yearly: "Yearly (Best Value)",
+            joinVvipBtn: "Start VVIP Membership",
+            discountMsg: "Cancel anytime. Secure financial support included.",
+            halvingMsg: "Analysis results based on halving data and on-chain liquidity.",
+            signals_1: "S&P 500 Bullish Regime Detection",
+            signals_2: "Dollar Overbought Warning Signal",
+            signals_3: "Tech Sector Alpha Alert",
+            accuracy: "Accuracy Captured",
+            indicators: {
+                vix: "VIX Index",
+                fedRate: "Fed Rate (Mar)",
+                inflation: "Inflation (YoY)",
+                usdIndex: "USD Index",
+                lowRisk: "Low Risk",
+                pause: "Pause",
+                stable: "Stable",
+                neutral: "Neutral"
+            },
+            relock: "Relock",
+            accuracyLabel: "Performance Record",
+            discountBadge: "30% OFF",
             threshold: "Threshold"
         },
         analysis: {
@@ -336,6 +529,135 @@ export const translations = {
             aiInsight: "AI Investment Insight",
             source: "Source",
             readMore: "Read Original"
+        },
+        pricing: {
+            title: "Choose Your Tier",
+            entry: "Entry (FREE)",
+            vip: "VIP Trader",
+            vvip: "VVIP Alpha",
+            free_price: "$0",
+            vip_price: "$19.99",
+            vvip_price: "$49.99",
+            current_tier: "Current Tier",
+            upgrade_vip: "Upgrade to VIP",
+            upgrade_vvip: "Upgrade to VVIP",
+            join_vvip: "Join Alpha Club",
+            top_choice: "TOP 1% CHOICE",
+            features: {
+                news: "Basic News Feed",
+                delayed_charts: "Delayed Charts",
+                unlimited_news: "Unlimited Real-time News",
+                standard_signals: "Standard AI Signals",
+                alpha_picks: "Real-time Alpha Picks",
+                insider_logic: "Institutional Insider Logic",
+                full_access: "Full Alpha Analysis Access"
+            }
+        },
+        analysisPage: {
+            navHome: "TERMINAL HOME",
+            premiumTitle: "Premium Analysis",
+            saveReport: "SAVE REPORT",
+            liveUsers: "users reading live",
+            vvipExclusive: "VVIP Exclusive Analysis",
+            masterBuffett: "Master: Buffett POV",
+            validFor: "Valid for",
+            macroRisk: "Macro Risk",
+            sentimentScore: "AI Sentiment Score",
+            sentimentLabel: {
+                aggressive: "Aggressive Long",
+                caution: "Caution/Short",
+                stable: "Stable Neutral"
+            },
+            winRate: "Match Win Rate",
+            avgProfit: "Avg Profit",
+            summaryTitle: "AI Summary Insight",
+            tabs: {
+                backtest: "Backtesting Matrix",
+                macro: "Macro Signals",
+                themes: "Theme Transfer Map"
+            },
+            backtesting: {
+                chartTitle: "Historical Similarity Chart Overlay",
+                probability: "Probability of Rebound",
+                mdd: "Urgent: Max Drawdown (MDD)",
+                locked: "Historical Similarity Chart Locked",
+                unlockMsg: "Original data revealed in 1 second upon payment.",
+                viewChart: "Join Membership & View Chart",
+                statsDesc: "rebound probability confirmed in past 10 matches",
+                mddDesc: "Max drawdown in current macro. Set stop loss here."
+            },
+            macro: {
+                executiveInsight: "Executive Deep Insight",
+                intentTitle: "Executive Intent: Hidden Meanings",
+                ibConsensus: "IB Consensus Score",
+                ibDesc: "Consensus of top 5 IBs (Goldman, MS, etc.)",
+                locked: "VVIP Confidential Analysis",
+                unlockMsg: "Global whales and executive intent revealed upon VVIP join.",
+                joinVvip: "Join VVIP Membership",
+                macroWeight: "Macro Weight Focus"
+            },
+            action: {
+                title: "Action Guidelines",
+                bestCase: "Best Case",
+                baseCase: "Base Case",
+                worstCase: "Worst Case",
+                locked: "View all scenarios with membership",
+                loading: "Analysing data..."
+            },
+            paywall: {
+                scenariosBtn: "Upgrade to VIP to view all scenarios"
+            },
+            footer: {
+                terminal: "Stock Empire Intelligence Terminal",
+                disclaimer: "Information included is not investment advice; final responsibility lies with the user."
+            },
+            chartLogic: "AI Similarity Pattern",
+            probabilityTitle: "Success Probability",
+            mddTitle: "Max Drawdown Risk",
+            themeTitle: "Sector Theme Transfer Map",
+            themeDesc: "Visualizes which sectors current news impacts are transferring to.",
+            quantGuideTitle: "Quant Strategy Guide (Beta)",
+            quantGuideDesc: "Check out specific quant entry and exit strategies suggested by AI.",
+            unlockQuantBtn: "Unlock Quant Guide",
+            terminalHome: "Terminal Home",
+            strategyDashboard: "AI Strategy Dashboard",
+            marketIntelligence: "Market Intelligence",
+            syncingAlpha: "Syncing alpha nodes...",
+            ready: "READY",
+            deepAnalysis: "Deep Analysis Available",
+            rationale: "AI Investment Rationale",
+            upgradeVvip: "Upgrade VVIP",
+            masterWarren: "Warren Buffett View",
+            liveReading: "users reading live",
+            master: "Master: Warren Buffett Perspective"
+        },
+        payment: {
+            checkout: "SECURE CHECKOUT",
+            selectedPlan: "Selected Plan",
+            cardLabel: "DEBIT / CREDIT",
+            cardInfo: "Please enter all card information.",
+            mockInfo: "(Test: Any numbers allowed)",
+            complete: "Complete Payment",
+            processing: "Encrypting Session",
+            processingDesc: "Connecting to secure financial network...",
+            success: "Access Granted",
+            successDesc: "Welcome to the Elite Tier"
+        },
+        auth: {
+            portalAccess: "Portal Access",
+            createIdentity: "Create Identity",
+            fullName: "Full Name",
+            emailAddress: "Email Address",
+            accessKey: "Access Key",
+            initializeLogin: "Initialize Login",
+            registerIdentity: "Register Identity",
+            noId: "Don't have an ID? Create One",
+            haveId: "Already have an ID? Login",
+            logout: "Logout",
+            member: "MEMBER",
+            commander: "COMMANDER",
+            hq: "COMMAND HQ",
+            loginError: "Login Failed"
         }
     }
 };
