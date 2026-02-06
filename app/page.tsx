@@ -263,7 +263,7 @@ export default function LandingPage() {
               </div>
               <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">{t.analysis.allInsights}</h2>
             </div>
-            <Link href="/analysis" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
+            <Link href="/vvip-alpha" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
               {t.common.more} <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -353,6 +353,45 @@ export default function LandingPage() {
         </div>
 
 
+      </section>
+
+      {/* Sector Intelligence Section */}
+      <section className="max-w-7xl mx-auto px-8 py-24">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Database className="w-5 h-5 text-blue-500" />
+              <span className="text-xs font-black text-blue-500 uppercase tracking-widest">{lang === 'ko' ? '데이터 허브' : 'DATA HUB'}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
+              Sector <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Intelligence</span>
+            </h2>
+          </div>
+          <Link href="/themes" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
+            {lang === 'ko' ? '모든 테마 보기' : 'VIEW ALL THEMES'} <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { id: 'ai-revolution', name: lang === 'ko' ? 'AI 혁명' : 'AI Revolution', icon: Cpu, color: 'from-purple-600/20 to-indigo-600/5' },
+            { id: 'ev-energy', name: lang === 'ko' ? 'EV & 클린 에너지' : 'EV & Clean Energy', icon: Zap, color: 'from-green-600/20 to-emerald-600/5' },
+            { id: 'semiconductors', name: lang === 'ko' ? '반도체 가이츠' : 'Semiconductor', icon: Activity, color: 'from-blue-600/20 to-cyan-600/5' },
+            { id: 'fintech-crypto', name: lang === 'ko' ? '핀테크 & 크립토' : 'Fintech & Crypto', icon: Milestone, color: 'from-orange-600/20 to-amber-600/5' }
+          ].map((theme, i) => (
+            <Link
+              key={i}
+              href={`/themes?id=${theme.id}`}
+              className={`group p-8 rounded-[2rem] bg-gradient-to-br ${theme.color} border border-slate-800 hover:border-blue-500/50 transition-all relative overflow-hidden`}
+            >
+              <theme.icon className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-black text-white uppercase italic tracking-tighter mb-2">{theme.name}</h3>
+              <div className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-white transition-colors">
+                {lang === 'ko' ? '종목 스캔' : 'SCAN SECTOR'} <ArrowUpRight size={12} />
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* NEW: News Teaser Section */}

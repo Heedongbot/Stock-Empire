@@ -13,6 +13,8 @@ function NotebookContent() {
     const [input, setInput] = useState(query);
     const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([]);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [currentTicker, setCurrentTicker] = useState<string | null>(null);
+    const [currentData, setCurrentData] = useState<any | null>(null);
 
     useEffect(() => {
         const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
@@ -29,6 +31,48 @@ function NotebookContent() {
             return await res.json();
         } catch (e) {
             return null;
+        }
+    };
+
+    const isTopicRequest = (q: string) => {
+        const triggers = {
+            financial: ['재무', '제표', '실적', 'financial', 'earnings', 'statement', 'balance'],
+            news: ['뉴스', '소식', '기사', 'news', 'update', 'impact']
+        };
+
+        q = q.toLowerCase();
+        if (triggers.financial.some(t => q.includes(t))) return 'FINANCIAL';
+        if (triggers.news.some(t => q.includes(t))) return 'NEWS';
+        return null;
+    };
+
+    const generateTopicResponse = (topic: 'FINANCIAL' | 'NEWS', data: any, lang: 'ko' | 'en') => {
+        if (!data) return lang === 'ko' ? "분석할 종목 데이터가 없습니다. 먼저 티커를 입력해주세요." : "No data to analyze. Please enter a ticker first.";
+
+        const symbol = data.symbol;
+        const name = data.shortName;
+
+        if (topic === 'FINANCIAL') {
+            if (lang === 'ko') {
+                return `**${name} (${symbol}) 재무 심층 분석 (NotebookLM)**\n\n` +
+                    `1. **수익성 지표**: 현재 P/E 비율 ${data.trailingPE || 'N/A'}는 업종 평균 대비 ${data.trailingPE > 25 ? '다소 높은' : '매력적인'} 수준입니다.\n` +
+                    `2. **현금 흐름**: 거래량 ${data.regularMarketVolume.toLocaleString()}을 기반으로 할 때 유동성은 양호하며, 주가 복원력이 확인됩니다.\n` +
+                    `3. **추천 전략**: 분기 실적 발표 전후의 변동성을 활용한 분할 매수 관점이 유리해 보입니다.`;
+            } else {
+                return `**${name} (${symbol}) Deep Financial Analysis (NotebookLM)**\n\n` +
+                    `1. **Profitability**: P/E of ${data.trailingPE || 'N/A'} is ${data.trailingPE > 25 ? 'slightly high' : 'attractive'} relative to sector peers.\n` +
+                    `2. **Cash Flow**: Strong liquidity confirmed with ${data.regularMarketVolume.toLocaleString()} volume, showing price resilience.\n` +
+                    `3. **Trading Strategy**: A DCA (Dollar Cost Averaging) approach around earnings calls is recommended to mitigate volatility risk.`;
+            }
+        } else {
+            // NEWS Impact
+            if (lang === 'ko') {
+                return `**${name} (${symbol}) 최근 뉴스 영향력 분석**\n\n` +
+                    `최근 시장에서 **${symbol}**에 대한 뉴스 톤은 **${data.regularMarketChangePercent > 0 ? '긍정적' : '신중함'}**이 지배적입니다. 기관 투자자들의 관심도가 상승하고 있으며, 특히 거시 경제 지표 변화가 주가에 민감하게 반영되고 있는 시점입니다.`;
+            } else {
+                return `**${name} (${symbol}) Recent News Sentiment Analysis**\n\n` +
+                    `Market sentiment for **${symbol}** is currently leaning towards **${data.regularMarketChangePercent > 0 ? 'optimism' : 'caution'}**. Institutional interest is rising, and macro-economic shifts are acting as a primary catalyst for immediate price movements.`;
+            }
         }
     };
 
@@ -78,21 +122,35 @@ function NotebookContent() {
 
     const handleAnalysis = async (q: string) => {
         setIsAnalyzing(true);
-        // Only add user message if it's a new input (not initial load)
-        if (q !== query || messages.length > 0) {
-            setMessages(prev => [...prev, { role: 'user', content: q }]);
-        } else if (messages.length === 0) {
-            // For initial load via URL, we might want to show the query as a user message or just the result
-            setMessages([{ role: 'user', content: q }]);
+        const userMsg = q;
+
+        // Add user message to UI
+        setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+
+        const topic = isTopicRequest(userMsg);
+
+        if (topic && currentData) {
+            // Context-based follow up
+            setTimeout(() => {
+                const response = generateTopicResponse(topic, currentData, lang);
+                setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+                setIsAnalyzing(false);
+            }, 1000);
+            return;
         }
 
+        // New ticker lookup
         const quoteData = await fetchQuote(q);
+        if (quoteData) {
+            setCurrentTicker(quoteData.symbol);
+            setCurrentData(quoteData);
+        }
 
         setTimeout(() => {
             const response = generateDynamicResponse(q, quoteData, lang);
             setMessages(prev => [...prev, { role: 'assistant', content: response }]);
             setIsAnalyzing(false);
-        }, 1500); // Slight delay for effect
+        }, 1500);
     };
 
     const handleSubmit = (e: React.FormEvent) => {

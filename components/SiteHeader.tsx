@@ -64,6 +64,8 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
         { id: 'dashboard', path: '/dashboard' },
         { id: 'news', path: '/news' },
         { id: 'analysis', path: '/analysis' },
+        { id: 'themes', path: '/themes' },
+        { id: 'vvip_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
         { id: 'portfolio', path: '/portfolio' },
     ];
