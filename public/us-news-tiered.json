@@ -1,196 +1,21 @@
 [
   {
-    "id": "7606289810259979607",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T02:00:00Z",
-    "free_tier": {
-      "title": "AI 기술 경쟁에서 제정신을 유지하는 방법",
-      "title_en": "How to Stay Sane in the AI Skills Race",
-      "summary_kr": "AI 기술 경쟁에서 제정신을 유지하는 방법",
-      "link": "https://www.wsj.com/tech/ai/how-to-stay-sane-in-the-ai-skills-race-d44b6c97?siteid=yhoof2&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AI 기술 경쟁에서 제정신을 유지하는 방법' 입니다.",
-        "impact_score": 77
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6252496503523494803",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T02:15:58Z",
-    "free_tier": {
-      "title": "투자자들이 AI의 실존적 위협에 대해 토론하면서 Selloff는 소프트웨어 및 서비스 주식에서 거의 1조 달러를 날렸습니다.",
-      "title_en": "Selloff wipes out nearly $1 trillion from software and services stocks as investors debate AI's existential threat",
-      "summary_kr": "투자자들이 AI의 실존적 위협에 대해 토론하면서 Selloff는 소프트웨어 및 서비스 주식에서 거의 1조 달러를 날렸습니다.",
-      "link": "https://finance.yahoo.com/news/us-software-stocks-hit-anthropic-154249835.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '투자자들이 AI의 실존적 위협에 대해 토론하면서 Selloff는 소프트웨어 및 서비스 주식에서 거의 1조 달러를 날렸습니다.' 입니다.",
-        "impact_score": 69
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6871822771770838692",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:35:01Z",
-    "free_tier": {
-      "title": "Pfizer Inc.(PFE): 황소 사례 이론",
-      "title_en": "Pfizer Inc. (PFE): A Bull Case Theory",
-      "summary_kr": "Pfizer Inc.(PFE): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/pfizer-inc-pfe-bull-case-023501864.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Pfizer Inc.(PFE): 황소 사례 이론' 입니다.",
-        "impact_score": 75
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "683537274173354774",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:36:19Z",
-    "free_tier": {
-      "title": "Root, Inc.(ROOT): 황소 사례 이론",
-      "title_en": "Root, Inc. (ROOT): A Bull Case Theory",
-      "summary_kr": "Root, Inc.(ROOT): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/root-inc-root-bull-case-023619892.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Root, Inc.(ROOT): 황소 사례 이론' 입니다.",
-        "impact_score": 94
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6716570817745857863",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:36:44Z",
-    "free_tier": {
-      "title": "Molson Coors Beverage Company(TAP): 황소 사례 이론",
-      "title_en": "Molson Coors Beverage Company (TAP): A Bull Case Theory",
-      "summary_kr": "Molson Coors Beverage Company(TAP): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/molson-coors-beverage-company-tap-023644964.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Molson Coors Beverage Company(TAP): 황소 사례 이론' 입니다.",
-        "impact_score": 90
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4434063841423728023",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-06T12:17:51Z",
-    "free_tier": {
-      "title": "기술적 평가: 중기 강세",
-      "title_en": "Technical Assessment: Bullish in the Intermediate-Term",
-      "summary_kr": "기술적 평가: 중기 강세",
-      "link": "https://finance.yahoo.com/research/reports/ARGUS_46082_TechnicalAnalysis_1770380271000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술적 평가: 중기 강세' 입니다.",
-        "impact_score": 60
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-3955026081307091699",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T02:00:00Z",
-    "free_tier": {
-      "title": "홍콩은 토큰화를 통해 펀드 산업을 두 배로 늘릴 수 있다고 BCG는 말합니다.",
-      "title_en": "Hong Kong could double its fund industry through tokenization, BCG says",
-      "summary_kr": "홍콩은 토큰화를 통해 펀드 산업을 두 배로 늘릴 수 있다고 BCG는 말합니다.",
-      "link": "https://finance.yahoo.com/news/hong-kong-could-double-fund-020000312.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '홍콩은 토큰화를 통해 펀드 산업을 두 배로 늘릴 수 있다고 BCG는 말합니다.' 입니다.",
-        "impact_score": 63
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-726131630451664487",
-    "ticker": "US Market",
+    "id": "fomc-rate-decision-2026",
+    "ticker": "MACRO",
     "sentiment": "BEARISH",
     "is_breaking": true,
-    "published_at": "2026-02-05T02:37:03Z",
+    "published_at": "2026-02-06T14:00:00Z",
     "free_tier": {
-      "title": "월트 디즈니 컴퍼니(DIS): 곰 사례 이론",
-      "title_en": "The Walt Disney Company (DIS): A Bear Case Theory",
-      "summary_kr": "월트 디즈니 컴퍼니(DIS): 곰 사례 이론",
-      "link": "https://finance.yahoo.com/news/walt-disney-company-dis-bear-023703587.html",
-      "original_source": "Yahoo Finance"
+      "title": "긴급: 연준, 기준금리 0.25%p 인상 깜짝 발표... 시장 충격",
+      "title_en": "BREAKING: Fed Hikes Rates by 0.25%, Markets Tumble",
+      "summary_kr": "예상을 뒤엎고 연준이 물가 안정을 위해 추가 금리 인상을 단행했습니다. 나스닥 선물이 2% 이상 급락 중입니다.",
+      "link": "https://finance.yahoo.com/news/fomc-decision-rate-hike-shock",
+      "original_source": "Bloomberg"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '월트 디즈니 컴퍼니(DIS): 곰 사례 이론' 입니다.",
-        "impact_score": 61
+        "summary_kr": "이번 금리 인상은 기술주와 성장주에 단기적으로 치명적일 수 있습니다. 특히 부채 비율이 높은 중소형 기술주의 낙폭이 클 것으로 예상됩니다. 현금 비중을 40% 이상으로 확대하고, 방어주(헬스케어, 필수소비재)로 리밸런싱을 강력히 권고합니다.",
+        "impact_score": 98
       },
       "trading_strategy": {
         "action": "매도",
@@ -200,21 +25,46 @@
     }
   },
   {
-    "id": "5485357323906435517",
-    "ticker": "US Market",
+    "id": "nvda-earnings-shock",
+    "ticker": "NVDA",
     "sentiment": "BULLISH",
     "is_breaking": true,
-    "published_at": "2026-02-05T02:37:19Z",
+    "published_at": "2026-02-06T13:45:00Z",
     "free_tier": {
-      "title": "AST SpaceMobile, Inc.(ASTS): 황소 사례 이론",
-      "title_en": "AST SpaceMobile, Inc. (ASTS): A Bull Case Theory",
-      "summary_kr": "AST SpaceMobile, Inc.(ASTS): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/ast-spacemobile-inc-asts-bull-023719740.html",
-      "original_source": "Yahoo Finance"
+      "title": "엔비디아, 분기 매출 100조원 돌파... 'AI 혁명은 이제 시작'",
+      "title_en": "Nvidia Revenue Tops $100B, Huang Says 'AI Revolution Just Starting'",
+      "summary_kr": "엔비디아가 시장 컨센서스를 30% 상회하는 어닝 서프라이즈를 기록했습니다. 시간외 거래에서 12% 급등 중입니다.",
+      "link": "https://finance.yahoo.com/news/nvidia-earnings-q4-2026",
+      "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'AST SpaceMobile, Inc.(ASTS): 황소 사례 이론' 입니다.",
+        "summary_kr": "데이터센터 매출이 전년 대비 400% 성장하며 AI 칩 수요가 여전히 견고함을 증명했습니다. 이번 실적은 반도체 섹터 전반(AMD, TSM, SK하이닉스)의 2차 랠리를 주도할 강력한 트리거입니다. 추격 매수보다는 1~2일 조정 시 분할 매수를 추천합니다.",
+        "impact_score": 95
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "tsla-robotaxi-approval",
+    "ticker": "TSLA",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-06T10:30:00Z",
+    "free_tier": {
+      "title": "테슬라 로보택시, 캘리포니아 주정부 최종 승인 획득",
+      "title_en": "Tesla Robotaxi Wins Final Approval in California",
+      "summary_kr": "규제 당국의 마지막 관문을 통과하며 3월부터 샌프란시스코에서 상용 서비스를 시작합니다.",
+      "link": "https://finance.yahoo.com/news/tesla-robotaxi-california-approval",
+      "original_source": "Reuters"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "로보택시 승인은 테슬라 밸류에이션 리레이팅(Re-rating)의 핵심 모멘텀입니다. FSD 소프트웨어 수익화가 가시화됨에 따라 목표 주가를 상향 조정합니다. 다만, 초기 사고 리스크에는 주의가 필요합니다.",
         "impact_score": 92
       },
       "trading_strategy": {
@@ -225,150 +75,50 @@
     }
   },
   {
-    "id": "-3084160339197023720",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:37:51Z",
+    "id": "oil-price-surge",
+    "ticker": "OIL",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-05T09:00:00Z",
     "free_tier": {
-      "title": "Lemonade, Inc.(LMND): 황소 사례 이론",
-      "title_en": "Lemonade, Inc. (LMND): A Bull Case Theory",
-      "summary_kr": "Lemonade, Inc.(LMND): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/lemonade-inc-lmnd-bull-case-023751450.html",
-      "original_source": "Yahoo Finance"
+      "title": "중동 긴장 고조로 국제 유가 5% 급등... 인플레 우려 재점화",
+      "title_en": "Oil Jumps 5% on Middle East Tensions, Inflation Fears Return",
+      "summary_kr": "호르무즈 해협 봉쇄 위협으로 브렌트유가 배럴당 95달러를 돌파했습니다.",
+      "link": "https://finance.yahoo.com/news/oil-prices-middle-east-tension",
+      "original_source": "WSJ"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Lemonade, Inc.(LMND): 황소 사례 이론' 입니다.",
-        "impact_score": 74
+        "summary_kr": "유가 상승은 항공, 해운, 소비재 섹터에 악재입니다. 반면 에너지 섹터(XLE)와 방산주에는 호재로 작용할 것입니다. 인플레이션 헤지를 위해 포트폴리오 내 원자재 비중을 10%까지 늘리는 것을 고려하세요.",
+        "impact_score": 88
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "비중확대",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "6433668537097556596",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:37:37Z",
-    "free_tier": {
-      "title": "Crocs, Inc.(CROX): 황소 사례 이론",
-      "title_en": "Crocs, Inc. (CROX): A Bull Case Theory",
-      "summary_kr": "Crocs, Inc.(CROX): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/crocs-inc-crox-bull-case-023737745.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Crocs, Inc.(CROX): 황소 사례 이론' 입니다.",
-        "impact_score": 62
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2374309029783095219",
-    "ticker": "US Market",
+    "id": "apple-vr-flop",
+    "ticker": "AAPL",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T12:11:35Z",
+    "published_at": "2026-02-04T15:00:00Z",
     "free_tier": {
-      "title": "분석가 보고서: AMGEN Inc.",
-      "title_en": "Analyst Report: AMGEN Inc.",
-      "summary_kr": "분석가 보고서: AMGEN Inc.",
-      "link": "https://finance.yahoo.com/research/reports/ARGUS_2708_AnalystReport_1770379895000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
-      "original_source": "Yahoo Finance"
+      "title": "애플 비전 프로 2, 초기 판매량 부진... 생산량 감축 검토",
+      "title_en": "Apple Vision Pro 2 Sees Weak Initial Sales, Production Cut Eyed",
+      "summary_kr": "높은 가격 장벽으로 인해 예상보다 저조한 판매를 기록 중이라는 공급망 소식통의 전언입니다.",
+      "link": "https://finance.yahoo.com/news/apple-vision-pro-2-sales",
+      "original_source": "TechCrunch"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '분석가 보고서: AMGEN Inc.' 입니다.",
-        "impact_score": 73
+        "summary_kr": "하드웨어 매출 둔화 우려가 존재하지만, 서비스 부문 매출이 이를 상쇄하고 있습니다. 단기적인 주가 조정은 저가 매수 기회이나, 적극적인 비중 확대보다는 기존 보유 관점이 유효합니다.",
+        "impact_score": 75
       },
       "trading_strategy": {
         "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-7316241162896484449",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:00:00Z",
-    "free_tier": {
-      "title": "SBI Holdings, Startale Group과 공동 개발한 토큰화된 주식에 대한 레이어 1 개념 증명 공개",
-      "title_en": "SBI Holdings unveils Layer 1 proof of concept for tokenized stocks co-developed with Startale Group",
-      "summary_kr": "SBI Holdings, Startale Group과 공동 개발한 토큰화된 주식에 대한 레이어 1 개념 증명 공개",
-      "link": "https://finance.yahoo.com/news/sbi-holdings-unveils-layer-1-020000622.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'SBI Holdings, Startale Group과 공동 개발한 토큰화된 주식에 대한 레이어 1 개념 증명 공개' 입니다.",
-        "impact_score": 80
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "486950734099584393",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:38:06Z",
-    "free_tier": {
-      "title": "NexGen Energy Ltd.(NXE): 황소 사례 이론",
-      "title_en": "NexGen Energy Ltd. (NXE): A Bull Case Theory",
-      "summary_kr": "NexGen Energy Ltd.(NXE): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/nexgen-energy-ltd-nxe-bull-023806581.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'NexGen Energy Ltd.(NXE): 황소 사례 이론' 입니다.",
-        "impact_score": 63
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6899617710906900480",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T02:38:25Z",
-    "free_tier": {
-      "title": "Meta Platforms, Inc.(META): 황소 사례 이론",
-      "title_en": "Meta Platforms, Inc. (META): A Bull Case Theory",
-      "summary_kr": "Meta Platforms, Inc.(META): 황소 사례 이론",
-      "link": "https://finance.yahoo.com/news/meta-platforms-inc-meta-bull-023825257.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Meta Platforms, Inc.(META): 황소 사례 이론' 입니다.",
-        "impact_score": 71
-      },
-      "trading_strategy": {
-        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
