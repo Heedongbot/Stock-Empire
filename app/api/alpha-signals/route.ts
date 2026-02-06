@@ -81,20 +81,20 @@ export async function GET(request: Request) {
         // Fallback Data if Yahoo API fails
         const fallbackSignals = [
             {
-                id: 'TSLA-fallback', ticker: 'TSLA', name: 'TSLA', price: 950.42, change_pct: 3.2, sentiment: 'BULLISH',
-                impact_score: 94, target_price: 1050, stop_loss: 880,
+                id: 'TSLA-fallback', ticker: 'TSLA', name: 'TSLA', price: 245.80, change_pct: 3.2, sentiment: 'BULLISH',
+                impact_score: 94, target_price: 280, stop_loss: 215,
                 ai_reason: "Strong momentum relative to sector. Institutional buying detected.",
                 updated_at: new Date().toISOString()
             },
             {
-                id: 'NVDA-fallback', ticker: 'NVDA', name: 'NVDA', price: 880.11, change_pct: -1.5, sentiment: 'BULLISH',
-                impact_score: 88, target_price: 950, stop_loss: 820,
+                id: 'NVDA-fallback', ticker: 'NVDA', name: 'NVDA', price: 135.20, change_pct: -1.5, sentiment: 'BULLISH',
+                impact_score: 88, target_price: 155, stop_loss: 118,
                 ai_reason: "Oversold RSI suggests a short-term rebound opportunity.",
                 updated_at: new Date().toISOString()
             },
             {
-                id: 'AAPL-fallback', ticker: 'AAPL', name: 'AAPL', price: 175.30, change_pct: 0.8, sentiment: 'NEUTRAL',
-                impact_score: 75, target_price: 185, stop_loss: 165,
+                id: 'AAPL-fallback', ticker: 'AAPL', name: 'AAPL', price: 225.50, change_pct: 0.8, sentiment: 'NEUTRAL',
+                impact_score: 75, target_price: 240, stop_loss: 210,
                 ai_reason: "Consolidating near support levels. Monitor for breakout.",
                 updated_at: new Date().toISOString()
             },
