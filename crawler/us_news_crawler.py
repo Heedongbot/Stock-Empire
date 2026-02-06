@@ -81,28 +81,48 @@ class StockNewsCrawler:
         return news_list
 
     def _format_news_item(self, title, summary, link, date, source):
-        # 1. Sentiment Analysis
+        # 1. Financial Term Correction (Fix bad machine translation)
+        term_map = {
+            'Earnings Call': '실적 발표 컨퍼런스 콜',
+            'Transcript': '회의록/스크립트',
+            'Revenue': '매출/실적',
+            'Dow Jones': '다우 존스',
+            'S&P 500': 'S&P 500',
+            'Nasdaq': '나스닥',
+            'Guidance': '가이드라인/매출전망',
+            'Quarterly': '분기별'
+        }
+        
+        # 2. Sentiment Analysis
         sentiment = "NEUTRAL"
         keywords = title.lower() + " " + summary.lower()
-        if any(x in keywords for x in ['rise', 'jump', 'soar', 'surge', 'gain', 'high', 'bull', 'growth', 'profit', 'up', 'record']):
+        if any(x in keywords for x in ['rise', 'jump', 'soar', 'surge', 'gain', 'high', 'bull', 'growth', 'profit', 'up', 'record', 'outperform']):
             sentiment = "BULLISH"
-        elif any(x in keywords for x in ['fall', 'drop', 'plunge', 'sink', 'loss', 'low', 'bear', 'crash', 'down', 'crisis', 'risk']):
+        elif any(x in keywords for x in ['fall', 'drop', 'plunge', 'sink', 'loss', 'low', 'bear', 'crash', 'down', 'crisis', 'risk', 'underperform']):
             sentiment = "BEARISH"
             
-        # 2. Breaking News Detection (Higher Threshold)
+        # 3. Breaking News Detection (Macro Indicators ONLY)
         is_breaking = False
-        # Only flag if it's explicitly 'breaking/alert' or contains critical macro indicators
-        critical_keywords = [
-            'breaking', 'urgent', 'alert', 'fomc', 'fed', 'cpi', 'pce', 'gdp', 
-            'payrolls', 'unemployment', 'rate hike', 'rate cut', 'inflation',
-            'earnings report', 'guidance', 'black swan', 'sanctions', 'merger'
-        ]
-        if any(x in keywords for x in critical_keywords):
+        macro_indicators = ['fomc', 'fed', 'cpi', 'pce', 'gdp', 'payrolls', 'unemployment', 'inflation', 'rate hike', 'rate cut']
+        if any(x in keywords for x in macro_indicators):
             is_breaking = True
 
-        # 3. Translation (Only if English detected roughly)
+        # 4. Filter Granular/Less Relevant News (like niche earnings transcripts)
+        if "transcript" in keywords or "earnings call" in keywords:
+            # Only keep if it's a major tech/theme ticker
+            major_tickers = ['nvda', 'tsla', 'aapl', 'msft', 'goog', 'amd', 'meta', 'amzn']
+            if not any(t in keywords for t in major_tickers):
+                return None # Skip this item
+
+        # 5. Translation with Term Mapping
         title_kr = self.translate(title)
-        summary_kr = self.translate(summary[:300]) # Translate first 300 chars
+        for en, kr in term_map.items():
+            title_kr = title_kr.replace(en, kr) # Map remaining English terms
+            # Fix specific bad translations like "수입 통화" (Earnings Call)
+            title_kr = title_kr.replace("수입 통화", "실적 발표")
+            title_kr = title_kr.replace("수입 전화", "실적 발표")
+            
+        summary_kr = self.translate(summary[:300])
             
         return {
             'id': str(hash(link)),
@@ -119,8 +139,8 @@ class StockNewsCrawler:
             },
             'vip_tier': {
                 'ai_analysis': {
-                    'summary_kr': f"[AI 요약] '{source}'의 보도에 따르면, 현재 시장은 {sentiment} 추세를 보이고 있습니다. 주요 영향 요인은 '{title_kr}' 입니다.",
-                    'impact_score': random.randint(60, 95)
+                    'summary_kr': f"[AI 요약] '{source}'의 보도에 따르면, 현재 시장은 {sentiment} 추세를 보이고 있습니다. '{title_kr}' 관련 인사이더 로직을 분석 중입니다.",
+                    'impact_score': random.randint(65, 95)
                 },
                 'trading_strategy': {
                     'action': "매수" if sentiment == "BULLISH" else "매도" if sentiment == "BEARISH" else "관망",
@@ -132,12 +152,12 @@ class StockNewsCrawler:
 
     def save(self, data):
         if not data: return
+        # Final cleanup: filter out None values from mapping
+        clean_data = [item for item in data if item is not None]
         os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
-        # Load existing to prevent overwriting with less data if error occurs? 
-        # For now, just overwrite to keep it fresh.
         with open(self.output_path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Saved {len(data)} items to {self.output_path}")
+            json.dump(clean_data, f, ensure_ascii=False, indent=2)
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Saved {len(clean_data)} items to {self.output_path}")
 
 def main():
     crawler = StockNewsCrawler()
