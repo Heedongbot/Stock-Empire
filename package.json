@@ -1,6 +1,6 @@
 {
   "name": "stock-empire",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "engines": {
     "node": "20.x"
@@ -16,7 +16,7 @@
     "dotenv": "^17.2.3",
     "fast-xml-parser": "^5.3.4",
     "lucide-react": "^0.563.0",
-    "next": "15.1.7",
+    "next": "15.2.0",
     "openai": "^6.17.0",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -27,7 +27,7 @@
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "15.2.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }
