@@ -58,7 +58,10 @@ function generateMockQuote(symbol: string) {
         hash = symbol.charCodeAt(i) + ((hash << 5) - hash);
     }
 
-    const basePrice = Math.abs(hash % 200) + 10;
+    // Allow for a wider range of prices, including penny stocks
+    // Modulo 20000 / 100 gives a range of 0.00 to 200.00
+    const basePrice = (Math.abs(hash % 20000) / 100) + 0.5;
+
     const isBullish = hash % 2 === 0;
     const change = (Math.abs(hash % 500) / 100) * (isBullish ? 1 : -1);
 
@@ -77,6 +80,15 @@ function generateMockQuote(symbol: string) {
 function getFallbackQuote(symbol: string) {
     const s = symbol.toUpperCase();
     const FALLBACK_QUOTES: Record<string, any> = {
+        'JTAI': {
+            symbol: 'JTAI',
+            shortName: 'Jet.AI Inc.',
+            regularMarketPrice: 0.15,
+            regularMarketChangePercent: -2.3,
+            regularMarketVolume: 1250000,
+            marketCap: 15400000,
+            trailingPE: null // Loss making usually
+        },
         'AMD': {
             symbol: 'AMD',
             shortName: 'Advanced Micro Devices, Inc.',

@@ -49,18 +49,26 @@ function NotebookContent() {
         const trend = isBullish ? (lang === 'ko' ? '상승세' : 'Upward') : (lang === 'ko' ? '하락세' : 'Downward');
         const sentiment = isBullish ? (lang === 'ko' ? '긍정적' : 'Positive') : (lang === 'ko' ? '보수적' : 'Conservative');
 
+        // Simulation Disclaimer
+        let disclaimer = "";
+        if (data.isSimulated) {
+            disclaimer = lang === 'ko'
+                ? "⚠️ **[시뮬레이션 모드 작동]**\n입력하신 티커(**" + (data.symbol || q) + "**)의 실시간 데이터를 찾을 수 없습니다.\n시스템이 **가상의 데이터**를 생성하여 분석 예시를 보여드립니다. (실제 투자가 아닌 기능 테스트용으로 참고하세요.)\n\n---\n\n"
+                : "⚠️ **[Simulation Mode Active]**\nReal-time data for **" + (data.symbol || q) + "** could not be found.\nThe system generated **hypothetical data** to demonstrate the analysis features. (Do not use for trading.)\n\n---\n\n";
+        }
+
         if (lang === 'ko') {
-            return `**${data.shortName || q} (${data.symbol})**에 대한 실시간 NotebookLM 분석 결과입니다.\n\n` +
+            return disclaimer + `**${data.shortName || q} (${data.symbol})**에 대한 NotebookLM 분석 결과입니다.\n\n` +
                 `현재 주가는 **$${price}**로 전일 대비 **${change.toFixed(2)}% ${isBullish ? '상승' : '하락'}**했습니다.\n\n` +
-                `**📊 실시간 데이터 기반 핵심 요약:**\n` +
+                `**📊 ${data.isSimulated ? '가상' : '실시간'} 데이터 기반 핵심 요약:**\n` +
                 `1. **시장 추세**: 현재 **${trend}**를 보이고 있으며, 거래량은 **${volume}M**입니다.\n` +
                 `2. **밸류에이션**: 시가총액 **$${marketCap}B**, P/E 비율은 **${peRatio}**입니다.\n` +
                 `3. **AI 종합 의견**: 최근 데이터 패턴을 분석할 때 **${sentiment}** 관점이 유효해 보입니다. ${Math.abs(change) > 2 ? '변동성이 크므로 주의가 필요합니다.' : '안정적인 흐름을 유지하고 있습니다.'}\n\n` +
                 `더 자세한 재무제표 분석이나 뉴스 영향도가 궁금하다면 말씀해주세요.`;
         } else {
-            return `Here is the real-time NotebookLM analysis for **${data.shortName || q} (${data.symbol})**.\n\n` +
+            return disclaimer + `Here is the NotebookLM analysis for **${data.shortName || q} (${data.symbol})**.\n\n` +
                 `The stock is currently trading at **$${price}**, **${isBullish ? 'up' : 'down'} ${change.toFixed(2)}%** from the previous close.\n\n` +
-                `**📊 Data-Driven Key Takeaways:**\n` +
+                `**📊 ${data.isSimulated ? 'Simulated' : 'Data-Driven'} Key Takeaways:**\n` +
                 `1. **Market Trend**: Showing a **${trend}** trend with a volume of **${volume}M**.\n` +
                 `2. **Valuation**: Market Cap is **$${marketCap}B** with a P/E Ratio of **${peRatio}**.\n` +
                 `3. **AI Verdict**: Based on recent patterns, a **${sentiment}** outlook is suggested. ${Math.abs(change) > 2 ? 'High volatility detected, proceed with caution.' : 'Maintaining a stable flow.'}\n\n` +
