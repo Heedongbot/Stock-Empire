@@ -152,6 +152,15 @@ function getFallbackQuote(symbol: string) {
             marketCap: 280000000000,
             trailingPE: 95.2
         },
+        'SMCI': {
+            symbol: 'SMCI',
+            shortName: 'Super Micro Computer, Inc.',
+            regularMarketPrice: 33.43,
+            regularMarketChangePercent: -2.5,
+            regularMarketVolume: 15000000,
+            marketCap: 22000000000,
+            trailingPE: 12.5
+        },
         'AMZN': {
             symbol: 'AMZN',
             shortName: 'Amazon.com, Inc.',
