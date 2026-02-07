@@ -10,16 +10,16 @@ import Link from "next/link";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
-        totalUsers: 1284,
+        totalUsers: 1326,
         newUsersToday: 42,
-        vipUsers: 156,
+        vipUsers: 189, // PRO Members
         vvipUsers: 34,
-        revenue: "₩1,245,000",
-        activeCrawlers: 2,
-        aiLoad: "12%",
+        revenue: "₩7,938,000", // 189 * 42,000 KRW
+        activeCrawlers: 42,
+        aiLoad: "0.8s",
         historyCount: 156,
-        lastBackup: "1시간 전",
-        systemStatus: "정상"
+        lastBackup: "방금 전",
+        systemStatus: "최적화됨"
     });
 
     return (
@@ -31,7 +31,7 @@ export default function AdminPage() {
                         <ArrowLeft className="w-5 h-5 text-slate-400 theme-hover:text-white" />
                     </Link>
                     <h1 className="text-xl font-black tracking-tighter uppercase italic flex items-center gap-2">
-                        <ShieldCheck className="w-6 h-6 text-blue-500" /> Commander Cockpit
+                        <ShieldCheck className="w-6 h-6 text-blue-500" /> Commander Cockpit (지휘 통제실)
                     </h1>
                 </div>
                 <div className="flex items-center gap-6">
@@ -47,30 +47,30 @@ export default function AdminPage() {
                 {/* STATS OVERVIEW */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                     <div className="premium-card p-6 border-slate-800 bg-slate-900/50">
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Total Users</p>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">총 사용자 (Total Users)</p>
                         <div className="flex items-end justify-between">
-                            <h2 className="text-3xl font-black text-white">{stats.totalUsers.toLocaleString()}</h2>
+                            <h2 className="text-3xl font-black text-white">{stats.totalUsers.toLocaleString()}명</h2>
                             <span className="text-green-500 text-[10px] font-bold flex items-center gap-1 mb-1">
                                 <UserPlus className="w-3 h-3" /> +{stats.newUsersToday}
                             </span>
                         </div>
                     </div>
                     <div className="premium-card p-6 border-slate-800 bg-slate-900/50">
-                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">VIP Members</p>
+                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">PRO 멤버 (유료 회원)</p>
                         <div className="flex items-end justify-between">
-                            <h2 className="text-3xl font-black text-white">{stats.vipUsers}</h2>
-                            <span className="text-slate-500 text-[10px] font-bold mb-1">Conversion: 12%</span>
+                            <h2 className="text-3xl font-black text-white">{stats.vipUsers}명</h2>
+                            <span className="text-slate-500 text-[10px] font-bold mb-1">전환율: 14.2%</span>
                         </div>
                     </div>
                     <div className="premium-card p-6 border-slate-800 bg-slate-900/50">
-                        <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-2">VVIP Leaders</p>
+                        <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-2">VVIP 리더그룹</p>
                         <div className="flex items-end justify-between">
-                            <h2 className="text-3xl font-black text-white">{stats.vvipUsers}</h2>
+                            <h2 className="text-3xl font-black text-white">{stats.vvipUsers}명</h2>
                             <span className="text-purple-500 text-[10px] font-bold mb-1 italic">👑 Ultra Premium</span>
                         </div>
                     </div>
                     <div className="premium-card p-6 border-[#d4af37]/20 bg-[#d4af37]/5">
-                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">MTD Revenue</p>
+                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">이번 달 예상 수익</p>
                         <div className="flex items-end justify-between">
                             <h2 className="text-3xl font-black text-white">{stats.revenue}</h2>
                             <TrendingUp className="text-[#d4af37] w-6 h-6 mb-1" />
@@ -83,7 +83,7 @@ export default function AdminPage() {
                     <div className="lg:col-span-2 premium-card p-8 border-slate-800 bg-slate-900/50">
                         <div className="flex justify-between items-center mb-10">
                             <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
-                                <Database className="w-5 h-5 text-blue-500" /> Pipeline & History (2 Weeks)
+                                <Database className="w-5 h-5 text-blue-500" /> 데이터 파이프라인 & 기록 (2주)
                             </h3>
                             <button className="p-2 hover:bg-slate-800 rounded-lg transition-all text-slate-500">
                                 <RefreshCw className="w-4 h-4" />
@@ -96,11 +96,11 @@ export default function AdminPage() {
                                         <Activity className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black text-white">Crawler Engine (KR/US)</p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Syncing 42 source journals</p>
+                                        <p className="text-xs font-black text-white">크롤러 엔진 (한국/미국)</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">42개 저널 실시간 동기화 중</p>
                                     </div>
                                 </div>
-                                <span className="text-[10px] font-black text-green-500">ACTIVE</span>
+                                <span className="text-[10px] font-black text-green-500">정상 가동 (ACTIVE)</span>
                             </div>
 
                             <div className="flex items-center justify-between p-4 bg-slate-950 rounded-2xl border border-slate-800">
@@ -109,11 +109,11 @@ export default function AdminPage() {
                                         <Cpu className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black text-white">AI Analysis Engine</p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Kim Daeri AI consultation: 1.2s avg latency</p>
+                                        <p className="text-xs font-black text-white">AI 분석 엔진 (김대리)</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">평균 응답 지연시간: 0.8초</p>
                                     </div>
                                 </div>
-                                <span className="text-[10px] font-black text-green-500">STABLE</span>
+                                <span className="text-[10px] font-black text-green-500">안정적 (STABLE)</span>
                             </div>
 
                             <div className="flex items-center justify-between p-4 bg-slate-950 rounded-2xl border border-slate-800">
@@ -122,29 +122,29 @@ export default function AdminPage() {
                                         <BarChart3 className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-black text-white">Data Retention (Archive)</p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">{stats.historyCount} records saved (Target: 14 days)</p>
+                                        <p className="text-xs font-black text-white">데이터 보관소 (Archive)</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">156개 기록 저장됨 (목표: 14일치)</p>
                                     </div>
                                 </div>
-                                <Link href={`#`} className="text-[10px] font-black text-blue-400 underline underline-offset-4">VIEW ARCHIVE</Link>
+                                <Link href={`#`} className="text-[10px] font-black text-blue-400 underline underline-offset-4">아카이브 보기</Link>
                             </div>
                         </div>
                     </div>
 
                     {/* ADMIN NOTES / LOG */}
                     <div className="premium-card p-8 border-slate-800 bg-slate-900/50">
-                        <h3 className="text-sm font-black uppercase tracking-widest mb-8">Admin Event Log</h3>
+                        <h3 className="text-sm font-black uppercase tracking-widest mb-8">관리자 이벤트 로그</h3>
                         <div className="space-y-6">
                             <div className="flex gap-4 border-l-2 border-blue-500 pl-4">
                                 <div className="flex-1">
                                     <p className="text-[10px] font-black text-slate-500 uppercase mb-1">21:40 | NEW SALE</p>
-                                    <p className="text-xs font-bold text-white">VVIP Membership activated by user_8291</p>
+                                    <p className="text-xs font-bold text-white">"user_8291"님이 PRO 멤버십을 결제했습니다.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4 border-l-2 border-slate-800 pl-4">
                                 <div className="flex-1">
                                     <p className="text-[10px] font-black text-slate-500 uppercase mb-1">21:30 | SYSTEM</p>
-                                    <p className="text-xs font-bold text-white">Daily News batch #12 processed successfully</p>
+                                    <p className="text-xs font-bold text-white">일일 뉴스 배리기 #12 처리 완료</p>
                                 </div>
                             </div>
                             <div className="flex gap-4 border-l-2 border-orange-500 pl-4">
