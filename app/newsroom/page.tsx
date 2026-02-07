@@ -26,9 +26,15 @@ interface NewsItem {
     };
 }
 
+import { useAuth } from '@/lib/AuthContext';
+
 export default function NewsroomPage() {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const { user } = useAuth();
+
+    // PRO 티어(VIP/VVIP)가 아닌 경우에만 광고를 보여줌
+    const showAds = !user || user.tier === 'FREE';
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -52,9 +58,11 @@ export default function NewsroomPage() {
 
             <main className="max-w-7xl mx-auto px-4 py-8">
                 {/* 1. 상단 광고 배너 (최우선 수익) */}
-                <div className="mb-8 overflow-hidden rounded-xl border border-slate-800">
-                    <AdLeaderboard />
-                </div>
+                {showAds && (
+                    <div className="mb-8 overflow-hidden rounded-xl border border-slate-800">
+                        <AdLeaderboard />
+                    </div>
+                )}
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* 왼쪽: 메인 뉴스 피드 */}
@@ -140,7 +148,7 @@ export default function NewsroomPage() {
                                         </article>
 
                                         {/* 2. 피드 중간 광고 (3번째 뉴스마다 하나씩) */}
-                                        {(idx + 1) % 3 === 0 && (
+                                        {showAds && (idx + 1) % 3 === 0 && (
                                             <div className="py-4 border-y border-slate-800/30 my-6">
                                                 <AdInFeed />
                                             </div>
@@ -154,10 +162,12 @@ export default function NewsroomPage() {
                     {/* 오른쪽: 사이드바 (광고 및 유틸리티) */}
                     <aside className="w-full lg:w-80 space-y-6">
                         {/* 3. 사이드바 사각형 광고 */}
-                        <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
-                            <h3 className="text-xs font-bold text-slate-500 mb-4 px-2">SPECIAL SPONSOR</h3>
-                            <AdRectangle />
-                        </div>
+                        {showAds && (
+                            <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
+                                <h3 className="text-xs font-bold text-slate-500 mb-4 px-2">SPECIAL SPONSOR</h3>
+                                <AdRectangle />
+                            </div>
+                        )}
 
                         {/* 실시간 마켓 점수 (AI 추천) */}
                         <div className="bg-gradient-to-br from-[#0c121d] to-[#121b2d] border border-[#00ffbd]/20 rounded-2xl p-6">
