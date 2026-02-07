@@ -7,6 +7,8 @@ const isPublicRoute = createRouteMatcher([
     '/pricing',
     '/news(.*)',
     '/market(.*)',
+    '/api/breaking-news', // 공개 API
+    '/api/news', // 공개 API
 ]);
 
 const isProtectedRoute = createRouteMatcher([
@@ -18,7 +20,7 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
     if (isProtectedRoute(req) && !isPublicRoute(req)) {
-        await auth.protect();
+        await (await auth()).protect();
     }
 });
 
