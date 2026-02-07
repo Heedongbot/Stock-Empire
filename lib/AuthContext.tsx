@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useUser, useClerk } from '@clerk/nextjs';
 
 type UserTier = 'FREE' | 'PRO';
 
@@ -15,7 +16,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (email: string, password?: string, tier?: UserTier) => { success: boolean, message?: string };
+    login: (tier?: UserTier) => void;
     logout: () => void;
     updateTier: (tier: UserTier) => void;
     isLoading: boolean;
@@ -24,70 +25,52 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(() => {
-        if (typeof window !== 'undefined') {
-            const saved = localStorage.getItem('stock-empire-user');
-            return saved ? JSON.parse(saved) : null;
-        }
-        return null;
-    });
-    const [isLoading, setIsLoading] = useState(false);
+    const { user: clerkUser, isLoaded, isSignedIn } = useUser();
+    const clerk = useClerk();
+    const [localTier, setLocalTier] = useState<UserTier>('FREE');
 
+    // Persist tier in local storage for demo purposes (hybrid approach)
     useEffect(() => {
-        setIsLoading(false);
+        if (typeof window !== 'undefined') {
+            const savedTier = localStorage.getItem('stock-empire-tier');
+            if (savedTier) setLocalTier(savedTier as UserTier);
+        }
     }, []);
 
-    const login = (email: string, password?: string, tier: UserTier = 'FREE') => {
-        // 관리자 특수 로그인 처리
-        if (email === '66683300hd@gmail.com') {
-            if (password !== 'gmlehd05') {
-                return { success: false, message: 'Invalid Admin Password' };
-            }
+    const user: User | null = isSignedIn && clerkUser ? {
+        id: clerkUser.id,
+        name: clerkUser.fullName || clerkUser.username || 'Investor',
+        email: clerkUser.primaryEmailAddress?.emailAddress || '',
+        // Use local tier override OR metadata if available (future proofing)
+        tier: localTier,
+        role: clerkUser.publicMetadata.role as 'ADMIN' | 'USER' || 'USER',
+        avatar: clerkUser.imageUrl,
+    } : null;
 
-            const adminUser: User = {
-                id: 'admin_root',
-                name: 'Commander Heedong',
-                email: email,
-                tier: 'PRO',
-                role: 'ADMIN',
-                avatar: `https://api.dicebear.com/7.x/pixel-art/svg?seed=admin`,
-            };
-            setUser(adminUser);
-            localStorage.setItem('stock-empire-user', JSON.stringify(adminUser));
-            return { success: true };
-        }
+    // Auto-admin for specific email (Backdoor for Commander)
+    if (user && user.email === '66683300hd@gmail.com') {
+        user.role = 'ADMIN';
+        user.tier = 'PRO';
+    }
 
-        // 일반 사용자 (현재는 비밀번호 없이 로그인 허용하는 Mock 모드)
-        const newUser: User = {
-            id: Math.random().toString(36).substring(7),
-            name: email.split('@')[0],
-            email: email,
-            tier: tier,
-            role: 'USER',
-            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-        };
-        setUser(newUser);
-        localStorage.setItem('stock-empire-user', JSON.stringify(newUser));
-        return { success: true };
+    const login = (tier?: UserTier) => {
+        // Redirect to Clerk Sign In
+        clerk.openSignIn();
     };
 
     const logout = () => {
-        setUser(null);
-        localStorage.removeItem('stock-empire-user');
+        clerk.signOut();
+        localStorage.removeItem('stock-empire-tier');
+        setLocalTier('FREE');
     };
 
     const updateTier = (tier: UserTier) => {
-        if (user && user.role === 'ADMIN') {
-            const updatedUser = { ...user, tier };
-            setUser(updatedUser);
-            localStorage.setItem('stock-empire-user', JSON.stringify(updatedUser));
-        }
+        setLocalTier(tier);
+        localStorage.setItem('stock-empire-tier', tier);
     };
 
-    const isAdmin = user?.role === 'ADMIN';
-
     return (
-        <AuthContext.Provider value={{ user, login, logout, updateTier, isLoading }}>
+        <AuthContext.Provider value={{ user, login, logout, updateTier, isLoading: !isLoaded }}>
             {children}
         </AuthContext.Provider>
     );

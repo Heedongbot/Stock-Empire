@@ -12,6 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/localizations": "^3.35.3",
+    "@clerk/nextjs": "^6.37.3",
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.2.3",
     "fast-xml-parser": "^5.3.4",
