@@ -30,7 +30,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
         { id: 'news', path: '/news' },
         { id: 'analysis', path: '/analysis' },
         { id: 'themes', path: '/themes' },
-        { id: 'vvip_alpha', path: '/vvip-alpha' },
+        { id: 'pro_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
         { id: 'portfolio', path: '/portfolio' },
     ];
@@ -54,7 +54,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                 <nav className="hidden lg:flex flex-1 items-center justify-center gap-3 xl:gap-8 px-2">
                     {NAV_ITEMS.map((item) => {
                         const isActive = pathname === item.path;
-                        const isVVIP = item.id === 'vvip_alpha' || item.id === 'market';
+                        const isPremium = item.id === 'pro_alpha' || item.id === 'market';
 
                         return (
                             <Link
@@ -66,7 +66,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                                 {isActive && (
                                     <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-indigo-500 shadow-[0_0_12px_rgba(99,102,241,0.8)] rounded-full animate-pulse"></div>
                                 )}
-                                {isVVIP && <Crown className={`w-3 h-3 ${isActive ? 'text-indigo-400 fill-indigo-400/20' : 'text-yellow-500/50 group-hover:text-yellow-500'}`} />}
+                                {isPremium && <Crown className={`w-3 h-3 ${isActive ? 'text-indigo-400 fill-indigo-400/20' : 'text-yellow-500/50 group-hover:text-yellow-500'}`} />}
                                 {t.nav[item.id as keyof typeof t.nav]}
                             </Link>
                         );

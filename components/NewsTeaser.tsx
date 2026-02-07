@@ -104,7 +104,7 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
                                         <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                                             <Lock className="w-5 h-5 text-indigo-500 mb-2" />
                                             <button
-                                                onClick={() => openPayment('VIP')}
+                                                onClick={() => openPayment('PRO')}
                                                 className="px-4 py-2 bg-slate-900 border border-indigo-500/30 text-indigo-400 text-[10px] font-black rounded-lg hover:bg-indigo-600 hover:text-white transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl"
                                             >
                                                 {lang === 'ko' ? "잠금 해제" : "UNLOCK"} <ArrowRight size={10} />

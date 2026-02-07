@@ -20,7 +20,7 @@ function ThemeContent() {
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
     const [searchTerm, setSearchTerm] = useState('');
     const { user } = useAuth();
-    const isVVIP = user?.tier === 'VVIP' || user?.role === 'ADMIN';
+    const isPro = user?.tier === 'PRO' || user?.role === 'ADMIN';
 
     useEffect(() => {
         const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
@@ -194,7 +194,7 @@ function ThemeContent() {
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-slate-950 border border-slate-800 p-5 rounded-3xl">
                                             <div className="text-[10px] text-slate-600 font-bold uppercase tracking-widest mb-1">{lang === 'ko' ? '목표가' : 'Target'}</div>
-                                            <div className={`text-xl font-black font-mono ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-blue-400'}`}>${sig.target_price}</div>
+                                            <div className={`text-xl font-black font-mono ${!isPro ? 'blur-md select-none text-slate-700' : 'text-blue-400'}`}>${sig.target_price}</div>
                                         </div>
                                         <div className="bg-slate-950 border border-slate-800 p-5 rounded-3xl">
                                             <div className="text-[10px] text-slate-600 font-bold uppercase tracking-widest mb-1">Impact Score</div>
@@ -215,7 +215,7 @@ function ThemeContent() {
                                     </p>
                                 </div>
 
-                                {!isVVIP && (
+                                {!isPro && (
                                     <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[3px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                         <button className="flex flex-col items-center group/upgrade">
                                             <div className="p-4 bg-blue-600 rounded-full mb-4 shadow-2xl shadow-blue-600/50 group-hover/upgrade:scale-110 transition-transform">

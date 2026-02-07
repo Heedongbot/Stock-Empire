@@ -5,8 +5,7 @@ export async function GET() {
     return NextResponse.json({
         totalUsers: 1428,
         newUsersToday: 56,
-        vipUsers: 182,
-        vvipUsers: 41,
+        proUsers: 223,
         revenueDaily: 125000,
         revenueMonthly: 3850000,
         activeCrawlers: 2,

@@ -10,21 +10,23 @@ import Link from "next/link";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
-        totalUsers: 1284,
-        newUsersToday: 42,
-        proUsers: 190,
-        revenue: "₩1,245,000",
-        activeCrawlers: 42,
-        aiLoad: "1.2s",
-        historyCount: 156,
+        totalUsers: 0,
+        newUsersToday: 0,
+        proUsers: 0,
+        revenue: "₩0",
+        activeCrawlers: 0,
+        aiLoad: "0.00s",
+        historyCount: 0,
         lastBackup: "방금 전",
-        systemStatus: "최적화됨"
+        systemStatus: "최적화됨",
+        crawlerStatus: "대기 중",
+        timestamp: "-"
     });
 
     const [logs, setLogs] = useState([
-        { id: 1, time: "21:40", type: "SALE", message: "user_8291님이 PRO 멤버십을 활성화했습니다.", color: "blue" },
-        { id: 2, time: "21:30", type: "SYSTEM", message: "일일 뉴스 배치 #14가 성공적으로 처리되었습니다.", color: "slate" },
-        { id: 3, time: "21:15", type: "WARNING", message: "\"반도체\" 테마 검색 트래픽이 평소보다 240% 급증했습니다.", color: "orange" }
+        { id: 1, time: "21:40", type: "결제", message: "PRO 멤버십 신규 가입 (user_8291)", color: "blue" },
+        { id: 2, time: "21:30", type: "시스템", message: "일일 뉴스 수집 배치 작업 완료", color: "green" },
+        { id: 3, time: "21:15", type: "경고", message: "\"반도체\" 테마 검색 트래픽 급증 (+240%)", color: "orange" }
     ]);
 
     const [loading, setLoading] = useState(false);
@@ -33,23 +35,22 @@ export default function AdminPage() {
         try {
             const res = await fetch('/api/admin/stats');
             const data = await res.json();
+
             setStats(prev => ({
                 ...prev,
-                ...data
+                ...data,
+                // timestamp 포맷팅
+                timestamp: new Date(data.timestamp).toLocaleTimeString('ko-KR')
             }));
 
-            // 실시간 로그 추가 시뮬레이션
-            if (Math.random() > 0.7) {
-                const now = new Date();
-                const timeStr = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-                const newLog = {
-                    id: Date.now(),
-                    time: timeStr,
-                    type: "SYSTEM",
-                    message: `알파 노드 동기화 완료: ${Math.floor(Math.random() * 100)}건의 신규 데이터 처리`,
-                    color: "green"
-                };
-                setLogs(prev => [newLog, ...prev.slice(0, 4)]);
+            // API에서 가져온 로그가 있으면 추가
+            if (data.recentLogs && data.recentLogs.length > 0) {
+                setLogs(prev => {
+                    // 중복 방지 및 최신순 정렬
+                    const newLogs = data.recentLogs.filter((newLog: any) => !prev.some(l => l.id === newLog.id));
+                    if (newLogs.length === 0) return prev;
+                    return [...newLogs, ...prev].slice(0, 10);
+                });
             }
         } catch (error) {
             console.error("Failed to fetch admin stats", error);
@@ -58,18 +59,10 @@ export default function AdminPage() {
 
     useEffect(() => {
         fetchStats();
-        const apiInterval = setInterval(fetchStats, 10000);
-        const simInterval = setInterval(() => {
-            setStats(prev => ({
-                ...prev,
-                totalUsers: prev.totalUsers + (Math.random() > 0.85 ? 1 : 0),
-                newUsersToday: prev.newUsersToday + (Math.random() > 0.95 ? 1 : 0),
-            }));
-        }, 2000);
+        const apiInterval = setInterval(fetchStats, 5000); // 5초마다 갱신
 
         return () => {
             clearInterval(apiInterval);
-            clearInterval(simInterval);
         };
     }, []);
 
@@ -150,7 +143,7 @@ export default function AdminPage() {
                     <div className="lg:col-span-2 premium-card p-8 border-slate-800 bg-[#0f172a]/50">
                         <div className="flex justify-between items-center mb-10">
                             <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-3">
-                                <Database className="w-5 h-5 text-blue-500" /> 데이터 파이프라인 엔진 상태 <span className="text-[10px] text-slate-500 normal-case">(실시간 감시 중)</span>
+                                <Database className="w-5 h-5 text-blue-500" /> 데이터 파이프라인 엔진 상태 <span className="text-[10px] text-slate-500 normal-case">(실시간 감시 중: {stats.timestamp})</span>
                             </h3>
                             <button
                                 onClick={handleRefresh}
@@ -167,12 +160,12 @@ export default function AdminPage() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-black text-white uppercase tracking-tight">지능형 크롤러 엔진 <span className="text-[10px] text-slate-500 font-bold">(국내/해외)</span></p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{stats.activeCrawlers}개 글로벌 주요 경제 매체 실시간 동기화 중</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{stats.activeCrawlers}개 저널 실시간 동기화 중</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]" />
-                                    <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">수집 중</span>
+                                    <div className={`w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px] ${stats.crawlerStatus.includes('정상') ? 'bg-green-500 shadow-green-500' : 'bg-orange-500 shadow-orange-500'}`} />
+                                    <span className={`text-[10px] font-black uppercase tracking-widest ${stats.crawlerStatus.includes('정상') ? 'text-green-500' : 'text-orange-500'}`}>{stats.crawlerStatus}</span>
                                 </div>
                             </div>
 
@@ -218,7 +211,7 @@ export default function AdminPage() {
                                 <div key={log.id} className={`flex gap-4 border-l-2 ${log.color === 'blue' ? 'border-blue-500' : log.color === 'green' ? 'border-green-500' : log.color === 'orange' ? 'border-orange-500' : 'border-slate-800'} pl-5 py-1 animate-fade-in`}>
                                     <div className="flex-1">
                                         <p className={`text-[10px] font-black ${log.color === 'orange' ? 'text-orange-500' : 'text-slate-500'} uppercase mb-1 tracking-widest`}>
-                                            {log.time} | {log.type === 'SALE' ? '신규 결제' : log.type === 'WARNING' ? '서버 경고' : '시스템 알림'}
+                                            {log.time} | {log.type}
                                         </p>
                                         <p className="text-xs font-black text-white tracking-tight">
                                             {log.message}

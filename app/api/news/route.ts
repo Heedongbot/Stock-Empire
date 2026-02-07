@@ -10,10 +10,23 @@ export async function GET(request: Request) {
     try {
         let allNews: any[] = [];
 
+        // 뉴스 로드 함수 (데이터 폴더 또는 상위 폴더 지원)
+        const getFilePath = (filename: string) => {
+            const possiblePaths = [
+                path.join(process.cwd(), 'data', filename),
+                path.join(process.cwd(), '..', filename),
+                path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', filename)
+            ];
+            for (const p of possiblePaths) {
+                if (fs.existsSync(p)) return p;
+            }
+            return null;
+        };
+
         // 한국 뉴스 로드
         if (market === 'ALL' || market === 'KR') {
-            const krDataPath = path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', 'kr_news_latest.json');
-            if (fs.existsSync(krDataPath)) {
+            const krDataPath = getFilePath('kr_news_latest.json');
+            if (krDataPath) {
                 const krContent = fs.readFileSync(krDataPath, 'utf-8');
                 const krNews = JSON.parse(krContent);
                 allNews = [...allNews, ...krNews];
@@ -22,8 +35,8 @@ export async function GET(request: Request) {
 
         // 미국 뉴스 로드
         if (market === 'ALL' || market === 'US') {
-            const usDataPath = path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', 'us_news_latest.json');
-            if (fs.existsSync(usDataPath)) {
+            const usDataPath = getFilePath('us_news_latest.json');
+            if (usDataPath) {
                 const usContent = fs.readFileSync(usDataPath, 'utf-8');
                 const usNews = JSON.parse(usContent);
                 allNews = [...allNews, ...usNews];

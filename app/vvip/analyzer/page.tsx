@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Search, Brain, TrendingUp, DollarSign, Activity, Lock, BarChart3, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-export default function VVIPAnalyzerPage() {
+export default function ProAnalyzerPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [analyzing, setAnalyzing] = useState(false);
     const [result, setResult] = useState<any>(null);
@@ -44,7 +44,7 @@ export default function VVIPAnalyzerPage() {
             <div className="max-w-6xl mx-auto">
                 <div className="mb-10 text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-sm font-bold mb-4">
-                        <Brain size={16} /> VVIP EXCLUSIVE
+                        <Brain size={16} /> PRO EXCLUSIVE
                     </div>
                     <h1 className="text-4xl md:text-5xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
                         AI Deep Analyzer

@@ -32,7 +32,7 @@ function VVIPAlphaContent() {
     const [loading, setLoading] = useState(true);
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
     const { user } = useAuth();
-    const isVVIP = user?.tier === 'VVIP' || user?.role === 'ADMIN';
+    const isPro = user?.tier === 'PRO' || user?.role === 'ADMIN';
 
     useEffect(() => {
         const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
@@ -79,7 +79,7 @@ function VVIPAlphaContent() {
                             </div>
                             <div>
                                 <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white leading-none">
-                                    VVIP <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 animate-gradient-x">Alpha Insights</span>
+                                    PRO <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 animate-gradient-x">Alpha Insights</span>
                                 </h1>
                                 <p className="text-[10px] text-yellow-500/70 font-black uppercase tracking-[0.4em] mt-2">
                                     {lang === 'ko' ? '최상위 1%를 위한 고확신 실시간 시그널' : 'High-Conviction Real-Time Signals for the Top 1%'}
@@ -107,7 +107,7 @@ function VVIPAlphaContent() {
                 </div>
 
                 {/* VVIP Alert Banner for non-members */}
-                {!isVVIP && (
+                {!isPro && (
                     <div className="mb-12 bg-gradient-to-r from-yellow-500/10 via-orange-500/10 to-transparent border border-yellow-500/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                         <div className="flex items-center gap-6 relative z-10">
@@ -115,14 +115,14 @@ function VVIPAlphaContent() {
                                 <Lock className="w-8 h-8 text-slate-950" />
                             </div>
                             <div>
-                                <h2 className="text-2xl font-black text-white italic uppercase tracking-tight">VVIP Limited Access</h2>
+                                <h2 className="text-2xl font-black text-white italic uppercase tracking-tight">PRO Alpha Access</h2>
                                 <p className="text-sm text-slate-400 font-medium">
-                                    {lang === 'ko' ? '청산 목표가와 기관 인사이더 로직은 VVIP 등급에게만 공개됩니다.' : 'Exit targets and institutional insider logic are exclusive to VVIP tier.'}
+                                    {lang === 'ko' ? '청산 목표가와 기관 인사이더 로직은 PRO 등급에게만 공개됩니다.' : 'Exit targets and institutional insider logic are exclusive to PRO tier.'}
                                 </p>
                             </div>
                         </div>
                         <Link href="/pricing" className="px-8 py-4 bg-yellow-500 hover:bg-yellow-400 text-slate-950 rounded-2xl font-black uppercase tracking-widest transition-all shadow-xl shadow-yellow-500/20 active:scale-95 shrink-0 relative z-10">
-                            {lang === 'ko' ? 'VVIP로 업그레이드' : 'Upgrade to VVIP'}
+                            {lang === 'ko' ? 'PRO로 업그레이드' : 'Upgrade to PRO'}
                         </Link>
                     </div>
                 )}
@@ -207,7 +207,7 @@ function VVIPAlphaContent() {
                                                 <Target className="w-3 h-3 text-green-500" />
                                                 <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '익절가' : 'Target'}</span>
                                             </div>
-                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-green-400'}`}>
+                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isPro ? 'blur-md select-none text-slate-700' : 'text-green-400'}`}>
                                                 ${sig.target_price}
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@ function VVIPAlphaContent() {
                                                 <ShieldAlert className="w-3 h-3 text-red-500" />
                                                 <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '손절가' : 'Stop'}</span>
                                             </div>
-                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-red-500'}`}>
+                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isPro ? 'blur-md select-none text-slate-700' : 'text-red-500'}`}>
                                                 ${sig.stop_loss}
                                             </div>
                                         </div>
@@ -233,7 +233,7 @@ function VVIPAlphaContent() {
                                         </span>
                                     </div>
 
-                                    <div className={`space-y-4 transition-all duration-700 ${!isVVIP ? 'blur-md select-none opacity-20' : ''}`}>
+                                    <div className={`space-y-4 transition-all duration-700 ${!isPro ? 'blur-md select-none opacity-20' : ''}`}>
                                         <div className="space-y-1">
                                             <div className="flex items-center gap-1.5 text-[9px] font-black text-indigo-400 uppercase tracking-tighter">
                                                 <Activity className="w-2.5 h-2.5" /> {lang === 'ko' ? '기술적 분석' : 'Technical'}
@@ -262,10 +262,10 @@ function VVIPAlphaContent() {
                                         </div>
                                     </div>
 
-                                    {!isVVIP && (
+                                    {!isPro && (
                                         <div className="absolute inset-0 flex items-center justify-center pt-8">
                                             <div className="px-6 py-2 bg-slate-950 border border-slate-700 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 shadow-2xl">
-                                                {lang === 'ko' ? 'VVIP 전용 심층 분석' : 'VVIP Deep Analysis'}
+                                                {lang === 'ko' ? 'PRO 전용 심층 분석' : 'PRO Deep Analysis'}
                                             </div>
                                         </div>
                                     )}

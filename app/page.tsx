@@ -9,10 +9,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
-import Ticker from '@/components/Ticker';
+import { Ticker } from '@/components/TickerMain';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
-import QuizWidget from '@/components/QuizWidget';
-import PaymentModal from '@/components/PaymentModal';
+import { QuizWidget } from '@/components/QuizMain';
+import PaymentModal from '@/components/PaymentMain';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import NewsTeaser from '@/components/NewsTeaser';
@@ -107,7 +107,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-radial from-indigo-900/20 via-transparent to-transparent opacity-50 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-8 relative z-10 text-center mt-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-[10px] font-black tracking-widest uppercase text-indigo-400 mb-8 animate-fade-in">
-            <Sparkles className="w-3 h-3" /> {t.common.statusOnline}
+            <Sparkles className="w-3 h-3" /> {t.stats.statusOnline}
           </div>
           <h1 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-8 leading-[0.9] text-white">
             {lang === 'ko' ? (

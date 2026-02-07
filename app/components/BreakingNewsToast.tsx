@@ -22,7 +22,7 @@ export default function BreakingNewsToast() {
         const checkBreakingNews = async () => {
             try {
                 // Add timestamp to prevent caching
-                const res = await fetch(`/us-news-tiered.json?t=${Date.now()}`);
+                const res = await fetch(`/us-news-realtime.json?t=${Date.now()}`);
                 if (!res.ok) return;
 
                 const data: NewsItem[] = await res.json();

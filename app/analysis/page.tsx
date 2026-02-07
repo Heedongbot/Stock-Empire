@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { translations } from '@/lib/translations';
-import { QuizWidget } from '@/components/QuizWidget';
+import { QuizWidget } from '@/components/QuizMain';
 import { useAuth } from '@/lib/AuthContext';
 
 interface AlphaSignal {
@@ -247,7 +247,7 @@ function AnalysisContent() {
                                             <div className="p-4 bg-indigo-600 rounded-full mb-4 shadow-xl">
                                                 <Lock className="w-6 h-6 text-white" />
                                             </div>
-                                            <button className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20">{t.analysisPage.upgradeVvip}</button>
+                                            <button className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20">{t.analysisPage.upgradePro}</button>
                                         </div>
                                     )}
                                 </div>

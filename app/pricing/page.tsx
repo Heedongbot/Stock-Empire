@@ -1,12 +1,45 @@
 'use client';
 
 import Link from 'next/link';
-import { Check, X, Zap, Crown, Sparkles, TrendingUp, Globe, Bell, Lock, ArrowRight } from 'lucide-react';
+import { Check, X, Zap, Crown, Sparkles, TrendingUp, Globe, Bell, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '@/lib/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function PricingPage() {
     const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
     const [lang, setLang] = useState<'ko' | 'en'>('ko');
+    const { user, login, updateTier } = useAuth();
+    const router = useRouter();
+
+    const handleUpgrade = (tier: 'FREE' | 'PRO') => {
+        if (!user) {
+            login();
+            return;
+        }
+
+        if (user.tier === tier) {
+            return; // Already on this plan
+        }
+
+        if (tier === 'PRO') {
+            // Mock Payment Process
+            // In real world: TossPayments.requestPayment(...)
+            const confirmed = window.confirm("Toss Payments 테스트 결제를 진행하시겠습니까? (실제 결제 아님)");
+            if (confirmed) {
+                alert("결제가 완료되었습니다! PRO 멤버십이 활성화됩니다.");
+                updateTier('PRO');
+                router.push('/');
+            }
+        } else {
+            // Downgrade to FREE
+            const confirmed = window.confirm("멤버십을 해지하고 FREE 등급으로 변경하시겠습니까?");
+            if (confirmed) {
+                updateTier('FREE');
+                alert("변경되었습니다.");
+            }
+        }
+    };
 
     const translations = {
         ko: {
@@ -17,53 +50,36 @@ export default function PricingPage() {
             yearlyDiscount: "2개월 무료!",
             freePlan: {
                 name: "FREE",
-                tagline: "구경만 해도 가치 있다",
+                tagline: "투자의 시작",
                 price: "0원",
                 period: "영구 무료",
                 cta: "지금 시작하기",
                 features: [
-                    { text: "글로벌 + 한국 뉴스 30개/시간", included: true },
+                    { text: "글로벌 + 한국 뉴스 (실시간)", included: true },
                     { text: "기본 AI 감성 분석", included: true },
                     { text: "제목 + 요약 제공", included: true },
                     { text: "AI 마스터 인사이트", included: false },
-                    { text: "실시간 경제지표 속보", included: false },
-                    { text: "프리미엄 종목 추천", included: false },
+                    { text: "실시간 경제지표 속보 심층 분석", included: false },
+                    { text: "PRO 전용 알파 시그널", included: false },
                     { text: "광고 제거", included: false },
                 ]
             },
-            vipPlan: {
-                name: "VIP",
-                tagline: "전문가의 시선으로",
-                price: "9,900원",
-                yearlyPrice: "99,000원",
+            proPlan: {
+                name: "PRO",
+                tagline: "상위 1%의 무기",
+                price: "29,900원",
+                yearlyPrice: "299,000원",
                 period: "월",
-                cta: "VIP 시작하기",
-                popular: "인기",
+                cta: "PRO 시작하기",
+                popular: "베스트",
                 features: [
                     { text: "FREE 전체 기능", included: true },
                     { text: "광고 완전 제거", included: true },
                     { text: "AI 마스터 인사이트 (버핏, 달리오)", included: true },
-                    { text: "글로벌 경제지표 실시간 속보", included: true },
-                    { text: "30개 심층 AI 분석", included: true },
-                    { text: "수혜/피해 섹터 분석", included: true },
-                    { text: "프리미엄 종목 추천", included: false },
-                ]
-            },
-            vvipPlan: {
-                name: "VVIP",
-                tagline: "프로의 무기",
-                price: "49,900원",
-                yearlyPrice: "499,000원",
-                period: "월",
-                cta: "VVIP 시작하기",
-                features: [
-                    { text: "VIP 전체 기능", included: true },
-                    { text: "AI 프리미엄 종목 추천 (단/중/장기)", included: true },
-                    { text: "승률 기반 매수/매도 시그널", included: true },
-                    { text: "과거 유사 사례 분석", included: true },
-                    { text: "거시지표별 주가 반응 패턴", included: true },
+                    { text: "글로벌 경제지표 실시간 속보 (Deep Dive)", included: true },
+                    { text: "PRO 전용 알파 시그널 (기관 수급)", included: true },
+                    { text: "과거 유사 사례 분석 (Backtest)", included: true },
                     { text: "텔레그램 실시간 알림", included: true },
-                    { text: "월간 프리미엄 리포트 (PDF)", included: true },
                 ]
             },
             faq: {
@@ -89,48 +105,31 @@ export default function PricingPage() {
                 period: "forever",
                 cta: "Start Now",
                 features: [
-                    { text: "30 Global + KR news/hour", included: true },
+                    { text: "Real-time Global + KR News", included: true },
                     { text: "Basic AI sentiment analysis", included: true },
                     { text: "Title + Summary", included: true },
                     { text: "AI Master Insights", included: false },
-                    { text: "Real-time Economic Indicators", included: false },
-                    { text: "Premium Stock Picks", included: false },
+                    { text: "Deep Dive Economic Indicators", included: false },
+                    { text: "PRO Alpha Signals", included: false },
                     { text: "Ad-free experience", included: false },
                 ]
             },
-            vipPlan: {
-                name: "VIP",
-                tagline: "Expert Perspective",
-                price: "$8",
-                yearlyPrice: "$80",
+            proPlan: {
+                name: "PRO",
+                tagline: "Elite Arsenal",
+                price: "$29.99",
+                yearlyPrice: "$299",
                 period: "month",
-                cta: "Start VIP",
-                popular: "Popular",
+                cta: "Start PRO",
+                popular: "Best Value",
                 features: [
                     { text: "All FREE features", included: true },
                     { text: "100% ad-free", included: true },
                     { text: "AI Master Insights (Buffett, Dalio)", included: true },
-                    { text: "Real-time Economic Indicators", included: true },
-                    { text: "30 Deep AI Analysis", included: true },
-                    { text: "Beneficiary/Risk Sector Analysis", included: true },
-                    { text: "Premium Stock Picks", included: false },
-                ]
-            },
-            vvipPlan: {
-                name: "VVIP",
-                tagline: "Professional Arsenal",
-                price: "$39",
-                yearlyPrice: "$390",
-                period: "month",
-                cta: "Start VVIP",
-                features: [
-                    { text: "All VIP features", included: true },
-                    { text: "AI Premium Stock Picks (Short/Mid/Long)", included: true },
-                    { text: "Win-rate based Buy/Sell Signals", included: true },
+                    { text: "Real-time Economic Indicators (Deep Dive)", included: true },
+                    { text: "PRO Alpha Signals (Institutional Flow)", included: true },
                     { text: "Historical Pattern Analysis", included: true },
-                    { text: "Macro Indicator Stock Response", included: true },
                     { text: "Telegram Real-time Alerts", included: true },
-                    { text: "Monthly Premium Report (PDF)", included: true },
                 ]
             },
             faq: {
@@ -184,8 +183,8 @@ export default function PricingPage() {
                         <button
                             onClick={() => setBillingCycle('monthly')}
                             className={`px-6 py-3 rounded-xl font-bold transition-all ${billingCycle === 'monthly'
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                                 }`}
                         >
                             {t.monthly}
@@ -193,8 +192,8 @@ export default function PricingPage() {
                         <button
                             onClick={() => setBillingCycle('yearly')}
                             className={`px-6 py-3 rounded-xl font-bold transition-all relative ${billingCycle === 'yearly'
-                                    ? 'bg-amber-600 text-white'
-                                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                                ? 'bg-amber-600 text-white'
+                                : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                                 }`}
                         >
                             {t.yearly}
@@ -205,32 +204,31 @@ export default function PricingPage() {
                     </div>
 
                     {/* Pricing Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto">
                         {/* FREE */}
                         <PricingCard
                             plan={t.freePlan}
                             icon={<Globe className="w-8 h-8" />}
                             color="from-slate-700 to-slate-800"
                             borderColor="border-slate-700"
+                            onAction={() => handleUpgrade('FREE')}
+                            currentTier={user?.tier}
+                            targetTier="FREE"
+                            onClick={() => handleUpgrade('FREE')}
                         />
 
-                        {/* VIP */}
+                        {/* PRO */}
                         <PricingCard
-                            plan={t.vipPlan}
-                            icon={<Zap className="w-8 h-8" />}
+                            plan={t.proPlan}
+                            icon={<Crown className="w-8 h-8" />}
                             color="from-purple-600 to-blue-600"
                             borderColor="border-purple-500"
-                            popular={t.vipPlan.popular}
+                            popular={t.proPlan.popular}
                             billingCycle={billingCycle}
-                        />
-
-                        {/* VVIP */}
-                        <PricingCard
-                            plan={t.vvipPlan}
-                            icon={<Crown className="w-8 h-8" />}
-                            color="from-amber-600 to-orange-600"
-                            borderColor="border-amber-500"
-                            billingCycle={billingCycle}
+                            onAction={() => handleUpgrade('PRO')}
+                            currentTier={user?.tier}
+                            targetTier="PRO"
+                            onClick={() => handleUpgrade('PRO')}
                         />
                     </div>
 
@@ -249,15 +247,27 @@ export default function PricingPage() {
     );
 }
 
-function PricingCard({ plan, icon, color, borderColor, popular, billingCycle }: any) {
+function PricingCard({ plan, icon, color, borderColor, popular, billingCycle, onClick, currentTier, targetTier }: any) {
     const displayPrice = billingCycle === 'yearly' && plan.yearlyPrice ? plan.yearlyPrice : plan.price;
+    const isCurrent = currentTier === targetTier;
+
+    // If not logged in & default tier is free, we treat it as active? No.
+    // If user is null (not logged in), no plan is "current".
 
     return (
-        <div className={`relative bg-slate-900/50 border-2 ${borderColor} rounded-3xl p-8 hover:scale-105 transition-transform`}>
+        <div className={`relative bg-slate-900/50 border-2 ${isCurrent ? 'border-green-500 box-shadow-green' : borderColor} rounded-3xl p-8 hover:scale-105 transition-transform flex flex-col`}>
             {popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
                         {popular}
+                    </span>
+                </div>
+            )}
+
+            {isCurrent && (
+                <div className="absolute top-4 right-4">
+                    <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest flex items-center gap-1">
+                        <Check size={12} /> 사용 중
                     </span>
                 </div>
             )}
@@ -281,12 +291,16 @@ function PricingCard({ plan, icon, color, borderColor, popular, billingCycle }: 
                 ) : null}
             </div>
 
-            <button className={`w-full py-4 rounded-xl font-black uppercase tracking-wider bg-gradient-to-r ${color} hover:opacity-90 transition-opacity mb-8 flex items-center justify-center gap-2`}>
-                {plan.cta}
-                <ArrowRight className="w-4 h-4" />
+            <button
+                onClick={onClick}
+                disabled={isCurrent}
+                className={`w-full py-4 rounded-xl font-black uppercase tracking-wider bg-gradient-to-r ${isCurrent ? 'from-slate-700 to-slate-800 cursor-default opacity-50' : color} hover:opacity-90 transition-opacity mb-8 flex items-center justify-center gap-2`}
+            >
+                {isCurrent ? "현재 플랜" : plan.cta}
+                {!isCurrent && <ArrowRight className="w-4 h-4" />}
             </button>
 
-            <ul className="space-y-4">
+            <ul className="space-y-4 flex-1">
                 {plan.features.map((feature: any, idx: number) => (
                     <li key={idx} className="flex items-start gap-3">
                         {feature.included ? (

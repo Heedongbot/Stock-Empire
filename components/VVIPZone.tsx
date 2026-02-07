@@ -31,14 +31,11 @@ interface NewsItem {
     };
 }
 
-// Define the type for the 't' prop passed to StockCard
-type VVIPZoneTranslations = typeof translations['ko']['vvipZone'];
-
 export function VVIPZone({ lang = 'ko' }: { lang?: 'ko' | 'en' }) {
     const [isVVIP, setIsVVIP] = useState(false); // Default to locked
     const [picks, setPicks] = useState<VVIPPick[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const t: VVIPZoneTranslations = translations[lang].vvipZone;
+    const t: any = (translations[lang] as any).vvipZone;
 
     // 실시간 데이터 페칭
     useEffect(() => {
@@ -77,10 +74,10 @@ export function VVIPZone({ lang = 'ko' }: { lang?: 'ko' | 'en' }) {
                 <button
                     onClick={() => setIsVVIP(!isVVIP)}
                     className="absolute top-4 right-4 z-50 p-2 bg-slate-800/50 hover:bg-slate-700/80 rounded-lg text-slate-500 hover:text-white transition-all text-xs flex items-center gap-2 border border-slate-700"
-                    title="Admin: Toggle VVIP View"
+                    title="Admin: Toggle PRO View"
                 >
                     <Key size={14} />
-                    {isVVIP ? (lang === 'ko' ? '일반인 시전' : 'View as FREE') : (lang === 'ko' ? 'VVIP 시점' : 'View as VVIP')}
+                    {isVVIP ? (lang === 'ko' ? '일반인 시점' : 'View as FREE') : (lang === 'ko' ? 'PRO 시점' : 'View as PRO')}
                 </button>
                 {/* Background Glow */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />

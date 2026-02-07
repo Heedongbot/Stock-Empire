@@ -4,8 +4,29 @@ import path from 'path';
 
 export async function GET() {
     try {
-        // JSON 파일 절대 경로 - "연구자동화" 폴더 포함!
-        const jsonPath = 'C:/Users/66683/OneDrive/바탕 화면/연구자동화/us_news_latest.json';
+        // JSON 파일 경로 서칭
+        const getFilePath = (filename: string) => {
+            const possiblePaths = [
+                path.join(process.cwd(), 'data', filename),
+                path.join(process.cwd(), '..', filename),
+                path.join('c:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화', filename)
+            ];
+            for (const p of possiblePaths) {
+                if (fs.existsSync(p)) return p;
+            }
+            return null;
+        };
+
+        const jsonPath = getFilePath('us_news_latest.json');
+
+        if (!jsonPath) {
+            console.warn('⚠️ No news file found, using fallback data');
+            return NextResponse.json({
+                success: true,
+                data: getFallbackData(),
+                lastUpdate: new Date().toISOString()
+            });
+        }
 
         console.log('📂 Trying to read:', jsonPath);
 
