@@ -14,42 +14,42 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
     const newsData = [
         {
             id: 1,
-            title: lang === 'ko' ? "엔비디아 Q4 실적 예상치 20% 상회 발표" : "NVIDIA Q4 Earnings Beat Expectations by 20%",
+            title: lang === 'ko' ? "알파벳, AI 인프라 투자 확대로 2026년 실적 가이던스 상향" : "Alphabet Raises 2026 Guidance on AI Infra Surge",
             summary: lang === 'ko'
-                ? "엔비디아가 4분기 매출 605억 달러로 월가 질적을..."
-                : "NVIDIA reported Q4 revenue of $60.5B, surpassing Wall St...",
+                ? "구글의 모기업 알파벳이 2026년 자본 지출 계획을 발표하며 AI 리더십 공고화를 선언했습니다..."
+                : "Alphabet announced its 2026 capex plan, declaring the solidification of its AI leadership...",
             ai_analysis_preview: lang === 'ko'
-                ? "이 뉴스는 한국 반도체 관련주에 직접적..."
-                : "This news directly impacts Korean semiconductor stocks...",
+                ? "빅테크 실적 장세가 2026년에도 지속될 전망..."
+                : "Big Tech earnings rally expected to continue in 2026...",
             ai_analysis_full: lang === 'ko'
-                ? "특히 SK하이닉스는 HBM3 공급 확대로 인해 단기적으로 +7~10% 상승 가능하며 후공정 장비주인 한미반도체 또한 수혜가 예상됩니다. 매수 적기는 실적 발표 직후 조정장이 올 때이며..."
-                : "Specifically, SK Hynix could see a +7-10% short-term gain due to HBM3 expansion. Hanmi Semiconductor is also expected to benefit. The best entry point is...",
+                ? "클라우드 부문의 가파른 성장이 밸류에이션을 견인하고 있습니다. 특히 저금리 안착 시기에 접어들며 차입 비용이 감소한 점이 긍정적입니다. 목표가 상향 조정이 잇따를 것으로 보이며..."
+                : "Steep growth in the cloud sector is driving valuations. The stabilization of lower rates has reduced borrowing costs. Target price upgrades are expected...",
         },
         {
             id: 2,
-            title: lang === 'ko' ? "테슬라 모델2 출시 일정 앞당긴다" : "Tesla Model 2 Launch Schedule Moved Up",
+            title: lang === 'ko' ? "삼성전자, 1.4nm 공정 양산 성공... 파운드리 점유율 확대" : "Samsung Electronic Success in 1.4nm Mass Production",
             summary: lang === 'ko'
-                ? "기가 팩토리 멕시코 착공과 함께 저가형 모델..."
-                : "With Gigafactory Mexico breaking ground, the budget model...",
+                ? "삼성전자가 세계 최초로 1.4나모 공정 양산에 성공하며 TSMC와의 격차를 좁히기 시작했습니다..."
+                : "Samsung succeeds in 1.4nm mass production, closing the gap with TSMC...",
             ai_analysis_preview: lang === 'ko'
-                ? "전기차 부품주들의 밸류에이션 재평가가..."
-                : "Revaluation of EV component stocks is imminent...",
+                ? "반도체 업황은 '초격차' 시대로 진입 중..."
+                : "Semiconductor industry entering 'Super-Gap' era...",
             ai_analysis_full: lang === 'ko'
-                ? "LG에너지솔루션과 엘앤에프의 공급 물량 확대가 확실시되며, 특히 2차전지 소재 섹터의 반등 트리거가 될 것입니다. 목표가 35만원을 제시하며..."
-                : "Increased supply volumes for LG Energy Solution and L&F are certain. This will trigger a rebound in the battery materials sector...",
+                ? "1.4nm 양산 성공은 향후 AI 반도체 수주 경쟁에서 우위를 점할 수 있는 핵심 지표입니다. 한국 반도체 섹터 전반에 긍정적인 온기가 퍼질 것으로 보이며, 특히 후공정 관련주들에 주목할 필요가 있습니다..."
+                : "Success in 1.4nm is a key metric for AI chip orders. Positive sentiment will spread across the KR semi sector, especially back-end equipment stocks...",
         },
         {
             id: 3,
-            title: lang === 'ko' ? "미 연준, 금리 인하 시기 '신중론' 유지" : "Fed Maintains 'Caution' on Rate Cuts",
+            title: lang === 'ko' ? "미 연준, 기준금리 3.50~3.75% 동결... '금융 완화 안착'" : "Fed Holds Rates at 3.50~3.75%, 'Monetary Comfort'",
             summary: lang === 'ko'
-                ? "파월 의장은 물가 상승률이 2%에 도달할 때까지..."
-                : "Chair Powell stated rates will maintain until inflation hits 2%...",
+                ? "미 연준이 공시를 통해 기준금리를 3% 중반대에서 동결하며 시장의 불확실성을 완전히 해소했습니다..."
+                : "The Fed held rates in the mid-3% range, completely resolving market uncertainty...",
             ai_analysis_preview: lang === 'ko'
-                ? "성장주보다는 가치주 위주의 포트폴리오가..."
-                : "A value-focused portfolio is preferred over growth stocks...",
+                ? "저금리 기조 안착은 성장주에 최적의 환경..."
+                : "Low rate environment is optimal for growth stocks...",
             ai_analysis_full: lang === 'ko'
-                ? "고배당 은행주와 통신주 방어율이 높을 것으로 보입니다. KB금융과 SK텔레콤 비중 확대를 권장하며, 나스닥 레버리지 ETF는 비중 축소가 필요합니다..."
-                : "High-dividend bank and telecom stocks will show high defense. Increasing weight in KB Financial and SK Telecom is recommended...",
+                ? "금리가 3.50~3.75% 수준에서 횡보함에 따라 시장은 '금리 하향 안정화'를 공식 팩트로 받아들이고 있습니다. 이는 성장주의 밸류에이션 리레이팅을 정당화하며, 자산 배분 전략에서 주식 비중을 확대해야 할 강력한 근거가 됩니다..."
+                : "As rates plateau at 3.50-3.75%, the market accepts 'downward stabilization' as fact. This justifies growth stock re-rating and supports increasing equity weight...",
         }
     ];
 
