@@ -99,7 +99,7 @@ class StockNewsCrawler:
                 if response.status_code != 200: continue
                     
                 soup = BeautifulSoup(response.content, 'xml')
-                items = soup.find_all('item', limit=8) # Get top 8 from each to mix
+                items = soup.find_all('item', limit=20) # Expanded pool for better selection
                 
                 for item in items:
                     title = item.find('title').text.strip()
@@ -160,12 +160,13 @@ class StockNewsCrawler:
             'upgrade', 'downgrade', 'price target', 'guidance', 'acquisition', 'merger',
             'earnings beat', 'earnings miss', 'buyback', 'dividend', 'fda', 'sec', 
             'settlement', 'contract', 'partnership', 'massive', 'breakout', 'deal',
-            'insider buy', 'tender offer', 'spinoff', 'ipo'
+            'insider buy', 'tender offer', 'spinoff', 'ipo', 'outlook', 'forecast',
+            'expansion', 'investment', 'regulatory', 'monetary', 'strategy', 'revenue'
         ]
         
         major_tickers = [
             'nvda', 'tsla', 'aapl', 'msft', 'goog', 'amd', 'meta', 'amzn', 'nflx', 'avgo',
-            'asml', 'trmp', 'pltr', 'smci', 'arm', 'mu', 'mstr', 'coin', 'ibm', 'intc'
+            'asml', 'trmp', 'pltr', 'smci', 'arm', 'mu', 'mstr', 'coin', 'ibm', 'intc', 'v', 'ma', 'jpm'
         ]
 
         has_alpha = any(x in keywords for x in alpha_keywords)

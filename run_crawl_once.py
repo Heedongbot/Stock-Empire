@@ -7,7 +7,7 @@ def run_once():
         # 1. Update Premium AI News
         crawler = StockNewsCrawler()
         print("--- [1/2] Updating Premium AI News (Money-Focused) ---")
-        news = crawler.crawl_all_sources(limit=25)
+        news = crawler.crawl_all_sources(limit=30)
         crawler.save(news)
         
         # 2. Update VVIP Alpha Signals
