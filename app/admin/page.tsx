@@ -10,11 +10,11 @@ import Link from "next/link";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
-        totalUsers: 1326,
-        newUsersToday: 42,
-        vipUsers: 189, // PRO Members
-        vvipUsers: 34,
-        revenue: "₩7,938,000", // 189 * 42,000 KRW
+        totalUsers: 5,
+        newUsersToday: 1,
+        vipUsers: 1, // Commander (Backdoor PRO)
+        vvipUsers: 1, // Commander
+        revenue: "₩0", // Beta Period
         activeCrawlers: 42,
         aiLoad: "0.8s",
         historyCount: 156,
@@ -31,12 +31,12 @@ export default function AdminPage() {
                         <ArrowLeft className="w-5 h-5 text-slate-400 theme-hover:text-white" />
                     </Link>
                     <h1 className="text-xl font-black tracking-tighter uppercase italic flex items-center gap-2">
-                        <ShieldCheck className="w-6 h-6 text-blue-500" /> Commander Cockpit (지휘 통제실)
+                        <ShieldCheck className="w-6 h-6 text-blue-500" /> 지휘 통제실 (Commander Cockpit)
                     </h1>
                 </div>
                 <div className="flex items-center gap-6">
                     <span className="text-[10px] font-black text-green-500 uppercase flex items-center gap-2 animate-pulse">
-                        <div className="w-2 h-2 bg-green-500 rounded-full" /> System Online
+                        <div className="w-2 h-2 bg-green-500 rounded-full" /> 시스템 가동 중
                     </span>
                     <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 overflow-hidden" />
                 </div>
@@ -59,7 +59,7 @@ export default function AdminPage() {
                         <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">PRO 멤버 (유료 회원)</p>
                         <div className="flex items-end justify-between">
                             <h2 className="text-3xl font-black text-white">{stats.vipUsers}명</h2>
-                            <span className="text-slate-500 text-[10px] font-bold mb-1">전환율: 14.2%</span>
+                            <span className="text-slate-500 text-[10px] font-bold mb-1">전환율: 20%</span>
                         </div>
                     </div>
                     <div className="premium-card p-6 border-slate-800 bg-slate-900/50">
@@ -70,7 +70,7 @@ export default function AdminPage() {
                         </div>
                     </div>
                     <div className="premium-card p-6 border-[#d4af37]/20 bg-[#d4af37]/5">
-                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">이번 달 예상 수익</p>
+                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">이번 달 수익</p>
                         <div className="flex items-end justify-between">
                             <h2 className="text-3xl font-black text-white">{stats.revenue}</h2>
                             <TrendingUp className="text-[#d4af37] w-6 h-6 mb-1" />
@@ -123,7 +123,7 @@ export default function AdminPage() {
                                     </div>
                                     <div>
                                         <p className="text-xs font-black text-white">데이터 보관소 (Archive)</p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">156개 기록 저장됨 (목표: 14일치)</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">{stats.historyCount}개 기록 저장됨 (목표: 14일치)</p>
                                     </div>
                                 </div>
                                 <Link href={`#`} className="text-[10px] font-black text-blue-400 underline underline-offset-4">아카이브 보기</Link>
@@ -137,20 +137,20 @@ export default function AdminPage() {
                         <div className="space-y-6">
                             <div className="flex gap-4 border-l-2 border-blue-500 pl-4">
                                 <div className="flex-1">
-                                    <p className="text-[10px] font-black text-slate-500 uppercase mb-1">21:40 | NEW SALE</p>
-                                    <p className="text-xs font-bold text-white">"user_8291"님이 PRO 멤버십을 결제했습니다.</p>
+                                    <p className="text-[10px] font-black text-slate-500 uppercase mb-1">21:40 | NEW USER</p>
+                                    <p className="text-xs font-bold text-white">"lgh425"님이 VVIP 권한을 획득했습니다.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4 border-l-2 border-slate-800 pl-4">
                                 <div className="flex-1">
                                     <p className="text-[10px] font-black text-slate-500 uppercase mb-1">21:30 | SYSTEM</p>
-                                    <p className="text-xs font-bold text-white">일일 뉴스 배리기 #12 처리 완료</p>
+                                    <p className="text-xs font-bold text-white">일일 뉴스 배치 #12 처리 완료</p>
                                 </div>
                             </div>
                             <div className="flex gap-4 border-l-2 border-orange-500 pl-4">
                                 <div className="flex-1">
                                     <p className="text-[10px] font-black text-orange-500 uppercase mb-1">21:15 | WARNING</p>
-                                    <p className="text-xs font-bold text-white italic">Higher than usual traffic for "Semiconductor" theme query</p>
+                                    <p className="text-xs font-bold text-white italic">"반도체" 테마 검색 트래픽 급증</p>
                                 </div>
                             </div>
                         </div>
