@@ -4,11 +4,10 @@ const isPublicRoute = createRouteMatcher([
     '/',
     '/sign-in(.*)',
     '/sign-up(.*)',
-    '/pricing',
+    '/pricing(.*)',
     '/news(.*)',
     '/market(.*)',
-    '/api/breaking-news', // 공개 API
-    '/api/news', // 공개 API
+    '/api/(.*)', // API는 일단 모두 열어줌 (내부에서 가드 처리)
 ]);
 
 const isProtectedRoute = createRouteMatcher([
@@ -19,7 +18,11 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-    if (isProtectedRoute(req) && !isPublicRoute(req)) {
+    // 1. 공개 경로는 무조건 즉시 통과
+    if (isPublicRoute(req)) return;
+
+    // 2. 보호된 경로일 때만 로그인 체크
+    if (isProtectedRoute(req)) {
         await (await auth()).protect();
     }
 });
