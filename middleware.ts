@@ -1,16 +1,25 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Protected routes (require login)
+const isPublicRoute = createRouteMatcher([
+    '/',
+    '/sign-in(.*)',
+    '/sign-up(.*)',
+    '/pricing',
+    '/news(.*)',
+    '/market(.*)',
+]);
+
 const isProtectedRoute = createRouteMatcher([
     '/portfolio(.*)',
     '/analysis(.*)',
     '/vvip-alpha(.*)',
-    // '/news(.*)', // News is public but some content is locked
+    '/dashboard(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-    // Restrict dashboard routes to signed-in users
-    if (isProtectedRoute(req)) (await auth()).protect();
+    if (isProtectedRoute(req) && !isPublicRoute(req)) {
+        await auth.protect();
+    }
 });
 
 export const config = {
