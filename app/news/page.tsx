@@ -5,6 +5,8 @@ import { Search, Newspaper, TrendingUp, TrendingDown, Filter, Zap, Lock, Chevron
 import SiteHeader from '@/components/SiteHeader';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
+import AdInFeed from '@/components/ads/AdInFeed';
 
 interface TierData {
     summary_kr?: string;
@@ -146,6 +148,13 @@ export default function NewsPage() {
                     </div>
                 </div>
 
+                {/* AD: Top Leaderboard */}
+                {userTier === 'FREE' && (
+                    <div className="mb-12">
+                        <AdLeaderboard />
+                    </div>
+                )}
+
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-40">
                         <LoaderIcon className="w-12 h-12 text-indigo-500 animate-spin mb-4" />
@@ -154,43 +163,50 @@ export default function NewsPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {displayedNews.map((news, idx) => (
-                            <div
-                                key={idx}
-                                onClick={() => setSelectedNews(news)}
-                                className="group relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col h-full animate-fade-in-up cursor-pointer"
-                            >
-                                <div className={`h-1.5 w-full ${news.sentiment === 'BULLISH' ? 'bg-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500' : 'bg-slate-500'}`} />
-                                <div className="p-6 flex flex-col h-full">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <span className="px-3 py-1 bg-slate-950 rounded-lg text-xs font-black text-indigo-400 border border-slate-800 uppercase tracking-widest">{news.ticker}</span>
-                                        <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${news.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500' : 'bg-slate-700/50 text-slate-400'}`}>
-                                            {news.sentiment}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-lg font-bold text-white mb-3 line-clamp-2 leading-snug group-hover:text-indigo-300 transition-colors">
-                                        {lang === 'en' && news.free_tier.title_en ? news.free_tier.title_en : news.free_tier.title}
-                                    </h3>
-                                    <div className="text-sm text-slate-400 mb-6 line-clamp-3 leading-relaxed">
-                                        {lang === 'en'
-                                            ? (news.free_tier.title_en || "Click for details")
-                                            : (userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.summary_kr || news.free_tier.summary_kr))
-                                        }
-                                    </div>
-                                    <div className="mt-auto pt-4 border-t border-slate-800/50">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                                            <span className="text-xs font-black text-yellow-500 uppercase tracking-wider">{t.newsPage.aiInsight}</span>
+                            <div className="contents" key={news.id || idx}>
+                                <div
+                                    onClick={() => setSelectedNews(news)}
+                                    className="group relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col h-full animate-fade-in-up cursor-pointer"
+                                >
+                                    <div className={`h-1.5 w-full ${news.sentiment === 'BULLISH' ? 'bg-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500' : 'bg-slate-500'}`} />
+                                    <div className="p-6 flex flex-col h-full">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <span className="px-3 py-1 bg-slate-950 rounded-lg text-xs font-black text-indigo-400 border border-slate-800 uppercase tracking-widest">{news.ticker}</span>
+                                            <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${news.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500' : 'bg-slate-700/50 text-slate-400'}`}>
+                                                {news.sentiment}
+                                            </span>
                                         </div>
-                                        <div className={`relative ${userTier === 'FREE' ? 'filter blur-[4px] opacity-50 select-none' : ''}`}>
-                                            <p className="text-xs text-slate-300 font-medium">
-                                                {lang === 'en'
-                                                    ? "AI analysis is currently processing this event for market impact."
-                                                    : (news.vip_tier?.ai_analysis?.investment_insight || "프리미엄 분석 대기 중...")
-                                                }
-                                            </p>
+                                        <h3 className="text-lg font-bold text-white mb-3 line-clamp-2 leading-snug group-hover:text-indigo-300 transition-colors">
+                                            {lang === 'en' && news.free_tier.title_en ? news.free_tier.title_en : news.free_tier.title}
+                                        </h3>
+                                        <div className="text-sm text-slate-400 mb-6 line-clamp-3 leading-relaxed">
+                                            {lang === 'en'
+                                                ? (news.free_tier.title_en || "Click for details")
+                                                : (userTier === 'FREE' ? news.free_tier.summary_kr : (news.vip_tier?.summary_kr || news.free_tier.summary_kr))
+                                            }
+                                        </div>
+                                        <div className="mt-auto pt-4 border-t border-slate-800/50">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                                                <span className="text-xs font-black text-yellow-500 uppercase tracking-wider">{t.newsPage.aiInsight}</span>
+                                            </div>
+                                            <div className={`relative ${userTier === 'FREE' ? 'filter blur-[4px] opacity-50 select-none' : ''}`}>
+                                                <p className="text-xs text-slate-300 font-medium">
+                                                    {lang === 'en'
+                                                        ? "AI analysis is currently processing this event for market impact."
+                                                        : (news.vip_tier?.ai_analysis?.investment_insight || "프리미엄 분석 대기 중...")
+                                                    }
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                {/* AD INJECTION: Every 6 items */}
+                                {userTier === 'FREE' && (idx + 1) % 6 === 0 && (
+                                    <div className="col-span-1 md:col-span-2 lg:col-span-1 animate-fade-in-up">
+                                        <AdInFeed />
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
