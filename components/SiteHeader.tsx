@@ -65,11 +65,11 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     };
 
     const NAV_ITEMS = [
-        { id: 'vvip_alpha', path: '/vvip-alpha' },
         { id: 'dashboard', path: '/dashboard' },
         { id: 'news', path: '/news' },
         { id: 'analysis', path: '/analysis' },
         { id: 'themes', path: '/themes' },
+        { id: 'vvip_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
         { id: 'portfolio', path: '/portfolio' },
     ];
@@ -89,84 +89,96 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                     </Link>
 
                     {/* Nav */}
-                    <nav className="hidden md:flex items-center gap-6">
+                    <nav className="hidden lg:flex items-center gap-8">
                         {NAV_ITEMS.map((item) => {
                             const isActive = pathname === item.path;
-                            const isVVIP = item.id === 'vvip_alpha';
+                            const isVVIP = item.id === 'vvip_alpha' || item.id === 'market';
 
                             return (
                                 <Link
                                     key={item.id}
                                     href={item.path}
-                                    className={`text-[10px] font-bold uppercase tracking-widest transition-colors relative group whitespace-nowrap flex items-center gap-1.5 ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
+                                    className={`text-[10px] font-black uppercase tracking-widest transition-all relative group whitespace-nowrap flex items-center gap-1.5 ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
                                         }`}
                                 >
-                                    {isVVIP && <Crown className={`w-3 h-3 ${isActive ? 'text-indigo-400 fill-indigo-400/20' : 'text-slate-500 group-hover:text-white transition-colors'}`} />}
-                                    {t.nav[item.id as keyof typeof t.nav]}
                                     {isActive && (
-                                        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-400 rounded-full shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+                                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-indigo-500 shadow-[0_0_12px_rgba(99,102,241,0.8)] rounded-full animate-pulse"></div>
                                     )}
+                                    {isVVIP && <Crown className={`w-3 h-3 ${isActive ? 'text-indigo-400 fill-indigo-400/20' : 'text-yellow-500/50 group-hover:text-yellow-500'}`} />}
+                                    {t.nav[item.id as keyof typeof t.nav]}
                                 </Link>
                             );
                         })}
-                        {user?.role === 'ADMIN' && (
-                            <Link
-                                href="/admin"
-                                className="px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg shadow-red-500/20 flex items-center gap-2 whitespace-nowrap"
-                            >
-                                <ShieldCheck className="w-3 h-3" /> {t.auth.hq}
-                            </Link>
-                        )}
                     </nav>
 
-                    {/* Right Actions */}
+                    {/* Right Utility Zone */}
                     <div className="flex items-center gap-4">
-                        <button
-                            onClick={toggleLang}
-                            className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-[10px] font-black text-slate-400 hover:text-white transition-colors uppercase hover:border-indigo-500/50"
-                        >
-                            {lang === 'ko' ? 'ENG' : 'KOR'}
-                        </button>
+                        {/* Divider */}
+                        <div className="hidden lg:block w-[1px] h-6 bg-slate-800 mx-2"></div>
 
-                        {!isLoading && (
-                            user ? (
-                                <div className="flex items-center gap-3">
-                                    <div className="hidden sm:flex flex-col items-end">
-                                        <div className="flex items-center gap-1">
-                                            {user.role === 'ADMIN' && <ShieldCheck className="w-3 h-3 text-red-500 animate-pulse" />}
-                                            <span className="text-[10px] font-black text-white">{user.name}</span>
+                        <div className="flex items-center gap-2">
+                            {/* Admin HQ Button */}
+                            {user?.role === 'ADMIN' && (
+                                <Link
+                                    href="/admin"
+                                    className="h-9 px-4 rounded-xl border border-red-500/20 bg-red-500/5 text-red-500 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all flex items-center gap-2 group/hq"
+                                >
+                                    <ShieldCheck className="w-3.5 h-3.5 group-hover/hq:animate-bounce" />
+                                    <span className="hidden xl:inline">{t.auth.hq}</span>
+                                </Link>
+                            )}
+
+                            {/* Language Selector */}
+                            <button
+                                onClick={toggleLang}
+                                className="h-9 px-3 rounded-xl bg-slate-900 border border-slate-700 text-[10px] font-black text-slate-400 hover:text-white hover:border-indigo-500/50 transition-all uppercase flex items-center gap-2"
+                            >
+                                <Globe className="w-3.5 h-3.5 text-slate-500" />
+                                {lang === 'ko' ? 'ENG' : 'KOR'}
+                            </button>
+                        </div>
+
+                        {/* Auth / Avatar Section */}
+                        <div className="flex items-center gap-3 pl-2 border-l border-slate-800">
+                            {!isLoading && (
+                                user ? (
+                                    <div className="flex items-center gap-3">
+                                        <div className="hidden md:flex flex-col items-end">
+                                            <span className="text-[10px] font-black text-white leading-none mb-1">{user.name}</span>
+                                            <span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded bg-slate-900 border ${user.role === 'ADMIN' ? 'text-red-500 border-red-500/20' : 'text-indigo-400 border-indigo-500/20'}`}>
+                                                {user.role === 'ADMIN' ? t.auth.commander : `${user.tier} ${t.auth.member}`}
+                                            </span>
                                         </div>
-                                        <span className={`text-[9px] font-bold uppercase tracking-tighter ${user.role === 'ADMIN' ? 'text-red-500' : 'text-indigo-400'}`}>
-                                            {user.role === 'ADMIN' ? t.auth.commander : `${user.tier} ${t.auth.member}`}
-                                        </span>
+                                        <div className="relative group/avatar">
+                                            <div className={`p-0.5 rounded-xl bg-gradient-to-tr ${user.role === 'ADMIN' ? 'from-red-600 to-red-400' : 'from-indigo-600 to-blue-400'} shadow-lg`}>
+                                                <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-[10px] bg-slate-950 object-cover" />
+                                            </div>
+                                            <button
+                                                onClick={logout}
+                                                className="absolute top-full right-0 mt-3 p-3 bg-slate-900 border border-slate-800 rounded-2xl text-slate-500 hover:text-red-400 opacity-0 group-hover/avatar:opacity-100 transition-all hover:shadow-xl hover:shadow-red-500/10 whitespace-nowrap text-[10px] font-black uppercase flex items-center gap-2 pointer-events-none group-hover/avatar:pointer-events-auto translate-y-2 group-hover/avatar:translate-y-0"
+                                            >
+                                                <LogOut className="w-3.5 h-3.5" /> {t.auth.logout}
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="relative group/avatar">
-                                        <img src={user.avatar} alt="Avatar" className={`w-9 h-9 rounded-xl border bg-slate-800 ${user.role === 'ADMIN' ? 'border-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'border-slate-700'}`} />
+                                ) : (
+                                    <div className="flex items-center gap-2">
                                         <button
-                                            onClick={logout}
-                                            className="absolute top-full right-0 mt-2 p-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-500 hover:text-red-400 opacity-0 group-hover/avatar:opacity-100 transition-opacity whitespace-nowrap text-[10px] font-black uppercase"
+                                            onClick={() => setAuthMode('LOGIN')}
+                                            className="px-4 py-2 hover:text-white text-slate-400 text-[10px] font-black uppercase tracking-widest transition-all"
                                         >
-                                            <LogOut className="w-3 h-3 inline mr-1" /> {t.auth.logout}
+                                            {t.auth.portalAccess}
+                                        </button>
+                                        <button
+                                            onClick={() => setAuthMode('SIGNUP')}
+                                            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-600/20 active:scale-95"
+                                        >
+                                            {t.auth.createIdentity}
                                         </button>
                                     </div>
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-2">
-                                    <button
-                                        onClick={() => setAuthMode('LOGIN')}
-                                        className="flex items-center gap-2 px-5 py-2 hover:text-white text-slate-400 text-xs font-black uppercase tracking-widest transition-all"
-                                    >
-                                        <LogIn className="w-4 h-4" /> {t.auth.portalAccess}
-                                    </button>
-                                    <button
-                                        onClick={() => setAuthMode('SIGNUP')}
-                                        className="flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20"
-                                    >
-                                        <UserPlus className="w-4 h-4" /> {t.auth.createIdentity}
-                                    </button>
-                                </div>
-                            )
-                        )}
+                                )
+                            )}
+                        </div>
                     </div>
                 </div>
             </header>
