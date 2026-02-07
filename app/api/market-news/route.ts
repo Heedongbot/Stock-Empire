@@ -13,7 +13,7 @@ export async function GET(request: Request) {
         // Determine file path based on market
         // For development/demo, we use the high-quality tiered data in public folder
         // In production, this should point to the live crawler output
-        let fileName = 'us-news-tiered.json';
+        let fileName = 'us-news-realtime.json';
         if (market === 'kr') {
             fileName = 'kr_news_latest.json'; // Future placeholder
         }

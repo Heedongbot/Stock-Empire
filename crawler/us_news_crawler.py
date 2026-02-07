@@ -24,7 +24,7 @@ class StockNewsCrawler:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Accept': 'application/rss+xml, application/xml, text/xml, */*'
         }
-        self.output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'public', 'us-news-tiered.json')
+        self.output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'public', 'us-news-realtime.json')
         self.translator = GoogleTranslator(source='auto', target='ko')
         self.cached_ids = set()
         
@@ -85,7 +85,6 @@ class StockNewsCrawler:
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling Unified Global Market Sources...")
         news_list = []
         sources = [
-            {'name': 'Yahoo Finance', 'url': 'https://finance.yahoo.com/news/rssindex'},
             {'name': 'Investing.com', 'url': 'https://www.investing.com/rss/news_25.rss'},
             {'name': 'Seeking Alpha', 'url': 'https://seekingalpha.com/feed.xml'},
             {'name': 'MarketWatch', 'url': 'https://www.marketwatch.com/rss/topstories'},
@@ -220,20 +219,20 @@ class StockNewsCrawler:
             
             if sentiment == "BULLISH":
                 if 'upgrade' in keywords or 'price target' in keywords:
-                    ai_insight = f"주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다."
+                    ai_insight = f"[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다."
                 elif 'beat' in keywords or 'guidance' in keywords:
-                    ai_insight = f"예상치를 상회하는 펀더멘털 지표는 밸류에이션 리레이팅(Re-rating)의 근거가 됩니다. 단순 테마성 반등이 아닌 실질적 수익성 개선이 확인되는 구간이므로, 포트폴리오 내 비중 확대를 적극 고려해야 합니다."
+                    ai_insight = f"[코부장 전담 분석] 예상치를 상회하는 펀더멘털 지표는 밸류에이션 리레이팅(Re-rating)의 근거가 됩니다. 단순 테마성 반등이 아닌 실질적 수익성 개선이 확인되는 구간이므로, 포트폴리오 내 비중 확대를 적극 고려해야 합니다."
                 else:
-                    ai_insight = f"시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다."
+                    ai_insight = f"[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다."
             elif sentiment == "BEARISH":
                 if 'offering' in keywords or 'dilution' in keywords or 'sell' in keywords:
-                    ai_insight = f"주요 주주의 주식 매칭 및 보통주 추가 발행은 주주 가치 희석을 의미하는 치명적인 하락 요인입니다. Empire AI는 이를 기관들의 이익 실현 및 탈출 신호로 분석하며, 보수적인 비중 축소를 강력 권고합니다."
+                    ai_insight = f"[코부장 전담 분석] 주요 주주의 주식 매칭 및 보통주 추가 발행은 주주 가치 희석을 의미하는 치명적인 하락 요인입니다. Empire AI는 이를 기관들의 이익 실현 및 탈출 신호로 분석하며, 보수적인 비중 축소를 강력 권고합니다."
                 elif 'crash' in keywords or 'sink' in keywords:
-                    ai_insight = f"주요 심리적 지지선 붕괴와 함께 투매(Panic Sell) 물량이 출회되고 있습니다. 공포 지수의 급격한 상승이 관찰되므로, 바닥권 확인 전까지는 성급한 저가 매수보다 리스크 헤지에 집중할 시점입니다."
+                    ai_insight = f"[코부장 전담 분석] 주요 심리적 지지선 붕괴와 함께 투매(Panic Sell) 물량이 출회되고 있습니다. 공포 지수의 급격한 상승이 관찰되므로, 바닥권 확인 전까지는 성급한 저가 매수보다 리스크 헤지에 집중할 시점입니다."
                 else:
-                    ai_insight = f"시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. {source} 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다."
+                    ai_insight = f"[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. {source} 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다."
             else:
-                ai_insight = "거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다."
+                ai_insight = "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다."
         else:
             # AI insight was successful, calculate a better impact score
             impact_score = min(98, 70 + (max(bull_score, bear_score) * 4) + random.randint(0, 5))

@@ -46,7 +46,7 @@ export const translations = {
         breakingNews: {
             title: "🔴 실시간 속보",
             subtitle: "글로벌 경제지표 긴급 분석",
-            analyzedBy: "분석: 정대리",
+            analyzedBy: "분석: 코부장",
             impactLevel: "충격도:",
             benefitSectors: "수혜 섹터",
             riskSectors: "피해 섹터",

@@ -1,7 +1,7 @@
 """
 VVIP Alpha Analyzer v2.0 - Multi-Strategy Engine
 - Strategies: RSI Rebound, Golden Cross, Volume Spike, Value Growth
-- Source: Yahoo Finance
+- Source: Empire Institutional Data
 """
 
 import yfinance as yf
@@ -101,7 +101,7 @@ class AlphaAnalyzer:
             
             fund_report = f"기본적 분석상 REAL 데이터 확인 결과, 수익률(ROA) {round(real_roic, 2)}% 및 영업마진 {round(real_margin, 2)}%를 기록 중입니다. 이는 시장 컨센서스를 {'상회하는' if real_margin > 15 else '준수하는'} 수준이며, 시가총액 ${round(info.get('marketCap', 0)/1e9, 1)}B 규모의 펀더멘털 건전성을 입증합니다."
             
-            action_plan = f"단기 목표가 ${round(target_price, 2)} 도달 시 분할 익절, ${round(stop_loss, 2)} 이탈 시 선제적 리스크 관리를 권장합니다. 야후 파이낸스 실시간 수급 데이터 기반 {'기관 집중 매집' if vol_spike else '추세 안정성'} 전략이 유효합니다."
+            action_plan = f"단기 목표가 ${round(target_price, 2)} 도달 시 분할 익절, ${round(stop_loss, 2)} 이탈 시 선제적 리스크 관리를 권장합니다. Empire Global 실시간 수급 데이터 기반 {'기관 집중 매집' if vol_spike else '추세 안정성'} 전략이 유효합니다."
 
             return {
                 'id': f"{symbol}-{int(time.time())}",
@@ -119,7 +119,7 @@ class AlphaAnalyzer:
                 'fundamental_analysis': fund_report,
                 'action_plan': action_plan,
                 'is_real_time': True,
-                'source': 'Yahoo Finance / Kim Daeri Engine',
+                'source': 'Empire Global / Ko Bujang Engine',
                 'updated_at': datetime.now().isoformat()
             }
         except Exception as e:

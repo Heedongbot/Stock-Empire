@@ -26,7 +26,7 @@ export async function GET(request: Request) {
             breaking_news: data.analyzed_news || [],
             last_analyzed: data.last_analyzed,
             total_count: data.total_count || 0,
-            analyst: data.analyst || "정대리"
+            analyst: data.analyst || "코부장"
         });
 
     } catch (error) {
