@@ -4,112 +4,125 @@ import json
 from datetime import datetime
 import time
 
-def crawl_naver_finance_news():
-    """
-    네이버 금융 실시간 속보 크롤링
-    Returns: 뉴스 리스트 (딕셔너리 리스트)
-    """
-    url = "https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    }
+import requests
+from bs4 import BeautifulSoup
+import json
+import os
+from datetime import datetime
+import time
+import random
+from openai import OpenAI
+from dotenv import load_dotenv
 
-    news_list = []
-    
-    # [조정] 보스의 지시에 따라 최신 '알짜' 뉴스 3페이지만 빠르게 수집
-    for page in range(1, 4):
-        current_url = f"{url}&page={page}"
+# 환경 변수 로드
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'))
+
+class KRNewsCrawler:
+    def __init__(self):
+        self.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+        self.output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'public', 'kr-news-realtime.json')
+        
+        # OpenAI 초기화
+        api_key = os.getenv("OPENAI_API_KEY")
+        self.client = OpenAI(api_key=api_key) if api_key else None
+        if self.client:
+            print("[INFO] Empire KR Intelligence: ACTIVE")
+        else:
+            print("[WARN] OpenAI Key missing in KR Crawler. Using fallbacks.")
+
+    def get_ai_analysis(self, title, summary):
+        """
+        네이버 뉴스를 기반으로 코부장 스타일의 AI 분석 생성
+        """
+        if not self.client:
+            return "[분석 대기] AI 엔진 연결이 필요합니다.", 50
+
         try:
-            response = requests.get(current_url, headers=headers)
+            prompt = f"""
+            주식 뉴스 분석:
+            제목: {title}
+            요약: {summary}
+
+            위 뉴스를 한국 주식 투자자 관점에서 분석하세요.
+            1. 30자 이내의 아주 짧고 강렬한 분석 (코부장 스타일: 신중하지만 냉철하게)
+            2. 이 뉴스가 주가에 미칠 영향 점수 (0~100)
+
+            반드시 JSON 형식으로만 응답하세요:
+            {{"insight": "분석내용", "score": 85}}
+            """
+            
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "system", "content": "당신은 Stock Empire의 수석 애널리스트 '코부장'입니다."},
+                          {"role": "user", "content": prompt}],
+                max_tokens=150,
+                temperature=0.3,
+                response_format={ "type": "json_object" }
+            )
+            res = json.loads(response.choices[0].message.content)
+            return res.get("insight", ""), res.get("score", 50)
+        except Exception as e:
+            print(f"[ERROR] AI Analysis failed: {e}")
+            return "시장 상황 모니터링 중입니다.", 50
+
+    def crawl(self):
+        url = "https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258"
+        news_list = []
+        
+        print(f"[{datetime.now()}] 네이버 금융 뉴스 수집 시작...")
+
+        try:
+            response = requests.get(url, headers=self.headers)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # 네이버 금융 뉴스 리스트 구조 파싱
             articles = soup.select('ul.realtimeNewsList li')
-            print(f"[{datetime.now()}] 네이버 금융 뉴스 (Page {page}) {len(articles)}개 발견...")
 
-            for article in articles:
-                # 제목 및 링크 추출 (구조: dl > dd.articleSubject > a 또는 dl > dt > a)
-                title_tag = article.select_one('dd.articleSubject a')
-                if not title_tag:
-                    title_tag = article.select_one('dt a')
-                
-                if not title_tag:
-                    continue
+            for article in articles[:10]: # 최신 뉴스 10개만 집중 분석
+                title_tag = article.select_one('dd.articleSubject a') or article.select_one('dt a')
+                if not title_tag: continue
 
                 title = title_tag.get_text(strip=True)
-                href = title_tag['href']
-                
-                # 절대 경로 지원 및 HTML 엔티티(&section -> §) 오작동 방지
-                if href.startswith('http'):
-                    link = href
-                else:
-                    link = "https://finance.naver.com" + href
-                
-                # 중요: &section_id 가 §ion_id 로 변환되는 현상 방지
-                link = link.replace('\xa7', '&sect') # § 기호를 다시 &sect 로 복구
-                if '§ion' in link:
-                    link = link.replace('§ion', '&section')
-                
-                # 요약 내용
+                link = "https://finance.naver.com" + title_tag['href']
                 summary_tag = article.select_one('dl > dd.articleSummary')
                 summary = summary_tag.get_text(strip=True) if summary_tag else ""
-                
-                # 언론사 및 시간
-                press_tag = article.select_one('span.press')
-                press = press_tag.get_text(strip=True) if press_tag else "Unknown"
-                
-                time_tag = article.select_one('span.wdate')
-                pub_date = time_tag.get_text(strip=True) if time_tag else str(datetime.now())
+                press = (article.select_one('span.press') or article.select_one('span.wdate')).get_text(strip=True)
 
-                # [필터링] 가치 낮은 뉴스 제외 (포토, 인사, 부고 등)
-                exclude_keywords = ['[포토]', '[인사]', '[부고]', '[게시판]', '[모집]']
-                if any(k in title for k in exclude_keywords):
-                    print(f"  - Skip (Noise): {title}")
-                    continue
-                
-                # 중복 뉴스 및 너무 짧은 뉴스 필터링 (최소 10자)
-                if len(title) < 10:
-                    continue
+                # AI 분석 실행
+                insight, score = self.get_ai_analysis(title, summary)
 
                 news_data = {
                     "id": str(hash(link)),
                     "market": "KR",
-                    "ticker": "KOSPI", # Default ticker for general news
-                    "title": title, # For legacy support
-                    "sentiment": "NEUTRAL",
-                    "published_at": pub_date,
+                    "ticker": "KOSPI",
+                    "sentiment": "BULLISH" if score > 55 else "BEARISH" if score < 45 else "NEUTRAL",
+                    "published_at": str(datetime.now()),
                     "free_tier": {
                         "title": title,
-                        "title_en": title, # No translation for now
                         "summary_kr": summary,
                         "link": link,
                         "original_source": press
                     },
                     "vip_tier": {
                         "ai_analysis": {
-                            "summary_kr": "[코부장 분석 대기중] 한국 시장 데이터 연동 준비 단계입니다.",
-                            "impact_score": 50,
-                            "investment_insight": "아직 AI 분석이 적용되지 않은 뉴스입니다."
+                            "summary_kr": insight,
+                            "impact_score": score,
+                            "investment_insight": "실시간 수급 데이터 기반 대응 권장"
                         }
                     }
                 }
                 news_list.append(news_data)
 
-        except Exception as e:
-            print(f"Error crawling Naver Finance page {page}: {e}")
-            continue
+            # 파일 저장
+            os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
+            with open(self.output_path, "w", encoding="utf-8") as f:
+                json.dump(news_list, f, indent=2, ensure_ascii=False)
+            print(f"[{datetime.now()}] {len(news_list)}개의 한국 뉴스 분석 완료 및 저장됨.")
 
-    return news_list
+        except Exception as e:
+            print(f"Error: {e}")
 
 if __name__ == "__main__":
-    print("=== 국내 뉴스(KR) 수집 시작 ===")
-    news = crawl_naver_finance_news()
-    
-    # 결과 확인용 출력
-    print(json.dumps(news[:3], indent=2, ensure_ascii=False))
-    print(f"\n총 {len(news)}개의 뉴스를 수집했습니다.")
-    
-    # 나중에 DB 저장할 때를 대비해 파일로 임시 저장
-    with open("kr_news_latest.json", "w", encoding="utf-8") as f:
-        json.dump(news, f, indent=2, ensure_ascii=False)
+    crawler = KRNewsCrawler()
+    crawler.crawl()
