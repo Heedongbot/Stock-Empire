@@ -1,5 +1,27 @@
 [
   {
+    "id": "bok_report_20260207",
+    "market": "KR",
+    "ticker": "KOSPI",
+    "title": "[분석] 한국은행, 기준금리 3.25% 유지... 가계부채 관리 '최우선'",
+    "sentiment": "NEUTRAL",
+    "published_at": "2026-02-07 10:00",
+    "free_tier": {
+      "title": "[분석] 한국은행, 기준금리 3.25% 유지... 가계부채 관리 '최우선'",
+      "title_en": "BOK Holds Rates at 3.25% Focus on Debt Management",
+      "summary_kr": "한국은행이 2026년 들어서도 기준금리를 3.25%로 유지하며 신중한 행보를 이어가고 있습니다. 환율 변동성과 가계부채 추이를 지켜보고 있습니다.",
+      "link": "https://www.bok.or.kr",
+      "original_source": "한국은행"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[최대리 속보] [4-STAR] 한은의 금리 인하 신중론 지속. 부동산 가격 및 대출 증가세 억제를 위해 당분간 중금리 기조를 유지할 것으로 분석됩니다.",
+        "impact_score": 88,
+        "investment_insight": "금리가 3.25%에서 하방 지직력을 보이면서 배당주 및 리츠 섹터의 단기 모멘텀은 제한적입니다. 다만, 산업 경쟁력이 있는 자동차 및 조선 섹터의 견고한 실적 흐름에 주목할 시점입니다."
+      }
+    }
+  },
+  {
     "id": "-8677743713346836006",
     "market": "KR",
     "ticker": "KOSPI",

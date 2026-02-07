@@ -104,7 +104,24 @@ class StockNewsCrawler:
                     title = item.find('title').text.strip()
                     link = item.find('link').text.strip()
                     desc = item.find('description').text.strip() if item.find('description') else title
+                    pub_date_raw = item.find('pubDate').text.strip() if item.find('pubDate') else None
                     
+                    # --- [NEW] FACT-GATE: DATE VALIDATION ---
+                    # Reject news that is older than 3 days or from previous years (prevents 2024 news leaks)
+                    if pub_date_raw:
+                        try:
+                            # Handling various RSS date formats
+                            import email.utils
+                            pub_dt = email.utils.parsedate_to_datetime(pub_date_raw)
+                            now_dt = datetime.now(pub_dt.tzinfo) if pub_dt.tzinfo else datetime.now()
+                            diff = now_dt - pub_dt
+                            
+                            if diff.days > 3:
+                                print(f" [SKIP] Old News Detected ({pub_dt.year}-{pub_dt.month}): {title[:30]}...")
+                                continue
+                        except Exception as e:
+                            print(f" [WARN] Date Parse Error: {e}")
+
                     # --- NOISE & RETAIL DRAMA FILTER ---
                     # Discarding non-institutional/noise news that doesn't affect the Stock Empire
                     noise_keywords = [
@@ -122,7 +139,7 @@ class StockNewsCrawler:
                     if any(x in content_to_check for x in noise_keywords) or title.strip().endswith('?'):
                         continue
                         
-                    pub_date = item.find('pubDate').text.strip() if item.find('pubDate') else datetime.now().isoformat()
+                    pub_date = pub_date_raw if pub_date_raw else datetime.now().isoformat()
                     formatted = self._format_news_item(title, desc, link, pub_date, src['name'])
                     if formatted:
                         news_list.append(formatted)
