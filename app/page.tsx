@@ -212,7 +212,7 @@ export default function LandingPage() {
   };
 
   const handleUpgradeComplete = () => {
-    updateTier(selectedPlan as 'VIP' | 'VVIP');
+    updateTier(selectedPlan as 'PRO');
   };
 
   return (
@@ -465,41 +465,43 @@ export default function LandingPage() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black italic tracking-tighter mb-4 text-white uppercase underline decoration-indigo-500 underline-offset-8">{t.pricing.title}</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
           {/* FREE PLAN */}
-          <div className="p-8 rounded-[2rem] border border-slate-800 bg-slate-900/20 flex flex-col hover:border-slate-700 transition-all">
+          <div className="p-10 rounded-[2rem] border border-slate-800 bg-slate-900/20 flex flex-col hover:border-slate-700 transition-all">
             <span className="text-[10px] text-slate-500 uppercase font-black mb-2 tracking-widest">{t.pricing.entry}</span>
             <div className="text-4xl font-black text-white mb-6 tracking-tighter">{t.pricing.free_price}</div>
             <ul className="space-y-4 mb-10 flex-1">
               <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> {t.pricing.features.news}</li>
               <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> {t.pricing.features.delayed_charts}</li>
             </ul>
-            <button className="w-full py-4 rounded-xl border border-slate-700 text-[10px] font-black uppercase text-slate-500 cursor-default">{t.pricing.current_tier}</button>
+            {userTier === 'FREE' ? (
+              <button className="w-full py-4 rounded-xl border border-slate-700 text-[10px] font-black uppercase text-slate-500 cursor-default">{t.pricing.current_tier}</button>
+            ) : (
+              <button className="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-[10px] font-black uppercase text-slate-300">Downgrade</button>
+            )}
           </div>
 
-          {/* VIP PLAN */}
-          <div className="p-8 rounded-[2rem] border border-blue-500/30 bg-blue-950/10 flex flex-col relative group hover:border-blue-500 transition-all">
-            <div className="absolute top-6 right-8"><Zap className="w-5 h-5 text-blue-500 fill-blue-500" /></div>
-            <span className="text-[10px] text-blue-500 uppercase font-black mb-2 tracking-widest">{t.pricing.vip}</span>
-            <div className="text-4xl font-black text-white mb-6 tracking-tighter">{t.pricing.vip_price}</div>
-            <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-slate-200 font-bold uppercase italic"><CheckCircle2 className="w-4 h-4 text-blue-500" /> {t.pricing.features.unlimited_news}</li>
-              <li className="flex items-center gap-2 text-xs text-slate-200 font-bold uppercase italic"><CheckCircle2 className="w-4 h-4 text-blue-500" /> {t.pricing.features.standard_signals}</li>
-            </ul>
-            <button onClick={() => openPayment('VIP')} className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-[10px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-blue-600/20">{t.pricing.upgrade_vip}</button>
-          </div>
+          {/* PRO PLAN (Unified) */}
+          <div className="p-10 rounded-[2rem] border-2 border-indigo-500 bg-gradient-to-br from-indigo-950/20 to-slate-900/40 flex flex-col relative group hover:border-indigo-400 transition-all shadow-2xl shadow-indigo-900/20">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-500 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">{t.pricing.top_choice}</div>
+            <span className="text-[10px] text-indigo-400 uppercase font-black mb-2 tracking-widest">{t.pricing.pro}</span>
+            <div className="text-4xl font-black text-white mb-2 tracking-tighter">{t.pricing.pro_price}</div>
+            <div className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-wide">{t.pricing.pro_price_yearly}</div>
 
-          {/* VVIP PLAN */}
-          <div className="p-8 rounded-[2rem] border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-950/10 to-slate-900/40 flex flex-col relative group hover:border-yellow-500 transition-all">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-950 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">{t.pricing.top_choice}</div>
-            <span className="text-[10px] text-yellow-500 uppercase font-black mb-2 tracking-widest">{t.pricing.vvip}</span>
-            <div className="text-4xl font-black text-white mb-6 tracking-tighter">{t.pricing.vvip_price}</div>
             <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {t.pricing.features.alpha_picks}</li>
-              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {t.pricing.features.insider_logic}</li>
-              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {t.pricing.features.full_access}</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> {t.pricing.features.unlimited_news}</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {t.pricing.features.standard_signals}</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Crown className="w-4 h-4 text-indigo-500 fill-indigo-500" /> {t.pricing.features.alpha_picks}</li>
+              <li className="flex items-center gap-2 text-xs text-white font-black uppercase italic tracking-tighter"><Lock className="w-4 h-4 text-indigo-500" /> {t.pricing.features.full_access}</li>
             </ul>
-            <button onClick={() => openPayment('VVIP')} className="w-full py-4 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-[10px] font-black uppercase tracking-widest text-slate-950 transition-all shadow-xl shadow-yellow-500/30">{t.pricing.join_vvip}</button>
+
+            {userTier === 'PRO' ? (
+              <button className="w-full py-4 rounded-xl border border-indigo-500 text-[10px] font-black uppercase text-indigo-400 cursor-default">{t.pricing.current_tier}</button>
+            ) : (
+              <button onClick={() => openPayment('PRO')} className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-[10px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2">
+                {t.pricing.upgrade_pro} <ArrowUpRight className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
       </section>

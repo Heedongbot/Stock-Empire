@@ -242,7 +242,7 @@ export default function NewsPage() {
                                         <Zap className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                                         <h4 className="text-sm font-black text-white uppercase tracking-widest">Premium AI Analysis</h4>
                                     </div>
-                                    <p className="text-slate-300 leading-relaxed mb-4">{selectedNews.vip_tier?.ai_analysis?.summary_kr || "VIP 분석 데이터를 불러오는 중입니다."}</p>
+                                    <p className="text-slate-300 leading-relaxed mb-4">{selectedNews.vip_tier?.ai_analysis?.summary_kr || "PRO 분석 데이터를 불러오는 중입니다."}</p>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
                                             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Impact Score</span>

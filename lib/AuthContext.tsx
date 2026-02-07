@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type UserTier = 'FREE' | 'VIP' | 'VVIP';
+type UserTier = 'FREE' | 'PRO';
 
 interface User {
     id: string;
@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 id: 'admin_root',
                 name: 'Commander Heedong',
                 email: email,
-                tier: 'VVIP',
+                tier: 'PRO',
                 role: 'ADMIN',
                 avatar: `https://api.dicebear.com/7.x/pixel-art/svg?seed=admin`,
             };

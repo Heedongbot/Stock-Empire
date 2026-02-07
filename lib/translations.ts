@@ -203,25 +203,22 @@ export const translations = {
         },
         pricing: {
             title: "멤버십 플랜 선택",
-            entry: "엔트리 (ENTRY)",
-            vip: "VIP 트레이더",
-            vvip: "VVIP 알파",
+            entry: "엔트리 (FREE)",
+            pro: "스톡 엠파이어 PRO",
             free_price: "₩0",
-            vip_price: "₩19,900",
-            vvip_price: "₩49,900",
+            pro_price: "월 $19.99 (약 25,900원)",
+            pro_price_yearly: "연 $199 (약 249,000원)",
             current_tier: "현재 사용 중",
-            upgrade_vip: "VIP 업그레이드",
-            upgrade_vvip: "VVIP 업그레이드",
-            join_vvip: "VVIP 알파 가입",
-            top_choice: "상위 1%의 선택",
+            upgrade_pro: "PRO 멤버십 시작하기",
+            top_choice: "가장 인기 있는 선택",
             features: {
-                news: "실시간 뉴스 피드",
-                delayed_charts: "지연 차트 제공",
-                unlimited_news: "제한 없는 실시간 속보",
-                standard_signals: "표준 AI 시그널",
-                alpha_picks: "실시간 고확신 알파 픽",
+                news: "기본 뉴스 피드",
+                delayed_charts: "지연 차트",
+                unlimited_news: "무제한 실시간 속보",
+                standard_signals: "AI 트레이딩 시그널",
+                alpha_picks: "고래 추적 알파 픽",
                 insider_logic: "기관용 인사이더 로직",
-                full_access: "고급 분석 리포트 전체 접근"
+                full_access: "모든 프리미엄 리포트 접근"
             }
         },
         analysisPage: {
@@ -537,24 +534,21 @@ export const translations = {
         pricing: {
             title: "Choose Your Tier",
             entry: "Entry (FREE)",
-            vip: "VIP Trader",
-            vvip: "VVIP Alpha",
+            pro: "STOCK EMPIRE PRO",
             free_price: "$0",
-            vip_price: "$19.99",
-            vvip_price: "$49.99",
+            pro_price: "$19.99 / mo",
+            pro_price_yearly: "$199 / yr (Save 20%)",
             current_tier: "Current Tier",
-            upgrade_vip: "Upgrade to VIP",
-            upgrade_vvip: "Upgrade to VVIP",
-            join_vvip: "Join Alpha Club",
-            top_choice: "TOP 1% CHOICE",
+            upgrade_pro: "Upgrade to PRO",
+            top_choice: "BEST VALUE",
             features: {
                 news: "Basic News Feed",
                 delayed_charts: "Delayed Charts",
                 unlimited_news: "Unlimited Real-time News",
-                standard_signals: "Standard AI Signals",
-                alpha_picks: "Real-time Alpha Picks",
-                insider_logic: "Institutional Insider Logic",
-                full_access: "Full Alpha Analysis Access"
+                standard_signals: "AI Trading Signals",
+                alpha_picks: "Alpha Picks (Whale Tracking)",
+                insider_logic: "Insider Logic",
+                full_access: "Full Premium Access"
             }
         },
         analysisPage: {
