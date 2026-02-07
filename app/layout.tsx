@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_placeholder"}
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_Y2xlcmstZW1waXJlLWR1bW15LWtleS0wMTAxMDE="}
       localization={koKR}
     >
       <html lang="ko" suppressHydrationWarning>
