@@ -10,8 +10,12 @@ export async function GET(request: Request) {
         }
 
         const priceMap: Record<string, number> = {
-            'NVDA': 185.65, 'TSLA': 412.50, 'AAPL': 248.50, 'MSFT': 442.10, 'PLTR': 72.40,
-            'AMD': 208.70, 'GOOGL': 188.40, 'META': 542.30, 'AVGO': 332.96, 'SMCI': 88.40
+            'NVDA': 185.41, 'TSLA': 392.67, 'AAPL': 248.50, 'MSFT': 393.67, 'PLTR': 135.90,
+            'AMD': 208.28, 'GOOGL': 322.00, 'META': 661.46, 'AVGO': 333.23, 'SMCI': 33.43,
+            'TSM': 349.01, 'ASML': 1193.80, 'INTC': 50.59, 'AMZN': 210.45, 'NFLX': 782.40,
+            'MU': 382.78, 'LRCX': 231.01, 'AMAT': 212.50, 'RIVN': 14.55, 'LI': 28.40,
+            'ENPH': 47.27, 'FSLR': 234.36, 'CHPT': 5.58, 'PYPL': 40.42, 'SQ': 82.50,
+            'COIN': 245.80, 'MSTR': 1350.00, 'V': 312.40, 'MA': 525.60
         };
 
         const response = await fetch(
@@ -97,7 +101,7 @@ function getFallbackQuote(symbol: string) {
         'NVDA': {
             symbol: 'NVDA',
             shortName: 'NVIDIA Corporation',
-            regularMarketPrice: 185.65,
+            regularMarketPrice: 185.41,
             regularMarketChangePercent: 8.01,
             regularMarketVolume: 320000000,
             marketCap: 4500000000000,
@@ -106,7 +110,7 @@ function getFallbackQuote(symbol: string) {
         'AMD': {
             symbol: 'AMD',
             shortName: 'Advanced Micro Devices, Inc.',
-            regularMarketPrice: 208.70,
+            regularMarketPrice: 208.28,
             regularMarketChangePercent: 8.28,
             regularMarketVolume: 110000000,
             marketCap: 335000000000,
@@ -115,20 +119,20 @@ function getFallbackQuote(symbol: string) {
         'MSFT': {
             symbol: 'MSFT',
             shortName: 'Microsoft Corporation',
-            regularMarketPrice: 442.10,
-            regularMarketChangePercent: 0.68,
+            regularMarketPrice: 393.67,
+            regularMarketChangePercent: -1.2,
             regularMarketVolume: 25000000,
-            marketCap: 3300000000000,
-            trailingPE: 38.5
+            marketCap: 3100000000000,
+            trailingPE: 35.2
         },
         'TSLA': {
             symbol: 'TSLA',
             shortName: 'Tesla, Inc.',
-            regularMarketPrice: 412.50,
+            regularMarketPrice: 392.67,
             regularMarketChangePercent: 3.2,
             regularMarketVolume: 98000000,
-            marketCap: 1300000000000,
-            trailingPE: 62.2
+            marketCap: 1200000000000,
+            trailingPE: 60.1
         },
         'AAPL': {
             symbol: 'AAPL',
@@ -142,11 +146,20 @@ function getFallbackQuote(symbol: string) {
         'PLTR': {
             symbol: 'PLTR',
             shortName: 'Palantir Technologies',
-            regularMarketPrice: 72.40,
+            regularMarketPrice: 135.90,
             regularMarketChangePercent: 4.8,
             regularMarketVolume: 72000000,
-            marketCap: 155000000000,
-            trailingPE: 88.5
+            marketCap: 280000000000,
+            trailingPE: 95.2
+        },
+        'AMZN': {
+            symbol: 'AMZN',
+            shortName: 'Amazon.com, Inc.',
+            regularMarketPrice: 210.45,
+            regularMarketChangePercent: -5.5,
+            regularMarketVolume: 55000000,
+            marketCap: 2200000000000,
+            trailingPE: 42.1
         }
     };
     return FALLBACK_QUOTES[s] || null;
