@@ -54,12 +54,12 @@ function NotebookContent() {
 
         if (topic === 'FINANCIAL') {
             if (lang === 'ko') {
-                return `**${name} (${symbol}) 재무 심층 분석 (NotebookLM)**\n\n` +
+                return `**${name} (${symbol}) 김대리의 재무 심층 분석**\n\n` +
                     `1. **수익성 지표**: 현재 P/E 비율 ${data.trailingPE || 'N/A'}는 업종 평균 대비 ${data.trailingPE > 25 ? '다소 높은' : '매력적인'} 수준입니다.\n` +
                     `2. **현금 흐름**: 거래량 ${data.regularMarketVolume.toLocaleString()}을 기반으로 할 때 유동성은 양호하며, 주가 복원력이 확인됩니다.\n` +
                     `3. **추천 전략**: 분기 실적 발표 전후의 변동성을 활용한 분할 매수 관점이 유리해 보입니다.`;
             } else {
-                return `**${name} (${symbol}) Deep Financial Analysis (NotebookLM)**\n\n` +
+                return `**${name} (${symbol}) Kim Daeri's Deep Financial Analysis**\n\n` +
                     `1. **Profitability**: P/E of ${data.trailingPE || 'N/A'} is ${data.trailingPE > 25 ? 'slightly high' : 'attractive'} relative to sector peers.\n` +
                     `2. **Cash Flow**: Strong liquidity confirmed with ${data.regularMarketVolume.toLocaleString()} volume, showing price resilience.\n` +
                     `3. **Trading Strategy**: A DCA (Dollar Cost Averaging) approach around earnings calls is recommended to mitigate volatility risk.`;
@@ -102,7 +102,7 @@ function NotebookContent() {
         }
 
         if (lang === 'ko') {
-            return disclaimer + `**${data.shortName || q} (${data.symbol})**에 대한 NotebookLM 분석 결과입니다.\n\n` +
+            return disclaimer + `**${data.shortName || q} (${data.symbol})**에 대한 김대리의 분석 결과입니다.\n\n` +
                 `현재 주가는 **$${price}**로 전일 대비 **${change.toFixed(2)}% ${isBullish ? '상승' : '하락'}**했습니다.\n\n` +
                 `**📊 ${data.isSimulated ? '가상' : '실시간'} 데이터 기반 핵심 요약:**\n` +
                 `1. **시장 추세**: 현재 **${trend}**를 보이고 있으며, 거래량은 **${volume}M**입니다.\n` +
@@ -110,7 +110,7 @@ function NotebookContent() {
                 `3. **AI 종합 의견**: 최근 데이터 패턴을 분석할 때 **${sentiment}** 관점이 유효해 보입니다. ${Math.abs(change) > 2 ? '변동성이 크므로 주의가 필요합니다.' : '안정적인 흐름을 유지하고 있습니다.'}\n\n` +
                 `더 자세한 재무제표 분석이나 뉴스 영향도가 궁금하다면 말씀해주세요.`;
         } else {
-            return disclaimer + `Here is the NotebookLM analysis for **${data.shortName || q} (${data.symbol})**.\n\n` +
+            return disclaimer + `Here is Kim Daeri's analysis for **${data.shortName || q} (${data.symbol})**.\n\n` +
                 `The stock is currently trading at **$${price}**, **${isBullish ? 'up' : 'down'} ${change.toFixed(2)}%** from the previous close.\n\n` +
                 `**📊 ${data.isSimulated ? 'Simulated' : 'Data-Driven'} Key Takeaways:**\n` +
                 `1. **Market Trend**: Showing a **${trend}** trend with a volume of **${volume}M**.\n` +
@@ -173,10 +173,10 @@ function NotebookContent() {
                     </div>
                     <div>
                         <h1 className="text-2xl font-black italic uppercase tracking-tighter text-white">
-                            Notebook<span className="text-blue-400">LM</span> Insights
+                            Kim Daeri<span className="text-blue-400">'s</span> Insights
                         </h1>
                         <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
-                            Powered by Google Gemini 1.5 Pro
+                            {lang === 'ko' ? '김대리의 인공지능 분석' : 'Powered by Kim Daeri AI'}
                         </p>
                     </div>
                 </div>
@@ -246,7 +246,7 @@ function NotebookContent() {
 
                 <div className="mt-4 flex justify-center">
                     <a href="https://notebooklm.google.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-400 transition-colors">
-                        Open Google NotebookLM <ExternalLink className="w-3 h-3" />
+                        Launch Global Knowledge Base <ExternalLink className="w-3 h-3" />
                     </a>
                 </div>
             </main>

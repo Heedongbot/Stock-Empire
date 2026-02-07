@@ -110,7 +110,7 @@ export default function AdminPage() {
                                     </div>
                                     <div>
                                         <p className="text-xs font-black text-white">AI Analysis Engine</p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">NotebookLM consultation: 1.2s avg latency</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Kim Daeri AI consultation: 1.2s avg latency</p>
                                     </div>
                                 </div>
                                 <span className="text-[10px] font-black text-green-500">STABLE</span>
