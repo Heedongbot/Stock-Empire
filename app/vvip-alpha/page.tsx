@@ -138,7 +138,9 @@ function VVIPAlphaContent() {
                                     <div className="flex flex-col items-end gap-2">
                                         <div className="flex items-center gap-1.5 px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 rounded-full">
                                             <Waves className="w-3 h-3 text-yellow-500" />
-                                            <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">Whale Active</span>
+                                            <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">
+                                                {lang === 'ko' ? '고래 활동 감지' : 'Whale Active'}
+                                            </span>
                                         </div>
                                         <div className={`flex items-center gap-1 text-xs font-black ${sig.change_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                             {sig.change_pct >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
@@ -163,7 +165,9 @@ function VVIPAlphaContent() {
                                 {/* AI Confidence Gauge */}
                                 <div className="mb-10 space-y-3">
                                     <div className="flex justify-between items-end">
-                                        <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">AI Confidence</span>
+                                        <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">
+                                            {lang === 'ko' ? 'AI 신뢰도' : 'AI Confidence'}
+                                        </span>
                                         <span className="text-sm font-black text-white">{sig.impact_score}%</span>
                                     </div>
                                     <div className="relative h-2 w-full bg-slate-900 rounded-full overflow-hidden">
@@ -171,7 +175,6 @@ function VVIPAlphaContent() {
                                             className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-400 rounded-full transition-all duration-1000 ease-out"
                                             style={{ width: `${sig.impact_score}%` }}
                                         ></div>
-                                        {/* Glow effect on progress bar */}
                                         <div
                                             className="absolute top-0 left-0 h-full w-20 bg-white/20 blur-md animate-shimmer"
                                             style={{ left: `${sig.impact_score - 10}%` }}
@@ -179,29 +182,41 @@ function VVIPAlphaContent() {
                                     </div>
                                 </div>
 
-                                {/* Targets Grid */}
-                                <div className="grid grid-cols-1 gap-6 mb-10">
-                                    <div className="flex justify-between items-center group/target">
+                                {/* Prices & Targets Grid */}
+                                <div className="grid grid-cols-1 gap-5 mb-10">
+                                    {/* Current Entry Price */}
+                                    <div className="flex justify-between items-center p-4 bg-slate-950/50 border border-slate-800/50 rounded-2xl group/price">
                                         <div className="flex items-center gap-2">
-                                            <div className="p-2 bg-green-500/10 rounded-lg group-hover/target:bg-green-500/20 transition-colors">
-                                                <Target className="w-4 h-4 text-green-500" />
+                                            <div className="p-2 bg-indigo-500/10 rounded-lg group-hover/price:bg-indigo-500/20 transition-colors">
+                                                <Activity className="w-4 h-4 text-indigo-400" />
                                             </div>
-                                            <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '목표가' : 'Target Price'}</span>
+                                            <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '진입가(현재)' : 'Entry(Current)'}</span>
                                         </div>
-                                        <div className={`text-2xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-green-400'}`}>
-                                            ${sig.target_price}
+                                        <div className="text-2xl font-black font-mono tracking-tighter text-white">
+                                            ${sig.price}
                                         </div>
                                     </div>
 
-                                    <div className="flex justify-between items-center group/stop">
-                                        <div className="flex items-center gap-2">
-                                            <div className="p-2 bg-red-500/10 rounded-lg group-hover/stop:bg-red-500/20 transition-colors">
-                                                <ShieldAlert className="w-4 h-4 text-red-500" />
+                                    {/* Exit Targets */}
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="flex flex-col gap-2 p-4 bg-green-500/5 border border-green-500/10 rounded-2xl group/target">
+                                            <div className="flex items-center gap-2">
+                                                <Target className="w-3 h-3 text-green-500" />
+                                                <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '익절가' : 'Target'}</span>
                                             </div>
-                                            <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '손절가' : 'Stop Loss'}</span>
+                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-green-400'}`}>
+                                                ${sig.target_price}
+                                            </div>
                                         </div>
-                                        <div className={`text-2xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-red-500'}`}>
-                                            ${sig.stop_loss}
+
+                                        <div className="flex flex-col gap-2 p-4 bg-red-500/5 border border-red-500/10 rounded-2xl group/stop">
+                                            <div className="flex items-center gap-2">
+                                                <ShieldAlert className="w-3 h-3 text-red-500" />
+                                                <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '손절가' : 'Stop'}</span>
+                                            </div>
+                                            <div className={`text-xl font-black font-mono tracking-tighter transition-all duration-700 ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-red-500'}`}>
+                                                ${sig.stop_loss}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +225,9 @@ function VVIPAlphaContent() {
                                 <div className="relative pt-6 border-t border-slate-800/50">
                                     <div className="flex items-center gap-2 mb-3">
                                         <Zap className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-                                        <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">[AI 분석 근거]</span>
+                                        <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">
+                                            {lang === 'ko' ? '[AI 분석 근거]' : '[AI Rationale]'}
+                                        </span>
                                     </div>
                                     <div className="relative">
                                         <p className={`text-[12px] leading-relaxed italic text-slate-400 line-clamp-3 group-hover:line-clamp-none transition-all duration-500 ${!isVVIP ? 'blur-[4px] select-none opacity-50' : ''}`}>
@@ -219,7 +236,7 @@ function VVIPAlphaContent() {
                                         {!isVVIP && (
                                             <div className="absolute inset-0 flex items-center justify-center">
                                                 <div className="px-4 py-1 bg-slate-900/80 border border-slate-700 rounded-full text-[8px] font-black uppercase tracking-widest text-slate-500">
-                                                    VVIP Exclusive
+                                                    {lang === 'ko' ? 'VVIP 전용' : 'VVIP Exclusive'}
                                                 </div>
                                             </div>
                                         )}

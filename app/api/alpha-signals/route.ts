@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-    try {
-        const { searchParams } = new URL(request.url);
-        const lang = searchParams.get('lang') || 'ko';
-        const isEn = lang === 'en';
+    const { searchParams } = new URL(request.url);
+    const lang = searchParams.get('lang') || 'ko';
+    const isEn = lang === 'en';
 
+    try {
         const symbols = ['META', 'NVDA', 'AAPL', 'TSLA', 'AMD', 'MSFT', 'GOOGL', 'PLTR'];
         const querySymbols = symbols.join(',');
 
@@ -85,25 +85,33 @@ export async function GET(request: Request) {
             {
                 id: 'TSLA-fallback', ticker: 'TSLA', name: 'Tesla, Inc.', price: 412.50, change_pct: 3.2, sentiment: 'BULLISH',
                 impact_score: 94, target_price: 468.20, stop_loss: 382.40,
-                ai_reason: "Surge in FSD adoption news driving institutional re-rating. Strong volume profile.",
+                ai_reason: isEn
+                    ? "Surge in FSD adoption news driving institutional re-rating. Strong volume profile."
+                    : "FSD 채택 급증 소식이 기관의 재평가를 유도하고 있습니다. 강력한 거래량 프로필이 포착됩니다.",
                 updated_at: new Date().toISOString()
             },
             {
                 id: 'NVDA-fallback', ticker: 'NVDA', name: 'NVIDIA Corporation', price: 142.30, change_pct: -1.5, sentiment: 'BULLISH',
                 impact_score: 88, target_price: 158.40, stop_loss: 131.50,
-                ai_reason: "Next-gen Blackwell demand exceeds supply. Buy the dip confirmed by AI Whale logic.",
+                ai_reason: isEn
+                    ? "Next-gen Blackwell demand exceeds supply. Buy the dip confirmed by AI Whale logic."
+                    : "차세대 블랙웰 수요가 공급을 압도하고 있습니다. AI 고래 로직에 의해 저점 매수가 확인되었습니다.",
                 updated_at: new Date().toISOString()
             },
             {
                 id: 'AAPL-fallback', ticker: 'AAPL', name: 'Apple Inc.', price: 238.40, change_pct: 0.8, sentiment: 'NEUTRAL',
                 impact_score: 75, target_price: 254.10, stop_loss: 226.50,
-                ai_reason: "Accumulation phase near 50-day EMA. AI integration sentiment remains positive.",
+                ai_reason: isEn
+                    ? "Accumulation phase near 50-day EMA. AI integration sentiment remains positive."
+                    : "50일 EMA 근처에서 매집 단계가 진행 중입니다. AI 통합에 대한 시장 정서가 긍정적입니다.",
                 updated_at: new Date().toISOString()
             },
             {
                 id: 'AMD-fallback', ticker: 'AMD', name: 'Advanced Micro Devices', price: 182.10, change_pct: 2.1, sentiment: 'BULLISH',
                 impact_score: 91, target_price: 204.50, stop_loss: 168.20,
-                ai_reason: "Data center market share gains accelerating. High conviction breakout signal.",
+                ai_reason: isEn
+                    ? "Data center market share gains accelerating. High conviction breakout signal."
+                    : "데이터 센터 시장 점유율 확보가 가속화되고 있습니다. 고확신 돌파 시그널이 발생했습니다.",
                 updated_at: new Date().toISOString()
             }
         ];
