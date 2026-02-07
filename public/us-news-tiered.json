@@ -1,131 +1,6 @@
 [
   {
-    "id": "6991422068160433423",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-07 00:23:10",
-    "free_tier": {
-      "title": "AgEagle Aerial Systems는 투자자와의 우선주 구매 계약을 개정합니다.",
-      "title_en": "AgEagle Aerial Systems amends preferred stock purchase agreement with investors",
-      "summary_kr": "AgEagle Aerial Systems는 투자자와의 우선주 구매 계약을 개정합니다.",
-      "link": "https://www.investing.com/news/sec-filings/ageagle-aerial-systems-amends-preferred-stock-purchase-agreement-with-investors-93CH-4492200",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 64
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "3542545410060144456",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T17:01:00Z",
-    "free_tier": {
-      "title": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
-      "title_en": "Is Social Security a 'Ponzi scheme?' Warren Buffett and Charlie Munger’s response — and how to secure your retirement",
-      "summary_kr": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
-      "link": "https://finance.yahoo.com/news/social-security-ponzi-scheme-warren-170100223.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 64
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "786218787772385211",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 21:00:00 GMT",
-    "free_tier": {
-      "title": "비트코인이 하락한 후, 암호화폐를 상대로 수십억 달러를 빌린 열광적인 투자자들을 불쌍히 여기십시오",
-      "title_en": "After bitcoin’s fall, pity those wildly enthusiastic investors who borrowed billions against crypto",
-      "summary_kr": "2025년에 비트코인이 20만 달러에 이를 것이라는 추측은 이제 꿈처럼 보입니다. 그랬기 때문이다.",
-      "link": "https://www.marketwatch.com/story/as-bitcoin-crashes-pity-those-wildly-enthusiastic-investors-who-borrowed-billions-against-crypto-794164bb?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "현재 시장가에 관련 재료가 반영되어 가는 과정이며, 방향성을 결정지을 만한 결정적 단서가 부족한 상태입니다. MarketWatch의 향후 후속 보도와 실물 지표의 변화를 모니터링하며 관망할 필요가 있습니다.",
-        "impact_score": 69
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "3024961252864925215",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07 00:12:33",
-    "free_tier": {
-      "title": "Dow는 50,000 이상으로 마감하고 거래자들이 AI 지출에 집중함에 따라 Nvidia는 급등합니다.",
-      "title_en": "Dow closes above 50,000, Nvidia soars as traders focus on AI spending",
-      "summary_kr": "Dow는 50,000 이상으로 마감하고 거래자들이 AI 지출에 집중함에 따라 Nvidia는 급등합니다.",
-      "link": "https://www.investing.com/news/stock-market-news/futures-stabilize-after-tech-rout-amazon-slides-on-ai-capex-lift-4490051",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "UBS를 포함한 주요 금융 기관의 AI 도입 및 효율성 개선 소식은 장기적인 오퍼레이션 비용 절감 및 마진 확대로 이어질 수 있는 긍정적 시그널입니다. Empire AI는 이를 기술적 혁신을 통한 펀더멘털 강화 단계로 해석합니다.",
-        "impact_score": 72
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8128625158637666315",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 21:18:00 GMT",
-    "free_tier": {
-      "title": "이번 주 손실을 일부 만회하기 위해 Tesla 주가가 상승했습니다.",
-      "title_en": "Tesla’s stock rallies to recover some of its losses this week",
-      "summary_kr": "회사는 무인 자동차와 태양 에너지라는 두 가지 잠재적 성장 부문에 진출하고 있습니다.",
-      "link": "https://www.marketwatch.com/story/teslas-stock-rallies-to-end-a-rough-week-c1f1d5e5?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "현재 시장가에 관련 재료가 반영되어 가는 과정이며, 방향성을 결정지을 만한 결정적 단서가 부족한 상태입니다. MarketWatch의 향후 후속 보도와 실물 지표의 변화를 모니터링하며 관망할 필요가 있습니다.",
-        "impact_score": 71
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6111321151161774522",
+    "id": "-871526101263076203",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": false,
@@ -139,8 +14,8 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "Empire AI 분석 결과, 본 뉴스는 업종 내 경쟁 우위를 확보하거나 실적 개선의 트리거가 될 수 있는 핵심 모멘텀을 포함하고 있습니다. Seeking Alpha 데이터 기준, 수급 유입 강도가 점진적으로 높아질 것으로 예측됩니다.",
-        "impact_score": 70
+        "summary_kr": "시장은 해당 이슈를 장기적 성장 동력으로 인지하고 있습니다. 기술적 반등을 넘어 추세적 상승으로 이어질 가능성이 75% 이상으로 분석됩니다.",
+        "impact_score": 72
       },
       "trading_strategy": {
         "action": "매수",
@@ -150,22 +25,22 @@
     }
   },
   {
-    "id": "7648725375509402646",
+    "id": "-3623828369359254138",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T17:07:28Z",
+    "published_at": "Fri, 06 Feb 2026 21:18:00 GMT",
     "free_tier": {
-      "title": "미국의 평균 장기 모기지 금리는 거의 변동하지 않으며 6% 가까이 유지됩니다.",
-      "title_en": "Average US long-term mortgage rate barely budges, holding near 6%",
-      "summary_kr": "미국의 평균 장기 모기지 금리는 거의 변동하지 않으며 6% 가까이 유지됩니다.",
-      "link": "https://finance.yahoo.com/news/average-us-long-term-mortgage-170728612.html",
-      "original_source": "Yahoo Top Stories"
+      "title": "이번 주 손실을 일부 만회하기 위해 Tesla 주가가 상승했습니다.",
+      "title_en": "Tesla’s stock rallies to recover some of its losses this week",
+      "summary_kr": "회사는 무인 자동차와 태양 에너지라는 두 가지 잠재적 성장 부문에 진출하고 있습니다.",
+      "link": "https://www.marketwatch.com/story/teslas-stock-rallies-to-end-a-rough-week-c1f1d5e5?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 66
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 73
       },
       "trading_strategy": {
         "action": "관망",
@@ -175,21 +50,21 @@
     }
   },
   {
-    "id": "2280349336605917614",
+    "id": "-8024433187198743878",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 23:46:00 GMT",
+    "published_at": "Fri, 06 Feb 2026 20:56:25 GMT",
     "free_tier": {
-      "title": "Hims & Hers 주가는 Wegovy 알약 복합제 논란으로 1년 최저치로 마감",
-      "title_en": "Hims & Hers stock closes at one-year low amid battle over compounded Wegovy pill",
-      "summary_kr": "Hims & Hers는 또한 슈퍼볼 광고에 등장한 암 탐지 테스트를 판매한다고 밝혔는데, 이는 부유층이 더 나은 의료 서비스를 받을 수 있다는 점을 보여주는 역할을 합니다.",
-      "link": "https://www.marketwatch.com/story/hims-hers-stock-nears-one-year-low-amid-battle-over-compounded-wegovy-pill-66ddcdb7?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
+      "title": "Carter Worth는 트레이더들이 하락세를 보이고 있는 이 주식 그룹을 퇴색시킬 시간이라고 말합니다.",
+      "title_en": "Time for traders to fade this group of stocks that's been on a tear, says Carter Worth",
+      "summary_kr": "베타가 낮고 오랫동안 부진했던 S&P 500 필수 소비재 부문은 지난 3개월 동안 큰 폭의 상승세를 보이며 현재 해당 기간 동안 15% 상승했습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/time-for-traders-to-fade-this-group-of-stocks-thats-been-on-a-tear-says-carter-worth.html",
+      "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "현재 시장가에 관련 재료가 반영되어 가는 과정이며, 방향성을 결정지을 만한 결정적 단서가 부족한 상태입니다. MarketWatch의 향후 후속 보도와 실물 지표의 변화를 모니터링하며 관망할 필요가 있습니다.",
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
         "impact_score": 69
       },
       "trading_strategy": {
@@ -200,22 +75,22 @@
     }
   },
   {
-    "id": "-5242182901293451730",
+    "id": "-8874811791744115099",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": false,
-    "published_at": "2026-02-07 00:07:03",
+    "published_at": "2026-02-07 00:12:33",
     "free_tier": {
-      "title": "Armada Hoffler Properties는 유지 보상을 부여하고 임원 보상 계획을 업데이트합니다.",
-      "title_en": "Armada Hoffler Properties grants retention awards and updates executive compensation plans",
-      "summary_kr": "Armada Hoffler Properties는 유지 보상을 부여하고 임원 보상 계획을 업데이트합니다.",
-      "link": "https://www.investing.com/news/sec-filings/armada-hoffler-properties-grants-retention-awards-and-updates-executive-compensation-plans-93CH-4492196",
+      "title": "Dow는 50,000 이상으로 마감하고 거래자들이 AI 지출에 집중함에 따라 Nvidia는 급등합니다.",
+      "title_en": "Dow closes above 50,000, Nvidia soars as traders focus on AI spending",
+      "summary_kr": "Dow는 50,000 이상으로 마감하고 거래자들이 AI 지출에 집중함에 따라 Nvidia는 급등합니다.",
+      "link": "https://www.investing.com/news/stock-market-news/futures-stabilize-after-tech-rout-amazon-slides-on-ai-capex-lift-4490051",
       "original_source": "Investing.com"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "Empire AI 분석 결과, 본 뉴스는 업종 내 경쟁 우위를 확보하거나 실적 개선의 트리거가 될 수 있는 핵심 모멘텀을 포함하고 있습니다. Investing.com 데이터 기준, 수급 유입 강도가 점진적으로 높아질 것으로 예측됩니다.",
-        "impact_score": 74
+        "summary_kr": "주요 금융 기관의 AI 실무 도입 소식은 장기적인 오퍼레이션 비용 절감 및 마진 확대로 이어질 수 있는 긍정적 시그널입니다. Investing.com 기준 수급 강화 단계로 해석됩니다.",
+        "impact_score": 70
       },
       "trading_strategy": {
         "action": "매수",
@@ -225,32 +100,57 @@
     }
   },
   {
-    "id": "-5063076740450226346",
+    "id": "7931473520117578669",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
+    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 23:38:00 GMT",
+    "published_at": "2026-02-05T17:11:13Z",
     "free_tier": {
-      "title": "다우지수는 기록적인 시간 안에 50,000선에 도달하며 강세장의 힘을 보여줍니다.",
-      "title_en": "Dow reaches 50,000 milestone in record time, showing power of bull market",
-      "summary_kr": "다우존스산업평균지수는 금요일 1,200포인트 이상 급등하며 주식시장의 반등을 이끌었습니다.",
-      "link": "https://www.marketwatch.com/story/dow-closes-above-50-000-for-first-time-after-rough-week-for-u-s-stock-market-c47282f7?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
+      "title": "Gemini는 영국, EU, 호주를 떠나 직원을 25% 줄이고 미국과 예측 시장에 집중할 예정입니다.",
+      "title_en": "Gemini to exit U.K., EU and Australia, reduce staff by 25%, and focus on U.S. and prediction markets",
+      "summary_kr": "Gemini는 영국, EU, 호주를 떠나 직원을 25% 줄이고 미국과 예측 시장에 집중할 예정입니다.",
+      "link": "https://finance.yahoo.com/news/gemini-exit-u-k-eu-171113073.html",
+      "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "Empire AI 분석 결과, 본 뉴스는 업종 내 경쟁 우위를 확보하거나 실적 개선의 트리거가 될 수 있는 핵심 모멘텀을 포함하고 있습니다. MarketWatch 데이터 기준, 수급 유입 강도가 점진적으로 높아질 것으로 예측됩니다.",
-        "impact_score": 87
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 63
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "691211677125337331",
+    "id": "-9110487521849502863",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2025-04-22T19:06:10Z",
+    "free_tier": {
+      "title": "모기지 금리는 언제 내려갈까요? 요금에 대한 통찰력은 정체 상태로 유지됩니다.",
+      "title_en": "When will mortgage rates go down? Insights as rates remain stagnant.",
+      "summary_kr": "모기지 금리는 언제 내려갈까요? 요금에 대한 통찰력은 정체 상태로 유지됩니다.",
+      "link": "https://finance.yahoo.com/personal-finance/mortgages/article/when-will-mortgage-rates-go-down-insights-as-rates-remain-stagnant-190610093.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "시장은 현재 해당 이슈를 기업 실적 둔화의 전조 증상으로 인지하고 있습니다. 단기 변동성 확대가 불가피하므로 포트폴리오 리스크 관리에 집중해야 합니다.",
+        "impact_score": 73
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "253526150624108533",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -264,8 +164,8 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "현재 시장가에 관련 재료가 반영되어 가는 과정이며, 방향성을 결정지을 만한 결정적 단서가 부족한 상태입니다. MarketWatch의 향후 후속 보도와 실물 지표의 변화를 모니터링하며 관망할 필요가 있습니다.",
-        "impact_score": 71
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 74
       },
       "trading_strategy": {
         "action": "관망",
@@ -275,182 +175,7 @@
     }
   },
   {
-    "id": "-7058904746875510046",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:55:02Z",
-    "free_tier": {
-      "title": "지금 구매할 수 있는 미발견 에너지 주식 1개",
-      "title_en": "1 Undiscovered Energy Stock to Buy Now",
-      "summary_kr": "지금 구매할 수 있는 미발견 에너지 주식 1개",
-      "link": "https://finance.yahoo.com/news/1-undiscovered-energy-stock-buy-165502966.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 62
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "4669905199708076746",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:58:26Z",
-    "free_tier": {
-      "title": "암호화폐 거래소 제미니(Gemini), 유럽과 호주 탈퇴로 일자리 대폭 삭감",
-      "title_en": "Crypto Exchange Gemini Slashes Jobs Amid Exit From Europe, Australia",
-      "summary_kr": "암호화폐 거래소 제미니(Gemini), 유럽과 호주 탈퇴로 일자리 대폭 삭감",
-      "link": "https://finance.yahoo.com/news/crypto-exchange-gemini-slashes-jobs-165826316.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 66
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7738566115688912605",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-07 00:17:56",
-    "free_tier": {
-      "title": "East West Bancorp 이사 Campbell은 221,000달러의 주식을 매도했습니다.",
-      "title_en": "East West Bancorp director Campbell sells $221k in stock",
-      "summary_kr": "East West Bancorp 이사 Campbell은 221,000달러의 주식을 매도했습니다.",
-      "link": "https://www.investing.com/news/insider-trading-news/east-west-bancorp-director-campbell-sells-221k-in-stock-93CH-4492199",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 65
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-1026931409488122346",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T17:04:52Z",
-    "free_tier": {
-      "title": "Royal Caribbean, 오늘의 IBD 주식, 손잡이 구축",
-      "title_en": "Royal Caribbean, IBD Stock Of The Day, Builds A Handle",
-      "summary_kr": "Royal Caribbean, 오늘의 IBD 주식, 손잡이 구축",
-      "link": "https://www.investors.com/research/ibd-stock-of-the-day/royal-caribbean-ibd-stock-of-the-day-buy-point-earnings-rcl-stock-cruise-lines/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 65
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6349363412711019733",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-07 00:14:47",
-    "free_tier": {
-      "title": "Aemetis 자회사, 시리즈 A 우선 유닛 상환 기한을 4월로 연장",
-      "title_en": "Aemetis subsidiary extends Series A preferred unit redemption deadline to April",
-      "summary_kr": "Aemetis 자회사, 시리즈 A 우선 유닛 상환 기한을 4월로 연장",
-      "link": "https://www.investing.com/news/sec-filings/aemetis-subsidiary-extends-series-a-preferred-unit-redemption-deadline-to-april-93CH-4492197",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 67
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "4669905199708076746",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:58:26Z",
-    "free_tier": {
-      "title": "암호화폐 거래소 제미니(Gemini), 유럽과 호주 탈퇴로 일자리 대폭 삭감",
-      "title_en": "Crypto Exchange Gemini Slashes Jobs Amid Exit From Europe, Australia",
-      "summary_kr": "암호화폐 거래소 제미니(Gemini), 유럽과 호주 탈퇴로 일자리 대폭 삭감",
-      "link": "https://finance.yahoo.com/news/crypto-exchange-gemini-slashes-jobs-165826316.html",
-      "original_source": "Yahoo Top Stories"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 62
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-7058904746875510046",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:55:02Z",
-    "free_tier": {
-      "title": "지금 구매할 수 있는 미발견 에너지 주식 1개",
-      "title_en": "1 Undiscovered Energy Stock to Buy Now",
-      "summary_kr": "지금 구매할 수 있는 미발견 에너지 주식 1개",
-      "link": "https://finance.yahoo.com/news/1-undiscovered-energy-stock-buy-165502966.html",
-      "original_source": "Yahoo Top Stories"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
-        "impact_score": 67
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8452470432453289550",
+    "id": "264227681369144078",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -464,7 +189,132 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
+        "summary_kr": "단편적인 사실 전달 위주의 기사로, 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 후속 보도를 통한 구체적 수치 확인이 필요합니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "3855767095652123851",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 23:54:28",
+    "free_tier": {
+      "title": "도요타, 업계 혼란으로 강세에도 불구하고 CEO 교체",
+      "title_en": "Toyota changes CEO despite its strength through industry turmoil",
+      "summary_kr": "도요타, 업계 혼란으로 강세에도 불구하고 CEO 교체",
+      "link": "https://www.investing.com/news/stock-market-news/toyota-changes-ceo-despite-its-strength-through-industry-turmoil-4492188",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-5882596581109003730",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 18:43:41 GMT",
+    "free_tier": {
+      "title": "거래자들은 지출 우려에도 불구하고 Amazon에서 구매 기회를 봅니다.",
+      "title_en": "Traders see a buying opportunity in Amazon despite spending concerns",
+      "summary_kr": "아마존은 막대한 지출의 대부분이 인공지능 데이터센터에 집중될 것이라고 말했다.",
+      "link": "https://www.cnbc.com/2026/02/06/traders-see-a-buying-opportunity-in-amazon-despite-spending-concerns.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 62
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4356742595925835239",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 21:00:00 GMT",
+    "free_tier": {
+      "title": "비트코인이 하락한 후, 암호화폐를 상대로 수십억 달러를 빌린 열광적인 투자자들을 불쌍히 여기십시오",
+      "title_en": "After bitcoin’s fall, pity those wildly enthusiastic investors who borrowed billions against crypto",
+      "summary_kr": "2025년에 비트코인이 20만 달러에 이를 것이라는 추측은 이제 꿈처럼 보입니다. 그랬기 때문이다.",
+      "link": "https://www.marketwatch.com/story/as-bitcoin-crashes-pity-those-wildly-enthusiastic-investors-who-borrowed-billions-against-crypto-794164bb?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "과도한 레버리지를 이용한 자산 매수는 하락장 발생 시 대규모 강제 청산(Liquidation Cascade)을 촉발하여 시장의 하방 압력을 가속화합니다. 이는 단순한 자산 매각을 넘어 시장의 전반적인 유동성 위기로 번질 수 있는 위험 요소입니다.",
+        "impact_score": 98
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-2156304858455146870",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-07 00:36:29",
+    "free_tier": {
+      "title": "미국은 복합 체중 감량 약물에 대한 단속 신호를 보냈습니다. 힘스 주가 하락",
+      "title_en": "US signals crackdown on compounded weight-loss drugs; Hims shares tumble",
+      "summary_kr": "미국은 복합 체중 감량 약물에 대한 단속 신호를 보냈습니다. 힘스 주가 하락",
+      "link": "https://www.investing.com/news/stock-market-news/fda-to-restrict-glp1-ingredients-used-in-nonapproved-compounded-drugs-4492113",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "매도 압력이 강해질 수 있는 부정적 재료입니다. Investing.com의 심층 분석 결과, 추가 하락 리스크가 존재하므로 지지선 확인 후 대응이 유효합니다.",
+        "impact_score": 79
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8703088441238139299",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 22:30:48",
+    "free_tier": {
+      "title": "TikTok, 앱의 중독성 기능으로 EU 규정 위반 혐의로 기소",
+      "title_en": "TikTok charged for breaching EU rules with app’s addictive features",
+      "summary_kr": "TikTok, 앱의 중독성 기능으로 EU 규정 위반 혐의로 기소",
+      "link": "https://www.investing.com/news/stock-market-news/tiktok-hit-with-charges-of-breaching-eu-online-content-rules-app-may-have-to-change-4489881",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
         "impact_score": 66
       },
       "trading_strategy": {
@@ -475,25 +325,175 @@
     }
   },
   {
-    "id": "7648725375509402646",
+    "id": "893509143939233703",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T17:07:28Z",
+    "published_at": "Fri, 06 Feb 2026 19:14:21 -0500",
     "free_tier": {
-      "title": "미국의 평균 장기 모기지 금리는 거의 변동하지 않으며 6% 가까이 유지됩니다.",
-      "title_en": "Average US long-term mortgage rate barely budges, holding near 6%",
-      "summary_kr": "미국의 평균 장기 모기지 금리는 거의 변동하지 않으며 6% 가까이 유지됩니다.",
-      "link": "https://finance.yahoo.com/news/average-us-long-term-mortgage-170728612.html",
-      "original_source": "Yahoo Finance"
+      "title": "Camden Property Trust(CPT) 2025년 4분기 실적 통화 기록",
+      "title_en": "Camden Property Trust (CPT) Q4 2025 Earnings Call Transcript",
+      "summary_kr": "Camden Property Trust(CPT) 2025년 4분기 실적 통화 기록",
+      "link": "https://seekingalpha.com/article/4867262-camden-property-trust-cpt-q4-2025-earnings-call-transcript?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다.",
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 64
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4867729687162991608",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 22:54:28",
+    "free_tier": {
+      "title": "Palmer Luckey가 지원하는 Erebor는 미국 국가 은행 허가를 받았다고 WSJ는 보도했습니다.",
+      "title_en": "Palmer Luckey-backed Erebor receives US national banking charter, WSJ reports",
+      "summary_kr": "Palmer Luckey가 지원하는 Erebor는 미국 국가 은행 허가를 받았다고 WSJ는 보도했습니다.",
+      "link": "https://www.investing.com/news/stock-market-news/palmer-luckeybacked-erebor-receives-us-national-banking-charter-wsj-reports-4492139",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
         "impact_score": 63
       },
       "trading_strategy": {
         "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "2985385228444155660",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T17:04:52Z",
+    "free_tier": {
+      "title": "Royal Caribbean, 오늘의 IBD 주식, 손잡이 구축",
+      "title_en": "Royal Caribbean, IBD Stock Of The Day, Builds A Handle",
+      "summary_kr": "Royal Caribbean, 오늘의 IBD 주식, 손잡이 구축",
+      "link": "https://www.investors.com/research/ibd-stock-of-the-day/royal-caribbean-ibd-stock-of-the-day-buy-point-earnings-rcl-stock-cruise-lines/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보도 내용의 실질적 영향력은 제한적인 것으로 보이며, 시장은 다음 주요 지표 발표를 기다리며 관망세를 보일 것으로 판단됩니다.",
+        "impact_score": 63
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "5325588623759390967",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 19:05:47 GMT",
+    "free_tier": {
+      "title": "JPMorgan은 트럼프의 감세로 인해 소비자가 증가할 것으로 보고 있습니다. 이 소매업체가 가장 큰 승자가 될 것입니다.",
+      "title_en": "JPMorgan sees a consumer boost from Trump's tax cuts. This retailer will be the biggest winner",
+      "summary_kr": "월스트리트 은행은 이 창고 클럽이 광범위한 지리적 입지와 회원 인구 통계 덕분에 이익을 얻을 수 있다고 말했습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/jpmorgan-see-consumer-boost-from-tax-cuts-this-retailer-will-win.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "투자 심리가 위축될 수 있는 소식입니다. 패닉 셀링보다는 비중 조절 및 보수적인 관망세를 유지하며 하방 경직성을 확인해야 합니다.",
+        "impact_score": 72
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8313269921251487819",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:40:00 GMT",
+    "free_tier": {
+      "title": "올해 슈퍼볼 광고는 AI 버블이 곧 터질 것이라고 알려줍니다.",
+      "title_en": "This year’s Super Bowl ads tell you the AI bubble is about to burst",
+      "summary_kr": "2000년 닷컴처럼 인공지능 광고가 최후의 만세일 수 있는 이유",
+      "link": "https://www.marketwatch.com/story/this-years-super-bowl-ads-tell-you-the-ai-bubble-is-about-to-burst-1357e5ae?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "주요 금융 기관의 AI 실무 도입 소식은 장기적인 오퍼레이션 비용 절감 및 마진 확대로 이어질 수 있는 긍정적 시그널입니다. MarketWatch 기준 수급 강화 단계로 해석됩니다.",
+        "impact_score": 69
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-414799868645003641",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-06 22:54:45",
+    "free_tier": {
+      "title": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
+      "title_en": "Judge bans Kalshi from offering sports-events contracts in Massachusetts in 30 days",
+      "summary_kr": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
+      "link": "https://www.investing.com/news/stock-market-news/judge-bans-kalshi-from-offering-sportsevents-contracts-in-massachusetts-in-30-days-4492135",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보통주 매각 및 추가 발행으로 인한 가치 희석은 기존 주주들에게 명확한 하락 압력으로 작용합니다. 특히 기관 및 대주주의 매도는 '엑싯(Exit)' 신호로 읽힐 수 있으므로 절대적인 보수적 접근이 필요합니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6210298618688766534",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:46:00 GMT",
+    "free_tier": {
+      "title": "Hims & Hers 주가는 Wegovy 알약 복합제 논란으로 1년 최저치로 마감",
+      "title_en": "Hims & Hers stock closes at one-year low amid battle over compounded Wegovy pill",
+      "summary_kr": "Hims & Hers는 또한 슈퍼볼 광고에 등장한 암 탐지 테스트를 판매한다고 밝혔는데, 이는 부유층이 더 나은 의료 서비스를 받을 수 있다는 점을 보여주는 역할을 합니다.",
+      "link": "https://www.marketwatch.com/story/hims-hers-stock-nears-one-year-low-amid-battle-over-compounded-wegovy-pill-66ddcdb7?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "보통주 매각 및 추가 발행으로 인한 가치 희석은 기존 주주들에게 명확한 하락 압력으로 작용합니다. 특히 기관 및 대주주의 매도는 '엑싯(Exit)' 신호로 읽힐 수 있으므로 절대적인 보수적 접근이 필요합니다.",
+        "impact_score": 81
+      },
+      "trading_strategy": {
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
