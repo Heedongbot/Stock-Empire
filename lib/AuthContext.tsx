@@ -47,8 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         avatar: clerkUser.imageUrl,
     } : null;
 
-    // Auto-admin for specific email (Backdoor for Commander)
-    if (user && user.email === '66683300hd@gmail.com') {
+    // Auto-admin for specific email (Backdoor for Commander & VVIP)
+    if (user && (user.email === '66683300hd@gmail.com' || user.email === 'lgh425@gmail.com')) {
         user.role = 'ADMIN';
         user.tier = 'PRO';
     }
