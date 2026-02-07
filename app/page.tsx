@@ -256,13 +256,7 @@ export default function LandingPage() {
         <div className="bg-slate-900/50 backdrop-blur-3xl border border-slate-800 rounded-[3rem] p-12 shadow-2xl overflow-hidden relative group">
           <div className="absolute -top-10 -right-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-[80px]" />
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Crown className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                <span className="text-xs font-black text-yellow-500 uppercase tracking-widest">{t.vvipZone.title}</span>
-              </div>
-              <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">{t.analysis.allInsights}</h2>
-            </div>
+            <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">{lang === 'ko' ? 'VVIP 알파 인사이트' : 'VVIP Alpha Insights'}</h2>
             <Link href="/vvip-alpha" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
               {t.common.more} <ChevronRight className="w-4 h-4" />
             </Link>

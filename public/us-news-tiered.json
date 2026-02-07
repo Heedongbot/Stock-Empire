@@ -1,6 +1,6 @@
 [
   {
-    "id": "9020924424832380107",
+    "id": "5925067362347211053",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -15,7 +15,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'UBS는 효율성을 높이기 위해 AI 프로그램을 배포합니다.' 입니다.",
-        "impact_score": 79
+        "impact_score": 68
       },
       "trading_strategy": {
         "action": "관망",
@@ -25,7 +25,7 @@
     }
   },
   {
-    "id": "6962656688771149366",
+    "id": "-6218755340762566850",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -40,7 +40,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '파나마 대통령은 항만 계약이 단일 운영자에게 발행되지 않을 것이라고 말했습니다.' 입니다.",
-        "impact_score": 65
+        "impact_score": 62
       },
       "trading_strategy": {
         "action": "관망",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "id": "-2369604382185432708",
+    "id": "2696210032759215006",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -65,7 +65,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.' 입니다.",
-        "impact_score": 74
+        "impact_score": 89
       },
       "trading_strategy": {
         "action": "관망",
@@ -75,7 +75,7 @@
     }
   },
   {
-    "id": "-3896755275624836133",
+    "id": "-3493798492186490263",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -90,7 +90,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오라클은 200억 달러 규모의 보통주를 매각하고 있습니다. 이는 ORCL에 무엇을 의미하며 지금 주식을 구매해야 합니까?' 입니다.",
-        "impact_score": 85
+        "impact_score": 78
       },
       "trading_strategy": {
         "action": "관망",
@@ -100,7 +100,7 @@
     }
   },
   {
-    "id": "-5567577366867132270",
+    "id": "2521095004328925123",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -115,7 +115,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '32%의 수익 성장이 2026년 AMD 주식 구매를 정당화하기에 충분합니까?' 입니다.",
-        "impact_score": 72
+        "impact_score": 92
       },
       "trading_strategy": {
         "action": "매수",
@@ -125,7 +125,7 @@
     }
   },
   {
-    "id": "-6453648111953848494",
+    "id": "3455256263262613603",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -140,7 +140,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Ladder Capital (LADR) 2025년 4분기 수익 대본' 입니다.",
-        "impact_score": 80
+        "impact_score": 64
       },
       "trading_strategy": {
         "action": "관망",
@@ -150,7 +150,7 @@
     }
   },
   {
-    "id": "-9013853799190146809",
+    "id": "9092993913870943586",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -165,7 +165,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '달러 강세와 이란 긴장 완화로 원유 가격 폭락' 입니다.",
-        "impact_score": 86
+        "impact_score": 77
       },
       "trading_strategy": {
         "action": "관망",
@@ -175,7 +175,7 @@
     }
   },
   {
-    "id": "-7096351082197483175",
+    "id": "3042146228354486895",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -190,7 +190,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '지금 구매할 수 있는 미발견 에너지 주식 1개' 입니다.",
-        "impact_score": 66
+        "impact_score": 72
       },
       "trading_strategy": {
         "action": "관망",
@@ -200,7 +200,7 @@
     }
   },
   {
-    "id": "1437356935350386270",
+    "id": "-4333157821167376440",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -215,7 +215,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 ''나는 수학으로 할 수 있다': 월스트리트의 민간 신용 대기업들은 급격한 소프트웨어 매각 속에서 AI에 대한 두려움을 진정시키려고 노력하고 있습니다' 입니다.",
-        "impact_score": 79
+        "impact_score": 78
       },
       "trading_strategy": {
         "action": "관망",
@@ -225,7 +225,7 @@
     }
   },
   {
-    "id": "3297432399718245262",
+    "id": "-7251995034681660956",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -240,7 +240,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법' 입니다.",
-        "impact_score": 79
+        "impact_score": 69
       },
       "trading_strategy": {
         "action": "관망",
@@ -250,7 +250,7 @@
     }
   },
   {
-    "id": "-644290141921597788",
+    "id": "5080554121021270120",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -265,7 +265,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Patrick Industries PATK 수입 통화 내용' 입니다.",
-        "impact_score": 77
+        "impact_score": 89
       },
       "trading_strategy": {
         "action": "관망",
@@ -275,7 +275,7 @@
     }
   },
   {
-    "id": "1349788932449808308",
+    "id": "-3794636407460049264",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -290,7 +290,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Royal Caribbean, 오늘의 IBD 주식, 손잡이 구축' 입니다.",
-        "impact_score": 63
+        "impact_score": 65
       },
       "trading_strategy": {
         "action": "관망",
@@ -300,7 +300,7 @@
     }
   },
   {
-    "id": "-1109142828245349375",
+    "id": "4464795509213807892",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -315,7 +315,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '미국의 평균 장기 모기지 금리는 거의 변동하지 않으며 6% 가까이 유지됩니다.' 입니다.",
-        "impact_score": 90
+        "impact_score": 69
       },
       "trading_strategy": {
         "action": "관망",
@@ -325,7 +325,7 @@
     }
   },
   {
-    "id": "-6751609922696631868",
+    "id": "2768499617688282457",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -340,7 +340,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'BYD의 최근 중국 판매 감소는 해외 확장을 설명합니다' 입니다.",
-        "impact_score": 66
+        "impact_score": 88
       },
       "trading_strategy": {
         "action": "관망",
@@ -350,7 +350,7 @@
     }
   },
   {
-    "id": "-2718442605460048832",
+    "id": "1763108348745653204",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -365,7 +365,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '이 희토류 주식을 구매해야 하는 30억 달러의 이유' 입니다.",
-        "impact_score": 76
+        "impact_score": 66
       },
       "trading_strategy": {
         "action": "관망",

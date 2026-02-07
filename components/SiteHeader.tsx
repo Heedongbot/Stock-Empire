@@ -94,29 +94,14 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                             const isActive = pathname === item.path;
                             const isVVIP = item.id === 'vvip_alpha';
 
-                            if (isVVIP) {
-                                return (
-                                    <Link
-                                        key={item.id}
-                                        href={item.path}
-                                        className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border whitespace-nowrap ${isActive
-                                            ? 'bg-yellow-500 border-yellow-400 text-slate-900 shadow-lg shadow-yellow-500/20'
-                                            : 'bg-yellow-500/10 border-yellow-500/30 text-yellow-500 hover:bg-yellow-500 hover:text-slate-900 shadow-lg shadow-yellow-500/10'
-                                            }`}
-                                    >
-                                        <Crown className={`w-3 h-3 ${isActive ? 'fill-slate-900' : 'fill-yellow-500'}`} />
-                                        {t.nav[item.id as keyof typeof t.nav]}
-                                    </Link>
-                                );
-                            }
-
                             return (
                                 <Link
                                     key={item.id}
                                     href={item.path}
-                                    className={`text-[10px] font-bold uppercase tracking-widest transition-colors relative group whitespace-nowrap ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
+                                    className={`text-[10px] font-bold uppercase tracking-widest transition-colors relative group whitespace-nowrap flex items-center gap-1.5 ${isActive ? 'text-indigo-400' : 'text-slate-400 hover:text-white'
                                         }`}
                                 >
+                                    {isVVIP && <Crown className={`w-3 h-3 ${isActive ? 'text-indigo-400 fill-indigo-400/20' : 'text-slate-500 group-hover:text-white transition-colors'}`} />}
                                     {t.nav[item.id as keyof typeof t.nav]}
                                     {isActive && (
                                         <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-400 rounded-full shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>

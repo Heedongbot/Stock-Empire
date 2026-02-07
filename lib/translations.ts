@@ -179,14 +179,14 @@ export const translations = {
             fearGreedDesc: "실시간 시장 심리를 수치화하여 극단적 공포와 탐욕 상태를 진단합니다."
         },
         vvipZone: {
-            title: "VIP 알파의 선택",
+            title: "VVIP 알파 인사이트",
             subtitle: "상위 1% 투자자만을 위한 주간 고확신 셋업",
             launchAnalyzer: "심층 분석기 실행",
             hiddenGem: "숨겨진 유망주",
-            upgradeToReveal: "VIP로 업그레이드하여 진입/청산 목표가를 확인하세요",
-            unlockPicks: "VIP 픽 잠금 해제",
+            upgradeToReveal: "VVIP로 업그레이드하여 진입/청산 목표가를 확인하세요",
+            unlockPicks: "VVIP 픽 잠금 해제",
             currentPrice: "종가 (전일)",
-            targetPrice: "목표가",
+            targetPrice: "익절가",
             stopPrice: "손절가",
             aiRationale: "[AI 분석 근거]"
         },
@@ -512,12 +512,12 @@ export const translations = {
             fearGreedDesc: "Quantifying real-time market sentiment to diagnose extreme fear and greed states."
         },
         vvipZone: {
-            title: "VIP ALPHA PICKS",
+            title: "VVIP ALPHA INSIGHTS",
             subtitle: "Only for the top 1% investors. Weekly high-conviction setup.",
             launchAnalyzer: "Launch Deep Analyzer",
             hiddenGem: "HIDDEN GEM",
-            upgradeToReveal: "Upgrade to VIP to reveal Entry/Exit targets",
-            unlockPicks: "UNLOCK VIP PICKS",
+            upgradeToReveal: "Upgrade to VVIP to reveal Entry/Exit targets",
+            unlockPicks: "UNLOCK VVIP PICKS",
             currentPrice: "Previous Close",
             targetPrice: "TARGET",
             stopPrice: "STOP",
