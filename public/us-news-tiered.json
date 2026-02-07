@@ -1,20 +1,120 @@
 [
   {
-    "id": "4075086283312341291",
+    "id": "-2794744163280759327",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T16:31:00Z",
+    "published_at": "2026-02-06 23:51:58",
     "free_tier": {
-      "title": "지금 당장 애플 주식을 사야 하는 1가지 이유",
-      "title_en": "1 Reason to Buy Apple Stock Right Now",
-      "summary_kr": "지금 당장 애플 주식을 사야 하는 1가지 이유",
-      "link": "https://finance.yahoo.com/news/1-reason-buy-apple-stock-163100753.html",
-      "original_source": "Yahoo Finance"
+      "title": "FirstSun Capital Bancorp, First Foundation과의 합병 계약 개정",
+      "title_en": "FirstSun Capital Bancorp amends merger agreement with First Foundation",
+      "summary_kr": "FirstSun Capital Bancorp, First Foundation과의 합병 계약 개정",
+      "link": "https://www.investing.com/news/sec-filings/firstsun-capital-bancorp-amends-merger-agreement-with-first-foundation-93CH-4492186",
+      "original_source": "Investing.com"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '지금 당장 애플 주식을 사야 하는 1가지 이유' 입니다.",
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 61
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "3646821763213392136",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 20:57:00 GMT",
+    "free_tier": {
+      "title": "이번 주말 미국의 이란 공격 가능성이 높아져 원유시장이 불안해하고 있다.",
+      "title_en": "Oil markets are on edge over elevated risks of a U.S. military strike against Iran this weekend",
+      "summary_kr": "주말에는 이란에 대한 새로운 제재가 가해지고 미국이 테헤란을 상대로 움직일 위험이 있습니다.",
+      "link": "https://www.marketwatch.com/story/oil-markets-are-on-edge-over-elevated-risks-of-a-u-s-military-strike-against-iran-this-weekend-ead5d7d2?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 69
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-2430768532998116416",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Fri, 06 Feb 2026 21:01:00 GMT",
+    "free_tier": {
+      "title": "이러한 주목받지 못하는 채권시장의 발전은 많은 차용자들을 불안하게 만들 수 있습니다.",
+      "title_en": "This little-noticed bond-market development could put many borrowers on edge",
+      "summary_kr": "올해 국채 수익률 곡선이 계속해서 가팔라지면 장기 차입자가 연준의 2026년 금리 인하의 완전한 영향을 느끼기가 더 어려워질 것입니다.",
+      "link": "https://www.marketwatch.com/story/this-little-noticed-bond-market-development-could-put-many-borrowers-on-edge-45a05830?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 60
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "5213205749233221254",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T17:01:00Z",
+    "free_tier": {
+      "title": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
+      "title_en": "Is Social Security a 'Ponzi scheme?' Warren Buffett and Charlie Munger’s response — and how to secure your retirement",
+      "summary_kr": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
+      "link": "https://finance.yahoo.com/news/social-security-ponzi-scheme-warren-170100223.html",
+      "original_source": "Yahoo Top Stories"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 61
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "640786072923093782",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 23:43:24",
+    "free_tier": {
+      "title": "SoFi Technologies 법무 자문위원 Lavet, 105,000달러 상당의 주식 매입",
+      "title_en": "SoFi Technologies general counsel Lavet buys $105k in shares",
+      "summary_kr": "SoFi Technologies 법무 자문위원 Lavet, 105,000달러 상당의 주식 매입",
+      "link": "https://www.investing.com/news/insider-trading-news/sofi-technologies-general-counsel-lavet-buys-105k-in-shares-93CH-4492183",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
         "impact_score": 64
       },
       "trading_strategy": {
@@ -25,247 +125,47 @@
     }
   },
   {
-    "id": "9092993913870943586",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:32:24Z",
-    "free_tier": {
-      "title": "달러 강세와 이란 긴장 완화로 원유 가격 폭락",
-      "title_en": "Crude Prices Tumble as the Dollar Strengthens and Iran Tensions Ease",
-      "summary_kr": "달러 강세와 이란 긴장 완화로 원유 가격 폭락",
-      "link": "https://finance.yahoo.com/news/crude-prices-tumble-dollar-strengthens-163224972.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '달러 강세와 이란 긴장 완화로 원유 가격 폭락' 입니다.",
-        "impact_score": 91
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2521095004328925123",
+    "id": "7043810474666831957",
     "ticker": "US Market",
     "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T16:32:43Z",
-    "free_tier": {
-      "title": "32%의 수익 성장이 2026년 AMD 주식 구매를 정당화하기에 충분합니까?",
-      "title_en": "Is 32% Revenue Growth Enough to Justify Buying AMD Stock in 2026?",
-      "summary_kr": "32%의 수익 성장이 2026년 AMD 주식 구매를 정당화하기에 충분합니까?",
-      "link": "https://finance.yahoo.com/news/32-revenue-growth-enough-justify-163243226.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '32%의 수익 성장이 2026년 AMD 주식 구매를 정당화하기에 충분합니까?' 입니다.",
-        "impact_score": 66
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2696210032759215006",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T16:38:53Z",
+    "published_at": "Fri, 06 Feb 2026 18:25:23 -0500",
     "free_tier": {
-      "title": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
-      "title_en": "This ETF Provides a Lens For Analyzing S&P 500 Tech Winners and Losers in 2026",
-      "summary_kr": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
-      "link": "https://finance.yahoo.com/news/etf-provides-lens-analyzing-p-163853522.html",
-      "original_source": "Yahoo Finance"
+      "title": "Birchcliff Energy: 생산 성장을 촉진하기 위해 Elmworth 투자 고려",
+      "title_en": "Birchcliff Energy: Contemplating Elmworth Investment To Drive Production Growth",
+      "summary_kr": "Birchcliff Energy: 생산 성장을 촉진하기 위해 Elmworth 투자 고려",
+      "link": "https://seekingalpha.com/article/4867334-birchcliff-energy-contemplating-elmworth-investment-to-drive-production-growth?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.' 입니다.",
-        "impact_score": 91
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "390707488203927193",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T16:21:00Z",
-    "free_tier": {
-      "title": "OpenAI, AI 에이전트를 위한 Frontier 플랫폼 출시로 소프트웨어 주가 하락",
-      "title_en": "OpenAI debuts Frontier platform for AI agents, sending software stocks lower",
-      "summary_kr": "OpenAI, AI 에이전트를 위한 Frontier 플랫폼 출시로 소프트웨어 주가 하락",
-      "link": "https://finance.yahoo.com/news/openai-debuts-frontier-platform-for-ai-agents-sending-software-stocks-lower-162100732.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 'OpenAI, AI 에이전트를 위한 Frontier 플랫폼 출시로 소프트웨어 주가 하락' 입니다.",
-        "impact_score": 69
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-9139974028082002631",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T16:32:00Z",
-    "free_tier": {
-      "title": "실적 요약: AbbVie 불안, 두 갈래로 갈라진 백신 시장 및 브리스톨 마이어스의 대기 게임",
-      "title_en": "Earnings roundup: AbbVie angst, a bifurcated vaccine market and Bristol Myers’ waiting game",
-      "summary_kr": "실적 요약: AbbVie 불안, 두 갈래로 갈라진 백신 시장 및 브리스톨 마이어스의 대기 게임",
-      "link": "https://finance.yahoo.com/news/earnings-roundup-abbvie-angst-bifurcated-163200592.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '실적 요약: AbbVie 불안, 두 갈래로 갈라진 백신 시장 및 브리스톨 마이어스의 대기 게임' 입니다.",
-        "impact_score": 89
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6218755340762566850",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:41:52Z",
-    "free_tier": {
-      "title": "파나마 대통령은 항만 계약이 단일 운영자에게 발행되지 않을 것이라고 말했습니다.",
-      "title_en": "Panama's president says port contracts will not be issued to a single operator",
-      "summary_kr": "파나마 대통령은 항만 계약이 단일 운영자에게 발행되지 않을 것이라고 말했습니다.",
-      "link": "https://finance.yahoo.com/news/panamas-president-says-port-contracts-164152865.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '파나마 대통령은 항만 계약이 단일 운영자에게 발행되지 않을 것이라고 말했습니다.' 입니다.",
-        "impact_score": 62
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-3493798492186490263",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:43:43Z",
-    "free_tier": {
-      "title": "오라클은 200억 달러 규모의 보통주를 매각하고 있습니다. 이는 ORCL에 무엇을 의미하며 지금 주식을 구매해야 합니까?",
-      "title_en": "Oracle Is Selling $20 Billion in Common Stock. What Does That Mean for ORCL, and Should You Buy Shares Now?",
-      "summary_kr": "오라클은 200억 달러 규모의 보통주를 매각하고 있습니다. 이는 ORCL에 무엇을 의미하며 지금 주식을 구매해야 합니까?",
-      "link": "https://finance.yahoo.com/news/oracle-selling-20-billion-common-164343643.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '오라클은 200억 달러 규모의 보통주를 매각하고 있습니다. 이는 ORCL에 무엇을 의미하며 지금 주식을 구매해야 합니까?' 입니다.",
-        "impact_score": 78
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6451609946942396776",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T16:14:01Z",
-    "free_tier": {
-      "title": "기술주 하락과 미국 노동시장 약화로 주가 하락",
-      "title_en": "Stocks Retreat as Tech Stocks Fall and the US Labor Market Weakens",
-      "summary_kr": "기술주 하락과 미국 노동시장 약화로 주가 하락",
-      "link": "https://finance.yahoo.com/news/stocks-retreat-tech-stocks-fall-161401997.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '기술주 하락과 미국 노동시장 약화로 주가 하락' 입니다.",
+        "summary_kr": "Empire AI 분석 결과, 해당 뉴스는 시장의 강력한 매수 동력을 자극할 것으로 평가됩니다. 특히 Seeking Alpha에서 언급된 실적지표 및 성장 모멘텀이 기관의 수급 유입을 가속화할 가능성이 80% 이상입니다.",
         "impact_score": 71
       },
       "trading_strategy": {
-        "action": "매도",
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "-2104955696308282387",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T16:14:07Z",
-    "free_tier": {
-      "title": "비트코인 가격은 트럼프 대통령 2선 이전 수준 아래로 떨어져 현재 67,000달러 아래로 맴돌고 있습니다.",
-      "title_en": "Bitcoin price falls below pre-Trump second term levels, now hovering below $67,000",
-      "summary_kr": "비트코인 가격은 트럼프 대통령 2선 이전 수준 아래로 떨어져 현재 67,000달러 아래로 맴돌고 있습니다.",
-      "link": "https://finance.yahoo.com/news/bitcoins-monthslong-slide-continues-hitting-161407727.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 가격은 트럼프 대통령 2선 이전 수준 아래로 떨어져 현재 67,000달러 아래로 맴돌고 있습니다.' 입니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7534391360831903258",
+    "id": "-2537821442601870543",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T16:27:58Z",
+    "published_at": "2026-02-05T16:55:44Z",
     "free_tier": {
-      "title": "Energizer (ENR) 2026년 1분기 실적 통화 기록",
-      "title_en": "Energizer (ENR) Q1 2026 Earnings Call Transcript",
-      "summary_kr": "Energizer (ENR) 2026년 1분기 실적 통화 기록",
-      "link": "https://finance.yahoo.com/news/energizer-enr-q1-2026-earnings-162758442.html",
-      "original_source": "Yahoo Finance"
+      "title": "'나는 수학으로 할 수 있다': 월스트리트의 민간 신용 대기업들은 급격한 소프트웨어 매각 속에서 AI에 대한 두려움을 진정시키려고 노력하고 있습니다",
+      "title_en": "'I can do it in math': Wall Street's private credit giants try to calm AI fears amid steep software sell-off",
+      "summary_kr": "'나는 수학으로 할 수 있다': 월스트리트의 민간 신용 대기업들은 급격한 소프트웨어 매각 속에서 AI에 대한 두려움을 진정시키려고 노력하고 있습니다",
+      "link": "https://finance.yahoo.com/news/i-can-do-it-in-math-wall-streets-private-credit-giants-try-to-calm-ai-fears-amid-steep-software-sell-off-165544679.html",
+      "original_source": "Yahoo Top Stories"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Energizer (ENR) 2026년 1분기 실적 통화 기록' 입니다.",
-        "impact_score": 88
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 60
       },
       "trading_strategy": {
         "action": "관망",
@@ -275,22 +175,22 @@
     }
   },
   {
-    "id": "1220475357120481633",
+    "id": "5213205749233221254",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T16:11:48Z",
+    "published_at": "2026-02-05T17:01:00Z",
     "free_tier": {
-      "title": "디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?",
-      "title_en": "What Are Wall Street Analysts' Target Price for Digital Realty Trust Stock?",
-      "summary_kr": "디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?",
-      "link": "https://finance.yahoo.com/news/wall-street-analysts-target-price-161148082.html",
+      "title": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
+      "title_en": "Is Social Security a 'Ponzi scheme?' Warren Buffett and Charlie Munger’s response — and how to secure your retirement",
+      "summary_kr": "사회보장은 '폰지 사기'인가? 워렌 버핏과 찰리 멍거의 반응 - 그리고 은퇴를 보장하는 방법",
+      "link": "https://finance.yahoo.com/news/social-security-ponzi-scheme-warren-170100223.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '디지털 부동산 신탁 주식에 대한 월스트리트 분석가의 목표 가격은 얼마입니까?' 입니다.",
-        "impact_score": 85
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 61
       },
       "trading_strategy": {
         "action": "관망",
@@ -300,32 +200,7 @@
     }
   },
   {
-    "id": "1470922207637430021",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T16:10:45Z",
-    "free_tier": {
-      "title": "Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.",
-      "title_en": "Amazon Earnings On Deck. AI Spending In Focus After Meta, Microsoft, Google Go Big On CapEx.",
-      "summary_kr": "Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.",
-      "link": "https://www.investors.com/news/technology/amazon-stock-q4-preview/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Amazon 수입이 갑판에 있습니다. Meta, Microsoft, Google 이후 AI 지출에 초점이 맞춰져 CapEx가 확대됩니다.' 입니다.",
-        "impact_score": 82
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "3042146228354486895",
+    "id": "-6399984541094338523",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -335,12 +210,12 @@
       "title_en": "1 Undiscovered Energy Stock to Buy Now",
       "summary_kr": "지금 구매할 수 있는 미발견 에너지 주식 1개",
       "link": "https://finance.yahoo.com/news/1-undiscovered-energy-stock-buy-165502966.html",
-      "original_source": "Yahoo Finance"
+      "original_source": "Yahoo Top Stories"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '지금 구매할 수 있는 미발견 에너지 주식 1개' 입니다.",
-        "impact_score": 76
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 64
       },
       "trading_strategy": {
         "action": "관망",
@@ -350,7 +225,57 @@
     }
   },
   {
-    "id": "-4333157821167376440",
+    "id": "-2835015744676047858",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:50:00Z",
+    "free_tier": {
+      "title": "이 10% 수익률의 배당주는 2026년에 많은 모멘텀을 가지고 기록적인 해를 맞이하고 있습니다.",
+      "title_en": "This 10%-Yielding Dividend Stock is Coming Off a Record Year With Lots Of Momentum in 2026",
+      "summary_kr": "이 10% 수익률의 배당주는 2026년에 많은 모멘텀을 가지고 기록적인 해를 맞이하고 있습니다.",
+      "link": "https://finance.yahoo.com/news/10-yielding-dividend-stock-coming-165000297.html",
+      "original_source": "Yahoo Top Stories"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "주주환원 정책(자사주 매입/배당) 발표는 주당 가치 상승의 강력한 신호입니다. Empire AI 시스템은 이를 중장기적 저점 다지기 및 추세 전환의 핵심 시그널로 인식합니다.",
+        "impact_score": 79
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8506898173934418941",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 23:48:30",
+    "free_tier": {
+      "title": "SpaceX는 화성의 2027년 달 착륙에 집중할 계획을 연기했다고 WSJ는 보도했습니다.",
+      "title_en": "SpaceX delays Mars plans to focus on 2027 moon landing, WSJ reports",
+      "summary_kr": "SpaceX는 화성의 2027년 달 착륙에 집중할 계획을 연기했다고 WSJ는 보도했습니다.",
+      "link": "https://www.investing.com/news/economy-news/spacex-delays-mars-plans-to-focus-on-moon-wsj-reports-4492181",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 60
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-2537821442601870543",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -364,11 +289,211 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 ''나는 수학으로 할 수 있다': 월스트리트의 민간 신용 대기업들은 급격한 소프트웨어 매각 속에서 AI에 대한 두려움을 진정시키려고 노력하고 있습니다' 입니다.",
-        "impact_score": 95
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 60
       },
       "trading_strategy": {
         "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8950790156180863274",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:38:53Z",
+    "free_tier": {
+      "title": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
+      "title_en": "This ETF Provides a Lens For Analyzing S&P 500 Tech Winners and Losers in 2026",
+      "summary_kr": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
+      "link": "https://finance.yahoo.com/news/etf-provides-lens-analyzing-p-163853522.html",
+      "original_source": "Yahoo Top Stories"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 63
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-7888614233744036505",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 21:18:00 GMT",
+    "free_tier": {
+      "title": "이번 주 손실을 일부 만회하기 위해 Tesla 주가가 상승했습니다.",
+      "title_en": "Tesla’s stock rallies to recover some of its losses this week",
+      "summary_kr": "회사는 무인 자동차와 태양 에너지라는 두 가지 잠재적 성장 부문에 진출하고 있습니다.",
+      "link": "https://www.marketwatch.com/story/teslas-stock-rallies-to-end-a-rough-week-c1f1d5e5?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "317558177207587789",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:38:00 GMT",
+    "free_tier": {
+      "title": "다우지수는 기록적인 시간 안에 50,000선에 도달하며 강세장의 힘을 보여줍니다.",
+      "title_en": "Dow reaches 50,000 milestone in record time, showing power of bull market",
+      "summary_kr": "다우존스산업평균지수는 금요일 1,200포인트 이상 급등하며 주식시장의 반등을 이끌었습니다.",
+      "link": "https://www.marketwatch.com/story/dow-closes-above-50-000-for-first-time-after-rough-week-for-u-s-stock-market-c47282f7?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "Empire AI 분석 결과, 해당 뉴스는 시장의 강력한 매수 동력을 자극할 것으로 평가됩니다. 특히 MarketWatch에서 언급된 실적지표 및 성장 모멘텀이 기관의 수급 유입을 가속화할 가능성이 80% 이상입니다.",
+        "impact_score": 87
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6205834077467828187",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:40:00 GMT",
+    "free_tier": {
+      "title": "올해 슈퍼볼 광고는 AI 버블이 곧 터질 것이라고 알려줍니다.",
+      "title_en": "This year’s Super Bowl ads tell you the AI bubble is about to burst",
+      "summary_kr": "2000년 닷컴처럼 인공지능 광고가 최후의 만세일 수 있는 이유",
+      "link": "https://www.marketwatch.com/story/this-years-super-bowl-ads-tell-you-the-ai-bubble-is-about-to-burst-1357e5ae?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "Empire AI 분석 결과, 해당 뉴스는 시장의 강력한 매수 동력을 자극할 것으로 평가됩니다. 특히 MarketWatch에서 언급된 실적지표 및 성장 모멘텀이 기관의 수급 유입을 가속화할 가능성이 80% 이상입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6927615367391806464",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 23:54:28",
+    "free_tier": {
+      "title": "도요타, 업계 혼란으로 강세에도 불구하고 CEO 교체",
+      "title_en": "Toyota changes CEO despite its strength through industry turmoil",
+      "summary_kr": "도요타, 업계 혼란으로 강세에도 불구하고 CEO 교체",
+      "link": "https://www.investing.com/news/stock-market-news/toyota-changes-ceo-despite-its-strength-through-industry-turmoil-4492188",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 61
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1601065300612640167",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-06 23:53:19",
+    "free_tier": {
+      "title": "Cirrus Logic CEO John Forsyth는 295만 달러의 주식을 매도했습니다.",
+      "title_en": "Cirrus Logic CEO John Forsyth sells $2.95 million in shares",
+      "summary_kr": "Cirrus Logic CEO John Forsyth는 295만 달러의 주식을 매도했습니다.",
+      "link": "https://www.investing.com/news/insider-trading-news/cirrus-logic-ceo-john-forsyth-sells-295-million-in-shares-93CH-4492187",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8950790156180863274",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T16:38:53Z",
+    "free_tier": {
+      "title": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
+      "title_en": "This ETF Provides a Lens For Analyzing S&P 500 Tech Winners and Losers in 2026",
+      "summary_kr": "이 ETF는 2026년 S&P 500 기술주 승자와 패자를 분석하기 위한 렌즈를 제공합니다.",
+      "link": "https://finance.yahoo.com/news/etf-provides-lens-analyzing-p-163853522.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다.",
+        "impact_score": 64
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-3056180323599898584",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 18:44:49 -0500",
+    "free_tier": {
+      "title": "링컨 교육 서비스: 미래 성장을 약속합니다",
+      "title_en": "Lincoln Educational Services: Future Growth Offers Promise",
+      "summary_kr": "링컨 교육 서비스: 미래 성장을 약속합니다",
+      "link": "https://seekingalpha.com/article/4867337-lincoln-educational-services-future-growth-offers-promise?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "Empire AI 분석 결과, 해당 뉴스는 시장의 강력한 매수 동력을 자극할 것으로 평가됩니다. 특히 Seeking Alpha에서 언급된 실적지표 및 성장 모멘텀이 기관의 수급 유입을 가속화할 가능성이 80% 이상입니다.",
+        "impact_score": 71
+      },
+      "trading_strategy": {
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
