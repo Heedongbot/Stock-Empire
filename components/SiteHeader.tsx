@@ -27,7 +27,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
 
     const NAV_ITEMS = [
         { id: 'dashboard', path: '/dashboard' },
-        { id: 'news', path: '/news' },
+        { id: 'newsroom', path: '/newsroom' },
         { id: 'analysis', path: '/analysis' },
         { id: 'themes', path: '/themes' },
         { id: 'pro_alpha', path: '/vvip-alpha' },

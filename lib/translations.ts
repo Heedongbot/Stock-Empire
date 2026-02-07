@@ -2,7 +2,7 @@ export const translations = {
     ko: {
         nav: {
             dashboard: "대시보드",
-            news: "AI 뉴스룸",
+            newsroom: "GLOBAL NEWSROOM",
             portfolio: "포트폴리오",
             chat: "AI 대가 상담",
             analysis: "AI 분석 리포트",

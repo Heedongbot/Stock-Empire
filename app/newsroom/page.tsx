@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { Search, TrendingUp, Calendar, ExternalLink, MessageCircle, Share2, DollarSign } from 'lucide-react';
-import { SiteHeader } from '@/components/SiteHeader';
-import { AdLeaderboard } from '@/components/ads/AdLeaderboard';
-import { AdInFeed } from '@/components/ads/AdInFeed';
-import { AdRectangle } from '@/components/ads/AdRectangle';
+import SiteHeader from '@/components/SiteHeader';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
+import AdInFeed from '@/components/ads/AdInFeed';
+import AdRectangle from '@/components/ads/AdRectangle';
 
 interface NewsItem {
     id: string;
