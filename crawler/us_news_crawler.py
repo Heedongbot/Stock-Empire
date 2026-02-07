@@ -85,10 +85,10 @@ class StockNewsCrawler:
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling Unified Global Market Sources...")
         news_list = []
         sources = [
+            {'name': 'Yahoo Finance', 'url': 'https://finance.yahoo.com/news/rssindex'},
             {'name': 'Investing.com', 'url': 'https://www.investing.com/rss/news_25.rss'},
-            {'name': 'Seeking Alpha', 'url': 'https://seekingalpha.com/feed.xml'},
             {'name': 'MarketWatch', 'url': 'https://www.marketwatch.com/rss/topstories'},
-            {'name': 'CNBC', 'url': 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839069'}
+            {'name': 'Reuters (Finance)', 'url': 'https://www.reutersagency.com/feed/?best-topics=business-finance&post_type=best'}
         ]
         
         for src in sources:

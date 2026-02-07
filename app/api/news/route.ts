@@ -8,29 +8,16 @@ export async function GET(request: Request) {
 
     try {
         const publicDir = path.join(process.cwd(), 'public');
-        const krNewsPath = path.join(publicDir, 'kr-news-realtime.json');
         const usNewsPath = path.join(publicDir, 'us-news-realtime.json');
 
-        let allNews: any[] = [];
-
-        // 한국 뉴스 로드
-        if ((market === 'all' || market === 'kr') && fs.existsSync(krNewsPath)) {
-            const krData = JSON.parse(fs.readFileSync(krNewsPath, 'utf-8'));
-            allNews = [...allNews, ...krData];
-        }
-
-        // 미국 뉴스 로드
-        if ((market === 'all' || market === 'us') && fs.existsSync(usNewsPath)) {
+        // 해외(미국) 현지 뉴스 로드 (야후, 인베스팅, 마켓워치 통합본)
+        if (fs.existsSync(usNewsPath)) {
             const usData = JSON.parse(fs.readFileSync(usNewsPath, 'utf-8'));
-            allNews = [...allNews, ...usData];
+            // 최신순 정렬은 이미 크롤러에서 관리되거나 여기서 한번 더 수행
+            return NextResponse.json(usData.slice(0, 30));
         }
 
-        // 시간순 정렬 (최신순)
-        allNews.sort((a, b) => {
-            return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
-        });
-
-        return NextResponse.json(allNews.slice(0, 30)); // 최신 30개만 반환
+        return NextResponse.json([]);
 
     } catch (error) {
         console.error('News API Integration Error:', error);
