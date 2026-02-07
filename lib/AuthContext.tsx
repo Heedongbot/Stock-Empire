@@ -47,10 +47,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         avatar: clerkUser.imageUrl,
     } : null;
 
-    // Auto-admin for specific email (Backdoor for Commander & VVIP)
-    if (user && (user.email === '66683300hd@gmail.com' || user.email === 'lgh425@gmail.com')) {
-        user.role = 'ADMIN';
-        user.tier = 'PRO';
+    // 특수 계정 권한 설정 (Special Account Permissions)
+    if (user) {
+        if (user.email === '66683300hd@gmail.com') {
+            user.role = 'ADMIN';
+            user.tier = 'PRO';
+        } else if (user.email === 'lgh425@gmail.com') {
+            user.role = 'USER';
+            user.tier = 'PRO';
+        }
     }
 
     const login = (tier?: UserTier) => {

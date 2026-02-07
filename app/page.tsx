@@ -1,28 +1,23 @@
-"use client";
-// Vercel Build Trigger: v1.0.1
+'use client';
 
+import { useState, useEffect } from 'react';
 import {
-  Globe, Zap, ArrowUpRight, UserPlus,
-  ChevronRight, TrendingUp, Database, Cpu,
-  Activity, BarChart3, Users, Flame, Clock, ShieldAlert,
-  ChevronDown, Sparkles, BookOpen, ExternalLink,
-  Milestone, BarChart, PieChart as PieChartIcon, MonitorSmartphone,
-  Briefcase, MessageSquare, Lock, Target,
-  CheckCircle2, Crown, X, CreditCard, Loader2, TrendingDown, Award, ShieldCheck
-} from "lucide-react";
-import NewsTeaser from "@/components/NewsTeaser";
-import AdLeaderboard from "@/components/ads/AdLeaderboard";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { translations } from "@/lib/translations";
-import { Ticker } from "@/components/Ticker";
-import { QuizWidget } from "@/components/QuizWidget";
-import SiteHeader from "@/components/SiteHeader";
-import { useAuth } from "@/lib/AuthContext";
+  ArrowUpRight, Sparkles, ChevronRight, Activity,
+  TrendingUp, TrendingDown, Cpu, Zap, Lock,
+  ShieldCheck, CheckCircle2, Crown, Activity as ActivityIcon,
+  BookOpen, MessageSquare, Award, Loader2, Milestone, Database
+} from 'lucide-react';
+import Link from 'next/link';
+import SiteHeader from '@/components/SiteHeader';
+import Ticker from '@/components/Ticker';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
+import QuizWidget from '@/components/QuizWidget';
+import PaymentModal from '@/components/PaymentModal';
+import { translations } from '@/lib/translations';
+import { useAuth } from '@/lib/AuthContext';
+import NewsTeaser from '@/components/NewsTeaser';
 
-// --- Interfaces for Alpha Signals ---
 interface AlphaSignal {
-  id: string;
   ticker: string;
   name: string;
   price: number;
@@ -32,138 +27,16 @@ interface AlphaSignal {
   target_price: number;
   stop_loss: number;
   ai_reason: string;
-  updated_at: string;
 }
 
-// --- Payment Modal Component ---
-function PaymentModal({ isOpen, onClose, plan, onComplete, lang }: { isOpen: boolean; onClose: () => void; plan: string; onComplete: () => void; lang: "ko" | "en" }) {
-  const [step, setStep] = useState<'CARD' | 'PROCESSING' | 'SUCCESS'>('CARD');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvc, setCvc] = useState('');
-  const t = (translations as any)[lang];
-
-  useEffect(() => {
-    if (isOpen) {
-      setStep('CARD');
-      setCardNumber('');
-      setExpiry('');
-      setCvc('');
-    }
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
-  const handlePay = () => {
-    if (!cardNumber || !expiry || !cvc) {
-      alert(t.payment.cardInfo + " " + t.payment.mockInfo);
-      return;
-    }
-    setStep('PROCESSING');
-    setTimeout(() => {
-      setStep('SUCCESS');
-      setTimeout(() => {
-        onComplete();
-        onClose();
-      }, 2000);
-    }, 2000);
-  };
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-md rounded-3xl overflow-hidden shadow-2xl animate-fade-in-up">
-        <div className="bg-slate-900/50 p-6 border-b border-slate-800 flex justify-between items-center">
-          <div>
-            <h3 className="text-xl font-black text-white italic">{t.payment.checkout}</h3>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">
-              {t.payment.selectedPlan}: <span className="text-blue-400">{plan}</span>
-            </p>
-          </div>
-          <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        <div className="p-8">
-          {step === 'CARD' && (
-            <div className="space-y-6">
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700/50 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <CreditCard className="w-24 h-24 text-white" />
-                </div>
-                <div className="flex justify-between items-center mb-8">
-                  <div className="w-12 h-8 bg-yellow-600/50 rounded flex items-center justify-center">
-                    <div className="w-8 h-5 bg-yellow-400/50 rounded-sm"></div>
-                  </div>
-                  <span className="text-xs font-mono text-slate-400">{t.payment.cardLabel}</span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="0000 0000 0000 0000"
-                  maxLength={19}
-                  className="w-full bg-transparent text-2xl font-mono text-white placeholder-slate-600 focus:outline-none mb-4 tracking-wider"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                />
-                <div className="flex gap-4">
-                  <input
-                    type="text"
-                    placeholder="MM/YY"
-                    maxLength={5}
-                    className="w-1/2 bg-transparent text-lg font-mono text-white placeholder-slate-600 focus:outline-none tracking-widest"
-                    value={expiry}
-                    onChange={(e) => setExpiry(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    placeholder="CVC"
-                    maxLength={3}
-                    className="w-1/2 bg-transparent text-lg font-mono text-white placeholder-slate-600 text-right focus:outline-none tracking-widest"
-                    value={cvc}
-                    onChange={(e) => setCvc(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button
-                onClick={handlePay}
-                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-2"
-              >
-                {t.payment.complete}
-              </button>
-            </div>
-          )}
-          {step === 'PROCESSING' && (
-            <div className="py-12 flex flex-col items-center justify-center text-center">
-              <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-6" />
-              <h4 className="text-xl font-black text-white uppercase italic tracking-widest">{t.payment.processing}</h4>
-              <p className="text-slate-500 text-xs mt-2">{t.payment.processingDesc}</p>
-            </div>
-          )}
-          {step === 'SUCCESS' && (
-            <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in">
-              <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
-                <CheckCircle2 className="w-10 h-10 text-green-500" />
-              </div>
-              <h4 className="text-2xl font-black text-white uppercase italic tracking-widest">{t.payment.success}</h4>
-              <p className="text-slate-400 text-sm mt-2 font-bold uppercase tracking-tighter">{t.payment.successDesc}</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// --- MAIN LANDING PAGE ---
-export default function LandingPage() {
-  const [lang, setLang] = useState<"ko" | "en">("ko");
+export default function Home() {
+  const [lang, setLang] = useState<'ko' | 'en'>('ko');
   const t = (translations as any)[lang];
   const { user, updateTier } = useAuth();
   const userTier = user?.tier || 'FREE';
 
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
-
   const [signals, setSignals] = useState<AlphaSignal[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -177,9 +50,7 @@ export default function LandingPage() {
       if (userLang.startsWith('ko')) {
         setLang('ko');
       } else {
-        // Default to Korean for this user even if browser is English, 
-        // because the user seems to prefer it.
-        setLang('ko');
+        setLang('ko'); // Default to Korean
       }
     }
   }, []);
@@ -192,18 +63,21 @@ export default function LandingPage() {
   useEffect(() => {
     const fetchSignals = async () => {
       try {
-        const res = await fetch(`/api/alpha-signals?lang=${lang}&t=${Date.now()}`);
-        if (res.ok) {
-          const data = await res.json();
+        const res = await fetch(`/api/alpha-signals?lang=${lang}&t=${Number(new Date())}`);
+        const data = await res.json();
+        if (Array.isArray(data)) {
           setSignals(data);
+          setLoading(false);
         }
       } catch (e) {
         console.error("Failed to fetch alpha signals", e);
-      } finally {
-        setLoading(false);
       }
     };
     fetchSignals();
+
+    // 실시간화: 30초마다 알파 시그널 동기화
+    const interval = setInterval(fetchSignals, 30000);
+    return () => clearInterval(interval);
   }, [lang]);
 
   const openPayment = (plan: string) => {
@@ -259,13 +133,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* VVIP Alpha Choice Section */}
+      {/* PRO Alpha Insights Section */}
       <section className="max-w-7xl mx-auto px-8 -mt-20 relative z-20">
         <div className="bg-slate-900/50 backdrop-blur-3xl border border-slate-800 rounded-[3rem] p-12 shadow-2xl overflow-hidden relative group">
-          <div className="absolute -top-10 -right-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-[80px]" />
+          <div className="absolute -top-10 -right-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px]" />
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-            <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">{lang === 'ko' ? 'VVIP 알파 인사이트' : 'VVIP Alpha Insights'}</h2>
-            <Link href="/vvip-alpha" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
+            <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">{t.proZone.title}</h2>
+            <Link href="/live-alpha" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-indigo-500/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-slate-300">
               {t.common.more} <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -275,9 +149,8 @@ export default function LandingPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {signals.slice(0, 4).map((sig, idx) => (
-                <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-yellow-500/50 transition-all group/card relative overflow-hidden">
-                  {/* Golden Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none" />
+                <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-indigo-500/50 transition-all group/card relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none" />
 
                   <div className="flex justify-between items-start mb-4 relative z-10">
                     <span className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</span>
@@ -286,19 +159,17 @@ export default function LandingPage() {
                         {sig.sentiment === 'BULLISH' ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
                         {sig.change_pct}%
                       </span>
-                      {/* New Premium Badge */}
-                      <span className="text-[9px] font-black text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">
-                        WHALE ACTIVE
+                      <span className="text-[9px] font-black text-indigo-400 bg-indigo-400/10 px-2 py-0.5 rounded border border-indigo-500/20">
+                        {lang === 'ko' ? '기관 분석 중' : 'INSTITUTIONAL'}
                       </span>
                     </div>
                   </div>
 
                   <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tight relative z-10">{sig.name}</h3>
 
-                  {/* Confidence Score Bar */}
                   <div className="mb-6 relative z-10">
                     <div className="flex justify-between text-[9px] font-black text-slate-500 mb-1 uppercase tracking-widest">
-                      <span>AI Confidence</span>
+                      <span>{lang === 'ko' ? 'AI 신뢰도' : 'AI Confidence'}</span>
                       <span className="text-indigo-400">{sig.impact_score}%</span>
                     </div>
                     <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
@@ -311,13 +182,13 @@ export default function LandingPage() {
 
                   <div className="space-y-4 mb-8 relative z-10">
                     <div className="flex justify-between items-end">
-                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.vvipZone.targetPrice}</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.proZone.targetPrice}</span>
                       <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none text-slate-600' : 'text-green-400'}`}>
                         ${sig.target_price}
                       </div>
                     </div>
                     <div className="flex justify-between items-end">
-                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.vvipZone.stopPrice}</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.proZone.stopPrice}</span>
                       <div className={`text-lg font-black font-mono transition-all ${userTier === 'FREE' ? 'blur-md select-none text-slate-600' : 'text-red-400'}`}>
                         ${sig.stop_loss}
                       </div>
@@ -326,14 +197,14 @@ export default function LandingPage() {
                   <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative z-10">
                     <div className="flex items-center gap-2 mb-2">
                       <Zap size={12} className="text-yellow-500 fill-yellow-500" />
-                      <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">{t.vvipZone.aiRationale}</span>
+                      <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">{t.proZone.aiRationale}</span>
                     </div>
                     <p className={`text-[11px] leading-relaxed text-slate-300 ${userTier === 'FREE' ? 'blur-[5px] line-clamp-2 select-none' : 'line-clamp-2'}`}>
                       {sig.ai_reason}
                     </p>
                     {userTier === 'FREE' && (
                       <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-[2px]">
-                        <Lock className="w-5 h-5 text-yellow-500/50" />
+                        <Lock className="w-5 h-5 text-indigo-500/50" />
                       </div>
                     )}
                   </div>
@@ -345,16 +216,14 @@ export default function LandingPage() {
           {userTier === 'FREE' && (
             <div className="mt-12 pt-12 border-t border-slate-800/50 text-center animate-pulse">
               <button
-                onClick={() => openPayment('VVIP')}
-                className="inline-flex items-center gap-2 px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl shadow-yellow-500/20 transition-all font-black"
+                onClick={() => openPayment('PRO')}
+                className="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl shadow-indigo-600/20 transition-all font-black"
               >
-                {t.vvipZone.unlockPicks} <Lock size={14} />
+                {t.proZone.unlockPicks} <Lock size={14} />
               </button>
             </div>
           )}
         </div>
-
-
       </section>
 
       {/* Sector Intelligence Section */}
@@ -393,7 +262,7 @@ export default function LandingPage() {
             {
               id: 'semiconductors',
               name: lang === 'ko' ? '반도체 가이츠' : 'Semiconductor',
-              icon: Activity,
+              icon: ActivityIcon,
               color: 'from-blue-600/20 to-cyan-600/5',
               preview: ['NVDA', 'AMD', 'AVGO']
             },
@@ -410,7 +279,6 @@ export default function LandingPage() {
               href={`/themes?id=${theme.id}`}
               className={`group p-8 rounded-[2rem] bg-gradient-to-br ${theme.color} border border-slate-800 hover:border-blue-500/50 hover:bg-slate-800/40 transition-all relative overflow-hidden flex flex-col h-full`}
             >
-              {/* Background Glow */}
               <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-all duration-500"></div>
 
               <div className="flex justify-between items-start mb-6">
@@ -419,7 +287,9 @@ export default function LandingPage() {
                 </div>
                 <div className="flex items-center gap-1.5 translate-y-1">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                  <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest group-hover:text-green-400 transition-colors">Live Scan</span>
+                  <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest group-hover:text-green-400 transition-colors">
+                    {lang === 'ko' ? '실시간 스캔 중' : 'Live Scan'}
+                  </span>
                 </div>
               </div>
 
@@ -437,14 +307,14 @@ export default function LandingPage() {
               </div>
 
               <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-white transition-all">
-                {lang === 'ko' ? '섹터 인스펙션' : 'SECTOR INSPECTION'} <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                {lang === 'ko' ? '섹터 정밀 분석' : 'SECTOR INSPECTION'} <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* NEW: News Teaser Section */}
+      {/* News Teaser Section */}
       <NewsTeaser lang={lang} openPayment={openPayment} />
 
       {/* Stats Summary Section */}
@@ -463,8 +333,6 @@ export default function LandingPage() {
             <div className="text-[10px] font-black text-slate-500 tracking-widest italic">{t.stats.revenue}</div>
           </div>
         </div>
-
-        {/* AdSense Leaderboard Placement */}
         <AdLeaderboard />
       </section>
 
@@ -479,8 +347,8 @@ export default function LandingPage() {
             <span className="text-[10px] text-slate-500 uppercase font-black mb-2 tracking-widest">{t.pricing.entry}</span>
             <div className="text-4xl font-black text-white mb-6 tracking-tighter">{t.pricing.free_price}</div>
             <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> {t.pricing.features.news}</li>
-              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><Activity className="w-4 h-4 text-slate-700" /> {t.pricing.features.delayed_charts}</li>
+              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><ActivityIcon className="w-4 h-4 text-slate-700" /> {t.pricing.features.news}</li>
+              <li className="flex items-center gap-2 text-xs text-slate-400 font-bold uppercase italic"><ActivityIcon className="w-4 h-4 text-slate-700" /> {t.pricing.features.delayed_charts}</li>
             </ul>
             {userTier === 'FREE' ? (
               <button className="w-full py-4 rounded-xl border border-slate-700 text-[10px] font-black uppercase text-slate-500 cursor-default">{t.pricing.current_tier}</button>
@@ -517,8 +385,6 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-slate-900 bg-[#020617] py-20 text-center animate-fade-in relative z-10">
         <div className="max-w-7xl mx-auto px-6">
-
-          {/* Security Badges */}
           <div className="flex justify-center gap-6 mb-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
             <div className="flex items-center gap-2 px-4 py-2 border border-slate-800 rounded bg-slate-900/50">
               <ShieldCheck className="w-4 h-4 text-green-500" />
@@ -540,7 +406,6 @@ export default function LandingPage() {
             &copy; 2026 STOCK EMPIRE INC. {lang === 'ko' ? '글로벌 금융 혁신' : 'Global Financial Innovation'}.
           </p>
 
-          {/* Legal Disclaimer */}
           <div className="max-w-3xl mx-auto border-t border-slate-900 pt-8">
             <p className="text-[10px] text-slate-600 leading-relaxed font-medium text-balance">
               {lang === 'ko'
@@ -551,7 +416,6 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* Modals & Ticker components */}
       <PaymentModal isOpen={isPaymentOpen} onClose={() => { setIsPaymentOpen(false); setSelectedPlan(""); }} plan={selectedPlan} onComplete={handleUpgradeComplete} lang={lang} />
       <QuizWidget />
     </div>

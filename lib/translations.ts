@@ -7,11 +7,11 @@ export const translations = {
             chat: "AI 대가 상담",
             analysis: "AI 분석 리포트",
             themes: "테마 인텔리전스",
-            vvip_alpha: "VVIP 알파 시그널",
-            market: "시장 시그널 (VVIP)",
+            pro_alpha: "PRO 알파 시그널",
+            market: "시장 시그널 (PRO)",
             home: "홈",
             store: "스토어",
-            vip: "VIP 존"
+            pro_zone: "PRO 존"
         },
         ranks: {
             CORPORAL: "SILVER",
@@ -71,8 +71,7 @@ export const translations = {
             loading: "불러오는 중...",
             more: "더 보기",
             back: "뒤로가기",
-            vipOnly: "VIP 전용",
-            vvipOnly: "VVIP 전용",
+            proOnly: "PRO 전용",
             analyzedBy: "분석가:",
             articleSummary: "기사 요약",
             fullAnalysis: "심층 분석",
@@ -106,11 +105,11 @@ export const translations = {
             economyCycle: "유동성 순환 모델",
             macroRiskRegime: "거시 경제 리스크 체제",
             recentSignals: "최근 거시 시그널 이력",
-            vvipOnly: "VVIP 한정 제공",
-            vvipDesc: "거시 경제 리스크 및 기관용 확률 맵에 접근하려면 VVIP 티어가 필요합니다.",
+            proOnly: "PRO 한정 제공",
+            proDesc: "거시 경제 리스크 및 기관용 확률 맵에 접근하려면 PRO 티어가 필요합니다.",
             monthly: "월간",
             yearly: "연간 (최대 할인)",
-            joinVvipBtn: "VVIP 멤버쉽 시작하기",
+            joinProBtn: "PRO 멤버쉽 시작하기",
             discountMsg: "언제든 취소 가능하며, 보안 금융 서포트를 제공합니다.",
             halvingMsg: "반감기 데이터 및 온체인 유동성 분석 결과입니다.",
             signals_1: "S&P 500 강세장 체제 포착",
@@ -119,7 +118,7 @@ export const translations = {
             accuracy: "정확도 포착",
             indicators: {
                 vix: "VIX 변동성 지수",
-                fedRate: "Fed 금리 (3월)",
+                fedRate: "Fed 금리 (2월)",
                 inflation: "인플레이션 (YoY)",
                 usdIndex: "달러 지수",
                 lowRisk: "저위험",
@@ -178,13 +177,13 @@ export const translations = {
             fearGreed: "공포와 탐욕 지수",
             fearGreedDesc: "실시간 시장 심리를 수치화하여 극단적 공포와 탐욕 상태를 진단합니다."
         },
-        vvipZone: {
-            title: "VVIP 알파 인사이트",
+        proZone: {
+            title: "PRO 알파 인사이트",
             subtitle: "상위 1% 투자자만을 위한 주간 고확신 셋업",
             launchAnalyzer: "심층 분석기 실행",
             hiddenGem: "숨겨진 유망주",
-            upgradeToReveal: "VVIP로 업그레이드하여 진입/청산 목표가를 확인하세요",
-            unlockPicks: "VVIP 픽 잠금 해제",
+            upgradeToReveal: "PRO로 업그레이드하여 진입/청산 목표가를 확인하세요",
+            unlockPicks: "PRO 픽 잠금 해제",
             currentPrice: "종가 (전일)",
             targetPrice: "익절가",
             stopPrice: "손절가",
@@ -226,7 +225,7 @@ export const translations = {
             premiumTitle: "프리미엄 분석 리포트",
             saveReport: "리포트 저장",
             liveUsers: "실시간 열람 중",
-            vvipExclusive: "VVIP 전용 분석",
+            proExclusive: "PRO 전용 분석",
             masterBuffett: "워렌 버핏 관점",
             validFor: "유효 시간",
             macroRisk: "매크로 리스크",
@@ -259,9 +258,9 @@ export const translations = {
                 intentTitle: "경영진 발언: 숨겨진 의도",
                 ibConsensus: "IB 컨센서스 점수",
                 ibDesc: "주요 5개 IB(골드만삭스, MS 등) 의견 수치화",
-                locked: "VVIP 전용 기밀 분석",
-                unlockMsg: "글로벌 큰손들과 경영진의 심리적 의도는 VVIP 가입 시 즉시 공개됩니다.",
-                joinVvip: "VVIP 멤버십 가입하기",
+                locked: "PRO 전용 기밀 분석",
+                unlockMsg: "글로벌 큰손들과 경영진의 심리적 의도는 PRO 가입 시 즉시 공개됩니다.",
+                joinPro: "PRO 멤버십 가입하기",
                 macroWeight: "매크로 가중치 중심"
             },
             action: {
@@ -273,7 +272,7 @@ export const translations = {
                 loading: "데이터 분석 중..."
             },
             paywall: {
-                scenariosBtn: "VIP 업그레이드하고 시나리오 전체 보기"
+                scenariosBtn: "PRO 업그레이드하고 시나리오 전체 보기"
             },
             footer: {
                 terminal: "Stock Empire 지능형 터미널",
@@ -294,7 +293,7 @@ export const translations = {
             ready: "준비됨",
             deepAnalysis: "심층 분석 가능",
             rationale: "AI 투자 근거",
-            upgradeVvip: "VVIP 업그레이드",
+            upgradePro: "PRO 업그레이드",
             masterWarren: "워렌 버핏 관점",
             liveReading: "실시간 열람 중",
             master: "마스터: 워렌 버핏 관점"
@@ -336,11 +335,11 @@ export const translations = {
             chat: "AI Chat",
             analysis: "AI Analysis",
             themes: "Sector Themes",
-            vvip_alpha: "VVIP Alpha",
-            market: "Market Signals (VVIP)",
+            pro_alpha: "PRO Alpha",
+            market: "Market Signals (PRO)",
             home: "Home",
             store: "Store",
-            vip: "VIP Zone"
+            pro_zone: "PRO Zone"
         },
         ranks: {
             CORPORAL: "CORPORAL",
@@ -400,8 +399,7 @@ export const translations = {
             loading: "Loading...",
             more: "More",
             back: "Back",
-            vipOnly: "VIP Only",
-            vvipOnly: "VVIP Only",
+            proOnly: "PRO Only",
             analyzedBy: "Analyzed by:",
             articleSummary: "Article Summary",
             fullAnalysis: "Deep Dive",
@@ -436,11 +434,11 @@ export const translations = {
             economyCycle: "Liquidity Cycle Model",
             macroRiskRegime: "Macro Risk Regime",
             recentSignals: "Recent Macro Signal History",
-            vvipOnly: "VVIP Exclusive Content",
-            vvipDesc: "VVIP tier is required to access macro economic risk assessments and institutional-grade probability maps.",
+            proOnly: "PRO Exclusive Content",
+            proDesc: "PRO tier is required to access macro economic risk assessments and institutional-grade probability maps.",
             monthly: "Monthly",
             yearly: "Yearly (Best Value)",
-            joinVvipBtn: "Start VVIP Membership",
+            joinProBtn: "Start PRO Membership",
             discountMsg: "Cancel anytime. Secure financial support included.",
             halvingMsg: "Analysis results based on halving data and on-chain liquidity.",
             signals_1: "S&P 500 Bullish Regime Detection",
@@ -449,7 +447,7 @@ export const translations = {
             accuracy: "Accuracy Captured",
             indicators: {
                 vix: "VIX Index",
-                fedRate: "Fed Rate (Mar)",
+                fedRate: "Fed Rate (Feb)",
                 inflation: "Inflation (YoY)",
                 usdIndex: "USD Index",
                 lowRisk: "Low Risk",
@@ -508,13 +506,13 @@ export const translations = {
             fearGreed: "Fear & Greed Index",
             fearGreedDesc: "Quantifying real-time market sentiment to diagnose extreme fear and greed states."
         },
-        vvipZone: {
-            title: "VVIP ALPHA INSIGHTS",
+        proZone: {
+            title: "PRO ALPHA INSIGHTS",
             subtitle: "Only for the top 1% investors. Weekly high-conviction setup.",
             launchAnalyzer: "Launch Deep Analyzer",
             hiddenGem: "HIDDEN GEM",
-            upgradeToReveal: "Upgrade to VVIP to reveal Entry/Exit targets",
-            unlockPicks: "UNLOCK VVIP PICKS",
+            upgradeToReveal: "Upgrade to PRO to reveal Entry/Exit targets",
+            unlockPicks: "UNLOCK PRO PICKS",
             currentPrice: "Previous Close",
             targetPrice: "TARGET",
             stopPrice: "STOP",
@@ -556,7 +554,7 @@ export const translations = {
             premiumTitle: "Premium Analysis",
             saveReport: "SAVE REPORT",
             liveUsers: "users reading live",
-            vvipExclusive: "VVIP Exclusive Analysis",
+            proExclusive: "PRO Exclusive Analysis",
             masterBuffett: "Master: Buffett POV",
             validFor: "Valid for",
             macroRisk: "Macro Risk",
@@ -589,9 +587,9 @@ export const translations = {
                 intentTitle: "Executive Intent: Hidden Meanings",
                 ibConsensus: "IB Consensus Score",
                 ibDesc: "Consensus of top 5 IBs (Goldman, MS, etc.)",
-                locked: "VVIP Confidential Analysis",
-                unlockMsg: "Global whales and executive intent revealed upon VVIP join.",
-                joinVvip: "Join VVIP Membership",
+                locked: "PRO Confidential Analysis",
+                unlockMsg: "Global whales and executive intent revealed upon PRO join.",
+                joinPro: "Join PRO Membership",
                 macroWeight: "Macro Weight Focus"
             },
             action: {
@@ -603,7 +601,7 @@ export const translations = {
                 loading: "Analysing data..."
             },
             paywall: {
-                scenariosBtn: "Upgrade to VIP to view all scenarios"
+                scenariosBtn: "Upgrade to PRO to view all scenarios"
             },
             footer: {
                 terminal: "Stock Empire Intelligence Terminal",
@@ -624,7 +622,7 @@ export const translations = {
             ready: "READY",
             deepAnalysis: "Deep Analysis Available",
             rationale: "AI Investment Rationale",
-            upgradeVvip: "Upgrade VVIP",
+            upgradePro: "Upgrade PRO",
             masterWarren: "Warren Buffett View",
             liveReading: "users reading live",
             master: "Master: Warren Buffett Perspective"

@@ -12,8 +12,7 @@ datasource db {
 
 enum Tier {
   FREE
-  VIP
-  VVIP
+  PRO
 }
 
 enum BillingCycle {

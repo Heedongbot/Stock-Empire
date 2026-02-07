@@ -60,10 +60,10 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
                     <Newspaper className="w-6 h-6 text-red-500" />
                 </div>
                 <h2 className="text-3xl font-black italic tracking-tighter text-white uppercase">
-                    {lang === 'ko' ? "TODAY'S TOP NEWS" : "TODAY'S TOP NEWS"}
+                    {lang === 'ko' ? "오늘의 주요 뉴스" : "TODAY'S TOP NEWS"}
                 </h2>
                 <span className="px-3 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold rounded-full uppercase tracking-widest border border-slate-700">
-                    AI ANALYZED
+                    {lang === 'ko' ? "AI 분석 완료" : "AI ANALYZED"}
                 </span>
             </div>
 
@@ -72,9 +72,9 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
                     <>
                         <div key={news.id} className="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden group hover:border-slate-700 transition-all">
                             <div className="flex justify-between items-start mb-4">
-                                <span className="text-[10px] font-black text-slate-500 bg-slate-950 px-2 py-1 rounded">NEWS #{news.id}</span>
+                                <span className="text-[10px] font-black text-slate-500 bg-slate-950 px-2 py-1 rounded">{lang === 'ko' ? "뉴스" : "NEWS"} #{news.id}</span>
                                 <span className="text-[10px] font-black text-indigo-400 flex items-center gap-1">
-                                    <FileText size={12} /> SUMMARY
+                                    <FileText size={12} /> {lang === 'ko' ? "요약" : "SUMMARY"}
                                 </span>
                             </div>
 
@@ -88,7 +88,7 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
 
                             <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 relative">
                                 <h4 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    🤖 AI Insight
+                                    🤖 {lang === 'ko' ? "AI 인사이트" : "AI Insight"}
                                 </h4>
 
                                 <p className="text-xs text-slate-300 font-bold mb-1">
@@ -107,7 +107,7 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
                                                 onClick={() => openPayment('VIP')}
                                                 className="px-4 py-2 bg-slate-900 border border-indigo-500/30 text-indigo-400 text-[10px] font-black rounded-lg hover:bg-indigo-600 hover:text-white transition-all uppercase tracking-widest flex items-center gap-2 shadow-xl"
                                             >
-                                                UNLOCK <ArrowRight size={10} />
+                                                {lang === 'ko' ? "잠금 해제" : "UNLOCK"} <ArrowRight size={10} />
                                             </button>
                                         </div>
                                     )}
