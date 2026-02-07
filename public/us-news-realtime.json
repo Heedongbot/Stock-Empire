@@ -6,17 +6,17 @@
     "is_breaking": true,
     "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
-      "title": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
-      "title_en": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
-      "summary_kr": "연방공개시장위원회(FOMC)가 기준금리를 5.25~5.50% 범위로 동결하기로 결정했습니다.",
+      "title": "[속보] 미국 연준, 기준금리 0.25%p 전격 인하 결정 (4.50~4.75%)",
+      "title_en": "[Breaking] Fed Cuts Rates by 25bps to 4.50~4.75%",
+      "summary_kr": "연방공개시장위원회(FOMC)가 기준금리를 4.50~4.75% 범위로 0.25%p 인하하기로 결정했습니다. 드디어 피벗(전환)이 시작되었습니다.",
       "link": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
       "original_source": "Federal Reserve"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 동결 | 실제: 동결 | 서프라이즈: 없음",
+        "summary_kr": "[최대리 속보] [5-STAR] 드디어 금리 인하(Pivot) 시작! 성장주(빅테크)에 강력한 호재. | 예상치 부합 | 서프라이즈: 없음",
         "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
+        "investment_insight": "금리 인하는 유동성 공급의 신호탄입니다. 성장주 비중을 확대하고, 채권(TLT) 매수를 고려하십시오."
       }
     }
   },
