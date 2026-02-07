@@ -138,30 +138,51 @@ function ThemeContent() {
                                 </div>
 
                                 <div className="flex justify-between items-start mb-6">
-                                    <div className="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</div>
-                                    <div className={`text-xs font-black flex items-center gap-1 ${sig.change_pct >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                    <div className="flex flex-col gap-2">
+                                        <div className="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs font-black text-white w-fit">{sig.ticker}</div>
+                                        {sig.whale_active && (
+                                            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/20 rounded text-[8px] font-black text-yellow-500 uppercase tracking-widest">
+                                                Whale Active
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className={`text-sm font-black flex items-center gap-1.5 ${sig.change_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                         {sig.change_pct > 0 ? '+' : ''}{sig.change_pct}%
-                                        {sig.change_pct >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+                                        {sig.change_pct >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                                     </div>
                                 </div>
 
                                 <h3 className="text-xl font-black text-white mb-1 uppercase tracking-tight truncate">{sig.name}</h3>
                                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-8">Constituent Performance</p>
 
-                                <div className="grid grid-cols-2 gap-4 mb-8">
-                                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                                        <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">{lang === 'ko' ? '목표가' : 'Target'}</div>
-                                        <div className={`text-lg font-black ${!isVVIP ? 'blur-md select-none text-slate-700' : 'text-blue-400'}`}>${sig.target_price}</div>
+                                <div className="grid grid-cols-1 gap-4 mb-8">
+                                    <div className="bg-slate-950 border border-slate-800 p-4 rounded-2xl flex justify-between items-center group/price">
+                                        <div className="text-[9px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '현재가' : 'Live Price'}</div>
+                                        <div className="text-xl font-black text-white font-mono italic">${sig.price}</div>
                                     </div>
-                                    <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                                        <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">Impact</div>
-                                        <div className="text-lg font-black text-white">{sig.impact_score}%</div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="bg-slate-950 border border-slate-800 p-4 rounded-2xl">
+                                            <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">{lang === 'ko' ? '목표가' : 'Target'}</div>
+                                            <div className={`text-lg font-black font-mono ${!isVVIP && user?.role !== 'ADMIN' ? 'blur-md select-none text-slate-700' : 'text-blue-400'}`}>${sig.target_price}</div>
+                                        </div>
+                                        <div className="bg-slate-950 border border-slate-800 p-4 rounded-2xl">
+                                            <div className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mb-1">Impact</div>
+                                            <div className="text-lg font-black text-white font-mono">{sig.impact_score}%</div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-2 text-xs text-slate-400 italic bg-slate-950/30 p-4 rounded-xl border border-slate-800/30">
-                                    <Zap className="w-3 h-3 text-yellow-500 shrink-0" />
-                                    <p className="line-clamp-2">"{sig.ai_reason}"</p>
+                                <div className="pt-6 border-t border-slate-800/80">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Zap className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+                                        <span className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">
+                                            {lang === 'ko' ? '김대리의 인사이트' : 'Kim Daeri Analyst Insight'}
+                                        </span>
+                                    </div>
+                                    <p className="text-[12px] leading-relaxed text-slate-300 italic font-medium">
+                                        "{sig.ai_reason}"
+                                    </p>
                                 </div>
 
                                 {!isVVIP && (

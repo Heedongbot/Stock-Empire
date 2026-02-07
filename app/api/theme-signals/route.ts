@@ -32,19 +32,30 @@ export async function GET(request: Request) {
         const signals = quotes.map((quote: any) => {
             const ticker = quote.symbol;
             const price = quote.regularMarketPrice;
-            const change = quote.regularMarketChangePercent;
+            const change = quote.regularMarketChangePercent || 0;
+            const volume = quote.regularMarketVolume || 0;
 
-            let ai_reason = isEn
-                ? `Leading the ${theme.name_en} sector with strong technical signals.`
-                : `${theme.name_ko} 섹터를 주도하며 강력한 기술적 지표를 보여주고 있습니다.`;
+            let sentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL' = change >= 1.5 ? 'BULLISH' : change <= -1.5 ? 'BEARISH' : 'NEUTRAL';
+            let impact_score = 65 + Math.floor(Math.random() * 30);
 
-            let sentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL' = change >= 0 ? 'BULLISH' : 'BEARISH';
-            let impact_score = 70 + Math.floor(Math.random() * 25);
+            // Institutional Momentum Flag (Simulation based on volume/impact)
+            const whale_active = volume > 5000000 || impact_score > 85;
 
-            if (Math.abs(change) < 0.5) sentiment = 'NEUTRAL';
+            let ai_reason = "";
+            if (lang === 'ko') {
+                if (change > 3) ai_reason = `세력의 강력한 매집으로 기술적 저항선을 돌파했습니다. "${theme.name_ko}" 섹터 내 가장 공격적인 우상향 흐름이 관찰됩니다.`;
+                else if (change > 0) ai_reason = `기관 자금 유입과 함께 견고한 지지선을 형성 중입니다. 추세 추종 전략(Trend Following)이 유효한 구간입니다.`;
+                else if (change < -3) ai_reason = `단기 과매도 구간 진입이 임박했습니다. ${ticker} 특유의 변동성을 고려할 때, 바닥 확인 후 반등 노림수가 필요합니다.`;
+                else ai_reason = `안정적인 매물 소화 과정을 거치고 있습니다. 섹터 전반의 지수 방향성에 동조하며 에너지를 응축 중인 것으로 분석됩니다.`;
+            } else {
+                if (change > 3) ai_reason = `Strong institutional accumulation detected. Bullish breakout targeting key resistance levels in the ${theme.name_en} sector.`;
+                else if (change > 0) ai_reason = `Forming a solid base with consistent buyer interest. Trend following maintains high probability of success.`;
+                else if (change < -3) ai_reason = `Extreme short-term volatility. Entering oversold territory - monitoring for a classic RSI reversal signal.`;
+                else ai_reason = `Consolidating within a tight range. Currently synchronizing with broader sector indices while accumulating momentum.`;
+            }
 
-            const target_price = price * (1 + (impact_score / 1500) + 0.03);
-            const stop_loss = price * (1 - (impact_score / 2500) - 0.02);
+            const target_price = price * (1 + (impact_score / 1200) + 0.04);
+            const stop_loss = price * (1 - (impact_score / 2000) - 0.03);
 
             return {
                 id: `${ticker}-${Date.now()}`,
@@ -54,6 +65,7 @@ export async function GET(request: Request) {
                 change_pct: parseFloat(change.toFixed(2)),
                 sentiment,
                 impact_score,
+                whale_active,
                 target_price: parseFloat(target_price.toFixed(2)),
                 stop_loss: parseFloat(stop_loss.toFixed(2)),
                 ai_reason,
