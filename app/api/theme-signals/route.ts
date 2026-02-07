@@ -88,8 +88,8 @@ export async function GET(request: Request) {
 
         const fallbackSignals = theme.tickers.map(ticker => {
             const priceMap: Record<string, number> = {
-                'NVDA': 185.65, 'TSLA': 412.50, 'AAPL': 248.50, 'MSFT': 482.10, 'PLTR': 72.40,
-                'AMD': 186.20, 'GOOGL': 192.40, 'META': 562.30, 'AVGO': 212.50, 'SMCI': 88.40
+                'NVDA': 185.65, 'TSLA': 412.50, 'AAPL': 248.50, 'MSFT': 442.10, 'PLTR': 72.40,
+                'AMD': 208.70, 'GOOGL': 188.40, 'META': 542.30, 'AVGO': 332.96, 'SMCI': 88.40
             };
             const basePrice = priceMap[ticker] || (100 + Math.random() * 400);
             const change = ticker === 'NVDA' ? 8.01 : (Math.random() * 6) - 2;

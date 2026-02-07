@@ -187,7 +187,7 @@ function ThemeContent() {
 
                                 <div className="grid grid-cols-1 gap-4 mb-8 flex-1">
                                     <div className="bg-slate-950/80 border border-slate-800 p-5 rounded-3xl flex justify-between items-center group/price transition-colors hover:border-slate-700">
-                                        <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '실시간 거래가' : 'Live Trade Price'}</div>
+                                        <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{lang === 'ko' ? '현재가' : 'Current Price'}</div>
                                         <div className="text-2xl font-black text-white font-mono italic">${sig.price}</div>
                                     </div>
 

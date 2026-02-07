@@ -9,6 +9,11 @@ export async function GET(request: Request) {
             return NextResponse.json({ error: 'Symbol is required' }, { status: 400 });
         }
 
+        const priceMap: Record<string, number> = {
+            'NVDA': 185.65, 'TSLA': 412.50, 'AAPL': 248.50, 'MSFT': 442.10, 'PLTR': 72.40,
+            'AMD': 208.70, 'GOOGL': 188.40, 'META': 542.30, 'AVGO': 332.96, 'SMCI': 88.40
+        };
+
         const response = await fetch(
             `https://query1.finance.yahoo.com/v8/finance/quote?symbols=${symbol}`,
             {
@@ -89,15 +94,6 @@ function getFallbackQuote(symbol: string) {
             marketCap: 15400000,
             trailingPE: null // Loss making usually
         },
-        'AMD': {
-            symbol: 'AMD',
-            shortName: 'Advanced Micro Devices, Inc.',
-            regularMarketPrice: 178.50,
-            regularMarketChangePercent: 2.45,
-            regularMarketVolume: 45000000,
-            marketCap: 288000000000,
-            trailingPE: 32.5
-        },
         'NVDA': {
             symbol: 'NVDA',
             shortName: 'NVIDIA Corporation',
@@ -106,6 +102,24 @@ function getFallbackQuote(symbol: string) {
             regularMarketVolume: 320000000,
             marketCap: 4500000000000,
             trailingPE: 82.4
+        },
+        'AMD': {
+            symbol: 'AMD',
+            shortName: 'Advanced Micro Devices, Inc.',
+            regularMarketPrice: 208.70,
+            regularMarketChangePercent: 8.28,
+            regularMarketVolume: 110000000,
+            marketCap: 335000000000,
+            trailingPE: 42.5
+        },
+        'MSFT': {
+            symbol: 'MSFT',
+            shortName: 'Microsoft Corporation',
+            regularMarketPrice: 442.10,
+            regularMarketChangePercent: 0.68,
+            regularMarketVolume: 25000000,
+            marketCap: 3300000000000,
+            trailingPE: 38.5
         },
         'TSLA': {
             symbol: 'TSLA',
