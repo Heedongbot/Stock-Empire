@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: "0 to 100 Million: Zero Capital Automated Investment System",
 };
 
+export const dynamic = 'force-dynamic';
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "@/lib/AuthContext";
 import Script from "next/script";
@@ -36,10 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_Y2xlcmstZW1waXJlLWR1bW15LWtleS0wMTAxMDE="}
-      localization={koKR}
-    >
+    <ClerkProvider localization={koKR}>
       <html lang="ko" suppressHydrationWarning>
         <head>
           <script
