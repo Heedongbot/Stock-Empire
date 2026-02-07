@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
+import React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "@/lib/AuthContext";
 import Script from "next/script";
@@ -37,12 +38,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  // --- SURVIVOR MODE: Manual Fallback ---
+  const [manualKey, setManualKey] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedKey = localStorage.getItem('EMPIRE_CLERK_KEY_OVERRIDE');
+      if (savedKey) setManualKey(savedKey);
+    }
+  }, []);
+
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || manualKey;
 
   if (!publishableKey) {
     const publicEnvVars = typeof window !== 'undefined'
       ? Object.keys(process.env).filter(key => key.startsWith('NEXT_PUBLIC'))
       : [];
+
+    const handleManualInput = () => {
+      const key = prompt('Clerk Publishable Key를 직접 입력해주세요 (pk_test_...):');
+      if (key && key.startsWith('pk_')) {
+        localStorage.setItem('EMPIRE_CLERK_KEY_OVERRIDE', key);
+        window.location.reload();
+      } else if (key) {
+        alert('올바른 형식의 키가 아닙니다. pk_로 시작하는 키를 입력해주세요.');
+      }
+    };
 
     return (
       <html lang="ko">
@@ -61,14 +82,18 @@ export default function RootLayout({
                 </ul>
               </div>
 
-              <div style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.6' }}>
+              <div style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '30px' }}>
                 <p><strong>🛠️ 해결 방법:</strong></p>
-                <ol style={{ textAlign: 'left', display: 'inline-block' }}>
-                  <li>Vercel Settings {">"} Env Variables 이동</li>
-                  <li><code>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code> 입력</li>
-                  <li><strong>Redeploy (Use existing Build Cache 체크 해제!)</strong></li>
-                </ol>
+                <p>1. Vercel Settings {">"} Env Variables 입력 확인</p>
+                <p>2. <strong>Redeploy (캐시 해제)</strong> 실행</p>
               </div>
+
+              <button
+                onClick={handleManualInput}
+                style={{ background: '#ff4d4d', color: 'white', border: 'none', padding: '12px 32px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 15px rgba(255, 77, 77, 0.4)' }}
+              >
+                🔐 수동으로 보안 키 입력하여 즉시 입장
+              </button>
             </div>
           </div>
         </body>

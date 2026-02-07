@@ -183,16 +183,23 @@ function NotebookContent() {
             <SiteHeader lang={lang} setLang={setLang} />
 
             <main className="flex-1 max-w-5xl w-full mx-auto px-6 py-8 flex flex-col">
-                <div className="flex items-center gap-3 mb-8">
-                    <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg shadow-blue-500/20 animate-pulse">
-                        <BrainCircuit className="w-8 h-8 text-white" />
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="relative">
+                        <div className="p-3 bg-gradient-to-br from-[#00ffbd] to-[#0088ff] rounded-2xl shadow-[0_0_30px_rgba(0,255,189,0.3)] animate-pulse">
+                            <BrainCircuit className="w-10 h-10 text-white" />
+                        </div>
+                        <div className="absolute -top-2 -right-2 bg-slate-950 border border-[#00ffbd] px-2 py-0.5 rounded-full">
+                            <span className="text-[8px] font-black text-[#00ffbd]">1,000+ SCENARIOS</span>
+                        </div>
                     </div>
                     <div>
-                        <h1 className="text-2xl font-black italic uppercase tracking-tighter text-white">
-                            Kim Daeri<span className="text-blue-400">'s</span> Insights
+                        <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white">
+                            EMPIRE <span className="text-[#00ffbd]">BRAIN</span>
                         </h1>
-                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
-                            {lang === 'ko' ? '김대리의 인공지능 분석' : 'Powered by Kim Daeri AI'}
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mt-1">
+                            {lang === 'ko'
+                                ? '보스님이 학습시킨 1,000가지 실전 시나리오 기반 분석'
+                                : 'AI Trained on 1,000 Professional Trading Scenarios'}
                         </p>
                     </div>
                 </div>
