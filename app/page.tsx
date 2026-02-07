@@ -220,10 +220,18 @@ export default function LandingPage() {
       <Ticker />
       <SiteHeader lang={lang} setLang={handleSetLang} />
 
-      {/* Hero Section */}
+      {/* HERO SECTION WITH EVENT BANNER */}
       <section className="relative pt-20 pb-40 overflow-hidden">
+        {/* EVENT BANNER */}
+        <div className="absolute top-0 w-full bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 py-2 text-center z-50 animate-pulse">
+          <span className="text-white text-xs md:text-sm font-black uppercase tracking-widest flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-yellow-300" />
+            {lang === 'ko' ? "🎉 GRAND OPEN: 2월 한달간 PRO 전 기능 무료! (결제는 3월 1일부터)" : "🎉 GRAND OPEN: FREE PRO ACCESS until Feb 28! (Billing starts Mar 1)"}
+          </span>
+        </div>
+
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-radial from-indigo-900/20 via-transparent to-transparent opacity-50 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center mt-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-[10px] font-black tracking-widest uppercase text-indigo-400 mb-8 animate-fade-in">
             <Sparkles className="w-3 h-3" /> {t.common.statusOnline}
           </div>
