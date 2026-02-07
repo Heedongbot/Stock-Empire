@@ -44,9 +44,18 @@ export default function RootLayout({
       <html lang="ko">
         <body style={{ margin: 0 }}>
           <div style={{ padding: '20px', textAlign: 'center', background: '#0a0a0a', color: '#00ff41', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: 'monospace' }}>
-            <h2>[SYSTEM] SECURITY KEY MISSING</h2>
-            <p>Vercel 환경 변수가 아직 로드되지 않았습니다.</p>
-            <p><small>Vercel Settings > Environment Variables에서 <br />NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY를 확인해주세요.</small></p>
+            <h2 style={{ color: '#ff4d4d' }}>[SYSTEM] SECURITY KEY MISSING</h2>
+            <div style={{ border: '1px solid #333', padding: '20px', display: 'inline-block', margin: '0 auto', textAlign: 'left', maxWidth: '500px' }}>
+              <p>⚠️ <strong>원인:</strong> Clerk 통신용 열쇠(Publishable Key)를 찾을 수 없습니다.</p>
+              <p>📌 <strong>조치 방법:</strong></p>
+              <ol style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#ccc' }}>
+                <li>Vercel {" > "} Settings {" > "} Environment Variables 이동</li>
+                <li><code>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code> 이름 확인 (오타 주의)</li>
+                <li><strong>Production, Preview, Development</strong> 전체 체크 확인</li>
+                <li>저장 후 <strong>Redeploy</strong> (캐시 없이) 실행</li>
+              </ol>
+              <p style={{ fontSize: '0.8rem', color: '#888', marginTop: '15px' }}>※ 브라우저가 현재 환경 변수를 전혀 읽지 못하고 있습니다.</p>
+            </div>
           </div>
         </body>
       </html>
