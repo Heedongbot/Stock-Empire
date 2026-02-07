@@ -18,7 +18,7 @@
     "dotenv": "^17.2.3",
     "fast-xml-parser": "^5.3.4",
     "lucide-react": "^0.563.0",
-    "next": "15.1.6",
+    "next": "15.1.7",
     "openai": "^6.17.0",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -29,7 +29,7 @@
     "@types/react": "19.2.13",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.0.0",
-    "eslint-config-next": "15.0.3",
+    "eslint-config-next": "15.1.7",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }
