@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react';
 
 export default function LiveTicker() {
   const [tickerData, setTickerData] = useState([
-    { symbol: 'KOSPI', value: 2580.45, change: 0.24, changePercent: '+0.24%' },
-    { symbol: 'KOSDAQ', value: 850.32, change: 0.41, changePercent: '+0.41%' },
-    { symbol: 'NASDAQ', value: 15234.56, change: 1.24, changePercent: '+1.24%' },
+    { symbol: 'NASDAQ 100', value: 18234.56, change: 1.24, changePercent: '+1.24%' },
     { symbol: 'S&P 500', value: 4892.34, change: 0.85, changePercent: '+0.85%' },
-    { symbol: '삼성전자', value: 75800, change: 2.1, changePercent: '+2.1%' },
-    { symbol: 'AAPL', value: 185.50, change: 3.5, changePercent: '+3.5%' },
-    { symbol: 'TSLA', value: 184.20, change: -1.8, changePercent: '-1.8%' },
+    { symbol: 'SOX (PHLX)', value: 4532.12, change: 2.15, changePercent: '+2.15%' },
+    { symbol: 'DOW JONES', value: 38234.56, change: -0.42, changePercent: '-0.42%' },
     { symbol: 'NVDA', value: 845.30, change: 4.2, changePercent: '+4.2%' },
+    { symbol: 'TSLA', value: 184.20, change: -1.8, changePercent: '-1.8%' },
+    { symbol: 'AAPL', value: 185.50, change: 3.5, changePercent: '+3.5%' },
+    { symbol: 'PLTR', value: 24.50, change: 5.2, changePercent: '+5.2%' },
+    { symbol: 'MSTR', value: 1245.30, change: 8.4, changePercent: '+8.4%' },
   ]);
 
   // 실시간 업데이트 시뮬레이션
