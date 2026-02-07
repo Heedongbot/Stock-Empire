@@ -40,21 +40,35 @@ export default function RootLayout({
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   if (!publishableKey) {
+    const publicEnvVars = typeof window !== 'undefined'
+      ? Object.keys(process.env).filter(key => key.startsWith('NEXT_PUBLIC'))
+      : [];
+
     return (
       <html lang="ko">
         <body style={{ margin: 0 }}>
-          <div style={{ padding: '20px', textAlign: 'center', background: '#0a0a0a', color: '#00ff41', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: 'monospace' }}>
-            <h2 style={{ color: '#ff4d4d' }}>[SYSTEM] SECURITY KEY MISSING</h2>
-            <div style={{ border: '1px solid #333', padding: '20px', display: 'inline-block', margin: '0 auto', textAlign: 'left', maxWidth: '500px' }}>
-              <p>⚠️ <strong>원인:</strong> Clerk 통신용 열쇠(Publishable Key)를 찾을 수 없습니다.</p>
-              <p>📌 <strong>조치 방법:</strong></p>
-              <ol style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#ccc' }}>
-                <li>Vercel {" > "} Settings {" > "} Environment Variables 이동</li>
-                <li><code>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code> 이름 확인 (오타 주의)</li>
-                <li><strong>Production, Preview, Development</strong> 전체 체크 확인</li>
-                <li>저장 후 <strong>Redeploy</strong> (캐시 없이) 실행</li>
-              </ol>
-              <p style={{ fontSize: '0.8rem', color: '#888', marginTop: '15px' }}>※ 브라우저가 현재 환경 변수를 전혀 읽지 못하고 있습니다.</p>
+          <div style={{ padding: '20px', textAlign: 'center', background: '#0a101f', color: '#00ffbd', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: 'monospace' }}>
+            <div style={{ maxWidth: '600px', margin: '0 auto', background: '#121b2d', padding: '40px', borderRadius: '24px', border: '2px solid #ff4d4d', boxShadow: '0 0 50px rgba(255, 77, 77, 0.2)' }}>
+              <h2 style={{ color: '#ff4d4d', fontSize: '1.5rem', marginBottom: '20px' }}>🚨 [CRITICAL] SECURITY KEY MISSING</h2>
+              <p style={{ fontSize: '1rem', color: '#ffffff', marginBottom: '30px' }}>Vercel 환경 변수 설정이 완료되지 않았거나, <br />클라이언트 사이드로 전달되지 않았습니다.</p>
+
+              <div style={{ textAlign: 'left', background: '#050b14', padding: '20px', borderRadius: '12px', fontSize: '0.8rem', color: '#888', marginBottom: '30px' }}>
+                <p style={{ color: '#00ffbd', fontWeight: 'bold', marginBottom: '10px' }}>🔍 실시간 진단 (Diagnostics):</p>
+                <ul style={{ listStyle: 'none', padding: 0 }}>
+                  <li>🔹 NODE_ENV: {process.env.NODE_ENV}</li>
+                  <li>🔹 Detected Keys: <span style={{ color: publicEnvVars.length > 0 ? '#00ffbd' : '#ff4d4d' }}>{publicEnvVars.length > 0 ? publicEnvVars.join(', ') : 'NONE FOUND'}</span></li>
+                  <li>🔹 Required: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</li>
+                </ul>
+              </div>
+
+              <div style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.6' }}>
+                <p><strong>🛠️ 해결 방법:</strong></p>
+                <ol style={{ textAlign: 'left', display: 'inline-block' }}>
+                  <li>Vercel Settings {">"} Env Variables 이동</li>
+                  <li><code>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code> 입력</li>
+                  <li><strong>Redeploy (Use existing Build Cache 체크 해제!)</strong></li>
+                </ol>
+              </div>
             </div>
           </div>
         </body>
