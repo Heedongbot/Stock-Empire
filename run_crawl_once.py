@@ -1,15 +1,23 @@
 from crawler.us_news_crawler import StockNewsCrawler
+from crawler.alpha_analyzer import AlphaAnalyzer
 import sys
 
 def run_once():
     try:
+        # 1. Update Premium AI News
         crawler = StockNewsCrawler()
-        print("Starting one-time crawl with improved AI reasoning...")
-        news = crawler.crawl_all_sources(limit=20)
+        print("--- [1/2] Updating Premium AI News (Money-Focused) ---")
+        news = crawler.crawl_all_sources(limit=25)
         crawler.save(news)
-        print("Done.")
+        
+        # 2. Update VVIP Alpha Signals
+        print("\n--- [2/2] Updating VVIP Alpha Stock Signals ---")
+        analyzer = AlphaAnalyzer()
+        analyzer.run_pipeline()
+        
+        print("\n[SUCCESS] All 'Money-Making' systems updated successfully.")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"\n[ERROR] Update failed: {e}")
 
 if __name__ == '__main__':
     run_once()

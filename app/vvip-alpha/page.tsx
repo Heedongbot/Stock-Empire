@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import {
     Crown, TrendingUp, TrendingDown, Target, ShieldAlert,
     ArrowLeft, Activity, Zap, Lock, RefreshCw, ChevronRight,
-    Search, BarChart4, Ghost, Waves
+    Search, BarChart4, Ghost, Waves, BrainCircuit
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { useAuth } from '@/lib/AuthContext';
@@ -21,6 +21,9 @@ interface AlphaSignal {
     target_price: number;
     stop_loss: number;
     ai_reason: string;
+    technical_analysis?: string;
+    fundamental_analysis?: string;
+    action_plan?: string;
     updated_at: string;
 }
 
@@ -221,26 +224,51 @@ function VVIPAlphaContent() {
                                     </div>
                                 </div>
 
-                                {/* AI Rationale Box */}
-                                <div className="relative pt-6 border-t border-slate-800/50">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <Zap className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-                                        <span className="text-[9px] font-black text-yellow-500 uppercase tracking-widest">
-                                            {lang === 'ko' ? '[AI 분석 근거]' : '[AI Rationale]'}
+                                {/* Kim Daeri Senior Analyst Report */}
+                                <div className="relative pt-6 border-t border-slate-800/80">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <BrainCircuit className="w-4 h-4 text-yellow-500" />
+                                        <span className="text-[10px] font-black text-white uppercase tracking-widest">
+                                            {lang === 'ko' ? '김대리의 심층 알파 리포트' : 'Kim Daeri Alpha Report'}
                                         </span>
                                     </div>
-                                    <div className="relative">
-                                        <p className={`text-[12px] leading-relaxed italic text-slate-400 line-clamp-3 group-hover:line-clamp-none transition-all duration-500 ${!isVVIP ? 'blur-[4px] select-none opacity-50' : ''}`}>
-                                            "{sig.ai_reason}"
-                                        </p>
-                                        {!isVVIP && (
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="px-4 py-1 bg-slate-900/80 border border-slate-700 rounded-full text-[8px] font-black uppercase tracking-widest text-slate-500">
-                                                    {lang === 'ko' ? 'VVIP 전용' : 'VVIP Exclusive'}
-                                                </div>
+
+                                    <div className={`space-y-4 transition-all duration-700 ${!isVVIP ? 'blur-md select-none opacity-20' : ''}`}>
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-1.5 text-[9px] font-black text-indigo-400 uppercase tracking-tighter">
+                                                <Activity className="w-2.5 h-2.5" /> {lang === 'ko' ? '기술적 분석' : 'Technical'}
                                             </div>
-                                        )}
+                                            <p className="text-[11px] leading-relaxed text-slate-300 italic">
+                                                {sig.technical_analysis || sig.ai_reason}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-1.5 text-[9px] font-black text-purple-400 uppercase tracking-tighter">
+                                                <BarChart4 className="w-2.5 h-2.5" /> {lang === 'ko' ? '기본적 분석' : 'Fundamental'}
+                                            </div>
+                                            <p className="text-[11px] leading-relaxed text-slate-300 italic">
+                                                {sig.fundamental_analysis || (lang === 'ko' ? '기관 수급 및 자본 효율성 개선 신호가 포착되었습니다.' : 'Institutional flow and capital efficiency signals detected.')}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-1.5 text-[9px] font-black text-yellow-500 uppercase tracking-tighter">
+                                                <Zap className="w-2.5 h-2.5" /> {lang === 'ko' ? '전략 제언' : 'Action Plan'}
+                                            </div>
+                                            <p className="text-[11px] leading-relaxed text-white font-bold italic">
+                                                {sig.action_plan || (lang === 'ko' ? '현 지점에서 비중 확대가 유효합니다.' : 'Accumulation is favorable at this level.')}
+                                            </p>
+                                        </div>
                                     </div>
+
+                                    {!isVVIP && (
+                                        <div className="absolute inset-0 flex items-center justify-center pt-8">
+                                            <div className="px-6 py-2 bg-slate-950 border border-slate-700 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 shadow-2xl">
+                                                {lang === 'ko' ? 'VVIP 전용 심층 분석' : 'VVIP Deep Analysis'}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Hover Glow Layer */}
