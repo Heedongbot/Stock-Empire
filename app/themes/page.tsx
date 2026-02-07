@@ -5,11 +5,12 @@ import { useSearchParams } from 'next/navigation';
 import {
     LayoutGrid, List, Search, TrendingUp, TrendingDown,
     ArrowRight, Activity, Zap, ShieldCheck, Globe, Cpu, Car,
-    Wallet, Rocket, RefreshCw, Lock
+    Wallet, Rocket, RefreshCw, Lock, BrainCircuit
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { THEMES } from '@/lib/themes';
 import { useAuth } from '@/lib/AuthContext';
+import { AIPerformanceBanner } from '@/components/AIPerformanceBanner';
 
 function ThemeContent() {
     const searchParams = useSearchParams();
@@ -100,6 +101,9 @@ function ThemeContent() {
                     </div>
                 </div>
 
+                {/* Live AI Performance Stats */}
+                <AIPerformanceBanner lang={lang} />
+
                 {/* Theme Selector Area */}
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
                     {THEMES.map((theme) => {
@@ -153,7 +157,10 @@ function ThemeContent() {
                                 </div>
 
                                 <h3 className="text-xl font-black text-white mb-1 uppercase tracking-tight truncate">{sig.name}</h3>
-                                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-8">Constituent Performance</p>
+                                <div className="flex items-center gap-2 mb-8">
+                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Institutional Flow Indicator</p>
+                                </div>
 
                                 <div className="grid grid-cols-1 gap-4 mb-8">
                                     <div className="bg-slate-950 border border-slate-800 p-4 rounded-2xl flex justify-between items-center group/price">
@@ -175,9 +182,9 @@ function ThemeContent() {
 
                                 <div className="pt-6 border-t border-slate-800/80">
                                     <div className="flex items-center gap-2 mb-3">
-                                        <Zap className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                                        <span className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">
-                                            {lang === 'ko' ? '김대리의 인사이트' : 'Kim Daeri Analyst Insight'}
+                                        <BrainCircuit className="w-3.5 h-3.5 text-indigo-400 stroke-[2.5px]" />
+                                        <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+                                            {lang === 'ko' ? '김대리 책임 분석관 리포트' : 'Kim Daeri Senior Analyst Report'}
                                         </span>
                                     </div>
                                     <p className="text-[12px] leading-relaxed text-slate-300 italic font-medium">
