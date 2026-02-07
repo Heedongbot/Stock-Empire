@@ -5,7 +5,9 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    // Vercel 빌드 시 정적 페이지 생성을 유연하게 처리
+    env: {
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_placeholder",
+    },
 };
 
 export default nextConfig;
