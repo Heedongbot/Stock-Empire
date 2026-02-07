@@ -156,15 +156,28 @@ class StockNewsCrawler:
         term_map = {
             'Earnings Call': '실적 발표 컨퍼런스 콜',
             'Transcript': '회의록/스크립트',
-            'Revenue': '매출/실적',
-            'Dow Jones': '다우 존스',
-            'S&P 500': 'S&P 500',
-            'Nasdaq': '나스닥',
-            'Guidance': '가이드라인/매출전망',
+            'Revenue': '매출액',
+            'Net Income': '당기순이익',
+            'EPS': '주당순이익(EPS)',
+            'Beat': '예상치 상회(어닝 서프라이즈)',
+            'Miss': '예상치 하회(어닝 쇼크)',
+            'Guidance': '향후 실적 가이드라인',
+            'Dow Jones': '다우 존스 지수',
+            'S&P 500': 'S&P 500 지수',
+            'Nasdaq': '나스닥 지수',
             'Quarterly': '분기별',
             'Common Stock': '보통주',
-            'Selling': '매각/발행',
-            'Dilution': '주주가치 희석'
+            'Selling': '매각/매도',
+            'Dilution': '주주가치 희석',
+            'Buyback': '자사주 매입',
+            'Dividend': '배당금',
+            'Rate Hike': '금리 인상',
+            'Rate Cut': '금리 인하',
+            'Short Squeeze': '숏스퀴즈(공매도 압박)',
+            'Bull Run': '상승 랠리',
+            'Bear Market': '하락장',
+            'Yield': '채권 수익률',
+            'Inflation': '인플레이션(물가 상승)'
         }
         
         keywords = (title + " " + summary).lower()
