@@ -77,19 +77,21 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
     return (
         <>
             <header className="sticky top-0 z-50 bg-[#050b14]/80 backdrop-blur-md border-b border-slate-800 h-20 transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-gradient-to-tr from-indigo-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-                            <Globe className="w-6 h-6 text-white animate-pulse-slow" />
-                        </div>
-                        <span className="text-xl font-black italic tracking-tighter text-white uppercase">
-                            STOCK<span className="text-indigo-400">EMPIRE</span>
-                        </span>
-                    </Link>
+                <div className="max-w-7xl mx-auto px-6 h-full flex items-center">
+                    {/* Logo Section */}
+                    <div className="flex-shrink-0 mr-8">
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="w-10 h-10 bg-gradient-to-tr from-indigo-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+                                <Globe className="w-6 h-6 text-white animate-pulse-slow" />
+                            </div>
+                            <span className="text-xl font-black italic tracking-tighter text-white uppercase whitespace-nowrap">
+                                STOCK<span className="text-indigo-400">EMPIRE</span>
+                            </span>
+                        </Link>
+                    </div>
 
-                    {/* Nav */}
-                    <nav className="hidden lg:flex items-center gap-8">
+                    {/* Nav - Centered & Flexible */}
+                    <nav className="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-8 px-4">
                         {NAV_ITEMS.map((item) => {
                             const isActive = pathname === item.path;
                             const isVVIP = item.id === 'vvip_alpha' || item.id === 'market';
@@ -111,10 +113,10 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                         })}
                     </nav>
 
-                    {/* Right Utility Zone */}
-                    <div className="flex items-center gap-4">
+                    {/* Right Utility Zone - Pinned Right */}
+                    <div className="flex-shrink-0 flex items-center gap-4 ml-8">
                         {/* Divider */}
-                        <div className="hidden lg:block w-[1px] h-6 bg-slate-800 mx-2"></div>
+                        <div className="hidden lg:block w-[1px] h-6 bg-slate-800"></div>
 
                         <div className="flex items-center gap-2">
                             {/* Admin HQ Button */}
@@ -139,7 +141,7 @@ export default function SiteHeader({ lang = 'ko', setLang }: SiteHeaderProps) {
                         </div>
 
                         {/* Auth / Avatar Section */}
-                        <div className="flex items-center gap-3 pl-2 border-l border-slate-800">
+                        <div className="flex items-center gap-3 pl-4 border-l border-slate-800">
                             {!isLoading && (
                                 user ? (
                                     <div className="flex items-center gap-3">

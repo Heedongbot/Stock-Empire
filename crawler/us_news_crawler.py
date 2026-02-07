@@ -134,18 +134,30 @@ class StockNewsCrawler:
         summary_kr = self.translate(summary[:300])
         
         # 6. Empire AI Dynamic Reasoning (Replacement for lazy templates)
-        impact_score = min(98, 60 + (max(bull_score, bear_score) * 8) + random.randint(0, 5))
+        impact_score = min(98, 62 + (max(bull_score, bear_score) * 7) + random.randint(0, 5))
+        
+        # Avoid Title Reflection in Analysis
+        clean_title = title_kr.replace("...", "").strip()
         
         if sentiment == "BULLISH":
-            ai_insight = f"Empire AI 분석 결과, 해당 뉴스는 시장의 강력한 매수 동력을 자극할 것으로 평가됩니다. 특히 {source}에서 언급된 실적지표 및 성장 모멘텀이 기관의 수급 유입을 가속화할 가능성이 80% 이상입니다."
-            if 'buyback' in keywords or 'dividend' in keywords:
-                ai_insight = f"주주환원 정책(자사주 매입/배당) 발표는 주당 가치 상승의 강력한 신호입니다. Empire AI 시스템은 이를 중장기적 저점 다지기 및 추세 전환의 핵심 시그널로 인식합니다."
+            if 'efficiency' in keywords or 'ai' in keywords:
+                ai_insight = f"UBS를 포함한 주요 금융 기관의 AI 도입 및 효율성 개선 소식은 장기적인 오퍼레이션 비용 절감 및 마진 확대로 이어질 수 있는 긍정적 시그널입니다. Empire AI는 이를 기술적 혁신을 통한 펀더멘털 강화 단계로 해석합니다."
+            elif 'buyback' in keywords or 'dividend' in keywords:
+                ai_insight = f"강력한 주주환원 정책은 기업의 현금 흐름에 대한 자신감을 반영합니다. 현재 매크로 환경에서 이러한 움직임은 기관 투자자들의 안전 자산 선호 심리와 맞물려 하단 지지선을 강력하게 구축할 것으로 보입니다."
+            else:
+                ai_insight = f"Empire AI 분석 결과, 본 뉴스는 업종 내 경쟁 우위를 확보하거나 실적 개선의 트리거가 될 수 있는 핵심 모멘텀을 포함하고 있습니다. {source} 데이터 기준, 수급 유입 강도가 점진적으로 높아질 것으로 예측됩니다."
         elif sentiment == "BEARISH":
-            ai_insight = f"현재 시장은 해당 소식을 하방 압력으로 인식하고 있습니다. 특히 {source}의 데이터에 따르면 단기 수급 이탈 가능성이 높으며, 지지선 붕괴 여부를 정밀하게 모니터링해야 하는 구간입니다."
-            if 'offering' in keywords or 'sell' in keywords or 'dilution' in keywords:
-                ai_insight = f"보통주 매각 및 주식 발행 소식은 주주가치 희석으로 인한 전형적인 악재입니다. Empire AI는 이를 수익성 악화보다는 자금 조달 리스크로 해석하며, 일시적 주가 하방 변동성이 확대될 것으로 예측합니다."
+            if 'offering' in keywords or 'dilution' in keywords:
+                ai_insight = f"보통주 추가 발행으로 인한 가치 희석은 기존 주주들에게 명확한 악재로 작용합니다. 자금 조달의 목적이 채무 상환일 경우 리스크가 크며, Empire AI는 이를 보수적인 관점(Conservative)으로 접근할 것을 권고합니다."
+            elif 'crash' in keywords or 'sink' in keywords:
+                ai_insight = f"급격한 가격 하락과 함께 거래량이 실린 변동성은 시장의 공포 심리를 반영합니다. 지지선 붕괴 시 추가 하락 공간이 열려 있으므로, 섣부른 저점 매수보다는 바닥 확인 과정을 지켜보는 전략이 유효합니다."
+            else:
+                ai_insight = f"현재 시장은 해당 이슈를 기업 가치 훼손의 전조 증상으로 인지하고 있습니다. {source}의 심층 보도를 종합할 때, 단기적인 변동성 확대가 불가피하며 보수적인 포트폴리오 관리가 요구됩니다."
         else:
-            ai_insight = f"본 뉴스는 현재 시장가에 이미 선반영된 것으로 보이며, 단기적인 방향성을 결정짓기에는 정보의 밀도가 낮습니다. 추가적인 수급 이벤트 발생 전까지는 중립적 관점을 유지합니다."
+            if title.lower() == summary.lower():
+                ai_insight = f"해당 정보는 현재 시장에 공개된 단편적인 사실(Fact) 전달로 보이며, 추가적인 세부 지표가 발표되기 전까지는 시장에 미치는 실질적 영향력이 제한적일 것으로 분석됩니다."
+            else:
+                ai_insight = f"현재 시장가에 관련 재료가 반영되어 가는 과정이며, 방향성을 결정지을 만한 결정적 단서가 부족한 상태입니다. {source}의 향후 후속 보도와 실물 지표의 변화를 모니터링하며 관망할 필요가 있습니다."
 
         return {
             'id': str(hash(link)),
