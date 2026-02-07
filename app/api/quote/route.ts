@@ -101,38 +101,38 @@ function getFallbackQuote(symbol: string) {
         'NVDA': {
             symbol: 'NVDA',
             shortName: 'NVIDIA Corporation',
-            regularMarketPrice: 135.20,
-            regularMarketChangePercent: -1.5,
+            regularMarketPrice: 185.65,
+            regularMarketChangePercent: 8.01,
             regularMarketVolume: 320000000,
-            marketCap: 3100000000000,
-            trailingPE: 75.4
+            marketCap: 4500000000000,
+            trailingPE: 82.4
         },
         'TSLA': {
             symbol: 'TSLA',
             shortName: 'Tesla, Inc.',
-            regularMarketPrice: 245.80,
+            regularMarketPrice: 412.50,
             regularMarketChangePercent: 3.2,
             regularMarketVolume: 98000000,
-            marketCap: 780000000000,
-            trailingPE: 45.2
+            marketCap: 1300000000000,
+            trailingPE: 62.2
         },
         'AAPL': {
             symbol: 'AAPL',
             shortName: 'Apple Inc.',
-            regularMarketPrice: 225.50,
-            regularMarketChangePercent: 0.8,
+            regularMarketPrice: 248.50,
+            regularMarketChangePercent: 1.2,
             regularMarketVolume: 48000000,
-            marketCap: 3450000000000,
-            trailingPE: 33.1
+            marketCap: 3850000000000,
+            trailingPE: 35.1
         },
         'PLTR': {
             symbol: 'PLTR',
             shortName: 'Palantir Technologies',
-            regularMarketPrice: 16.50,
-            regularMarketChangePercent: 5.4,
+            regularMarketPrice: 72.40,
+            regularMarketChangePercent: 4.8,
             regularMarketVolume: 72000000,
-            marketCap: 45000000000,
-            trailingPE: 65.1
+            marketCap: 155000000000,
+            trailingPE: 88.5
         }
     };
     return FALLBACK_QUOTES[s] || null;

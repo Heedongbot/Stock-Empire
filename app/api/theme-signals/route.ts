@@ -87,22 +87,26 @@ export async function GET(request: Request) {
         const isEn = lang === 'en';
 
         const fallbackSignals = theme.tickers.map(ticker => {
-            const price = 100 + Math.random() * 400;
-            const change = (Math.random() * 6) - 2; // -2% to +4%
-            const impact_score = 75 + Math.floor(Math.random() * 20);
+            const priceMap: Record<string, number> = {
+                'NVDA': 185.65, 'TSLA': 412.50, 'AAPL': 248.50, 'MSFT': 482.10, 'PLTR': 72.40,
+                'AMD': 186.20, 'GOOGL': 192.40, 'META': 562.30, 'AVGO': 212.50, 'SMCI': 88.40
+            };
+            const basePrice = priceMap[ticker] || (100 + Math.random() * 400);
+            const change = ticker === 'NVDA' ? 8.01 : (Math.random() * 6) - 2;
+            const impact_score = ticker === 'NVDA' ? 98 : (75 + Math.floor(Math.random() * 20));
 
             return {
                 id: `${ticker}-fallback-${Date.now()}`,
                 ticker,
                 name: `${ticker} Corp`,
-                price: parseFloat(price.toFixed(2)),
+                price: parseFloat(basePrice.toFixed(2)),
                 change_pct: parseFloat(change.toFixed(2)),
                 sentiment: change > 0 ? 'BULLISH' : 'BEARISH',
                 impact_score,
                 whale_active: impact_score > 85,
                 ai_reason: isEn
-                    ? `Institutional accumulation detected. Strong recovery potential in the ${theme.name_en} sector.`
-                    : `${theme.name_ko} 섹터 내 기관 수급 유입이 포착됩니다. 강력한 하방 경직성 및 반등 에너지가 확인됩니다.`,
+                    ? `Institutional accumulation detected. NVDA showing dominant breakout pattern at $185.`
+                    : `${ticker} 섹터 내 기관 수급 유입이 포착됩니다. 특히 NVDA의 $185 돌파는 강력한 주도주 신호입니다.`,
                 updated_at: new Date().toISOString(),
                 is_fallback: true
             };
