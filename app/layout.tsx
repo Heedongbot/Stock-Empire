@@ -39,8 +39,18 @@ export default function RootLayout({
 }>) {
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-  if (!publishableKey && typeof window !== 'undefined') {
-    console.error("Critical: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is missing in the browser!");
+  if (!publishableKey) {
+    return (
+      <html lang="ko">
+        <body style={{ margin: 0 }}>
+          <div style={{ padding: '20px', textAlign: 'center', background: '#0a0a0a', color: '#00ff41', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: 'monospace' }}>
+            <h2>[SYSTEM] SECURITY KEY MISSING</h2>
+            <p>Vercel 환경 변수가 아직 로드되지 않았습니다.</p>
+            <p><small>Vercel Settings > Environment Variables에서 <br />NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY를 확인해주세요.</small></p>
+          </div>
+        </body>
+      </html>
+    );
   }
 
   return (
