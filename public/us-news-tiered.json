@@ -1,46 +1,46 @@
 [
   {
-    "id": "5420918697947942870",
+    "id": "2994098601182294681",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
+    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 12:48:22 GMT",
+    "published_at": "2026-02-05T18:20:00Z",
     "free_tier": {
-      "title": "아마존은 마진과 자본 지출 문제에 대해 고민하고 있습니다. 월스트리트 애널리스트들은 여전히 ​​상승세를 보고 있다",
-      "title_en": "Amazon is dipping on margin and capex concerns. Wall Street analysts still see upside",
-      "summary_kr": "대부분의 분석가들은 목표 가격을 낮추었음에도 불구하고 아마존에 대해 압도적인 낙관론을 유지했습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/amazon-is-dipping-on-margin-and-capex-concerns-wall-street-analysts-still-see-upside.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 72
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "4037587878645960708",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-05T17:45:30Z",
-    "free_tier": {
-      "title": "시장이 소프트웨어 주식을 처벌함에 따라 Anthropic, AI 업그레이드 출시",
-      "title_en": "Anthropic releases AI upgrade as market punishes software stocks",
-      "summary_kr": "시장이 소프트웨어 주식을 처벌함에 따라 Anthropic, AI 업그레이드 출시",
-      "link": "https://finance.yahoo.com/news/anthropic-releases-ai-upgrade-market-174530092.html",
+      "title": "예측 시장은 미국 전역에서 성장하고 있습니다. 인기를 누리고 있는 3개 회사를 소개합니다.",
+      "title_en": "Prediction Markets Are Growing Across the United States. Here Are 3 Companies Tapping Into Their Popularity.",
+      "summary_kr": "예측 시장은 미국 전역에서 성장하고 있습니다. 인기를 누리고 있는 3개 회사를 소개합니다.",
+      "link": "https://finance.yahoo.com/news/prediction-markets-growing-across-united-182000114.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 72
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '예측 시장은 미국 전역에서 성장하고 있습니다. 인기를 누리고 있는 3개 회사를 소개합니다.' 입니다.",
+        "impact_score": 85
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4995327425527812174",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:16:56Z",
+    "free_tier": {
+      "title": "Adient Stock, 상대강도 등급 업그레이드 획득",
+      "title_en": "Adient Stock Gets Relative Strength Rating Upgrade",
+      "summary_kr": "Adient Stock, 상대강도 등급 업그레이드 획득",
+      "link": "https://www.investors.com/news/adient-stock-gets-relative-strength-rating-upgrade/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'Adient Stock, 상대강도 등급 업그레이드 획득' 입니다.",
+        "impact_score": 77
       },
       "trading_strategy": {
         "action": "매수",
@@ -50,22 +50,272 @@
     }
   },
   {
-    "id": "2863174387516525437",
+    "id": "2576451936969434403",
     "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06 22:54:45",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:21:18Z",
     "free_tier": {
-      "title": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
-      "title_en": "Judge bans Kalshi from offering sports-events contracts in Massachusetts in 30 days",
-      "summary_kr": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
-      "link": "https://www.investing.com/news/stock-market-news/judge-bans-kalshi-from-offering-sportsevents-contracts-in-massachusetts-in-30-days-4492135",
-      "original_source": "Investing.com"
+      "title": "비트코인 폭락으로 암호화폐 사재기에 뛰어든 기업들 뒤흔들다",
+      "title_en": "Bitcoin slump shakes companies that jumped on crypto-hoarding bandwagon",
+      "summary_kr": "비트코인 폭락으로 암호화폐 사재기에 뛰어든 기업들 뒤흔들다",
+      "link": "https://finance.yahoo.com/news/bitcoin-slump-shakes-companies-jumped-182118070.html",
+      "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "주요 주주의 주식 매칭 및 보통주 추가 발행은 주주 가치 희석을 의미하는 치명적인 하락 요인입니다. Empire AI는 이를 기관들의 이익 실현 및 탈출 신호로 분석하며, 보수적인 비중 축소를 강력 권고합니다.",
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '비트코인 폭락으로 암호화폐 사재기에 뛰어든 기업들 뒤흔들다' 입니다.",
         "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "4769586103118120883",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:23:15Z",
+    "free_tier": {
+      "title": "MI400 출시 전에 AMD 주식을 구매해야 합니까?",
+      "title_en": "Should You Buy AMD Stock Before the MI400 Launch?",
+      "summary_kr": "MI400 출시 전에 AMD 주식을 구매해야 합니까?",
+      "link": "https://finance.yahoo.com/news/buy-amd-stock-mi400-launch-182315989.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'MI400 출시 전에 AMD 주식을 구매해야 합니까?' 입니다.",
+        "impact_score": 95
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4068732824997869166",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:12:53Z",
+    "free_tier": {
+      "title": "새로운 '트럼프 주택' 프로젝트를 위해 지금 매수해야 할 주식 2개",
+      "title_en": "2 Stocks to Buy Now for a New ‘Trump Homes’ Project",
+      "summary_kr": "새로운 '트럼프 주택' 프로젝트를 위해 지금 매수해야 할 주식 2개",
+      "link": "https://finance.yahoo.com/news/2-stocks-buy-now-trump-181253103.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '새로운 '트럼프 주택' 프로젝트를 위해 지금 매수해야 할 주식 2개' 입니다.",
+        "impact_score": 95
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-7638218268835242716",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:21:00Z",
+    "free_tier": {
+      "title": "Tesla 주식에 대한 전략적 구매 기회가 나타나고 있습니다",
+      "title_en": "A Strategic Buying Opportunity Is Emerging for Tesla Stock",
+      "summary_kr": "Tesla 주식에 대한 전략적 구매 기회가 나타나고 있습니다",
+      "link": "https://www.barrons.com/articles/tesla-stock-strategic-buying-opportunity-charts-c90e79da?siteid=yhoof2&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Tesla 주식에 대한 전략적 구매 기회가 나타나고 있습니다' 입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "3142136234643652597",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:12:18Z",
+    "free_tier": {
+      "title": "발렌타인데이에 좋은 징조? Hershey는 수익, 전망에서 구매 포인트를 뛰어 넘었습니다.",
+      "title_en": "Good Sign For Valentine's Day? Hershey Jumps Past Buy Point On Earnings, Outlook",
+      "summary_kr": "발렌타인데이에 좋은 징조? Hershey는 수익, 전망에서 구매 포인트를 뛰어 넘었습니다.",
+      "link": "https://www.investors.com/news/hershey-jumps-past-buy-point-on-earnings-outlook/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '발렌타인데이에 좋은 징조? Hershey는 수익, 전망에서 구매 포인트를 뛰어 넘었습니다.' 입니다.",
+        "impact_score": 61
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6283930254001565225",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:30:02Z",
+    "free_tier": {
+      "title": "놓치지 마세요: 비정상적으로 활성화된 상위 25개 옵션 보석 3개를 교살하세요!",
+      "title_en": "Don't Miss Out: Strangle Plays on These 3 Top 25 Unusually Active Options Gems!",
+      "summary_kr": "놓치지 마세요: 비정상적으로 활성화된 상위 25개 옵션 보석 3개를 교살하세요!",
+      "link": "https://finance.yahoo.com/news/dont-miss-strangle-plays-3-183002423.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '놓치지 마세요: 비정상적으로 활성화된 상위 25개 옵션 보석 3개를 교살하세요!' 입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4159366971711340454",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:37:11Z",
+    "free_tier": {
+      "title": "분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?",
+      "title_en": "Analysts See Super Micro Computer Finally Staging a Turnaround. Should You Buy SMCI Stock Now?",
+      "summary_kr": "분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?",
+      "link": "https://finance.yahoo.com/news/analysts-see-super-micro-computer-183711679.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?' 입니다.",
+        "impact_score": 79
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1626605675353461025",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:06:40Z",
+    "free_tier": {
+      "title": "목요일 정오까지 연장된 대두 랠리",
+      "title_en": "Soybean Rally Extending to Thursday’s Midday",
+      "summary_kr": "목요일 정오까지 연장된 대두 랠리",
+      "link": "https://finance.yahoo.com/news/soybean-rally-extending-thursday-midday-180640461.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '목요일 정오까지 연장된 대두 랠리' 입니다.",
+        "impact_score": 64
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6360095252955521564",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:20:33Z",
+    "free_tier": {
+      "title": "Climber Capital, First Trust 글로벌 전술 상품 전략 ETF 350만 달러 매각",
+      "title_en": "Climber Capital Sells $3.5 Million of First Trust Global Tactical Commodity Strategy ETF",
+      "summary_kr": "Climber Capital, First Trust 글로벌 전술 상품 전략 ETF 350만 달러 매각",
+      "link": "https://finance.yahoo.com/news/climber-capital-sells-3-5-182033699.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Climber Capital, First Trust 글로벌 전술 상품 전략 ETF 350만 달러 매각' 입니다.",
+        "impact_score": 86
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "490139058545401040",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:06:40Z",
+    "free_tier": {
+      "title": "곡물 랠리를 따라잡는 밀 황소",
+      "title_en": "Wheat Bulls Catching Up on The Grain Rally",
+      "summary_kr": "곡물 랠리를 따라잡는 밀 황소",
+      "link": "https://finance.yahoo.com/news/wheat-bulls-catching-grain-rally-180640233.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '곡물 랠리를 따라잡는 밀 황소' 입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-6856558271825129113",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:06:40Z",
+    "free_tier": {
+      "title": "목화 손실은 목요일에도 계속됩니다",
+      "title_en": "Cotton Losses Continue on Thursday",
+      "summary_kr": "목화 손실은 목요일에도 계속됩니다",
+      "link": "https://finance.yahoo.com/news/cotton-losses-continue-thursday-180640347.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '목화 손실은 목요일에도 계속됩니다' 입니다.",
+        "impact_score": 85
       },
       "trading_strategy": {
         "action": "매도",
@@ -75,75 +325,50 @@
     }
   },
   {
-    "id": "1708031422383175233",
+    "id": "4108507323835600186",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T17:35:49Z",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:06:40Z",
     "free_tier": {
-      "title": "꼬마 요정. 뷰티 CEO, 성장 우려 거부하고 헤일리 비버 인수 이후 '큰 모멘텀' 지적",
-      "title_en": "E.l.f. Beauty CEO rejects growth fears, points to 'great momentum' following Hailey Bieber deal",
-      "summary_kr": "꼬마 요정. 뷰티 CEO, 성장 우려 거부하고 헤일리 비버 인수 이후 '큰 모멘텀' 지적",
-      "link": "https://finance.yahoo.com/news/elf-beauty-ceo-rejects-growth-fears-points-to-great-momentum-following-hailey-bieber-deal-173549661.html",
+      "title": "옥수수 게시 정오 목요일 이익",
+      "title_en": "Corn Posting Midday Thursday Gains",
+      "summary_kr": "옥수수 게시 정오 목요일 이익",
+      "link": "https://finance.yahoo.com/news/corn-posting-midday-thursday-gains-180640726.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 65
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "302189576708837188",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 20:56:25 GMT",
-    "free_tier": {
-      "title": "Carter Worth는 트레이더들이 하락세를 보이고 있는 이 주식 그룹을 퇴색시킬 시간이라고 말합니다.",
-      "title_en": "Time for traders to fade this group of stocks that's been on a tear, says Carter Worth",
-      "summary_kr": "베타가 낮고 오랫동안 부진했던 S&P 500 필수 소비재 부문은 지난 3개월 동안 큰 폭의 상승세를 보이며 현재 해당 기간 동안 15% 상승했습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/time-for-traders-to-fade-this-group-of-stocks-thats-been-on-a-tear-says-carter-worth.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 70
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4288425282296051478",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 13:13:00 GMT",
-    "free_tier": {
-      "title": "Goldman Sachs는 Meta 원자력 계약에서 이 에너지 주식을 업그레이드하고 40% 상승 여력을 확인합니다.",
-      "title_en": "Goldman Sachs upgrades this energy stock on Meta nuclear power deal, sees 40% upside",
-      "summary_kr": "Goldman Sachs는 Vistra가 전력 구매 계약을 통해 더 많은 원자력 함대를 계약할 경우 추가 상승 가능성을 보고 있습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/goldman-sachs-upgrades-this-energy-stock-on-meta-nuclear-power-deal-sees-40percent-upside.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 75
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '옥수수 게시 정오 목요일 이익' 입니다.",
+        "impact_score": 91
       },
       "trading_strategy": {
         "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6679746632819367719",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T18:46:18Z",
+    "free_tier": {
+      "title": "알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?",
+      "title_en": "As Alphabet Plunges Below Its 50-Day MA, Should You Buy the Dip in GOOGL Stock?",
+      "summary_kr": "알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?",
+      "link": "https://finance.yahoo.com/news/alphabet-plunges-below-50-day-184618710.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?' 입니다.",
+        "impact_score": 68
+      },
+      "trading_strategy": {
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
