@@ -14,7 +14,10 @@ import pandas as pd
 
 class AlphaAnalyzer:
     def __init__(self):
-        self.tickers = ['NVDA', 'TSLA', 'PLTR', 'AAPL', 'AMD', 'MSFT', 'GOOGL', 'META', 'MSTR', 'COIN', 'NFLX', 'SMCI']
+        self.tickers = [
+            'NVDA', 'TSLA', 'PLTR', 'AAPL', 'AMD', 'MSFT', 'GOOGL', 'META', 'MSTR', 'COIN', 'NFLX', 'SMCI',
+            '005930.KS', '000660.KS', '005380.KS', '035420.KS', '035720.KS', '000270.KS', '068270.KS', '105560.KS'
+        ]
         self.output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'public', 'alpha-signals.json')
 
     def calculate_rsi(self, data, window=14):
@@ -89,19 +92,21 @@ class AlphaAnalyzer:
             # --- KIM DAERI'S IN-DEPTH ANALYSIS BLOCKS ---
             support = round(curr_price * 0.95, 2)
             resistance = round(curr_price * 1.08, 2)
+            is_kr = symbol.endswith('.KS')
             
-            tech_report = f"기술적 지표상 RSI는 {round(curr_rsi, 1)}로 {'과열' if curr_rsi > 70 else '과매도' if curr_rsi < 35 else '안정'}권에 위치하며, 1차 지지선 ${support} 상단에서 강한 하방 경직성을 확보했습니다. {'골든크로스 발생으로 인한 추세 전환' if is_golden_cross else '매물대 돌파 시 추가 숏스퀴즈'} 시나리오가 유효합니다."
+            unit = "원" if is_kr else "$"
+            
+            tech_report = f"기술적 지표상 RSI는 {round(curr_rsi, 1)}로 {'과열' if curr_rsi > 70 else '과매도' if curr_rsi < 35 else '안정'}권에 위치하며, 1차 지지선 {unit}{support} 상단에서 강한 하방 경직성을 확보했습니다. {'골든크로스 발생으로 인한 추세 전환' if is_golden_cross else '매물대 돌파 시 추가 숏스퀴즈'} 시나리오가 유효합니다."
             
             # --- REAL FUNDAMENTAL METRICS ---
             info = ticker.info
-            # Fetch real metrics, fallback to 'N/A' if missing
-            real_roic = info.get('returnOnAssets', 0) * 100 # Using ROA as proxy for ROIC if missing
+            real_roic = info.get('returnOnAssets', 0) * 100
             real_margin = info.get('ebitdaMargins', 0) * 100
             if real_margin == 0: real_margin = info.get('profitMargins', 0) * 100
             
-            fund_report = f"기본적 분석상 REAL 데이터 확인 결과, 수익률(ROA) {round(real_roic, 2)}% 및 영업마진 {round(real_margin, 2)}%를 기록 중입니다. 이는 시장 컨센서스를 {'상회하는' if real_margin > 15 else '준수하는'} 수준이며, 시가총액 ${round(info.get('marketCap', 0)/1e9, 1)}B 규모의 펀더멘털 건전성을 입증합니다."
+            fund_report = f"기본적 분석상 REAL 데이터 확인 결과, 수익률(ROA) {round(real_roic, 2)}% 및 영업마진 {round(real_margin, 2)}%를 기록 중입니다. 이는 시장 컨센서스를 {'상회하는' if real_margin > 15 else '준수하는'} 수준이며, {'시총' if is_kr else '시가총액'} {'₩' if is_kr else '$'}{round(info.get('marketCap', 0)/1e12 if is_kr else info.get('marketCap', 0)/1e9, 1)}{'조' if is_kr else 'B'} 규모의 펀더멘털 건전성을 입증합니다."
             
-            action_plan = f"단기 목표가 ${round(target_price, 2)} 도달 시 분할 익절, ${round(stop_loss, 2)} 이탈 시 선제적 리스크 관리를 권장합니다. Empire Global 실시간 수급 데이터 기반 {'기관 집중 매집' if vol_spike else '추세 안정성'} 전략이 유효합니다."
+            action_plan = f"단기 목표가 {unit}{round(target_price, 2)} 도달 시 분할 익절, {unit}{round(stop_loss, 2)} 이탈 시 선제적 리스크 관리를 권장합니다. Empire Global 실시간 수급 데이터 기반 {'기관 집중 매집' if vol_spike else '추세 안정성'} 전략이 유효합니다."
 
             return {
                 'id': f"{symbol}-{int(time.time())}",
