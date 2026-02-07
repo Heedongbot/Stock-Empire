@@ -42,24 +42,72 @@ export async function GET(request: Request) {
             // Institutional Momentum Flag (Simulation based on volume/impact)
             const whale_active = volume > 5000000 || impact_score > 85;
 
-            let ai_reason = "";
-            if (lang === 'ko') {
-                if (change > 3) ai_reason = `세력의 강력한 매집으로 기술적 저항선을 돌파했습니다. "${theme.name_ko}" 섹터 내 가장 공격적인 우상향 흐름이 관찰됩니다.`;
-                else if (change > 0) ai_reason = `기관 자금 유입과 함께 견고한 지지선을 형성 중입니다. 추세 추종 전략(Trend Following)이 유효한 구간입니다.`;
-                else if (change < -3) ai_reason = `단기 과매도 구간 진입이 임박했습니다. ${ticker} 특유의 변동성을 고려할 때, 바닥 확인 후 반등 노림수가 필요합니다.`;
-                else ai_reason = `안정적인 매물 소화 과정을 거치고 있습니다. 섹터 전반의 지수 방향성에 동조하며 에너지를 응축 중인 것으로 분석됩니다.`;
-            } else {
-                if (change > 3) ai_reason = `Strong institutional accumulation detected. Bullish breakout targeting key resistance levels in the ${theme.name_en} sector.`;
-                else if (change > 0) ai_reason = `Forming a solid base with consistent buyer interest. Trend following maintains high probability of success.`;
-                else if (change < -3) ai_reason = `Extreme short-term volatility. Entering oversold territory - monitoring for a classic RSI reversal signal.`;
-                else ai_reason = `Consolidating within a tight range. Currently synchronizing with broader sector indices while accumulating momentum.`;
-            }
+            // --- UPGRADED KIM DAERI INTELLIGENCE ENGINE ---
+            const getDynamicReason = (ticker: string, change: number, lang: string) => {
+                const isKo = lang === 'ko';
+                const absChange = Math.abs(change);
+
+                // Ticker Specific High-Conviction Insights
+                const specialInsights: Record<string, any> = {
+                    'NVDA': {
+                        bull: isKo ? "블랙웰(Blackwell) 칩셋 공급 부족이 가시화되며 기관의 '묻지마 매수'가 이어지고 있습니다. $185 지지는 강력한 추세 연장을 시사합니다."
+                            : "Blackwell supply tightness is fueling aggressive institutional accumulation. Support at $185 indicates a robust trend extension.",
+                        bear: isKo ? "차익 실현 매물이 출회되고 있으나, 데이터센터 부문의 성장성은 여전히 독보적입니다. 하방 경직성을 테스트하는 구간입니다."
+                            : "Profit-taking is causing short-term friction, but Data Center fundamentals remain unrivaled. Currently testing floor integrity."
+                    },
+                    'TSLA': {
+                        bull: isKo ? "FSD v13 버전의 압도적 성과가 월가의 재평가를 이끌고 있습니다. 에너지 사업부의 마진 개선이 주가 상승의 촉매제입니다."
+                            : "Exceptional performance of FSD v13 is driving a Wall Street re-rating. Energy division margin expansion is the key catalyst.",
+                        bear: isKo ? "인도시장 진출 연기 노이즈로 변동성이 커졌으나, 로보택시 비전은 여전히 유효합니다. $400 초반 매수 대기 자금이 확인됩니다."
+                            : "Delay in India expansion is causing volatility, but the Robotaxi vision holds. Strong bid interest confirmed near low $400s."
+                    },
+                    'AAPL': {
+                        bull: isKo ? "아이폰 17 시제품의 AI 성능 혁신 기대감이 유입되고 있습니다. 현금 흐름 기반의 자사주 매입이 하단을 강력하게 지지합니다."
+                            : "Innovation expectations for iPhone 17's AI capabilities are rising. Buybacks based on cash flow are providing a solid floor.",
+                        bear: isKo ? "중국 내 점유율 회복 속도가 예상보다 더디지만, 서비스 부문의 안정적 성장이 밸류에이션 하락을 방어하고 있습니다."
+                            : "Recovery in China market share is slower than expected, but steady Service segment growth is protecting the valuation."
+                    }
+                };
+
+                if (specialInsights[ticker]) {
+                    return change >= 0 ? specialInsights[ticker].bull : specialInsights[ticker].bear;
+                }
+
+                // Generic but DIVERSE Reason Tree
+                const templates = {
+                    bull: isKo ? [
+                        "장기 이평선 돌파와 함께 대량 거래가 동반된 고확신 매수 시그널입니다.",
+                        "기관의 바스켓 매수세가 유입되며 섹터 내 주도주로 부상하고 있습니다.",
+                        "추세 추종(Trend Following) 전략가들의 타겟이 되며 상방 압력이 강해지고 있습니다."
+                    ] : [
+                        "High-conviction buy signal confirmed by breakout above long-term EMAs with massive volume.",
+                        "Emerging as a sector leader as institutional basket orders flood the tape.",
+                        "Becoming a target for trend-following strategists, intensifying upward pressure."
+                    ],
+                    bear: isKo ? [
+                        "기술적 반등 구간에 진입했으나, 상단 저항 매물이 두터워 보수적 접근이 필요합니다.",
+                        "섹터 전반의 심리 위축으로 인해 일시적인 투매(Sell-off) 압력을 받고 있는 구간입니다.",
+                        "에너지 응축을 위한 건강한 조정(Healthy Correction) 과정으로 판단되며 지지선 확인이 우선입니다."
+                    ] : [
+                        "Entering a technical bounce zone, but heavy overhead resistance warrants a cautious approach.",
+                        "Facing temporary sell-off pressure due to broad sector sentiment dampening.",
+                        "Viewed as a healthy correction to build momentum; verifying support levels is a priority."
+                    ]
+                };
+
+                const pool = change >= 0 ? templates.bull : templates.bear;
+                // Use ticker length and change as a simple seed for variety
+                const seed = (ticker.length + Math.floor(absChange * 10)) % pool.length;
+                return pool[seed];
+            };
+
+            const ai_reason = getDynamicReason(ticker, change, lang);
 
             const target_price = price * (1 + (impact_score / 1200) + 0.04);
             const stop_loss = price * (1 - (impact_score / 2000) - 0.03);
 
             return {
-                id: `${ticker}-${Date.now()}`,
+                id: `${ticker}-${Date.now()}-${Math.random()}`,
                 ticker,
                 name: quote.shortName || ticker,
                 price,

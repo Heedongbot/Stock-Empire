@@ -1,181 +1,31 @@
 [
   {
-    "id": "-5206580286392494186",
+    "id": "-6349274156283355304",
     "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:50:12Z",
-    "free_tier": {
-      "title": "MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요",
-      "title_en": "Dear MicroStrategy Stock Fans, Mark Your Calendars for February 5",
-      "summary_kr": "MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요",
-      "link": "https://finance.yahoo.com/news/dear-microstrategy-stock-fans-mark-185012183.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요' 입니다.",
-        "impact_score": 93
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8397593161901881336",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:50:00Z",
-    "free_tier": {
-      "title": "넷플릭스는 매수인가요?",
-      "title_en": "Is Netflix a Buy?",
-      "summary_kr": "넷플릭스는 매수인가요?",
-      "link": "https://finance.yahoo.com/news/netflix-buy-185000393.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '넷플릭스는 매수인가요?' 입니다.",
-        "impact_score": 72
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-442021909193749320",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:50:42Z",
-    "free_tier": {
-      "title": "인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?",
-      "title_en": "Intel Just Announced That It Will Make GPUs. Should You Buy INTC Stock Here?",
-      "summary_kr": "인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?",
-      "link": "https://finance.yahoo.com/news/intel-just-announced-gpus-buy-185042873.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?' 입니다.",
-        "impact_score": 69
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6679746632819367719",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
+    "sentiment": "BULLISH",
     "is_breaking": true,
-    "published_at": "2026-02-05T18:46:18Z",
+    "published_at": "2026-02-05T18:59:00Z",
     "free_tier": {
-      "title": "알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?",
-      "title_en": "As Alphabet Plunges Below Its 50-Day MA, Should You Buy the Dip in GOOGL Stock?",
-      "summary_kr": "알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?",
-      "link": "https://finance.yahoo.com/news/alphabet-plunges-below-50-day-184618710.html",
+      "title": "리더십 개편이 계속되면서 Verizon의 Sampath가 떠납니다.",
+      "title_en": "Verizon’s Sampath Leaves as Leadership Shakeup Continues",
+      "summary_kr": "리더십 개편이 계속되면서 Verizon의 Sampath가 떠납니다.",
+      "link": "https://www.barrons.com/articles/verizon-sampath-ceo-consumer-exit-stock-c3588d5a?siteid=yhoof2&yptr=yahoo",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BEARISH 추세를 보이고 있습니다. 주요 영향 요인은 '알파벳이 50일 MA 아래로 급락하면서 GOOGL 주식 하락세를 매수해야 할까요?' 입니다.",
-        "impact_score": 60
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '리더십 개편이 계속되면서 Verizon의 Sampath가 떠납니다.' 입니다.",
+        "impact_score": 95
       },
       "trading_strategy": {
-        "action": "매도",
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "7476950370293965027",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:56:14Z",
-    "free_tier": {
-      "title": "AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.",
-      "title_en": "Axon Tased By AI Software Fears As Investors Shoot First",
-      "summary_kr": "AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.",
-      "link": "https://www.investors.com/news/axon-stock-tased-by-ai-software-fears/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.' 입니다.",
-        "impact_score": 85
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "4902808943525228481",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:56:32Z",
-    "free_tier": {
-      "title": "AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.",
-      "title_en": "AppLovin Has Far More Worries Than a Short Seller's Report",
-      "summary_kr": "AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.",
-      "link": "https://finance.yahoo.com/news/applovin-far-more-worries-short-185632132.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.' 입니다.",
-        "impact_score": 90
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7074298918328888813",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-05T18:50:43Z",
-    "free_tier": {
-      "title": "주요 암호화폐 거래소, 시장 퇴출로 대규모 정리해고 발표",
-      "title_en": "Major crypto exchange announces major layoff amid market exit",
-      "summary_kr": "주요 암호화폐 거래소, 시장 퇴출로 대규모 정리해고 발표",
-      "link": "https://finance.yahoo.com/news/major-crypto-exchange-announces-major-185043545.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '주요 암호화폐 거래소, 시장 퇴출로 대규모 정리해고 발표' 입니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2712299651587371702",
+    "id": "-7189402731198159577",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": true,
@@ -190,7 +40,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '잠금 장치 및 화재 경보기 제조사, 수익 급증 후 포인트 구매 눈' 입니다.",
-        "impact_score": 63
+        "impact_score": 90
       },
       "trading_strategy": {
         "action": "매수",
@@ -200,7 +50,57 @@
     }
   },
   {
-    "id": "444570710422693650",
+    "id": "1793394367276917834",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:56:32Z",
+    "free_tier": {
+      "title": "AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.",
+      "title_en": "AppLovin Has Far More Worries Than a Short Seller's Report",
+      "summary_kr": "AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.",
+      "link": "https://finance.yahoo.com/news/applovin-far-more-worries-short-185632132.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AppLovin은 공매도 보고서보다 훨씬 더 많은 걱정을 갖고 있습니다.' 입니다.",
+        "impact_score": 85
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "6455873351900817095",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:56:14Z",
+    "free_tier": {
+      "title": "AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.",
+      "title_en": "Axon Tased By AI Software Fears As Investors Shoot First",
+      "summary_kr": "AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.",
+      "link": "https://www.investors.com/news/axon-stock-tased-by-ai-software-fears/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AI 소프트웨어에 의해 테이저링된 Axon은 투자자가 먼저 촬영함에 따라 두려움을 느낍니다.' 입니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1699628100931423900",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -215,7 +115,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Broadcom 주가가 하락하고 있습니다. 분석가들이 다음에 기대하는 것은 다음과 같습니다.' 입니다.",
-        "impact_score": 66
+        "impact_score": 64
       },
       "trading_strategy": {
         "action": "관망",
@@ -225,7 +125,32 @@
     }
   },
   {
-    "id": "-238495021974260408",
+    "id": "-3768579446785122671",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T19:01:00Z",
+    "free_tier": {
+      "title": "AI 에이전트에도 신원 보안이 필요합니다. 이 회사는 업무를 수행합니다.",
+      "title_en": "AI Agents Need Identity Security Too. This Company Does the Job.",
+      "summary_kr": "AI 에이전트에도 신원 보안이 필요합니다. 이 회사는 업무를 수행합니다.",
+      "link": "https://www.barrons.com/articles/okta-stock-provides-ai-agents-security-buy-827dea80?siteid=yhoof2&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'AI 에이전트에도 신원 보안이 필요합니다. 이 회사는 업무를 수행합니다.' 입니다.",
+        "impact_score": 79
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "2245250715546986083",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -240,7 +165,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'BofA, 2분기 실적 부진 이후 Clorox(CLX)에 대한 마진 불확실성 표시' 입니다.",
-        "impact_score": 89
+        "impact_score": 78
       },
       "trading_strategy": {
         "action": "관망",
@@ -250,72 +175,22 @@
     }
   },
   {
-    "id": "-4159366971711340454",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T18:37:11Z",
-    "free_tier": {
-      "title": "분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?",
-      "title_en": "Analysts See Super Micro Computer Finally Staging a Turnaround. Should You Buy SMCI Stock Now?",
-      "summary_kr": "분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?",
-      "link": "https://finance.yahoo.com/news/analysts-see-super-micro-computer-183711679.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '분석가들은 슈퍼마이크로 컴퓨터가 마침내 턴어라운드를 준비하고 있다고 보고 있습니다. 지금 SMCI 주식을 사야 할까요?' 입니다.",
-        "impact_score": 63
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7146011180782097121",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "published_at": "2026-02-05T18:48:09Z",
-    "free_tier": {
-      "title": "주의하세요! 비트코인은 항복 모드에 진입하고 '예측보다 규율을 보상하는 단계'에서 거래됩니다.",
-      "title_en": "Heads Up! Bitcoin Enters Capitulation Mode, Trades In a ‘Phase That Rewards Discipline Over Prediction’",
-      "summary_kr": "주의하세요! 비트코인은 항복 모드에 진입하고 '예측보다 규율을 보상하는 단계'에서 거래됩니다.",
-      "link": "https://finance.yahoo.com/news/heads-bitcoin-enters-capitulation-mode-184809250.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 '주의하세요! 비트코인은 항복 모드에 진입하고 '예측보다 규율을 보상하는 단계'에서 거래됩니다.' 입니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-7360633039060890955",
+    "id": "5979557506604143787",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T19:09:20Z",
+    "published_at": "2026-02-05T18:50:42Z",
     "free_tier": {
-      "title": "단기 반등이 예상되는 레모네이드 주식",
-      "title_en": "Lemonade Stock Due for a Short-Term Bounce",
-      "summary_kr": "단기 반등이 예상되는 레모네이드 주식",
-      "link": "https://finance.yahoo.com/news/lemonade-stock-due-short-term-190920527.html",
+      "title": "인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?",
+      "title_en": "Intel Just Announced That It Will Make GPUs. Should You Buy INTC Stock Here?",
+      "summary_kr": "인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?",
+      "link": "https://finance.yahoo.com/news/intel-just-announced-gpus-buy-185042873.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '단기 반등이 예상되는 레모네이드 주식' 입니다.",
-        "impact_score": 94
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '인텔은 방금 GPU를 만들 것이라고 발표했습니다. 여기서 INTC 주식을 구매해야 할까요?' 입니다.",
+        "impact_score": 79
       },
       "trading_strategy": {
         "action": "관망",
@@ -325,22 +200,22 @@
     }
   },
   {
-    "id": "-5244077740953794523",
+    "id": "-539644295447702194",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-05T19:11:57Z",
+    "published_at": "2026-02-05T18:50:12Z",
     "free_tier": {
-      "title": "Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.",
-      "title_en": "Deutsche Bank Lifts Hershey (HSY) Target but Stays on the Sidelines Ahead of Q4",
-      "summary_kr": "Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.",
-      "link": "https://finance.yahoo.com/news/deutsche-bank-lifts-hershey-hsy-191157849.html",
+      "title": "MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요",
+      "title_en": "Dear MicroStrategy Stock Fans, Mark Your Calendars for February 5",
+      "summary_kr": "MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요",
+      "link": "https://finance.yahoo.com/news/dear-microstrategy-stock-fans-mark-185012183.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.' 입니다.",
-        "impact_score": 62
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'MicroStrategy 주식 팬 여러분, 달력에 2월 5일을 표시해 두세요' 입니다.",
+        "impact_score": 66
       },
       "trading_strategy": {
         "action": "관망",
@@ -350,7 +225,7 @@
     }
   },
   {
-    "id": "-1164615322103142786",
+    "id": "2125650775055163139",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -365,10 +240,135 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '암호화폐 M&A에 대한 월스트리트 규율: AlphaTON 파트너 Yury Mitin, Nasdaq에서 라이브' 입니다.",
-        "impact_score": 76
+        "impact_score": 78
       },
       "trading_strategy": {
         "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1475442881143657962",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T18:57:21Z",
+    "free_tier": {
+      "title": "Microsoft의 5000억 달러 대패 이후 Amazon Cloud 판매에 집중",
+      "title_en": "Amazon Cloud Sales in Focus After Microsoft’s $500 Billion Rout",
+      "summary_kr": "Microsoft의 5000억 달러 대패 이후 Amazon Cloud 판매에 집중",
+      "link": "https://finance.yahoo.com/news/amazon-cloud-sales-focus-microsoft-112001757.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Microsoft의 5000억 달러 대패 이후 Amazon Cloud 판매에 집중' 입니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4706256247206201113",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T19:11:57Z",
+    "free_tier": {
+      "title": "Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.",
+      "title_en": "Deutsche Bank Lifts Hershey (HSY) Target but Stays on the Sidelines Ahead of Q4",
+      "summary_kr": "Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.",
+      "link": "https://finance.yahoo.com/news/deutsche-bank-lifts-hershey-hsy-191157849.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'Deutsche Bank는 Hershey(HSY) 목표를 상향 조정했지만 4분기를 앞두고 부양책을 유지했습니다.' 입니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8817377012016659942",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T19:09:20Z",
+    "free_tier": {
+      "title": "단기 반등이 예상되는 레모네이드 주식",
+      "title_en": "Lemonade Stock Due for a Short-Term Bounce",
+      "summary_kr": "단기 반등이 예상되는 레모네이드 주식",
+      "link": "https://finance.yahoo.com/news/lemonade-stock-due-short-term-190920527.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 '단기 반등이 예상되는 레모네이드 주식' 입니다.",
+        "impact_score": 87
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-5572049270056504308",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-05T19:14:37Z",
+    "free_tier": {
+      "title": "TD Cowen, 북미 거래량이 여전히 약한 동안 Mondelez(MDLZ) 목표 상향",
+      "title_en": "TD Cowen Raises Mondelez (MDLZ) Target While North America Volumes Remain Weak",
+      "summary_kr": "TD Cowen, 북미 거래량이 여전히 약한 동안 Mondelez(MDLZ) 목표 상향",
+      "link": "https://finance.yahoo.com/news/td-cowen-raises-mondelez-mdlz-191437954.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 NEUTRAL 추세를 보이고 있습니다. 주요 영향 요인은 'TD Cowen, 북미 거래량이 여전히 약한 동안 Mondelez(MDLZ) 목표 상향' 입니다.",
+        "impact_score": 72
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "2507640641193327523",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "2026-02-05T19:16:45Z",
+    "free_tier": {
+      "title": "UBS, 중립적 견해를 유지하면서 U.S. Bancorp(USB) 목표를 더 높게 조정",
+      "title_en": "UBS Nudges U.S. Bancorp (USB) Target Higher while Holding a Neutral View",
+      "summary_kr": "UBS, 중립적 견해를 유지하면서 U.S. Bancorp(USB) 목표를 더 높게 조정",
+      "link": "https://finance.yahoo.com/news/ubs-nudges-u-bancorp-usb-191645749.html",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[AI 요약] 'Yahoo Finance'의 보도에 따르면, 현재 시장은 BULLISH 추세를 보이고 있습니다. 주요 영향 요인은 'UBS, 중립적 견해를 유지하면서 U.S. Bancorp(USB) 목표를 더 높게 조정' 입니다.",
+        "impact_score": 91
+      },
+      "trading_strategy": {
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
