@@ -27,6 +27,7 @@ interface NewsItem {
     win_rate?: number;
     free_tier: {
         title: string;
+        title_en?: string;
         summary_kr: string;
         link: string;
         original_source: string;
@@ -68,8 +69,12 @@ export default function NewsPage() {
 
     useEffect(() => {
         const fetchNews = async () => {
+            setLoading(true);
             try {
-                const res = await fetch(`/api/market-news?t=${Date.now()}`);
+                // User Directive: ALWAYS show Global (US) News, regardless of UI language.
+                // "American market is the main focus!"
+                const market = 'global';
+                const res = await fetch(`/api/market-news?market=${market}&t=${Date.now()}`);
                 const data = await res.json();
                 if (data.reports && Array.isArray(data.reports)) {
                     setNewsData(data.reports);
@@ -83,7 +88,7 @@ export default function NewsPage() {
             }
         };
         fetchNews();
-    }, []);
+    }, [lang]);
 
     const filteredNews = newsData.filter(item => {
         if (filter === 'ALL') return true;

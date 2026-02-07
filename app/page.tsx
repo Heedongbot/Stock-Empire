@@ -542,7 +542,7 @@ export default function LandingPage() {
       </footer>
 
       {/* Modals & Ticker components */}
-      <PaymentModal isOpen={isPaymentOpen} onClose={() => setIsPaymentOpen(false)} plan={selectedPlan} onComplete={handleUpgradeComplete} lang={lang} />
+      <PaymentModal isOpen={isPaymentOpen} onClose={() => { setIsPaymentOpen(false); setSelectedPlan(""); }} plan={selectedPlan} onComplete={handleUpgradeComplete} lang={lang} />
       <QuizWidget />
     </div>
   );

@@ -1,10 +1,10 @@
 [
   {
-    "id": "-5588813415904760473",
+    "id": "-477167934609425178",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
       "title_en": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
@@ -21,11 +21,11 @@
     }
   },
   {
-    "id": "6360894976320991852",
+    "id": "-2673905314090969521",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
       "title_en": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
@@ -42,11 +42,11 @@
     }
   },
   {
-    "id": "-2092945538915136820",
+    "id": "-5097525711394013860",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
       "title_en": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
@@ -63,11 +63,11 @@
     }
   },
   {
-    "id": "-6096456192513419563",
+    "id": "-7450871241163743316",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
       "title_en": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
@@ -84,11 +84,11 @@
     }
   },
   {
-    "id": "-4298838578306492469",
+    "id": "-5243050833455847376",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
       "title_en": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
@@ -105,11 +105,11 @@
     }
   },
   {
-    "id": "-8610269475370941893",
+    "id": "-8532164632035873352",
     "ticker": "MACRO",
     "sentiment": "NEUTRAL",
     "is_breaking": true,
-    "published_at": "2026-02-07T15:40:06.239912",
+    "published_at": "2026-02-07T16:00:01.785655",
     "free_tier": {
       "title": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
       "title_en": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
@@ -126,7 +126,32 @@
     }
   },
   {
-    "id": "8310689634242827093",
+    "id": "-6700128826275423601",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Thu, 05 Feb 2026 18:28:22 GMT",
+    "free_tier": {
+      "title": "이 소프트웨어 ETF는 자유낙하 중입니다. 차트를 활용해 바닥을 잡는 방법",
+      "title_en": "This software ETF is in freefall. How to catch the bottom using charts",
+      "summary_kr": "iShares Expanded Tech-Software Sector ETF(IGV)가 8번째 하락일을 기록할 예정이지만 잠재적인 반등을 플레이하는 올바른 방법과 잘못된 방법이 있습니다.",
+      "link": "https://www.cnbc.com/2026/02/05/this-software-etf-is-in-freefall-how-to-catch-the-bottom-using-charts.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-714762184984380805",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": false,
@@ -151,57 +176,57 @@
     }
   },
   {
-    "id": "-8796166834580083112",
+    "id": "583325476959784409",
     "ticker": "US Market",
-    "sentiment": "BULLISH",
+    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Sat, 07 Feb 2026 00:56:44 -0500",
+    "published_at": "Fri, 06 Feb 2026 20:56:25 GMT",
     "free_tier": {
-      "title": "알파인 소득 재산 신탁: 견고한 상승 잠재력을 지닌 안정적인 배당 소득",
-      "title_en": "Alpine Income Property Trust: Reliable Dividend Income With Solid Upside Potential",
-      "summary_kr": "알파인 소득 재산 신탁: 견고한 상승 잠재력을 지닌 안정적인 배당 소득",
-      "link": "https://seekingalpha.com/article/4867383-alpine-income-property-trust-reliable-dividend-income-with-solid-upside-potential?source=feed_all_articles",
-      "original_source": "Seeking Alpha"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다.",
-        "impact_score": 74
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-5516006118521969634",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Thu, 05 Feb 2026 13:41:14 GMT",
-    "free_tier": {
-      "title": "Wolfe는 향상된 성장 프로필과 AI 수익 창출을 언급하며 Zoom을 업그레이드합니다.",
-      "title_en": "Wolfe upgrades Zoom, citing improved growth profile and AI monetization",
-      "summary_kr": "Wolfe Research의 115달러 목표 가격은 Zoom Communications 주식의 25% 이상의 상승 여력을 의미합니다.",
-      "link": "https://www.cnbc.com/2026/02/05/wolfe-upgrades-zoom-cites-improving-growth-profile-and-ai-monetization.html",
+      "title": "Carter Worth는 트레이더들이 하락세를 보이고 있는 이 주식 그룹을 퇴색시킬 시간이라고 말합니다.",
+      "title_en": "Time for traders to fade this group of stocks that's been on a tear, says Carter Worth",
+      "summary_kr": "베타가 낮고 오랫동안 부진했던 S&P 500 필수 소비재 부문은 지난 3개월 동안 큰 폭의 상승세를 보이며 현재 해당 기간 동안 15% 상승했습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/time-for-traders-to-fade-this-group-of-stocks-thats-been-on-a-tear-says-carter-worth.html",
       "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 83
+        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
+        "impact_score": 70
       },
       "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
     }
   },
   {
-    "id": "-1209702936572359104",
+    "id": "-1224603808740392732",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": true,
+    "published_at": "Fri, 06 Feb 2026 23:15:00 -0500",
+    "free_tier": {
+      "title": "영란은행(Bank of England)은 금리 인하에 가까워졌습니다: 3월은 통화 정책과 파운드화의 실질적인 전환점입니다",
+      "title_en": "Bank Of England Moves Closer To Rate Cuts: March A Real Turning Point For Monetary Policy And Pound",
+      "summary_kr": "영란은행(Bank of England)은 금리 인하에 가까워졌습니다: 3월은 통화 정책과 파운드화의 실질적인 전환점입니다",
+      "link": "https://seekingalpha.com/article/4867376-bank-of-england-moves-closer-to-rate-cuts-march-real-turning-point-for-monetary-policy-pound?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. Seeking Alpha 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
+        "impact_score": 70
+      },
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8074947669394021507",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": false,
@@ -226,22 +251,22 @@
     }
   },
   {
-    "id": "-4623432125012649813",
+    "id": "-2507364019656504377",
     "ticker": "US Market",
     "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 19:05:47 GMT",
+    "is_breaking": true,
+    "published_at": "Fri, 06 Feb 2026 21:01:00 GMT",
     "free_tier": {
-      "title": "JPMorgan은 트럼프의 감세로 인해 소비자가 증가할 것으로 보고 있습니다. 이 소매업체가 가장 큰 승자가 될 것입니다.",
-      "title_en": "JPMorgan sees a consumer boost from Trump's tax cuts. This retailer will be the biggest winner",
-      "summary_kr": "월스트리트 은행은 이 창고 클럽이 광범위한 지리적 입지와 회원 인구 통계 덕분에 이익을 얻을 수 있다고 말했습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/jpmorgan-see-consumer-boost-from-tax-cuts-this-retailer-will-win.html",
-      "original_source": "CNBC"
+      "title": "이러한 주목받지 못하는 채권시장의 발전은 많은 차용자들을 불안하게 만들 수 있습니다.",
+      "title_en": "This little-noticed bond-market development could put many borrowers on edge",
+      "summary_kr": "올해 국채 수익률 곡선이 계속해서 가팔라지면 장기 차입자가 연준의 2026년 금리 인하의 완전한 영향을 느끼기가 더 어려워질 것입니다.",
+      "link": "https://www.marketwatch.com/story/this-little-noticed-bond-market-development-could-put-many-borrowers-on-edge-45a05830?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. CNBC 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
-        "impact_score": 68
+        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. MarketWatch 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
+        "impact_score": 66
       },
       "trading_strategy": {
         "action": "매도",
@@ -251,46 +276,21 @@
     }
   },
   {
-    "id": "-3165589324178205706",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 20:56:25 GMT",
-    "free_tier": {
-      "title": "Carter Worth는 트레이더들이 하락세를 보이고 있는 이 주식 그룹을 퇴색시킬 시간이라고 말합니다.",
-      "title_en": "Time for traders to fade this group of stocks that's been on a tear, says Carter Worth",
-      "summary_kr": "베타가 낮고 오랫동안 부진했던 S&P 500 필수 소비재 부문은 지난 3개월 동안 큰 폭의 상승세를 보이며 현재 해당 기간 동안 15% 상승했습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/time-for-traders-to-fade-this-group-of-stocks-thats-been-on-a-tear-says-carter-worth.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 69
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-4445813701569358140",
+    "id": "3576935181144454125",
     "ticker": "US Market",
     "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "Fri, 06 Feb 2026 23:15:00 -0500",
+    "is_breaking": false,
+    "published_at": "2026-02-06 22:54:45",
     "free_tier": {
-      "title": "영란은행(Bank of England)은 금리 인하에 가까워졌습니다: 3월은 통화 정책과 파운드화의 실질적인 전환점입니다",
-      "title_en": "Bank Of England Moves Closer To Rate Cuts: March A Real Turning Point For Monetary Policy And Pound",
-      "summary_kr": "영란은행(Bank of England)은 금리 인하에 가까워졌습니다: 3월은 통화 정책과 파운드화의 실질적인 전환점입니다",
-      "link": "https://seekingalpha.com/article/4867376-bank-of-england-moves-closer-to-rate-cuts-march-real-turning-point-for-monetary-policy-pound?source=feed_all_articles",
-      "original_source": "Seeking Alpha"
+      "title": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
+      "title_en": "Judge bans Kalshi from offering sports-events contracts in Massachusetts in 30 days",
+      "summary_kr": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
+      "link": "https://www.investing.com/news/stock-market-news/judge-bans-kalshi-from-offering-sportsevents-contracts-in-massachusetts-in-30-days-4492135",
+      "original_source": "Investing.com"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. Seeking Alpha 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
+        "summary_kr": "[코부장 전담 분석] 주요 주주의 주식 매칭 및 보통주 추가 발행은 주주 가치 희석을 의미하는 치명적인 하락 요인입니다. Empire AI는 이를 기관들의 이익 실현 및 탈출 신호로 분석하며, 보수적인 비중 축소를 강력 권고합니다.",
         "impact_score": 65
       },
       "trading_strategy": {
@@ -301,97 +301,22 @@
     }
   },
   {
-    "id": "-8395174452414009937",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 23:23:00 -0500",
-    "free_tier": {
-      "title": "MTUM은 변동성으로 전환하고 기술주 전환(등급 하향)",
-      "title_en": "MTUM Turns Volatile, Tech Stocks Turning (Rating Downgrade)",
-      "summary_kr": "MTUM은 변동성으로 전환하고 기술주 전환(등급 하향)",
-      "link": "https://seekingalpha.com/article/4867366-mtum-turns-volatile-tech-stocks-turning-rating-downgrade?source=feed_all_articles",
-      "original_source": "Seeking Alpha"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. Seeking Alpha 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
-        "impact_score": 70
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "1537899637195217273",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 13:13:00 GMT",
-    "free_tier": {
-      "title": "Goldman Sachs는 Meta 원자력 계약에서 이 에너지 주식을 업그레이드하고 40% 상승 여력을 확인합니다.",
-      "title_en": "Goldman Sachs upgrades this energy stock on Meta nuclear power deal, sees 40% upside",
-      "summary_kr": "Goldman Sachs는 Vistra가 전력 구매 계약을 통해 더 많은 원자력 함대를 계약할 경우 추가 상승 가능성을 보고 있습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/goldman-sachs-upgrades-this-energy-stock-on-meta-nuclear-power-deal-sees-40percent-upside.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "8357355121861134143",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 23:50:00 -0500",
-    "free_tier": {
-      "title": "주식 시장과 기술 부문이 다시 숨을 쉬고 있습니다 - 다우 존스가 사상 최고치를 경신했습니다",
-      "title_en": "Stock Markets And Tech Sector Breathe Again - Dow Jones To New All-Time Highs",
-      "summary_kr": "주식 시장과 기술 부문이 다시 숨을 쉬고 있습니다 - 다우 존스가 사상 최고치를 경신했습니다",
-      "link": "https://seekingalpha.com/article/4867380-stock-market-tech-sector-breathe-again-dow-jones-to-new-all-time-highs?source=feed_all_articles",
-      "original_source": "Seeking Alpha"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다.",
-        "impact_score": 81
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "5954855325573935816",
+    "id": "-6976742061688994932",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Thu, 05 Feb 2026 20:28:53 GMT",
+    "published_at": "Thu, 05 Feb 2026 13:07:37 GMT",
     "free_tier": {
-      "title": "2026년에는 소형주가 S&P 500을 앞지르고 있습니다. 이 주식은 배당금을 지급하며 거리에서 인기를 끌고 있습니다.",
-      "title_en": "Small caps are beating the S&P 500 in 2026. These stocks pay a dividend and are liked on the Street",
-      "summary_kr": "위험을 감수하려는 투자자를 위해 Russell 2000에는 수익을 지불하고 잠재적 감사를 제공하며 분석가가 추천하는 여러 회원이 있습니다.",
-      "link": "https://www.cnbc.com/2026/02/05/small-caps-are-beating-the-sp-500-in-2026-these-stocks-pay-a-dividend.html",
+      "title": "Stifel은 Microsoft를 다운그레이드하고 AI 지출과 Azure에 대한 우려가 단기적인 상승을 제한할 수 있다고 말합니다.",
+      "title_en": "Stifel downgrades Microsoft, says AI spending and Azure concerns could limit near-term upside",
+      "summary_kr": "Stifel의 392달러 목표 가격은 여기에서 Microsoft 주식의 5% 하락을 의미합니다.",
+      "link": "https://www.cnbc.com/2026/02/05/stifel-downgrades-microsoft-says-ai-spending-and-azure-concerns-could-limit-near-term-upside.html",
       "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 73
+        "impact_score": 66
       },
       "trading_strategy": {
         "action": "관망",
@@ -401,82 +326,7 @@
     }
   },
   {
-    "id": "2900885643397954753",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "Thu, 05 Feb 2026 18:28:22 GMT",
-    "free_tier": {
-      "title": "이 소프트웨어 ETF는 자유낙하 중입니다. 차트를 활용해 바닥을 잡는 방법",
-      "title_en": "This software ETF is in freefall. How to catch the bottom using charts",
-      "summary_kr": "iShares Expanded Tech-Software Sector ETF(IGV)가 8번째 하락일을 기록할 예정이지만 잠재적인 반등을 플레이하는 올바른 방법과 잘못된 방법이 있습니다.",
-      "link": "https://www.cnbc.com/2026/02/05/this-software-etf-is-in-freefall-how-to-catch-the-bottom-using-charts.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 67
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "7328571277902901152",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "Sat, 07 Feb 2026 00:30:00 -0500",
-    "free_tier": {
-      "title": "시장은 리더십의 변화 속에서 새로운 연준 시대를 준비합니다",
-      "title_en": "Markets Prepare For New Fed Era Amid Change In Leadership",
-      "summary_kr": "시장은 리더십의 변화 속에서 새로운 연준 시대를 준비합니다",
-      "link": "https://seekingalpha.com/article/4867377-markets-prepare-for-new-fed-era-amid-leadership-change?source=feed_all_articles",
-      "original_source": "Seeking Alpha"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 58
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-6827330704501291505",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Fri, 06 Feb 2026 12:48:22 GMT",
-    "free_tier": {
-      "title": "아마존은 마진과 자본 지출 문제에 대해 고민하고 있습니다. 월스트리트 애널리스트들은 여전히 ​​상승세를 보고 있다",
-      "title_en": "Amazon is dipping on margin and capex concerns. Wall Street analysts still see upside",
-      "summary_kr": "대부분의 분석가들은 목표 가격을 낮추었음에도 불구하고 아마존에 대해 압도적인 낙관론을 유지했습니다.",
-      "link": "https://www.cnbc.com/2026/02/06/amazon-is-dipping-on-margin-and-capex-concerns-wall-street-analysts-still-see-upside.html",
-      "original_source": "CNBC"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
-        "impact_score": 76
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "6644440349806705210",
+    "id": "-6490017238529062998",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": false,
@@ -501,47 +351,22 @@
     }
   },
   {
-    "id": "3335878114040365706",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06 22:54:45",
-    "free_tier": {
-      "title": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
-      "title_en": "Judge bans Kalshi from offering sports-events contracts in Massachusetts in 30 days",
-      "summary_kr": "판사는 Kalshi가 30일 이내에 매사추세츠에서 스포츠 이벤트 계약을 제안하는 것을 금지했습니다.",
-      "link": "https://www.investing.com/news/stock-market-news/judge-bans-kalshi-from-offering-sportsevents-contracts-in-massachusetts-in-30-days-4492135",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 주요 주주의 주식 매칭 및 보통주 추가 발행은 주주 가치 희석을 의미하는 치명적인 하락 요인입니다. Empire AI는 이를 기관들의 이익 실현 및 탈출 신호로 분석하며, 보수적인 비중 축소를 강력 권고합니다.",
-        "impact_score": 66
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "8277847625346709148",
+    "id": "7565066133857266590",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "Thu, 05 Feb 2026 13:07:37 GMT",
+    "published_at": "Thu, 05 Feb 2026 20:28:53 GMT",
     "free_tier": {
-      "title": "Stifel은 Microsoft를 다운그레이드하고 AI 지출과 Azure에 대한 우려가 단기적인 상승을 제한할 수 있다고 말합니다.",
-      "title_en": "Stifel downgrades Microsoft, says AI spending and Azure concerns could limit near-term upside",
-      "summary_kr": "Stifel의 392달러 목표 가격은 여기에서 Microsoft 주식의 5% 하락을 의미합니다.",
-      "link": "https://www.cnbc.com/2026/02/05/stifel-downgrades-microsoft-says-ai-spending-and-azure-concerns-could-limit-near-term-upside.html",
+      "title": "2026년에는 소형주가 S&P 500을 앞지르고 있습니다. 이 주식은 배당금을 지급하며 거리에서 인기를 끌고 있습니다.",
+      "title_en": "Small caps are beating the S&P 500 in 2026. These stocks pay a dividend and are liked on the Street",
+      "summary_kr": "위험을 감수하려는 투자자를 위해 Russell 2000에는 수익을 지불하고 잠재적 감사를 제공하며 분석가가 추천하는 여러 회원이 있습니다.",
+      "link": "https://www.cnbc.com/2026/02/05/small-caps-are-beating-the-sp-500-in-2026-these-stocks-pay-a-dividend.html",
       "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
-        "impact_score": 68
+        "impact_score": 72
       },
       "trading_strategy": {
         "action": "관망",
@@ -551,22 +376,22 @@
     }
   },
   {
-    "id": "-8317187897686883798",
+    "id": "-3703210869488693265",
     "ticker": "US Market",
     "sentiment": "BEARISH",
-    "is_breaking": true,
-    "published_at": "Fri, 06 Feb 2026 21:01:00 GMT",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 19:05:47 GMT",
     "free_tier": {
-      "title": "이러한 주목받지 못하는 채권시장의 발전은 많은 차용자들을 불안하게 만들 수 있습니다.",
-      "title_en": "This little-noticed bond-market development could put many borrowers on edge",
-      "summary_kr": "올해 국채 수익률 곡선이 계속해서 가팔라지면 장기 차입자가 연준의 2026년 금리 인하의 완전한 영향을 느끼기가 더 어려워질 것입니다.",
-      "link": "https://www.marketwatch.com/story/this-little-noticed-bond-market-development-could-put-many-borrowers-on-edge-45a05830?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
+      "title": "JPMorgan은 트럼프의 감세로 인해 소비자가 증가할 것으로 보고 있습니다. 이 소매업체가 가장 큰 승자가 될 것입니다.",
+      "title_en": "JPMorgan sees a consumer boost from Trump's tax cuts. This retailer will be the biggest winner",
+      "summary_kr": "월스트리트 은행은 이 창고 클럽이 광범위한 지리적 입지와 회원 인구 통계 덕분에 이익을 얻을 수 있다고 말했습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/jpmorgan-see-consumer-boost-from-tax-cuts-this-retailer-will-win.html",
+      "original_source": "CNBC"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. MarketWatch 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
-        "impact_score": 69
+        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. CNBC 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
+        "impact_score": 70
       },
       "trading_strategy": {
         "action": "매도",
@@ -576,7 +401,32 @@
     }
   },
   {
-    "id": "-4966452481103168386",
+    "id": "-1505833953550751263",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Thu, 05 Feb 2026 13:41:14 GMT",
+    "free_tier": {
+      "title": "Wolfe는 향상된 성장 프로필과 AI 수익 창출을 언급하며 Zoom을 업그레이드합니다.",
+      "title_en": "Wolfe upgrades Zoom, citing improved growth profile and AI monetization",
+      "summary_kr": "Wolfe Research의 115달러 목표 가격은 Zoom Communications 주식의 25% 이상의 상승 여력을 의미합니다.",
+      "link": "https://www.cnbc.com/2026/02/05/wolfe-upgrades-zoom-cites-improving-growth-profile-and-ai-monetization.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
+        "impact_score": 81
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-1462787588122726456",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": false,
@@ -591,6 +441,56 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다.",
+        "impact_score": 72
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4933937639985654319",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 12:48:22 GMT",
+    "free_tier": {
+      "title": "아마존은 마진과 자본 지출 문제에 대해 고민하고 있습니다. 월스트리트 애널리스트들은 여전히 ​​상승세를 보고 있다",
+      "title_en": "Amazon is dipping on margin and capex concerns. Wall Street analysts still see upside",
+      "summary_kr": "대부분의 분석가들은 목표 가격을 낮추었음에도 불구하고 아마존에 대해 압도적인 낙관론을 유지했습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/amazon-is-dipping-on-margin-and-capex-concerns-wall-street-analysts-still-see-upside.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
+        "impact_score": 73
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8643693644433158197",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 13:13:00 GMT",
+    "free_tier": {
+      "title": "Goldman Sachs는 Meta 원자력 계약에서 이 에너지 주식을 업그레이드하고 40% 상승 여력을 확인합니다.",
+      "title_en": "Goldman Sachs upgrades this energy stock on Meta nuclear power deal, sees 40% upside",
+      "summary_kr": "Goldman Sachs는 Vistra가 전력 구매 계약을 통해 더 많은 원자력 함대를 계약할 경우 추가 상승 가능성을 보고 있습니다.",
+      "link": "https://www.cnbc.com/2026/02/06/goldman-sachs-upgrades-this-energy-stock-on-meta-nuclear-power-deal-sees-40percent-upside.html",
+      "original_source": "CNBC"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 주요 IB의 등급 상향 조정 및 목표가 상향은 강력한 수급 유입 채널을 형성합니다. Empire AI 분석 결과, 직전 고점 돌파 시 약 15~20%의 추가 공간이 열려 있으며, 장기 이평선 지지 확인 후 추격 매수 관점이 유효합니다.",
         "impact_score": 75
       },
       "trading_strategy": {
@@ -601,7 +501,7 @@
     }
   },
   {
-    "id": "6756194586034861491",
+    "id": "2684137429434452624",
     "ticker": "US Market",
     "sentiment": "BULLISH",
     "is_breaking": false,
@@ -616,10 +516,110 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[코부장 전담 분석] 예상치를 상회하는 펀더멘털 지표는 밸류에이션 리레이팅(Re-rating)의 근거가 됩니다. 단순 테마성 반등이 아닌 실질적 수익성 개선이 확인되는 구간이므로, 포트폴리오 내 비중 확대를 적극 고려해야 합니다.",
-        "impact_score": 75
+        "impact_score": 74
       },
       "trading_strategy": {
         "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-4445314811420966645",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 00:56:44 -0500",
+    "free_tier": {
+      "title": "알파인 소득 재산 신탁: 견고한 상승 잠재력을 지닌 안정적인 배당 소득",
+      "title_en": "Alpine Income Property Trust: Reliable Dividend Income With Solid Upside Potential",
+      "summary_kr": "알파인 소득 재산 신탁: 견고한 상승 잠재력을 지닌 안정적인 배당 소득",
+      "link": "https://seekingalpha.com/article/4867383-alpine-income-property-trust-reliable-dividend-income-with-solid-upside-potential?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다.",
+        "impact_score": 77
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-3747197951086190925",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:50:00 -0500",
+    "free_tier": {
+      "title": "주식 시장과 기술 부문이 다시 숨을 쉬고 있습니다 - 다우 존스가 사상 최고치를 경신했습니다",
+      "title_en": "Stock Markets And Tech Sector Breathe Again - Dow Jones To New All-Time Highs",
+      "summary_kr": "주식 시장과 기술 부문이 다시 숨을 쉬고 있습니다 - 다우 존스가 사상 최고치를 경신했습니다",
+      "link": "https://seekingalpha.com/article/4867380-stock-market-tech-sector-breathe-again-dow-jones-to-new-all-time-highs?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 시장의 지배적 매수 심리가 확인되는 핵심 시그널입니다. 주도주 중심의 강한 거래량이 동반되고 있으며, 이는 기관 투자자들의 '스마트 머니' 유입으로 판단됩니다.",
+        "impact_score": 82
+      },
+      "trading_strategy": {
+        "action": "매수",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-141678044444283304",
+    "ticker": "US Market",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Sat, 07 Feb 2026 00:30:00 -0500",
+    "free_tier": {
+      "title": "시장은 리더십의 변화 속에서 새로운 연준 시대를 준비합니다",
+      "title_en": "Markets Prepare For New Fed Era Amid Change In Leadership",
+      "summary_kr": "시장은 리더십의 변화 속에서 새로운 연준 시대를 준비합니다",
+      "link": "https://seekingalpha.com/article/4867377-markets-prepare-for-new-fed-era-amid-leadership-change?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 구간입니다. 주요 가격 임계점(Threshold) 돌파를 확인하기 전까지는 분할 매수/매도보다는 관망세 유지가 유리합니다.",
+        "impact_score": 59
+      },
+      "trading_strategy": {
+        "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "-3329487544757545832",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 23:23:00 -0500",
+    "free_tier": {
+      "title": "MTUM은 변동성으로 전환하고 기술주 전환(등급 하향)",
+      "title_en": "MTUM Turns Volatile, Tech Stocks Turning (Rating Downgrade)",
+      "summary_kr": "MTUM은 변동성으로 전환하고 기술주 전환(등급 하향)",
+      "link": "https://seekingalpha.com/article/4867366-mtum-turns-volatile-tech-stocks-turning-rating-downgrade?source=feed_all_articles",
+      "original_source": "Seeking Alpha"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[코부장 전담 분석] 시장의 하방 리스크가 가속화되는 부정적 변곡점입니다. Seeking Alpha 데이터 기준 외국인 및 기관의 대규모 이탈이 감지되므로, 방어적 포지션 유지가 최선입니다.",
+        "impact_score": 65
+      },
+      "trading_strategy": {
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }

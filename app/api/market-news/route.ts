@@ -15,7 +15,7 @@ export async function GET(request: Request) {
         // In production, this should point to the live crawler output
         let fileName = 'us-news-realtime.json';
         if (market === 'kr') {
-            fileName = 'kr_news_latest.json'; // Future placeholder
+            fileName = 'kr-news-realtime.json';
         }
 
         // Use process.cwd() to locate public folder correctly in Next.js

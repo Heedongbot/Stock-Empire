@@ -73,13 +73,26 @@ def crawl_naver_finance_news():
                     continue
 
                 news_data = {
+                    "id": str(hash(link)),
                     "market": "KR",
-                    "title": title,
-                    "link": link,
-                    "summary": summary,
-                    "press": press,
+                    "ticker": "KOSPI", # Default ticker for general news
+                    "title": title, # For legacy support
+                    "sentiment": "NEUTRAL",
                     "published_at": pub_date,
-                    "collected_at": str(datetime.now())
+                    "free_tier": {
+                        "title": title,
+                        "title_en": title, # No translation for now
+                        "summary_kr": summary,
+                        "link": link,
+                        "original_source": press
+                    },
+                    "vip_tier": {
+                        "ai_analysis": {
+                            "summary_kr": "[코부장 분석 대기중] 한국 시장 데이터 연동 준비 단계입니다.",
+                            "impact_score": 50,
+                            "investment_insight": "아직 AI 분석이 적용되지 않은 뉴스입니다."
+                        }
+                    }
                 }
                 news_list.append(news_data)
 
