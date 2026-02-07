@@ -37,10 +37,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
   return (
-    <ClerkProvider publishableKey={publishableKey} localization={koKR}>
+    <ClerkProvider localization={koKR}>
       <html lang="ko" suppressHydrationWarning>
         <head>
           <script
