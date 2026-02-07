@@ -1,17 +1,17 @@
 [
   {
-    "id": "-8178387380459629317",
+    "id": "2969763183064109018",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "\"가상자산, 신뢰 붕괴\" 국회도 '빗썸 사고' 성토…기본법 '규제' 기조에 힘 실리나",
+    "title": "빗썸, '비트코인 오지급' 사태에 고개…\"고객 손실 10억, 전액 보상\"",
     "sentiment": "NEUTRAL",
-    "published_at": "2026-02-07 20:14",
+    "published_at": "2026-02-07 20:51",
     "free_tier": {
-      "title": "\"가상자산, 신뢰 붕괴\" 국회도 '빗썸 사고' 성토…기본법 '규제' 기조에 힘 실리나",
-      "title_en": "\"가상자산, 신뢰 붕괴\" 국회도 '빗썸 사고' 성토…기본법 '규제' 기조에 힘 실리나",
-      "summary_kr": "국내 2위 가상자산 거래소 빗썸에서 발생한 대규모 오지급 사고로 정치권에서도 거래소의 신뢰성에 대한 비판이 이어지면서 디지털자산 기본법(2단계 ...뉴시스|2026-02-07 20:14",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0013755376&office_id=003&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=1",
-      "original_source": "뉴시스"
+      "title": "빗썸, '비트코인 오지급' 사태에 고개…\"고객 손실 10억, 전액 보상\"",
+      "title_en": "빗썸, '비트코인 오지급' 사태에 고개…\"고객 손실 10억, 전액 보상\"",
+      "summary_kr": "가상자산 거래소 빗썸은 '비트코인 오지급' 전산사고에 대해 7일 사과문을 내고 '패닉셀'(공황매도) 투자자들에게 손실금 전액과 추가 보상을 지급...한국경제|2026-02-07 20:51",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005248267&office_id=015&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=1",
+      "original_source": "한국경제"
     },
     "vip_tier": {
       "ai_analysis": {
@@ -22,18 +22,18 @@
     }
   },
   {
-    "id": "-3230135073219214768",
+    "id": "-6004684173767680949",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "[속보]빗썸 “비트코인 오지급 관련 고객 손실 10억원 안팎…110% 보상”",
+    "title": "빗썸, “비트코인 패닉셀 손실 110% 보상”…1000억 펀드 조성",
     "sentiment": "NEUTRAL",
-    "published_at": "2026-02-07 19:21",
+    "published_at": "2026-02-07 19:23",
     "free_tier": {
-      "title": "[속보]빗썸 “비트코인 오지급 관련 고객 손실 10억원 안팎…110% 보상”",
-      "title_en": "[속보]빗썸 “비트코인 오지급 관련 고객 손실 10억원 안팎…110% 보상”",
-      "summary_kr": "연합뉴스 가상자산 거래소 빗썸은 비트코인 오(誤)지급에 따른 고객 손실 금액을 10억 원 안팎으로 파악하고 있다고 7일 밝혔다. 이재원 빗썸 대...문화일보|2026-02-07 19:21",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0002769604&office_id=021&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=1",
-      "original_source": "문화일보"
+      "title": "빗썸, “비트코인 패닉셀 손실 110% 보상”…1000억 펀드 조성",
+      "title_en": "빗썸, “비트코인 패닉셀 손실 110% 보상”…1000억 펀드 조성",
+      "summary_kr": "사고 당시 접속시 2만원 지급·일주일 수수료 ‘0원’ AI 기반 이상 거래 차단 등 재발 방지 대책 마련 이재원 대표 “무거운 책임 통감” 공식...매일경제|2026-02-07 19:23",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005633936&office_id=009&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=1",
+      "original_source": "매일경제"
     },
     "vip_tier": {
       "ai_analysis": {
@@ -44,18 +44,18 @@
     }
   },
   {
-    "id": "-487873176654121881",
+    "id": "5762453269825676433",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "금융위, 빗썸 불러 긴급회의…대응반 꾸려 다른 거래소도 점검(종합)",
+    "title": "빗썸, \"저가 매도 추가 보상\"…금융위 주재 긴급 점검(종합)",
     "sentiment": "NEUTRAL",
-    "published_at": "2026-02-07 18:17",
+    "published_at": "2026-02-07 18:25",
     "free_tier": {
-      "title": "금융위, 빗썸 불러 긴급회의…대응반 꾸려 다른 거래소도 점검(종합)",
-      "title_en": "금융위, 빗썸 불러 긴급회의…대응반 꾸려 다른 거래소도 점검(종합)",
-      "summary_kr": "금감원, 오전에 현장점검반 급파…\"위법 발견시 즉시 검사전환\" 가상자산 2단계법 연계 제도개선도…외부기관 주기점검·무과실책임 등 추진 금융 당국...연합뉴스|2026-02-07 18:17",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0015891681&office_id=001&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=2",
-      "original_source": "연합뉴스"
+      "title": "빗썸, \"저가 매도 추가 보상\"…금융위 주재 긴급 점검(종합)",
+      "title_en": "빗썸, \"저가 매도 추가 보상\"…금융위 주재 긴급 점검(종합)",
+      "summary_kr": "금융위원회와 금융감독원, 금융정보분석원(FIU)이 빗썸의 비트코인 오지급 사고와 관련해 긴급 점검 회의를 열고 이용자 피해와 거래소 내부통제 실...아이뉴스24|2026-02-07 18:25",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0001003883&office_id=031&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=2",
+      "original_source": "아이뉴스24"
     },
     "vip_tier": {
       "ai_analysis": {
@@ -66,17 +66,17 @@
     }
   },
   {
-    "id": "-2066724656340770408",
+    "id": "1634863987028629903",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "빗썸, 초유의 비트코인 오지급 사고 발생",
+    "title": "빗썸, 비트코인 오지급 사고",
     "sentiment": "NEUTRAL",
     "published_at": "2026-02-07 17:34",
     "free_tier": {
-      "title": "빗썸, 초유의 비트코인 오지급 사고 발생",
-      "title_en": "빗썸, 초유의 비트코인 오지급 사고 발생",
+      "title": "빗썸, 비트코인 오지급 사고",
+      "title_en": "빗썸, 비트코인 오지급 사고",
       "summary_kr": "국내 가상자산 거래소 빗썸에서 이벤트를 통해 당첨자들에게 현금 2000원~5만원을 지급하려 했으나 시스템 오류로 단위가 '원'이 아닌 'BTC'...뉴시스|2026-02-07 17:34",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0013755337&office_id=003&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=2",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0013755339&office_id=003&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=2",
       "original_source": "뉴시스"
     },
     "vip_tier": {
@@ -88,18 +88,18 @@
     }
   },
   {
-    "id": "-3181548358675422758",
+    "id": "-4938558692201172899",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "[주末머니]태양광 뜨나…韓·美·中서 피어오르는 반등의 불씨",
+    "title": "개미들 돈 싸들고 몰렸다…레버리지·곱버스 ETF '인기'",
     "sentiment": "NEUTRAL",
-    "published_at": "2026-02-07 15:11",
+    "published_at": "2026-02-07 15:42",
     "free_tier": {
-      "title": "[주末머니]태양광 뜨나…韓·美·中서 피어오르는 반등의 불씨",
-      "title_en": "[주末머니]태양광 뜨나…韓·美·中서 피어오르는 반등의 불씨",
-      "summary_kr": "한국, 미국, 중국을 중심으로 태양광 가격이 반등할 것이라는 전망이 나왔다. 7일 DB증권은 한국의 수요 회복, 미국의 전기료 상승, 중국의 재...아시아경제|2026-02-07 15:11",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005718415&office_id=277&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=3",
-      "original_source": "아시아경제"
+      "title": "개미들 돈 싸들고 몰렸다…레버리지·곱버스 ETF '인기'",
+      "title_en": "개미들 돈 싸들고 몰렸다…레버리지·곱버스 ETF '인기'",
+      "summary_kr": "고위험·고수익 투자상품인 레버리지 상장지수펀드(ETF) 인기가 가파르게 치솟고 있다. 국내 증시가 한동안 갇혀 있던 ‘박스권’을 벗어나자 수익을...한국경제|2026-02-07 15:42",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005248215&office_id=015&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=3",
+      "original_source": "한국경제"
     },
     "vip_tier": {
       "ai_analysis": {
@@ -110,18 +110,18 @@
     }
   },
   {
-    "id": "-4068673110719161007",
+    "id": "-6846249505140832889",
     "market": "KR",
     "ticker": "KOSPI",
-    "title": "태양광으로 ‘무한 동력’...머스크가 우주 데이터센터 앞당길까 [김기혁의 테슬라월드]",
+    "title": "“전형적인 가격 변동”…비트코인, 하루만에 7만달러로 급반등",
     "sentiment": "NEUTRAL",
-    "published_at": "2026-02-07 14:01",
+    "published_at": "2026-02-07 14:13",
     "free_tier": {
-      "title": "태양광으로 ‘무한 동력’...머스크가 우주 데이터센터 앞당길까 [김기혁의 테슬라월드]",
-      "title_en": "태양광으로 ‘무한 동력’...머스크가 우주 데이터센터 앞당길까 [김기혁의 테슬라월드]",
-      "summary_kr": "※‘김기혁의 테슬라월드’를 구독하시면 테슬라와 일론 머스크가 추진하는 전기차·로봇·AI·자율주행·에너지·배터리 산업의 미래를 쉽게 파악하실 수 ...서울경제|2026-02-07 14:01",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0004587814&office_id=011&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=3",
-      "original_source": "서울경제"
+      "title": "“전형적인 가격 변동”…비트코인, 하루만에 7만달러로 급반등",
+      "title_en": "“전형적인 가격 변동”…비트코인, 하루만에 7만달러로 급반등",
+      "summary_kr": "6만 달러선 붕괴 직전까지 내몰렸던 비트코인이 하루 만에 급반등에 성공하며 7만 달러선을 회복했다. 미 가상화폐 거래소 코인베이스에 따르면 미 ...매일경제|2026-02-07 14:13",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005633896&office_id=009&mode=LSS2D&type=0&section_id=101&section_id2=258&section_id3=&date=20260207&page=3",
+      "original_source": "매일경제"
     },
     "vip_tier": {
       "ai_analysis": {
