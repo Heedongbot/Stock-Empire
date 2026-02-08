@@ -90,79 +90,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📰 투데이 마켓 브리핑 (최신 지표 및 뉴스) */}
-      <LatestNewsInsights />
+
 
       {/* 💰 중간 광고 배치 */}
       <div className="max-w-7xl mx-auto px-8 mb-20">
         <AdLeaderboard />
       </div>
 
-      {/* Alpha Insights Section: 오직 ADMIN(보스님)만 볼 수 있게 제한 */}
-      {user?.role === 'ADMIN' ? (
-        <section className="max-w-7xl mx-auto px-8 -mt-20 relative z-20 mb-20">
-          <div className="bg-slate-900/50 backdrop-blur-3xl border border-[#00ffbd]/30 rounded-[3rem] p-12 shadow-2xl overflow-hidden relative group">
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-[#00ffbd]/10 rounded-full blur-[80px]" />
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-              <div>
-                <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter flex items-center gap-3">
-                  <ShieldCheck className="w-8 h-8 text-[#00ffbd]" />
-                  고위험 알파 시그널 (사령관 전용)
-                </h2>
-                <p className="text-slate-500 text-xs mt-2 font-bold uppercase tracking-widest">이 섹션은 보스님(ADMIN) 외에 일반 사용자에게는 노출되지 않습니다.</p>
-              </div>
-              <Link href="/vvip-alpha" className="px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-[#00ffbd]/50 transition-all text-xs font-black uppercase tracking-widest flex items-center gap-2 text-[#00ffbd]">
-                상세 통제실 입장 <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {loading ? (
-              <div className="flex justify-center py-20"><Loader2 className="w-10 h-10 text-[#00ffbd] animate-spin" /></div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {signals.slice(0, 4).map((sig, idx) => (
-                  <div key={idx} className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl hover:border-[#00ffbd]/50 transition-all group/card relative overflow-hidden">
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-black text-white">{sig.ticker}</span>
-                      <span className={`text-[10px] font-black ${sig.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
-                        {sig.change_pct}%
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-black text-white mb-4 uppercase tracking-tight">{sig.name}</h3>
-                    <div className="space-y-4 mb-6 text-xs">
-                      <div className="flex justify-between font-mono">
-                        <span className="text-slate-500 uppercase">Target</span>
-                        <span className="text-green-400 font-black">${sig.target_price}</span>
-                      </div>
-                      <div className="flex justify-between font-mono">
-                        <span className="text-slate-500 uppercase">Stop</span>
-                        <span className="text-red-400 font-black">${sig.stop_loss}</span>
-                      </div>
-                    </div>
-                    <p className="text-[11px] leading-relaxed text-slate-400 line-clamp-3 italic">
-                      {sig.ai_reason}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      ) : (
-        /* 일반 사용자용: 리스크 방지를 위해 섹터 대시보드만 노출 */
-        <section className="max-w-7xl mx-auto px-8 -mt-20 relative z-20 mb-20">
-          <div className="bg-[#0c121d] border border-slate-800 rounded-[3rem] p-12 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-10 opacity-5">
-              <Database className="w-40 h-40" />
-            </div>
-            <h2 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-4">전 세계 투자 지능은 지금도 동기화 중</h2>
-            <p className="text-slate-400 max-w-xl mx-auto mb-8 font-medium">실시간 뉴스룸과 테마 분석을 통해 시장의 거대한 흐름을 확인하세요. 알파 시그널은 안정성 검증 후 차례로 개방됩니다.</p>
-            <Link href="/newsroom" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all">
-              뉴스룸 바로가기 <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
-      )}
+      {/* 📰 투데이 마켓 브리핑 (최신 지표 및 뉴스) - 대체 배치 */}
+      <LatestNewsInsights />
 
       {/* Sector Intelligence Section */}
       <section className="max-w-7xl mx-auto px-8 py-10">
