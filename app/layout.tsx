@@ -9,6 +9,7 @@ import { AuthProvider } from "@/lib/AuthContext";
 import TickerTape from "@/components/TickerTape";
 import SiteFooter from "@/components/SiteFooter";
 import BreakingNewsToast from "./components/BreakingNewsToast";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,13 +42,17 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        <script
+        <meta name="google-adsense-account" content="ca-pub-9538835439937351" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* Google AdSense Script */}
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9538835439937351"
           crossOrigin="anonymous"
-        ></script>
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          strategy="afterInteractive"
+        />
+
         {!isClient ? (
           // 하이드레이션 전 로딩 상태 (서버 렌더링용)
           <div style={{ background: '#050b14', height: '100vh' }} />
