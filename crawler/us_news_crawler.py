@@ -16,7 +16,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load local environment variables
-load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'))
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'), override=True)
 
 class StockNewsCrawler:
     def __init__(self):
@@ -107,20 +107,28 @@ class StockNewsCrawler:
                     pub_date_raw = item.find('pubDate').text.strip() if item.find('pubDate') else None
                     
                     # --- [NEW] FACT-GATE: DATE VALIDATION ---
-                    # Reject news that is older than 3 days or from previous years (prevents 2024 news leaks)
                     if pub_date_raw:
                         try:
-                            # Handling various RSS date formats
-                            import email.utils
-                            pub_dt = email.utils.parsedate_to_datetime(pub_date_raw)
-                            now_dt = datetime.now(pub_dt.tzinfo) if pub_dt.tzinfo else datetime.now()
+                            # Handling various date formats
+                            from dateutil import parser
+                            try:
+                                pub_dt = parser.parse(pub_date_raw)
+                            except:
+                                import email.utils
+                                pub_dt = email.utils.parsedate_to_datetime(pub_date_raw)
+                                
+                            if pub_dt.tzinfo is None:
+                                pub_dt = pub_dt.replace(tzinfo=datetime.now().astimezone().tzinfo)
+                                
+                            now_dt = datetime.now(pub_dt.tzinfo)
                             diff = now_dt - pub_dt
                             
                             if diff.days > 3:
-                                print(f" [SKIP] Old News Detected ({pub_dt.year}-{pub_dt.month}): {title[:30]}...")
+                                # print(f" [SKIP] Old News: {title[:30]}...")
                                 continue
                         except Exception as e:
-                            print(f" [WARN] Date Parse Error: {e}")
+                            print(f" [WARN] Date Parse Error: {pub_date_raw} -> {e}")
+                            pub_dt = datetime.now()
 
                     # --- NOISE & RETAIL DRAMA FILTER ---
                     # Discarding non-institutional/noise news that doesn't affect the Stock Empire
@@ -304,6 +312,83 @@ class StockNewsCrawler:
         with open(self.output_path, 'w', encoding='utf-8') as f:
             json.dump(clean_data, f, ensure_ascii=False, indent=2)
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Saved {len(clean_data)} items to {self.output_path}")
+
+        # ------------------------------------------------------------------
+        # [자동 포스팅] 티스토리 블로그 발행 (미국 주식 버전)
+        # ------------------------------------------------------------------
+        if clean_data:
+            try:
+                # 상대 경로/절대 경로 import 호환성 처리
+                try:
+                    from crawler.tistory_poster import TistoryAutoPoster
+                except ImportError:
+                    from tistory_poster import TistoryAutoPoster
+                
+                print("[INFO] Starting Tistory Auto-Posting (US Market)...")
+                
+                # 가장 핫한 뉴스 1개 선정 (Breaking News 우선, 없으면 첫번째)
+                top_news = next((item for item in clean_data if item.get('is_breaking')), clean_data[0])
+                
+                # 데이터 추출
+                title_kr = top_news['free_tier']['title']
+                summary_kr = top_news['free_tier']['summary_kr']
+                ai_summary = top_news['vip_tier']['ai_analysis']['summary_kr']
+                impact_score = top_news['vip_tier']['ai_analysis']['impact_score']
+                sentiment = top_news['sentiment']
+                
+                # 블로그용 제목 (이모지 포함)
+                blog_title = f"[Stock Empire] 🇺🇸 미장 속보: {title_kr}"
+                
+                # 블로그 본문 (HTML + 홍보 링크)
+                blog_content = f"""
+                <h2 style="color: #0F172A; border-bottom: 2px solid #2563EB; padding-bottom: 10px;">🇺🇸 미국 증시 AI 속보</h2>
+                <p><strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.</p>
+                <br>
+                
+                <h3 style="background-color: #EFF6FF; padding: 15px; border-left: 5px solid #2563EB;">📰 {title_kr}</h3>
+                <p style="font-size: 16px; line-height: 1.7; color: #334155;">
+                {summary_kr}
+                </p>
+                <br>
+                
+                <div style="border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; background-color: #F8FAFC;">
+                    <h4 style="margin-top: 0; color: #2563EB;">🤖 AI 워룸(War Room) 분석</h4>
+                    <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                        <li style="margin-bottom: 8px;"><strong>⚡ 파급력 점수:</strong> <span style="background-color: #FEF3C7; padding: 2px 6px; border-radius: 4px;">{impact_score}/100</span></li>
+                        <li style="margin-bottom: 8px;"><strong>🌊 시장 감지:</strong> {sentiment}</li>
+                        <li style="margin-top: 12px; font-weight: bold; color: #0F172A;">💡 코부장 Insight:</li>
+                        <li style="color: #475569; padding-left: 10px; border-left: 3px solid #CBD5E1;">{ai_summary}</li>
+                    </ul>
+                </div>
+                
+                <br>
+                <hr style="border: 0; border-top: 1px dashed #CBD5E1; margin: 30px 0;">
+                
+                <!-- 트래픽 유입용 홍보 섹션 -->
+                <div style="text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 30px 20px; border-radius: 15px; color: white;">
+                    <h3 style="color: #60A5FA; margin-top: 0;">🚀 아직도 뉴스를 직접 찾으시나요?</h3>
+                    <p style="margin-bottom: 25px; color: #94A3B8;">
+                        <strong>Stock Empire</strong>에서는 전 세계 금융 뉴스를 AI가 24시간 실시간으로 분석해 드립니다.<br>
+                        지금 바로 접속해서 <strong>나만의 AI 투자 비서</strong>를 만나보세요.
+                    </p>
+                    <a href="https://stock-empire.vercel.app" target="_blank" 
+                       style="background-color: #3B82F6; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+                       👉 Stock Empire 무료 사용하기
+                    </a>
+                </div>
+                <br>
+                <p style="color: #94A3B8; font-size: 11px; text-align: center;">※ 본 포스팅은 Stock Empire AI 엔진에 의해 자동 생성되었습니다.</p>
+                """
+                
+                # 태그
+                tags = ["미국주식", "나스닥", "S&P500", "StockEmpire", "AI투자", "해외주식"]
+                
+                # 포스팅 실행
+                poster = TistoryAutoPoster()
+                poster.post(title=blog_title, content=blog_content, tags=tags)
+                
+            except Exception as e:
+                print(f"[ERROR] US Auto-posting failed: {e}")
 
 def main():
     crawler = StockNewsCrawler()
