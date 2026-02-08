@@ -16,6 +16,7 @@ import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import NewsTeaser from '@/components/NewsTeaser';
 import AdInFeed from '@/components/ads/AdInFeed';
+import LatestNewsInsights from '@/components/LatestNewsInsights';
 
 interface AlphaSignal {
   ticker: string;
@@ -88,6 +89,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 📰 투데이 마켓 브리핑 (최신 지표 및 뉴스) */}
+      <LatestNewsInsights />
 
       {/* 💰 중간 광고 배치 */}
       <div className="max-w-7xl mx-auto px-8 mb-20">
