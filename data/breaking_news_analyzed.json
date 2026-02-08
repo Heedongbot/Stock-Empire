@@ -1,0 +1,57 @@
+{
+    "last_analyzed": "2026-02-08 10:25:00",
+    "analyzed_news": [
+        {
+            "original_news": {
+                "category": "FOMC",
+                "priority": "[5-STAR]",
+                "title": "[속보] 미국 연준 기준금리 동결 결정 (4.50~4.75%)",
+                "source": "Federal Reserve",
+                "published_at": "2026-02-08 10:20:00",
+                "impact": "CRITICAL",
+                "url": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
+                "summary": "연방공개시장위원회(FOMC)가 기준금리를 4.50~4.75% 범위로 동결하기로 결정했습니다. 인플레이션 둔화세를 주시하며 신중한 입장을 견지했습니다.",
+                "market_expectation": "예상치: 동결 | 실제: 동결 | 서프라이즈: 없음"
+            },
+            "analysis": {
+                "impact_level": "CRITICAL",
+                "impact_reason": "금리 동결 결정은 시장의 불확실성을 해소하며 안정적인 유동성 환경을 보장합니다.",
+                "benefit_sectors": "기술주(NVDA, MSFT), 성장주, 부동산 섹터",
+                "risk_sectors": "전통적 금융주 (예대마진 축소 우려)",
+                "forecast_3days": "기술주 중심의 강한 랠리 지속",
+                "forecast_1week": "안착 후 지지선 확인 단계 진입",
+                "forecast_1month": "금리 인하 기대감 확산으로 낙관적 장세 전개",
+                "trading_strategy": "기술주 비중 유지 및 저점 매수 기회 활용",
+                "analyst": "코부장 (AI Breaking News Specialist)",
+                "analyzed_at": "2026-02-08 10:25:00"
+            }
+        },
+        {
+            "original_news": {
+                "category": "CPI",
+                "priority": "[5-STAR]",
+                "title": "[속보] 미국 CPI 2.4% 발표... 연준 목표치에 근접",
+                "source": "Bureau of Labor Statistics",
+                "published_at": "2026-02-08 10:20:00",
+                "impact": "HIGH",
+                "url": "https://www.bls.gov/news.release/cpi.nr0.htm",
+                "summary": "2월 소비자물가지수(CPI)가 전년 대비 2.4% 상승하며 시장 예상치에 부합했습니다.",
+                "market_expectation": "예상치: 2.4% | 실제: 2.4% | 서프라이즈: 없음"
+            },
+            "analysis": {
+                "impact_level": "HIGH",
+                "impact_reason": "인플레이션이 연준 목표치에 근접함에 따라 금리 인하 여력이 확보되었습니다.",
+                "benefit_sectors": "소비재, 소매 유통, 성장주",
+                "risk_sectors": "원자재 관련주 (인플레 둔화 압력)",
+                "forecast_3days": "물가 안정에 따른 안도 랠리",
+                "forecast_1week": "박스권 상단 돌파 시도",
+                "forecast_1month": "금리 정책 변화에 대한 기대감 고조",
+                "trading_strategy": "분할 매수를 통한 포트폴리오 강화",
+                "analyst": "코부장 (AI Breaking News Specialist)",
+                "analyzed_at": "2026-02-08 10:25:00"
+            }
+        }
+    ],
+    "total_count": 2,
+    "analyst": "코부장 (AI Breaking News Specialist)"
+}

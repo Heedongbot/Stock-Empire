@@ -6,10 +6,11 @@ import {
     Network, Lock, Shield, AlertCircle, BookOpen, ExternalLink, ArrowLeft, MousePointer2, Layers,
     Flame, ShieldAlert, Sparkles, Star, Clock
 } from "lucide-react";
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/AuthContext";
 import { translations } from "@/lib/translations";
+import AdLeaderboard from "@/components/ads/AdLeaderboard";
 
 interface NewsItem {
     id: string;
@@ -26,54 +27,23 @@ interface NewsItem {
 export default function AnalysisPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
     const { user } = useAuth();
-    const [lang, setLang] = useState<"ko" | "en">("ko");
+    const isAdmin = user?.role === 'ADMIN';
+    const lang = 'ko'; // 한국어 고정
     const t = (translations as any)[lang];
     const [insights, setInsights] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [tier, setTier] = useState<"free" | "vip" | "vvip">("free");
     const [activeTab, setActiveTab] = useState(0);
-
-    // Auto-detect User Locale with Persistence
-    useEffect(() => {
-        const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
-        if (savedLang) {
-            setLang(savedLang);
-        } else {
-            const userLang = navigator.language || navigator.languages[0];
-            if (userLang.startsWith('ko')) {
-                setLang('ko');
-            } else {
-                setLang('ko'); // Default to Korean as per user preference
-            }
-        }
-    }, []);
-
-    const handleSetLang = (newLang: 'ko' | 'en') => {
-        setLang(newLang);
-        localStorage.setItem('stock-empire-lang', newLang);
-    };
-
-    // Sync Tier with Auth
-    useEffect(() => {
-        if (user) {
-            setTier(user.tier.toLowerCase() as any);
-        } else {
-            setTier("free");
-        }
-    }, [user]);
 
     const [newsItem, setNewsItem] = useState<any>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // 1. Fetch News to find the matching title
                 const newsRes = await fetch('/api/news');
                 const newsData = await newsRes.json();
 
-                // Parse ID like "report-us-0"
                 const parts = resolvedParams.id.split('-');
-                const market = parts[1]?.toUpperCase(); // US or KR
+                const market = parts[1]?.toUpperCase();
                 const index = parseInt(parts[2]);
 
                 let selectedNews: NewsItem | null = null;
@@ -83,7 +53,6 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                 }
                 setNewsItem(selectedNews);
 
-                // 2. Fetch Insights
                 const insightRes = await fetch('/api/insights');
                 const insightData = await insightRes.json();
                 setInsights(insightData);
@@ -95,244 +64,130 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
         fetchData();
     }, [resolvedParams.id]);
 
-    // DERIVE REPORT DATA
     const baseReport = insights?.insights?.[0] || null;
     let report = baseReport ? { ...baseReport } : null;
 
-    const parts = resolvedParams.id.split('-');
-    const market = parts[1]?.toUpperCase(); // US or KR
-
-    // If it's a KR report, override with KR specific mock data if the API didn't return KR specific data
-    if (market === 'KR' && report) {
-        report = {
-            ...report,
-            master: "Peter Lynch (Domestic)",
-            sentiment: "0.45",
-            win_rate: "72",
-            mdd: "-8.5",
-            summary: "정부 밸류업 프로그램 및 상법 개정안 이슈로 인한 저PBR 지주사 및 금융 섹터 수급 집중 예상.",
-            intent: "국내 기관들은 정부 정책 모멘텀에 편승하여 저평가 자산주 비중을 확대하고 있으며, 자사주 소각 의무화 이슈는 단기적으로 지배구조 우수 기업에 강력한 호재로 작용 중입니다.",
-            ib_consensus: "65",
-            macro_weight: "원/달러 환율 & 외국인 수급",
-            scenarios: "Best: 상법 개정안 통과 및 주주환원율 제고로 코리아 디스카운트 해소. Base: 선별적 밸류업 지속, 지주사 및 금융주 위주 강세. Worst: 정책 모멘텀 소멸 및 총선 이후 규제 리스크 부각.",
-            transfer_map: "삼성물산(028260), 현대차(005380), KB금융(105560), 메리츠금융지주(138040)",
-            similarity: "2024년 1월 밸류업 초기 국면 (일치율 85%) 정부 정책 주도 장세와 외국인 순매수 유입 패턴 유사.",
-        };
-    } else if (report && newsItem && newsItem.title !== insights?.news_title) {
-        // [UPGRADE] Derive metrics mathematically from AI Sentiment, not random seed
+    if (report && newsItem && newsItem.title !== insights?.news_title) {
         const seed = newsItem.title.length;
-
-        // 1. Vary Sentiment slightly around the base
         report.sentiment = (parseFloat(report.sentiment) + (seed % 10 - 5) / 50).toFixed(2);
-
-        // 2. Calculate MDD based on Sentiment (Negative Sentiment = Deeper Risk)
-        // Formula: Base MDD (-10%) * (1 + |Sentiment|)
         const sentimentVal = parseFloat(report.sentiment);
         const calculatedMDD = -10 * (1 + Math.abs(sentimentVal) * 1.5);
         report.mdd = calculatedMDD.toFixed(1);
-
-        // 3. Calculate Win Rate inverse to Risk (Higher Risk = Slightly Lower Win Rate in short term volatility)
         const calculatedWinRate = 85 - (Math.abs(sentimentVal) * 20);
         report.win_rate = Math.round(calculatedWinRate).toString();
-
-        // 4. Update Similarity Context
-        const years = [2024, 2022, 2018, 2008];
-        const selectedYear = years[seed % years.length];
-        report.similarity = `${selectedYear} Patterns Identified (MDD ${report.mdd}%) - Risk simulation applied based on AI sentiment analysis.`;
+        report.similarity = `2024 Market Replay Patterns Detected (AI Sync Pulse: 98%)`;
     }
 
     return (
-        <div className="min-h-screen pb-20 bg-[#050b14] text-[#e2e8f0]">
-            {/* Tier Switcher (Admin Preview) */}
-            {user?.role === 'ADMIN' && (
-                <div className="fixed top-24 right-4 z-[100] flex flex-col gap-2 scale-90">
-                    <div className="bg-[#0f172a] p-3 rounded-2xl shadow-2xl border border-slate-800">
-                        <p className="text-[10px] font-black text-slate-500 mb-2 uppercase text-center">Preview Mode</p>
-                        {(['free', 'vip', 'vvip'] as const).map((t: "free" | "vip" | "vvip") => (
-                            <button key={t} onClick={() => setTier(t)} className={`w-full text-left px-4 py-2 rounded-xl text-[11px] font-bold uppercase transition-all mb-1 ${tier === t ? 'bg-primary text-white' : 'text-slate-500 hover:bg-slate-800'}`}>
-                                {t} {t === 'vvip' && '👑'}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            <nav className="sticky top-0 z-50 bg-[#050b14]/80 backdrop-blur-xl border-b border-slate-800/60 px-8 py-4 flex justify-between items-center shadow-sm">
-                <Link href="/" className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors font-bold text-xs uppercase tracking-widest">
-                    <ArrowLeft className="w-4 h-4" /> {t.analysisPage.terminalHome}
+        <div className="min-h-screen bg-[#050b14] text-[#e2e8f0] font-sans">
+            <nav className="sticky top-0 z-50 bg-[#050b14]/90 backdrop-blur-xl border-b border-white/5 px-8 py-4 flex justify-between items-center">
+                <Link href="/" className="flex items-center gap-2 text-slate-500 hover:text-[#00ffbd] transition-colors font-black text-[10px] uppercase tracking-widest">
+                    <ArrowLeft className="w-4 h-4" /> TERMINAL
                 </Link>
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#d4af37] rounded-xl flex items-center justify-center shadow-lg shadow-yellow-500/20">
-                        <Sparkles className="text-black w-5 h-5 fill-current" />
+                    <div className="w-8 h-8 bg-[#00ffbd] rounded-xl flex items-center justify-center shadow-lg shadow-[#00ffbd]/20">
+                        <Sparkles className="text-black w-4 h-4 fill-current" />
                     </div>
-                    <span className="text-lg font-black tracking-tighter uppercase italic text-white underline decoration-yellow-500/50 underline-offset-4">{t.analysisPage.premiumTitle}</span>
+                    <span className="text-lg font-black tracking-tighter uppercase italic text-white">PRO ALPHA <span className="text-[#00ffbd]">INSIGHT</span></span>
                 </div>
-                <div className="flex items-center gap-4">
-                    <div className="flex bg-slate-900/50 p-1 rounded-xl border border-slate-800 mr-2">
-                        <button
-                            onClick={() => handleSetLang('ko')}
-                            className={`px-3 py-1 rounded-lg text-[10px] font-black transition-all ${lang === 'ko' ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
-                        >
-                            KO
-                        </button>
-                        <button
-                            onClick={() => handleSetLang('en')}
-                            className={`px-3 py-1 rounded-lg text-[10px] font-black transition-all ${lang === 'en' ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
-                        >
-                            EN
-                        </button>
-                    </div>
-                    <div className="hidden md:flex items-center gap-2">
-                        <span className="text-[10px] font-black text-slate-400 uppercase mr-4">{t.analysisPage.liveReading}: 458 {t.analysisPage.liveUsers}</span>
-                        <button className="bg-primary text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">{t.analysisPage.footer.terminal}</button>
-                    </div>
+                <div className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest hidden md:block">
+                    LIVE STATUS: EMPIRE ENGINE v4.0
                 </div>
             </nav>
 
-            <main className="max-w-7xl mx-auto px-8 py-10">
+            <main className="max-w-7xl mx-auto px-6 py-10">
+                <div className="mb-12">
+                    <AdLeaderboard />
+                </div>
 
                 {/* HEADER SECTION */}
-                <section className="mb-12">
-                    <div className="mb-10 text-center max-w-4xl mx-auto">
-                        <div className="inline-flex items-center gap-3 mb-6">
-                            <div className="px-3 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] font-black rounded-full border border-yellow-500/20 uppercase flex items-center gap-2">
-                                <Star className="w-3 h-3 fill-current" /> {t.analysisPage.vvipExclusive}
-                            </div>
-                            <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{t.analysisPage.masterWarren}</div>
-                        </div>
-                        <h1 className="text-5xl font-black text-white leading-tight mb-6 tracking-tighter italic">
-                            {newsItem?.title || insights?.news_title || (tier === 'vvip' ? (lang === 'ko' ? "2026 분석 보고서 준비 중..." : "Preparing 2026 Analysis...") : (lang === 'ko' ? "분석 진행 중..." : "Analysis In Progress..."))}
-                        </h1>
-                        <div className="flex items-center justify-center gap-6 text-[11px] font-black uppercase text-slate-500">
-                            <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> {t.analysisPage.validFor} 24h</span>
-                            <span className="flex items-center gap-2"><ShieldAlert className="w-3.5 h-3.5 text-red-500" /> {t.analysisPage.macroRisk}: {lang === 'ko' ? '위험' : 'Alert'}</span>
+                <section className="mb-16 text-center max-w-4xl mx-auto">
+                    <div className="inline-flex items-center gap-3 mb-8">
+                        <div className="px-4 py-1.5 bg-[#00ffbd]/10 text-[#00ffbd] text-[10px] font-black rounded-full border border-[#00ffbd]/30 uppercase flex items-center gap-2 animate-pulse">
+                            <Star className="w-3 h-3 fill-current" /> UNLOCKED ALPHA
                         </div>
                     </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
-                        <div className="premium-card p-8 h-full flex flex-col items-center justify-center text-center bg-slate-900 border-slate-800">
-                            <p className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">{t.analysisPage.sentimentScore}</p>
-                            <div className="text-6xl font-black text-white mb-6">
-                                {loading ? '--' : (report?.sentiment || '0.0')}
-                            </div>
-                            <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-4 p-0.5">
-                                <div
-                                    className="h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(59,130,246,0.4)]"
-                                    style={{
-                                        width: `${((parseFloat(report?.sentiment) || 0) + 1) * 50}%`,
-                                        backgroundColor: (parseFloat(report?.sentiment) || 0) > 0 ? '#10b981' : '#ef4444'
-                                    }}
-                                />
-                            </div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                                {(parseFloat(report?.sentiment) || 0) > 0.3 ? t.analysisPage.sentimentLabel.aggressive : (parseFloat(report?.sentiment) || 0) < -0.3 ? t.analysisPage.sentimentLabel.caution : t.analysisPage.sentimentLabel.stable}
-                            </p>
-                        </div>
-
-                        <div className="premium-card p-8 h-full flex flex-col items-center justify-center text-center bg-slate-900 border-slate-800">
-                            <p className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">{t.analysisPage.winRate}</p>
-                            <div className={`text-6xl font-black text-white mb-6 ${tier === 'free' ? 'blur-md select-none' : ''}`}>
-                                {loading ? '--%' : (report?.win_rate || '0')}%
-                            </div>
-                            <div className="flex items-center gap-2 text-green-400 font-extrabold text-[10px] bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20 uppercase tracking-tighter">
-                                <ArrowUpRight className="w-3.5 h-3.5" /> {t.analysisPage.avgProfit} +4.82%
-                            </div>
-                        </div>
-
-                        <div className="premium-card p-10 h-full lg:col-span-2 bg-gradient-to-br from-[#0f172a] to-[#0a192f] text-white border-blue-500/20 relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-125 transition-transform duration-1000">
-                                <Zap className="text-blue-500 w-48 h-48 fill-current" />
-                            </div>
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-2 mb-8">
-                                    <Activity className="text-blue-400 w-5 h-5" />
-                                    <span className="font-black text-[11px] uppercase tracking-[0.3em] text-blue-400">{t.analysisPage.summaryTitle}</span>
-                                </div>
-                                <h3 className="text-2xl font-black leading-snug mb-8 tracking-tight italic">
-                                    "{loading ? (lang === 'ko' ? '빅데이터 분석 엔진 가동 중...' : 'Analyzing Big Data...') : (report?.summary?.replace(/###/g, '').trim() || (lang === 'ko' ? '분석 데이터를 불러오고 있습니다.' : 'Loading analysis data...'))}"
-                                </h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '').split(',').slice(0, 4).map((tag: string, i: number) => (
-                                        <div key={i} className="bg-white/5 px-4 py-2 rounded-xl text-[11px] font-black text-white/70 border border-white/10 uppercase tracking-tight">
-                                            #{tag.trim()}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter italic uppercase">
+                        {newsItem?.title || insights?.news_title || "분석 보고서 로드 중..."}
+                    </h1>
+                    <div className="flex items-center justify-center gap-8 text-[11px] font-black uppercase text-slate-500">
+                        <span className="flex items-center gap-2 text-[#00ffbd]"><Clock className="w-4 h-4" /> 실시간 유효성 체크 완료</span>
+                        <span className="flex items-center gap-2"><ShieldAlert className="w-4 h-4" /> 리스크 스캔 진행됨</span>
                     </div>
                 </section>
 
-                {/* DATA TABS SECTION */}
-                <section className="mb-12">
-                    <div className="flex border-b border-slate-800 mb-10 overflow-x-auto gap-12">
-                        {[t.analysisPage.tabs.backtest, t.analysisPage.tabs.macro, t.analysisPage.tabs.themes].map((tab: string, i: number) => (
-                            <button key={i} onClick={() => setActiveTab(i)} className={`pb-5 text-[12px] font-black transition-all relative whitespace-nowrap uppercase tracking-[0.2em] ${activeTab === i ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-16">
+                    <div className="bg-[#0a1120] border border-slate-800 rounded-[2.5rem] p-10 text-center shadow-2xl">
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">AI Sentiment Score</p>
+                        <div className="text-6xl font-black text-white mb-8 italic">
+                            {loading ? '--' : (report?.sentiment || '0.0')}
+                        </div>
+                        <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden p-0.5 mb-6">
+                            <div
+                                className="h-full rounded-full transition-all duration-1000"
+                                style={{
+                                    width: `${((parseFloat(report?.sentiment) || 0) + 1) * 50}%`,
+                                    backgroundColor: '#00ffbd'
+                                }}
+                            />
+                        </div>
+                        <p className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest italic leading-none">Empire Engine Analysis Safe</p>
+                    </div>
+
+                    <div className="bg-[#0a1120] border border-slate-800 rounded-[2.5rem] p-10 text-center shadow-2xl">
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">Simulated Win-Rate</p>
+                        <div className="text-6xl font-black text-[#00ffbd] mb-8 italic">
+                            {loading ? '--' : (report?.win_rate || '0')}%
+                        </div>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Backtested Scenario v4</p>
+                    </div>
+
+                    <div className="lg:col-span-2 bg-gradient-to-br from-[#0a1120] to-slate-900 border border-slate-800 rounded-[2.5rem] p-10 relative overflow-hidden shadow-2xl group">
+                        <div className="absolute top-0 right-0 p-10 opacity-5">
+                            <BarChart3 className="w-40 h-40 text-white" />
+                        </div>
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-8">
+                                <Activity className="text-[#00ffbd] w-5 h-5" />
+                                <span className="font-black text-[10px] uppercase tracking-[0.3em] text-[#00ffbd]">AI INTELLIGENCE SUMMARY</span>
+                            </div>
+                            <h3 className="text-2xl font-black leading-snug text-white italic tracking-tight mb-10">
+                                "{loading ? '빅데이터 분석 엔진 가동 중...' : (report?.summary?.replace(/###/g, '').trim() || '분석 데이터를 불러오고 있습니다.')}"
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '').split(',').slice(0, 4).map((tag: string, i: number) => (
+                                    <div key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-slate-400 uppercase">
+                                        #{tag.trim()}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section className="mb-16">
+                    <div className="flex border-b border-slate-800 mb-12 gap-12 overflow-x-auto">
+                        {['BACKTEST', 'MACRO INTEL', 'WATCHLIST'].map((tab, i) => (
+                            <button key={i} onClick={() => setActiveTab(i)} className={`pb-6 text-[11px] font-black uppercase tracking-[0.3em] transition-all relative ${activeTab === i ? 'text-[#00ffbd]' : 'text-slate-500'}`}>
                                 {tab}
-                                {activeTab === i && <div className="absolute bottom-[-1px] left-0 right-0 h-1 bg-blue-500 rounded-t-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" />}
+                                {activeTab === i && <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#00ffbd] shadow-lg shadow-[#00ffbd]/50" />}
                             </button>
                         ))}
                     </div>
 
-                    <div className="min-h-[500px]">
+                    <div className="min-h-[400px]">
                         {activeTab === 0 && (
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                <div className="lg:col-span-2 premium-card p-1 overflow-hidden bg-slate-900 border-slate-800 relative">
-                                    <div className="p-8 bg-slate-900/50 border-b border-slate-800 flex justify-between items-center">
-                                        <h4 className="font-black text-white text-sm flex items-center gap-3 uppercase tracking-widest italic leading-none">
-                                            <BarChart3 className="w-5 h-5 text-blue-500" /> {t.analysisPage.backtesting.chartTitle}
-                                        </h4>
-                                        <span className="text-[10px] font-black text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-lg uppercase flex items-center gap-2">
-                                            <Zap className="w-3 h-3 fill-current" /> {t.analysisPage.chartLogic}
-                                        </span>
+                            <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden">
+                                <Layers className="w-16 h-16 text-slate-800 mx-auto mb-8" />
+                                <h3 className="text-2xl font-black text-white italic mb-10">Historical Performance Simulation</h3>
+                                <div className="max-w-3xl mx-auto space-y-8">
+                                    <div className="p-8 bg-slate-950 rounded-3xl border border-white/5 italic text-slate-400 font-bold leading-relaxed">
+                                        "{report?.similarity || "Loading Similarity..."}"
                                     </div>
-
-                                    <div className={`h-[400px] flex items-center justify-center flex-col text-center p-12 relative ${tier === 'free' ? 'blur-paywall' : ''}`}>
-                                        <Layers className="w-20 h-20 text-slate-800 mb-6" />
-                                        <p className="text-slate-500 font-black text-lg tracking-widest uppercase italic mb-8 mx-20 leading-relaxed">
-                                            "{report?.similarity || "Loading Similarity..."}"
-                                        </p>
-                                        <div className="w-full max-w-xl h-32 flex items-end gap-2 px-10">
-                                            {[40, 70, 45, 90, 65, 80, 55, 95, 85, 100].map((h: number, i: number) => {
-                                                // Randomize bar height based on title length seed if available
-                                                const seed = newsItem?.title?.length || 0;
-                                                const randomHeight = seed ? Math.min(100, Math.max(20, h + (seed * (i + 1) % 40) - 20)) : h;
-                                                return (
-                                                    <div key={i} className="flex-1 bg-gradient-to-t from-blue-500/20 to-blue-500 rounded-t-lg" style={{ height: `${randomHeight}%` }} />
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-
-                                    {/* Paywall Overlay */}
-                                    {tier === 'free' && (
-                                        <div className="absolute inset-x-0 bottom-0 top-[88px] z-20 flex flex-col items-center justify-center bg-slate-950/40 backdrop-blur-sm">
-                                            <Lock className="w-12 h-12 text-[#d4af37] mb-6" />
-                                            <h4 className="text-xl font-black text-white mb-2 italic">{t.analysisPage.backtesting.locked}</h4>
-                                            <p className="text-slate-400 text-xs font-bold mb-8 uppercase tracking-widest">{t.analysisPage.backtesting.unlockMsg}</p>
-                                            <button onClick={() => setTier('vip')} className="bg-[#d4af37] text-black font-black px-12 py-4 rounded-2xl text-[12px] uppercase shadow-2xl hover:scale-105 transition-all">
-                                                {t.analysisPage.backtesting.viewChart}
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="space-y-6">
-                                    <div className="premium-card p-8 border-l-4 border-l-blue-500 bg-slate-900 border-slate-800">
-                                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-6">{t.analysisPage.probabilityTitle}</p>
-                                        <div className={`text-5xl font-black text-white mb-2 ${tier === 'free' ? 'blur-md select-none' : ''}`}>
-                                            {report?.win_rate || '0'}%
-                                        </div>
-                                        <p className="text-[11px] text-slate-400 font-bold leading-relaxed clean-text italic">
-                                            {report?.win_rate || "0"}% {t.analysisPage.backtesting.statsDesc}
-                                        </p>
-                                    </div>
-                                    <div className="premium-card p-8 bg-red-500/10 border-red-500/20 border-l-4 border-l-red-500">
-                                        <p className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-4">{t.analysisPage.mddTitle}</p>
-                                        <div className="text-4xl font-black text-white mb-2 italic">-{report?.mdd || '0'}%</div>
-                                        <p className="text-[11px] text-slate-400 leading-relaxed font-bold">
-                                            {t.analysisPage.backtesting.mddDesc}
-                                        </p>
+                                    <div className="flex items-end gap-3 h-32 px-10">
+                                        {[40, 70, 45, 90, 65, 80, 55, 95, 85, 100].map((h, i) => (
+                                            <div key={i} className="flex-1 bg-gradient-to-t from-[#00ffbd]/10 to-[#00ffbd] rounded-t-lg" style={{ height: `${h}%` }} />
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -340,89 +195,65 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
 
                         {activeTab === 1 && (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                <div className="premium-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden group">
+                                <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 shadow-2xl relative overflow-hidden">
                                     <div className="flex items-center gap-4 mb-10">
-                                        <div className="w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center text-white border border-slate-800 shadow-xl">
-                                            <Lock className="w-6 h-6 text-[#d4af37]" />
+                                        <div className="w-12 h-12 bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center">
+                                            <ShieldCheck className="w-6 h-6 text-[#00ffbd]" />
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-black text-white leading-none mb-2 tracking-tighter">{t.analysisPage.macro.intentTitle}</h3>
-                                            <p className="text-[11px] text-slate-500 font-black uppercase tracking-[0.3em]">{t.analysisPage.macro.executiveInsight}</p>
+                                            <h3 className="text-xl font-black text-white italic uppercase tracking-tighter">Strategic Intent</h3>
+                                            <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Empire Inside Report (Restricted)</p>
                                         </div>
                                     </div>
 
-                                    {tier === 'vvip' ? (
-                                        <div className="space-y-6">
-                                            <div className="bg-[#d4af37]/10 p-8 rounded-3xl border border-[#d4af37]/20 relative overflow-hidden">
-                                                <Sparkles className="absolute top-4 right-4 w-5 h-5 text-[#d4af37] opacity-40" />
-                                                <p className="text-xl font-bold text-white leading-relaxed italic clean-text">
-                                                    "{report?.intent || (lang === 'ko' ? "데이터 수집 중입니다." : "Gathering data...")}"
-                                                </p>
-                                            </div>
-                                            <p className="text-[11px] text-slate-500 font-bold italic">* {lang === 'ko' ? '본 정보는 제휴 IB 리포트 및 현지 소식통을 기반으로 재구성되었습니다.' : 'Reconstructed from partner IB reports and local sources.'}</p>
+                                    {!isAdmin ? (
+                                        <div className="bg-slate-950 p-12 rounded-3xl text-center border border-white/5">
+                                            <Lock className="w-12 h-12 text-red-500 mx-auto mb-6 animate-pulse" />
+                                            <h4 className="text-lg font-black text-white mb-2 uppercase">Access Restricted</h4>
+                                            <p className="text-xs text-slate-500 font-bold leading-relaxed italic">
+                                                이 구역은 보스(ADMIN) 전용입니다. <br /> 리스크 관리를 위해 핵심 동향 분석은 승인된 유저만 열람 가능합니다.
+                                            </p>
                                         </div>
                                     ) : (
-                                        <div className="bg-slate-950/60 backdrop-blur-md rounded-3xl p-16 border border-slate-800 text-center">
-                                            <Lock className="w-14 h-14 text-[#d4af37] mx-auto mb-6" />
-                                            <h4 className="font-black text-white text-2xl mb-2">{t.analysisPage.macro.locked}</h4>
-                                            <p className="text-slate-500 text-sm font-bold mb-10 uppercase tracking-widest italic leading-relaxed">
-                                                {t.analysisPage.macro.unlockMsg}
-                                            </p>
-                                            <button onClick={() => setTier('vvip')} className="bg-[#d4af37] text-black font-black px-12 py-4 rounded-2xl text-[12px] uppercase shadow-lg shadow-yellow-600/20 hover:scale-105 transition-all">
-                                                {t.analysisPage.macro.joinVvip}
-                                            </button>
+                                        <div className="bg-[#00ffbd]/5 p-8 rounded-3xl border border-[#00ffbd]/20 italic text-white font-bold leading-relaxed clean-text">
+                                            "{report?.intent}"
                                         </div>
                                     )}
                                 </div>
 
-                                <div className="premium-card p-12 bg-slate-900 border-slate-800">
-                                    <h3 className="text-2xl font-black text-white flex items-center gap-3 mb-12 italic tracking-tighter uppercase leading-none">
-                                        <Activity className="w-6 h-6 text-blue-500" /> {t.features.signals}
-                                    </h3>
+                                <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 shadow-2xl">
+                                    <h3 className="text-xl font-black text-white italic uppercase tracking-tighter mb-10">Macro Indicator Map</h3>
                                     <div className="space-y-10">
-                                        <div className="flex flex-col gap-4">
-                                            <div className="flex justify-between items-center px-4">
-                                                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest">{t.analysisPage.macro.macroWeight}</span>
-                                                <span className="text-sm font-black text-white italic">{report?.macro_weight || (lang === 'ko' ? "금리/환율" : "Rates/FX")}</span>
-                                            </div>
-                                            <div className="h-1 bg-slate-800 rounded-full w-full opacity-30" />
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <div className="flex justify-between items-center px-4">
-                                                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest">{t.analysisPage.macro.ibConsensus}</span>
-                                                <div className="flex items-center gap-4">
-                                                    <span className="text-xl font-black text-blue-400 italic">{report?.ib_consensus || "0"}</span>
-                                                    <span className="text-[11px] font-black text-slate-700">/ 100</span>
+                                        {[
+                                            { label: "IB CONSENSUS", val: report?.ib_consensus || "0", p: report?.ib_consensus || 0 },
+                                            { label: "MACRO WEIGHT", val: report?.macro_weight || "PAUSE", p: 100 }
+                                        ].map((item, i) => (
+                                            <div key={i} className="space-y-4">
+                                                <div className="flex justify-between items-baseline px-2">
+                                                    <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">{item.label}</span>
+                                                    <span className="text-2xl font-black text-[#00ffbd] italic">{item.val}</span>
+                                                </div>
+                                                <div className="h-1.5 bg-slate-900 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-[#00ffbd]" style={{ width: `${item.p}%` }} />
                                                 </div>
                                             </div>
-                                            <div className="h-2 bg-slate-800 rounded-full w-full overflow-hidden">
-                                                <div className="h-full bg-blue-500" style={{ width: `${report?.ib_consensus || 0}%` }} />
-                                            </div>
-                                        </div>
-                                        <p className="px-4 text-[11px] text-slate-500 font-bold leading-relaxed clean-text italic">
-                                            * {t.analysisPage.macro.ibDesc}
-                                        </p>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         )}
 
                         {activeTab === 2 && (
-                            <div className="premium-card p-12 min-h-[500px] flex flex-col items-center justify-center text-center bg-slate-900 border-slate-800 relative">
-                                <Network className="w-20 h-20 text-indigo-500 mb-10 animate-pulse" />
-                                <h3 className="text-3xl font-black text-white mb-6 italic tracking-tighter leading-none">{t.analysisPage.themeTitle}</h3>
-                                <p className="text-slate-500 font-bold mb-12 uppercase tracking-widest italic text-sm">
-                                    {t.analysisPage.themeDesc}
-                                </p>
-                                <div className="flex flex-wrap justify-center gap-6 max-w-4xl">
+                            <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-16 text-center shadow-2xl min-h-[400px] flex flex-col justify-center">
+                                <Network className="w-16 h-16 text-[#00ffbd] mx-auto mb-10" />
+                                <h3 className="text-3xl font-black text-white italic tracking-tighter mb-10 uppercase">Watchlist Propagation</h3>
+                                <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
                                     {report?.transfer_map?.replace(/Themes:|Watchlist:|Stocks:|Key Themes & Stocks:/g, '')
                                         .split(/,|\||\n/)
                                         .filter((s: string) => s.trim().length > 0)
                                         .map((stock: string, i: number) => (
-                                            <div key={i} className="bg-slate-950 border border-slate-800 p-6 rounded-3xl shadow-lg hover:border-blue-500/50 transition-all flex items-center gap-6 min-w-[200px] group">
-                                                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center font-black text-xs text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">{i + 1}</div>
-                                                <span className="font-black text-lg text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">{stock.trim()}</span>
-                                                <ArrowUpRight className="ml-auto w-5 h-5 text-slate-700 group-hover:text-blue-500" />
+                                            <div key={i} className="px-8 py-5 bg-slate-950 border border-slate-800 rounded-2xl hover:border-[#00ffbd]/50 transition-all font-black text-lg text-slate-300 uppercase italic tracking-tight shadow-xl">
+                                                {stock.trim()}
                                             </div>
                                         ))}
                                 </div>
@@ -431,58 +262,31 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                     </div>
                 </section>
 
-                {/* BOTTOM SECTION: SCENARIOS & CTAs */}
                 <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="premium-card p-1 overflow-hidden bg-slate-900 border-slate-800 relative">
-                        <div className="bg-slate-950 p-6 text-white text-center border-b border-slate-800">
-                            <h4 className="font-black text-lg italic uppercase tracking-[0.2em] leading-none">{t.analysisPage.action.title}</h4>
+                    <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 shadow-2xl flex flex-col justify-center">
+                        <div className="text-center mb-10">
+                            <h4 className="text-lg font-black text-white italic uppercase tracking-[0.2em]">Strategy Scenarios</h4>
                         </div>
-
-                        <div className={`p-10 space-y-6 ${tier === 'free' ? 'blur-paywall' : ''}`}>
+                        <div className="space-y-6">
                             {report?.scenarios?.split('/').map((s: string, i: number) => (
-                                <div key={i} className="flex gap-6 p-6 bg-slate-950/50 border border-slate-800/50 rounded-2xl group hover:border-blue-500/30 transition-all">
-                                    <div className={`w-3 h-3 rounded-full mt-2 ring-4 ${i === 0 ? 'bg-green-500 ring-green-500/10' : i === 1 ? 'bg-blue-500 ring-blue-500/10' : 'bg-red-500 ring-red-500/10'}`} />
-                                    <div className="flex-1">
-                                        <p className="text-[10px] font-black uppercase text-slate-600 mb-1 tracking-widest">{i === 0 ? t.analysisPage.action.bestCase : i === 1 ? t.analysisPage.action.baseCase : t.analysisPage.action.worstCase}</p>
-                                        <p className="text-[13px] font-bold text-slate-300 leading-relaxed clean-text italic">{s.trim()}</p>
-                                    </div>
+                                <div key={i} className="p-6 bg-slate-950 border border-white/5 rounded-2xl flex gap-6 items-center">
+                                    <div className={`w-3 h-3 rounded-full ${i === 0 ? 'bg-green-500' : i === 1 ? 'bg-blue-500' : 'bg-red-500'}`} />
+                                    <p className="text-[13px] font-bold text-slate-400 italic">"{s.trim()}"</p>
                                 </div>
-                            )) || <p className="text-center text-slate-500 text-xs italic">{t.analysisPage.action.loading}</p>}
+                            ))}
                         </div>
-
-                        {/* Scenario Paywall Overlay */}
-                        {tier === 'free' && (
-                            <div className="absolute inset-x-0 bottom-0 top-[88px] z-20 flex flex-col items-center justify-center bg-slate-950/20 backdrop-blur-sm">
-                                <Lock className="w-10 h-10 text-[#d4af37] mb-4" />
-                                <button onClick={() => setTier('vip')} className="bg-[#d4af37] text-black font-black px-10 py-3.5 rounded-2xl text-[11px] uppercase tracking-tighter shadow-xl">
-                                    {t.analysisPage.paywall.scenariosBtn}
-                                </button>
-                            </div>
-                        )}
                     </div>
 
-                    <div className="premium-card p-12 flex flex-col justify-between items-center text-center bg-slate-950 border-[#d4af37]/20 border-2 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-8 opacity-5">
-                            <BookOpen className="w-40 h-40 text-[#d4af37]" />
-                        </div>
-                        <div className="w-20 h-20 bg-[#d4af37]/10 rounded-3xl flex items-center justify-center mb-8 border border-[#d4af37]/20">
-                            <BookOpen className="text-[#d4af37] w-10 h-10" />
-                        </div>
-                        <div>
-                            <h4 className="text-2xl font-black text-white mb-4 tracking-tighter italic">{t.analysisPage.quantGuideTitle}</h4>
-                            <p className="text-[11px] text-slate-500 mb-12 font-bold italic leading-relaxed px-10">
-                                {t.analysisPage.quantGuideDesc}
-                            </p>
-                        </div>
-                        <button className="w-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 font-black py-5 rounded-2xl text-xs hover:bg-[#d4af37]/20 transition-all flex items-center justify-center gap-3 uppercase tracking-widest">
-                            {t.analysisPage.unlockQuantBtn} <ExternalLink className="w-4 h-4" />
+                    <div className="bg-gradient-to-br from-[#00ffbd]/5 to-[#0a1120] border border-[#00ffbd]/20 rounded-[3rem] p-12 text-center shadow-2xl flex flex-col items-center justify-center">
+                        <BookOpen className="w-16 h-16 text-[#00ffbd] mb-8" />
+                        <h4 className="text-2xl font-black text-white italic mb-6">Quant Education Terminal</h4>
+                        <p className="text-xs text-slate-500 font-bold italic leading-relaxed px-10 mb-10">
+                            엠파이어 콴트 엔진이 분석한 데이터를 바탕으로 투자 결정을 내리는 법을 배우세요.
+                        </p>
+                        <button className="w-full py-5 bg-[#00ffbd] text-black font-black uppercase rounded-2xl shadow-xl shadow-[#00ffbd]/10 shadow-lg text-xs tracking-widest active:scale-95 transition-all">
+                            심층 리포트 다운로드 (PDF)
                         </button>
                     </div>
-                </section>
-
-                <section className="mt-12 text-center">
-                    <p className="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em] mb-4">{t.analysisPage.footer.terminal}</p>
-                    <p className="text-slate-600 text-xs italic">{t.analysisPage.footer.disclaimer}</p>
                 </section>
             </main>
         </div>

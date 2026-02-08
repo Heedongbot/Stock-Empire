@@ -1,197 +1,26 @@
 [
   {
-    "id": "-8238163612846678550",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
+    "id": "68500815997221040",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-07 19:24:27",
     "free_tier": {
-      "title": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
-      "title_en": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
-      "summary_kr": "연방공개시장위원회(FOMC)가 기준금리를 5.25~5.50% 범위로 동결하기로 결정했습니다.",
-      "link": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
-      "original_source": "Federal Reserve"
+      "title": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
+      "title_en": "Hims & Hers to stop offering compounded semaglutide pill after FDA crackdown",
+      "summary_kr": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
+      "link": "https://www.investing.com/news/stock-market-news/hims--hers-to-stop-offering-compounded-semaglutide-pill-after-fda-crackdown-4492374",
+      "original_source": "Investing.com"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 동결 | 실제: 동결 | 서프라이즈: 없음",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
+        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
+        "impact_score": 74
       },
-      "master_analysis": {
-        "master_name": "Peter Lynch",
-        "sentiment_score": 0.27,
-        "win_rate": "82%",
-        "mdd_risk": "-14%",
-        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
-        "ib_consensus": 71,
-        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
-        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
-        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
-        "historical_match": "2019년 유사 패턴 (일치율 87%)",
-        "full_insight": "[Peter Lynch의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
-      },
-      "master_analysis_done": true
-    }
-  },
-  {
-    "id": "6018285469425106120",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
-    "free_tier": {
-      "title": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
-      "title_en": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
-      "summary_kr": "1월 소비자물가지수(CPI)가 전년 대비 3.2% 상승, 인플레이션 재점화 우려가 제기되고 있습니다.",
-      "link": "https://www.bls.gov/news.release/cpi.nr0.htm",
-      "original_source": "Bureau of Labor Statistics"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 3.0% | 실제: 3.2% | 서프라이즈: +0.2%p",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
-      },
-      "master_analysis": {
-        "master_name": "Ray Dalio",
-        "sentiment_score": 0.38,
-        "win_rate": "88%",
-        "mdd_risk": "-15%",
-        "intent_analysis": "연준의 의도는 명확합니다. 인플레이션과의 전쟁이 끝나지 않았음을 시사합니다.",
-        "ib_consensus": 89,
-        "macro_weight": "채권 수익률 곡선의 변화가 주식 시장 밸류에이션을 압박하고 있습니다.",
-        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
-        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
-        "historical_match": "2019년 유사 패턴 (일치율 87%)",
-        "full_insight": "[Ray Dalio의 관점] 거시 경제 사이클의 변곡점입니다. 부채 사이클과 연준의 움직임이 충돌하고 있습니다. 현금 비중을 조절하고 변동성에 대비하십시오."
-      },
-      "master_analysis_done": true
-    }
-  },
-  {
-    "id": "-4964757106234203457",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
-    "free_tier": {
-      "title": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
-      "title_en": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
-      "summary_kr": "1월 비농업 고용이 25만 명 증가하며 시장 예상치(15만 명)를 크게 상회했습니다.",
-      "link": "https://www.bls.gov/news.release/empsit.nr0.htm",
-      "original_source": "Bureau of Labor Statistics"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 15만 명 | 실제: 25만 명 | 서프라이즈: +10만 명",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
-      },
-      "master_analysis": {
-        "master_name": "Peter Lynch",
-        "sentiment_score": 0.15,
-        "win_rate": "83%",
-        "mdd_risk": "-10%",
-        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
-        "ib_consensus": 75,
-        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
-        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
-        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
-        "historical_match": "2019년 유사 패턴 (일치율 87%)",
-        "full_insight": "[Peter Lynch의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
-      },
-      "master_analysis_done": true
-    }
-  },
-  {
-    "id": "-4148590145042258434",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
-    "free_tier": {
-      "title": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
-      "title_en": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
-      "summary_kr": "4분기 실질 GDP가 연율 2.8% 성장하며 경기 연착륙 가능성을 시사했습니다.",
-      "link": "https://www.bea.gov/news/current-releases",
-      "original_source": "Bureau of Economic Analysis"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 예상치: 2.5% | 실제: 2.8% | 서프라이즈: +0.3%p",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
-      },
-      "master_analysis": {
-        "master_name": "Ray Dalio",
-        "sentiment_score": 0.29,
-        "win_rate": "85%",
-        "mdd_risk": "-11%",
-        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
-        "ib_consensus": 71,
-        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
-        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
-        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
-        "historical_match": "2019년 유사 패턴 (일치율 87%)",
-        "full_insight": "[Ray Dalio의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
-      },
-      "master_analysis_done": true
-    }
-  },
-  {
-    "id": "8538790732978506982",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
-    "free_tier": {
-      "title": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
-      "title_en": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
-      "summary_kr": "제롬 파월 연준 의장이 '인플레이션 둔화 속도가 예상보다 느리다'며 금리 인하를 서두르지 않겠다는 입장을 재확인했습니다.",
-      "link": "https://www.bloomberg.com/markets/fixed-income",
-      "original_source": "Bloomberg"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 시장 반응: 달러 강세, 국채 금리 상승",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
-      },
-      "master_analysis": {
-        "master_name": "Ray Dalio",
-        "sentiment_score": 0.33,
-        "win_rate": "80%",
-        "mdd_risk": "-14%",
-        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
-        "ib_consensus": 84,
-        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
-        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
-        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
-        "historical_match": "2019년 유사 패턴 (일치율 87%)",
-        "full_insight": "[Ray Dalio의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
-      },
-      "master_analysis_done": true
-    }
-  },
-  {
-    "id": "-8858866790580959962",
-    "ticker": "MACRO",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "published_at": "2026-02-08T09:36:12.214466",
-    "free_tier": {
-      "title": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
-      "title_en": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
-      "summary_kr": "중동 지역 지정학적 긴장 고조로 안전자산 선호 심리가 강화되고 있습니다.",
-      "link": "https://www.reuters.com/world/",
-      "original_source": "Reuters"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 영향 섹터: 에너지(+), 항공(-), 금(+)",
-        "impact_score": 99,
-        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
+      "trading_strategy": {
+        "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
       }
     }
   }

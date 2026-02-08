@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { TrendingUp, TrendingDown, Plus, X, Search, DollarSign, Activity, Target, Zap, Globe, Flag } from 'lucide-react';
+import { TrendingUp, TrendingDown, Plus, X, Activity, Zap, DollarSign, ShieldCheck } from 'lucide-react';
 import { translations } from '@/lib/translations';
 import SiteHeader from '@/components/SiteHeader';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
 
 interface PortfolioItem {
     id: string;
@@ -19,7 +20,7 @@ interface PortfolioItem {
 type MarketTab = 'ALL' | 'KR' | 'US';
 
 export default function PortfolioPage() {
-    const [lang, setLang] = useState<'ko' | 'en'>('ko');
+    const lang = 'ko';
     const t = translations[lang];
 
     const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
@@ -38,9 +39,7 @@ export default function PortfolioPage() {
     });
 
     const formatCurrency = (value: number, market: 'KR' | 'US') => {
-        if (market === 'KR') {
-            return `₩${value.toLocaleString()}`;
-        }
+        if (market === 'KR') return `₩${value.toLocaleString()}`;
         return `$${value.toLocaleString()}`;
     };
 
@@ -52,9 +51,9 @@ export default function PortfolioPage() {
         return { pnl, pnlPercent };
     };
 
-    const handleAddStock = async () => {
+    const handleAddStock = () => {
         if (!newStock.symbol || !newStock.name || newStock.quantity <= 0) {
-            alert(lang === 'ko' ? '모든 필드를 올바르게 입력해주세요!' : 'Please fill in all fields correctly!');
+            alert('모든 필드를 올바르게 입력해주세요!');
             return;
         }
 
@@ -74,7 +73,7 @@ export default function PortfolioPage() {
     };
 
     const handleRemoveStock = (id: string) => {
-        if (confirm(lang === 'ko' ? '정말 삭제하시겠습니까?' : 'Are you sure you want to delete this?')) {
+        if (confirm('정말 삭제하시겠습니까?')) {
             setPortfolio(portfolio.filter(item => item.id !== id));
         }
     };
@@ -103,270 +102,169 @@ export default function PortfolioPage() {
         }
     };
 
-    const [isLoaded, setIsLoaded] = useState(false); // 로컬스토리지 로드 완료 여부
-
     useEffect(() => {
         const saved = localStorage.getItem('stock-empire-portfolio-v2');
         if (saved) {
             try {
                 setPortfolio(JSON.parse(saved));
             } catch (e) {
-                console.error('Failed to parse portfolio', e);
-                setPortfolio([]);
+                console.error(e);
             }
         }
         setIsMounted(true);
-        setIsLoaded(true); // 로드 완료 플래그
     }, []);
 
     useEffect(() => {
         if (isMounted) {
-            // 1. Initial Fetch on Load
             handleRefreshPrices();
-
-            // 2. Auto-Refresh Loop (Every 10 seconds)
-            const interval = setInterval(() => {
-                handleRefreshPrices();
-            }, 10000);
-
+            const interval = setInterval(handleRefreshPrices, 15000);
             return () => clearInterval(interval);
         }
     }, [isMounted]);
 
-    // Update LocalStorage whenever portfolio changes (빈 배열이어도 저장)
     useEffect(() => {
-        if (isLoaded) { // 초기 로드가 끝난 이후에만 저장 (덮어쓰기 방지)
+        if (isMounted) {
             localStorage.setItem('stock-empire-portfolio-v2', JSON.stringify(portfolio));
         }
-    }, [portfolio, isLoaded]);
+    }, [portfolio, isMounted]);
 
     const filteredPortfolio = activeTab === 'ALL'
         ? portfolio
         : portfolio.filter(item => item.market === activeTab);
 
-    const totalPortfolioValue = filteredPortfolio.reduce((sum, item) => {
-        return sum + (item.quantity * item.currentPrice);
-    }, 0);
-
-    const totalPnL = filteredPortfolio.reduce((sum, item) => {
-        const { pnl } = calculatePnL(item);
-        return sum + pnl;
-    }, 0);
-
-    const totalPnLPercent = totalPortfolioValue > 0
-        ? ((totalPnL / (totalPortfolioValue - totalPnL)) * 100).toFixed(2)
-        : '0.00';
+    const totalPortfolioValue = filteredPortfolio.reduce((sum, item) => sum + (item.quantity * item.currentPrice), 0);
+    const totalPnL = filteredPortfolio.reduce((sum, item) => sum + calculatePnL(item).pnl, 0);
+    const totalPnLPercent = totalPortfolioValue > 0 ? ((totalPnL / (totalPortfolioValue - totalPnL)) * 100).toFixed(2) : '0.00';
 
     if (!isMounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#0a0f1a] text-white">
-            <SiteHeader lang={lang} setLang={setLang} />
+        <div className="min-h-screen bg-[#050b14] text-white font-sans">
+            <SiteHeader />
 
-            <main className="max-w-7xl mx-auto px-8 py-12">
-                <div className="flex items-center justify-between mb-8">
+            <main className="max-w-7xl mx-auto px-6 py-12">
+                <div className="mb-12">
+                    <AdLeaderboard />
+                </div>
+
+                <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8 border-b border-slate-800 pb-12">
+                    <div>
+                        <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase mb-2">
+                            Empire <span className="text-[#00ffbd]">Portfolio</span>
+                        </h2>
+                        <p className="text-slate-500 font-bold text-sm tracking-widest uppercase italic">실시간 자산 동기화 및 AI 리스크 진단</p>
+                    </div>
+
                     <div className="flex items-center gap-4">
                         {lastUpdated && (
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm font-black text-slate-300">{t.stats.lastUpdate}:</span>
-                                <span className="text-sm font-black text-white bg-slate-800 px-3 py-1 rounded-lg">
-                                    {lastUpdated.toLocaleTimeString(lang === 'ko' ? 'ko-KR' : 'en-US')}
-                                </span>
+                            <div className="text-right hidden md:block">
+                                <div className="text-[10px] text-slate-500 font-black uppercase">Last Updated</div>
+                                <div className="text-xs font-black text-[#00ffbd] font-mono">{lastUpdated.toLocaleTimeString()}</div>
                             </div>
                         )}
+                        <button
+                            onClick={handleRefreshPrices}
+                            disabled={isRefreshing || portfolio.length === 0}
+                            className="px-8 py-4 bg-[#00ffbd] hover:bg-[#00d4ff] text-black rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-[#00ffbd]/20 active:scale-95"
+                        >
+                            {isRefreshing ? 'SYNCING...' : 'LIVE REFRESH'}
+                        </button>
                     </div>
-                    <button
-                        onClick={handleRefreshPrices}
-                        disabled={isRefreshing || portfolio.length === 0}
-                        className="px-8 py-4 bg-green-600 hover:bg-green-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded-xl font-black text-base uppercase tracking-widest transition-all flex items-center gap-3 shadow-lg shadow-green-500/20"
-                    >
-                        <Activity className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
-                        {isRefreshing ? t.common.loading : t.common.refresh}
-                    </button>
                 </div>
 
                 <section className="mb-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left: Key Metrics */}
-                    <div className="lg:col-span-2 space-y-6">
-                        <h2 className="text-2xl font-black italic tracking-tighter mb-6">{t.dashboard.portfolioSummary}</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="premium-card p-8 bg-slate-900/50 border-blue-500/20 relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <DollarSign className="w-24 h-24 text-blue-500" />
-                                </div>
-                                <div className="relative z-10">
-                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">{t.dashboard.totalValue}</p>
-                                    <p className="text-4xl font-black text-white italic tracking-tight">
-                                        {activeTab === 'KR' ? `₩${totalPortfolioValue.toLocaleString()}` : `$${totalPortfolioValue.toLocaleString()}`}
-                                    </p>
-                                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-slate-400">
-                                        <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded">{lang === 'ko' ? '주문 가능' : 'Buying Power'}</span>
-                                        <span>$42,500.00</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-[#0a1120] border border-slate-800 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+                            <DollarSign className="absolute -top-6 -right-6 w-32 h-32 text-white/5" />
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Total Evaluation</p>
+                            <h3 className="text-4xl font-black text-white italic tracking-tighter">
+                                {activeTab === 'KR' ? `₩${totalPortfolioValue.toLocaleString()}` : `$${totalPortfolioValue.toLocaleString()}`}
+                            </h3>
+                            <p className="mt-4 text-[10px] text-[#00ffbd] font-black uppercase">Market Live Active</p>
+                        </div>
 
-
-                            <div className="premium-card p-8 bg-slate-900/50 border-green-500/20 relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <TrendingUp className="w-24 h-24 text-green-500" />
-                                </div>
-                                <div className="relative z-10">
-                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">{t.dashboard.totalPnL}</p>
-                                    <div className="flex items-baseline gap-3">
-                                        <p className={`text-4xl font-black italic tracking-tight ${totalPnL >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                            {totalPnL >= 0 ? '+' : ''}{totalPnL.toLocaleString()}
-                                        </p>
-                                        <span className={`text-lg font-bold ${totalPnLPercent.startsWith('-') ? 'text-red-500' : 'text-green-500'}`}>
-                                            {totalPnLPercent}%
-                                        </span>
-                                    </div>
-                                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-slate-400">
-                                        <span className="px-2 py-0.5 bg-green-500/20 text-green-400 rounded">{lang === 'ko' ? '일일 손익' : 'Daily P&L'}</span>
-                                        <span>+$1,240.50 ({lang === 'ko' ? '예상' : 'Est'})</span>
-                                    </div>
-                                </div>
+                        <div className="bg-[#0a1120] border border-slate-800 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+                            <TrendingUp className="absolute -top-6 -right-6 w-32 h-32 text-white/5" />
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Profit & Loss</p>
+                            <div className="flex items-baseline gap-3">
+                                <span className={`text-4xl font-black italic tracking-tighter ${totalPnL >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                    {totalPnL >= 0 ? '+' : ''}{totalPnL.toLocaleString()}
+                                </span>
+                                <span className={`text-lg font-black ${totalPnL >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                    {totalPnLPercent}%
+                                </span>
                             </div>
                         </div>
 
-                        {/* AI Diagnosis */}
-                        <div className="premium-card p-8 bg-gradient-to-br from-indigo-900/40 to-slate-900 border-indigo-500/30">
+                        <div className="md:col-span-2 bg-gradient-to-br from-[#00ffbd]/10 to-slate-900 border border-[#00ffbd]/20 rounded-3xl p-8">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                                    <Zap className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-black text-white italic">{lang === 'ko' ? 'AI 포트폴리오 정밀 진단' : 'AI Portfolio Diagnosis'}</h3>
-                                    <p className="text-xs text-indigo-400 font-bold uppercase tracking-widest">{lang === 'ko' ? 'DeepQuant® 엔진 구동 중' : 'Powered by DeepQuant Engine'}</p>
-                                </div>
+                                <Zap className="w-8 h-8 text-[#00ffbd]" />
+                                <h4 className="text-lg font-black uppercase italic text-white tracking-widest font-mono">AI Portfolio Health Check</h4>
                             </div>
-                            <div className="space-y-4">
-                                <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-xs font-bold text-slate-400 uppercase">{lang === 'ko' ? '분산 투자 점수' : 'Diversification Score'}</span>
-                                        <span className="text-sm font-black text-yellow-500">42/100 ({lang === 'ko' ? '위험' : 'Risky'})</span>
-                                    </div>
-                                    <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                        <div className="bg-yellow-500 h-full w-[42%]"></div>
-                                    </div>
-                                    <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                                        {lang === 'ko' ? (
-                                            <>
-                                                ⚠️ <strong>집중 투자 경고:</strong> 기술주(NVDA) 비중이 과도하게 높습니다. 변동성에 취약한 구조이니 경기 방어주나 채권 ETF를 편입하여 리스크를 헤지하십시오.
-                                            </>
-                                        ) : (
-                                            <>
-                                                ⚠️ <strong>Concentration Risk:</strong> Your portfolio is heavily weighted towards Tech (NVDA). Consider adding defensive sectors or bonds to hedge against volatility.
-                                            </>
-                                        )}
-                                    </p>
-                                </div>
-                                <div className="flex gap-2">
-                                    <button className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-bold text-xs uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20">
-                                        {lang === 'ko' ? '자동 리밸런싱' : 'Rebalance Now'}
-                                    </button>
-                                    <button className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-bold text-xs uppercase tracking-widest transition-all">
-                                        {lang === 'ko' ? '전체 리포트' : 'View Full Report'}
-                                    </button>
-                                </div>
+                            <div className="bg-slate-950 p-6 rounded-2xl border border-white/5">
+                                <p className="text-sm text-slate-300 leading-relaxed italic">
+                                    "현재 자산 구성상 특정 섹터에 대한 노출도가 높습니다. 상관관계가 낮은 자산을 추가하여 전체 변동성을 제어하는 것을 권장합니다."
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right: Allocation Chart */}
-                    <div className="premium-card p-8 bg-slate-900/50 border-slate-800 flex flex-col items-center justify-center text-center relative overflow-hidden">
-                        <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-8">{lang === 'ko' ? '자산 배분 현황' : 'Asset Allocation'}</h3>
-
-                        <div className="relative w-64 h-64 mb-8">
-                            {/* Simple CSS Pie Chart simulation using conic-gradient */}
-                            <div
-                                className="w-full h-full rounded-full border-8 border-slate-900 shadow-2xl"
-                                style={{
-                                    background: `conic-gradient(
-                                        #3b82f6 0% 60%, 
-                                        #10b981 60% 85%, 
-                                        #f59e0b 85% 100%
-                                    )`
-                                }}
-                            ></div>
-                            <div className="absolute inset-4 bg-[#0a0f1a] rounded-full flex flex-col items-center justify-center">
-                                <span className="text-3xl font-black text-white">{lang === 'ko' ? '미국장' : 'US'}</span>
-                                <span className="text-xs font-bold text-blue-500 uppercase tracking-widest">{lang === 'ko' ? '주식 60%' : 'Equity 60%'}</span>
+                    <div className="bg-[#0a1120] border border-slate-800 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-2xl">
+                        <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-8 italic">Asset Allocation</h3>
+                        <div className="relative w-48 h-48 mb-8">
+                            <div className="w-full h-full rounded-full border-4 border-slate-900" style={{ background: 'conic-gradient(#00ffbd 0% 70%, #3b82f6 70% 100%)' }}></div>
+                            <div className="absolute inset-4 bg-[#050b14] rounded-full flex items-center justify-center">
+                                <span className="text-sm font-black uppercase text-[#00ffbd]">Empire Core</span>
                             </div>
                         </div>
-
-                        <div className="w-full space-y-3">
-                            <div className="flex items-center justify-between px-4 py-2 bg-slate-800/50 rounded-lg">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                                    <span className="text-xs font-bold text-slate-300">{t.dashboard.sectors.technology}</span>
-                                </div>
-                                <span className="text-xs font-black text-white">60%</span>
-                            </div>
-                            <div className="flex items-center justify-between px-4 py-2 bg-slate-800/50 rounded-lg">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    <span className="text-xs font-bold text-slate-300">{lang === 'ko' ? '반도체' : 'Semiconductors'}</span>
-                                </div>
-                                <span className="text-xs font-black text-white">25%</span>
-                            </div>
-                            <div className="flex items-center justify-between px-4 py-2 bg-slate-800/50 rounded-lg">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                                    <span className="text-xs font-bold text-slate-300">Crypto</span>
-                                </div>
-                                <span className="text-xs font-black text-white">15%</span>
-                            </div>
-                        </div>
+                        <ul className="w-full space-y-3">
+                            <li className="flex justify-between text-xs font-black"><span className="text-slate-500">EQUITY</span> <span className="text-white">70%</span></li>
+                            <li className="flex justify-between text-xs font-black"><span className="text-slate-500">CASH</span> <span className="text-white">30%</span></li>
+                        </ul>
                     </div>
                 </section>
 
                 <section>
-                    <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-4">
-                            <h2 className="text-2xl font-black italic tracking-tighter">{t.dashboard.return}</h2>
-                            <div className="flex gap-2">
-                                <button onClick={() => setActiveTab('ALL')} className={`px-4 py-2 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'ALL' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>ALL</button>
-                                <button onClick={() => setActiveTab('KR')} className={`px-4 py-2 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'KR' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>KR</button>
-                                <button onClick={() => setActiveTab('US')} className={`px-4 py-2 rounded-xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'US' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>US</button>
-                            </div>
+                    <div className="flex justify-between items-center mb-8">
+                        <div className="flex gap-2">
+                            {['ALL', 'KR', 'US'].map((tab) => (
+                                <button key={tab} onClick={() => setActiveTab(tab as MarketTab)} className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-[#00ffbd] text-black shadow-lg shadow-[#00ffbd]/20' : 'bg-slate-900 text-slate-500'}`}>
+                                    {tab}
+                                </button>
+                            ))}
                         </div>
-                        <button onClick={() => setIsAddingStock(true)} className="px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black text-sm uppercase tracking-widest transition-all flex items-center gap-2">
-                            <Plus className="w-4 h-4" /> {t.dashboard.managePortfolio}
+                        <button onClick={() => setIsAddingStock(true)} className="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all">
+                            <Plus className="w-4 h-4 text-[#00ffbd]" /> 자산 추가
                         </button>
                     </div>
 
-                    <div className="premium-card bg-slate-900/50 border-slate-800 overflow-hidden">
+                    <div className="bg-[#0a1120] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
                         <table className="w-full">
                             <thead>
-                                <tr className="border-b border-slate-800">
-                                    <th className="text-left p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Symbol</th>
-                                    <th className="text-left p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Name</th>
-                                    <th className="text-right p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Qty</th>
-                                    <th className="text-right p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Avg Price</th>
-                                    <th className="text-right p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Current</th>
-                                    <th className="text-right p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">P&L</th>
-                                    <th className="text-right p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Action</th>
+                                <tr className="border-b border-slate-800/50">
+                                    <th className="text-left p-6 text-[10px] font-black text-slate-600 uppercase">Symbol</th>
+                                    <th className="text-right p-6 text-[10px] font-black text-slate-600 uppercase">Current</th>
+                                    <th className="text-right p-6 text-[10px] font-black text-slate-600 uppercase">P&L</th>
+                                    <th className="text-right p-6 text-[10px] font-black text-slate-600 uppercase">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {filteredPortfolio.map((item) => {
                                     const { pnl, pnlPercent } = calculatePnL(item);
                                     return (
-                                        <tr key={item.id} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
-                                            <td className="p-6 font-black text-white">{item.symbol}</td>
-                                            <td className="p-6 text-slate-400 font-bold text-sm">{item.name}</td>
-                                            <td className="p-6 text-right font-black text-white">{item.quantity}</td>
-                                            <td className="p-6 text-right font-bold text-slate-400">{formatCurrency(item.avgPrice, item.market)}</td>
+                                        <tr key={item.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="p-6">
+                                                <div className="font-black text-white">{item.symbol}</div>
+                                                <div className="text-[9px] text-slate-600 font-bold uppercase">{item.name}</div>
+                                            </td>
                                             <td className="p-6 text-right font-black text-white">{formatCurrency(item.currentPrice, item.market)}</td>
                                             <td className="p-6 text-right">
                                                 <div className={`font-black ${Number(pnl) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                                    {Number(pnl) >= 0 ? '+' : ''}{formatCurrency(pnl as number, item.market)}
-                                                    <div className="text-xs opacity-60">({pnlPercent}%)</div>
+                                                    {Number(pnl) >= 0 ? '+' : ''}{pnlPercent}%
                                                 </div>
                                             </td>
                                             <td className="p-6 text-right">
-                                                <button onClick={() => handleRemoveStock(item.id)} className="text-slate-500 hover:text-red-500 transition-colors">
+                                                <button onClick={() => handleRemoveStock(item.id)} className="text-slate-700 hover:text-red-500">
                                                     <X className="w-4 h-4" />
                                                 </button>
                                             </td>
@@ -380,59 +278,23 @@ export default function PortfolioPage() {
             </main>
 
             {isAddingStock && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
-                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsAddingStock(false)} />
-                    <div className="relative z-10 bg-slate-900 border border-slate-700 p-8 rounded-3xl max-w-md w-full shadow-2xl">
-                        <button onClick={() => setIsAddingStock(false)} className="absolute top-4 right-4 text-slate-500 hover:text-white">✕</button>
-                        <h3 className="text-2xl font-black text-white italic tracking-tighter mb-8 text-center">{t.dashboard.managePortfolio}</h3>
-
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/90 backdrop-blur-sm shadow-2xl" onClick={() => setIsAddingStock(false)} />
+                    <div className="relative bg-[#0a1120] border border-slate-800 p-10 rounded-[2.5rem] w-full max-w-md shadow-2xl">
+                        <h3 className="text-2xl font-black text-white italic tracking-tighter mb-8 uppercase text-center">Add Asset</h3>
                         <div className="space-y-4">
-                            <div>
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">Market</label>
-                                <select
-                                    value={newStock.market}
-                                    onChange={(e) => setNewStock({ ...newStock, market: e.target.value as 'KR' | 'US' })}
-                                    className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold"
-                                >
-                                    <option value="US">🇺🇸 US Market</option>
-                                    <option value="KR">🇰🇷 KR Market</option>
-                                </select>
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="Symbol (e.g. NVDA)"
-                                value={newStock.symbol}
-                                onChange={e => setNewStock({ ...newStock, symbol: e.target.value })}
-                                className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Name (e.g. NVIDIA)"
-                                value={newStock.name}
-                                onChange={e => setNewStock({ ...newStock, name: e.target.value })}
-                                className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold"
-                            />
+                            <select value={newStock.market} onChange={e => setNewStock({ ...newStock, market: e.target.value as any })} className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-black text-white">
+                                <option value="US">🇺🇸 US MARKET</option>
+                                <option value="KR">🇰🇷 KR MARKET</option>
+                            </select>
+                            <input type="text" placeholder="SYMBOL" value={newStock.symbol} onChange={e => setNewStock({ ...newStock, symbol: e.target.value })} className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-black text-white uppercase" />
+                            <input type="text" placeholder="NAME" value={newStock.name} onChange={e => setNewStock({ ...newStock, name: e.target.value })} className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-black text-white uppercase" />
                             <div className="flex gap-4">
-                                <input
-                                    type="number"
-                                    placeholder="Qty"
-                                    value={newStock.quantity || ''}
-                                    onChange={e => setNewStock({ ...newStock, quantity: Number(e.target.value) })}
-                                    className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold"
-                                />
-                                <input
-                                    type="number"
-                                    placeholder="Avg Price"
-                                    value={newStock.avgPrice || ''}
-                                    onChange={e => setNewStock({ ...newStock, avgPrice: Number(e.target.value) })}
-                                    className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold"
-                                />
+                                <input type="number" placeholder="QTY" value={newStock.quantity || ''} onChange={e => setNewStock({ ...newStock, quantity: Number(e.target.value) })} className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-black text-white" />
+                                <input type="number" placeholder="PRICE" value={newStock.avgPrice || ''} onChange={e => setNewStock({ ...newStock, avgPrice: Number(e.target.value) })} className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-black text-white" />
                             </div>
                         </div>
-
-                        <button onClick={handleAddStock} className="w-full mt-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-xl uppercase tracking-widest transition-all">
-                            {t.common.buy}
-                        </button>
+                        <button onClick={handleAddStock} className="w-full mt-10 py-5 bg-[#00ffbd] text-black font-black uppercase rounded-2xl shadow-xl shadow-[#00ffbd]/20 transition-all active:scale-95">포트폴리오에 추가</button>
                     </div>
                 </div>
             )}

@@ -31,14 +31,10 @@ export default function NewsroomPage() {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
-    const [lang, setLang] = useState<'ko' | 'en'>('ko');
 
-    useEffect(() => {
-        const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
-        if (savedLang) setLang(savedLang);
-    }, []);
-
-    const showAds = !user || user.tier === 'FREE';
+    // 한국 전용 테스트: 언어 고정 및 광고 전면 노출
+    const lang = 'ko';
+    const showAds = true;
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -57,27 +53,29 @@ export default function NewsroomPage() {
 
     return (
         <div className="min-h-screen bg-[#050b14] text-[#e0e6ed]">
-            <SiteHeader lang={lang} setLang={setLang} />
+            <SiteHeader />
 
             <main className="max-w-7xl mx-auto px-4 py-8">
-                {showAds && (
-                    <div className="mb-8 overflow-hidden rounded-xl border border-slate-800">
-                        <AdLeaderboard />
-                    </div>
-                )}
+                {/* 상단 전면 광고 */}
+                <div className="mb-8 overflow-hidden rounded-xl border border-slate-800 shadow-[0_0_30px_rgba(0,0,0,0.4)]">
+                    <AdLeaderboard />
+                </div>
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div className="flex-1 space-y-8">
                         <header className="flex items-center justify-between border-b border-slate-800 pb-4">
                             <div>
-                                <h1 className="text-3xl font-black text-[#00ffbd] tracking-tighter">GLOBAL NEWSROOM</h1>
-                                <p className="text-slate-400 text-sm mt-1">현지 소식을 가장 빠르게 해설하여 배달합니다.</p>
+                                <h1 className="text-3xl font-black text-[#00ffbd] tracking-tighter uppercase italic">LIVE EMPIRE TERMINAL</h1>
+                                <p className="text-slate-400 text-sm mt-1 flex items-center gap-2">
+                                    <span className="w-2 h-2 bg-[#00ffbd] rounded-full animate-ping"></span>
+                                    미국 시장 실시간 데이터 분석 엔진 (한국 테스트 버전)
+                                </p>
                             </div>
                             <div className="relative">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                 <input
                                     type="text"
-                                    placeholder="종목 또는 키워드 검색"
+                                    placeholder="종목/키워드 검색"
                                     className="bg-slate-900/50 border border-slate-800 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-[#00ffbd] transition-all"
                                 />
                             </div>
@@ -141,9 +139,9 @@ export default function NewsroomPage() {
                                                     <div className="flex items-center gap-2 mb-3">
                                                         <Sparkles className="w-4 h-4 text-[#00ffbd]" />
                                                         <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
-                                                            Empire Intelligence Report
+                                                            Empire Intelligence Report (Unlocked)
                                                             <span className="w-px h-3 bg-slate-700"></span>
-                                                            <span className="text-slate-500 font-bold">Confidential</span>
+                                                            <span className="text-[#00ffbd] font-bold">Public Access</span>
                                                         </span>
                                                     </div>
                                                     <p className="text-[14px] text-slate-200 leading-relaxed font-medium">
@@ -162,7 +160,7 @@ export default function NewsroomPage() {
                                                         </div>
                                                         <div className="flex flex-col">
                                                             <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
-                                                            <span className="text-xs font-black text-yellow-500">MODERATE</span>
+                                                            <span className="text-xs font-black text-yellow-500">STABLE</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,7 +172,7 @@ export default function NewsroomPage() {
                                                         rel="noopener noreferrer"
                                                         className="group/link text-[10px] font-black text-slate-500 hover:text-white flex items-center gap-1.5 transition-all bg-slate-900/50 px-3 py-1.5 rounded-lg border border-transparent hover:border-slate-800"
                                                     >
-                                                        OPEN TERMINAL <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                                                        VIEW SOURCE <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                                                     </a>
                                                     <div className="flex items-center gap-3">
                                                         <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><Share2 className="w-4 h-4" /></button>
@@ -184,8 +182,12 @@ export default function NewsroomPage() {
                                             </div>
                                         </article>
 
-                                        {showAds && (idx + 1) % 3 === 0 && (
-                                            <div className="py-4 border-y border-slate-800/30 my-6">
+                                        {/* 광고 배치 강화: 뉴스 2개마다 무조건 광고 노출 */}
+                                        {(idx + 1) % 2 === 0 && (
+                                            <div className="py-6 border-y border-slate-800/20 my-6 bg-slate-900/10">
+                                                <div className="flex justify-center mb-2">
+                                                    <span className="text-[8px] font-bold text-slate-600 tracking-widest uppercase">Sponsored Advertisement</span>
+                                                </div>
                                                 <AdInFeed />
                                             </div>
                                         )}
@@ -196,28 +198,26 @@ export default function NewsroomPage() {
                     </div>
 
                     <aside className="w-full lg:w-80 space-y-6">
-                        {showAds && (
-                            <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
-                                <h3 className="text-xs font-bold text-slate-500 mb-4 px-2">SPECIAL SPONSOR</h3>
-                                <AdRectangle />
-                            </div>
-                        )}
+                        <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
+                            <h3 className="text-xs font-bold text-slate-500 mb-4 px-2 tracking-widest uppercase">Special Sponsor</h3>
+                            <AdRectangle />
+                        </div>
 
-                        <div className="bg-gradient-to-br from-[#0c121d] to-[#121b2d] border border-[#00ffbd]/20 rounded-2xl p-6">
+                        <div className="bg-gradient-to-br from-[#0c121d] to-[#121b2d] border border-[#00ffbd]/20 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
                             <h3 className="text-sm font-black text-[#00ffbd] mb-4 flex items-center gap-2">
                                 <DollarSign className="w-4 h-4" />
-                                오늘의 EMPIRE TOP PICKS
+                                EMPIRE TOP PICKS
                             </h3>
                             <div className="space-y-4">
                                 {['NVDA', 'TSLA', 'PLTR'].map(ticker => (
-                                    <div key={ticker} className="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+                                    <div key={ticker} className="flex items-center justify-between text-xs border-b border-slate-800 pb-2 hover:border-[#00ffbd]/30 transition-colors">
                                         <span className="font-bold">{ticker}</span>
                                         <span className="text-[#ff4d4d] font-bold">+2.4%</span>
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-4 bg-[#00ffbd] text-[#050b14] font-black py-2 rounded-xl text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,255,189,0.3)]">
-                                정밀 분석 보고서 보기
+                            <button className="w-full mt-6 bg-[#00ffbd] text-black font-black py-2.5 rounded-xl text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,255,189,0.3)] uppercase">
+                                Full Signal Analysis
                             </button>
                         </div>
                     </aside>
