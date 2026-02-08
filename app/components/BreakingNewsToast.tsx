@@ -63,43 +63,33 @@ export default function BreakingNewsToast() {
     if (!isVisible || !news) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 z-[9999] animate-slide-up-fade">
-            <div className="bg-[#0f172a] border-l-4 border-l-amber-500 border-y border-r border-[#1e293b] rounded-r-lg shadow-2xl p-4 max-w-sm relative overflow-hidden group">
+        <div className="fixed bottom-4 left-4 z-[9999] animate-slide-up-fade">
+            <div className="bg-[#0f172a]/90 backdrop-blur-md border border-slate-700/50 rounded-xl shadow-2xl p-3 max-w-[280px] relative overflow-hidden group hover:border-amber-500/50 transition-all">
 
                 {/* Background Glow */}
-                <div className={`absolute -right-10 -top-10 w-24 h-24 rounded-full blur-3xl opacity-20 ${news.sentiment === 'BULLISH' ? 'bg-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500' : 'bg-amber-500'}`}></div>
-
                 <button
                     onClick={() => setIsVisible(false)}
-                    className="absolute top-2 right-2 text-slate-500 hover:text-white transition-colors"
+                    className="absolute top-2 right-2 text-slate-600 hover:text-white transition-colors z-20"
                 >
-                    <X className="w-4 h-4" />
+                    <X className="w-3 h-3" />
                 </button>
 
-                <div className="flex items-start gap-4 pr-6">
-                    <div className={`p-3 rounded-full mt-1 ${news.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500' : 'bg-amber-500/10 text-amber-500'}`}>
-                        {news.sentiment === 'BULLISH' ? <TrendingUp className="w-6 h-6 animate-pulse" /> :
-                            news.sentiment === 'BEARISH' ? <TrendingDown className="w-6 h-6 animate-pulse" /> :
-                                <Bell className="w-6 h-6 animate-pulse" />}
+                <div className="flex items-start gap-3">
+                    <div className={`p-1.5 rounded-lg shrink-0 mt-0.5 ${news.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500' : news.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500' : 'bg-amber-500/10 text-amber-500'}`}>
+                        {news.sentiment === 'BULLISH' ? <TrendingUp className="w-3.5 h-3.5" /> :
+                            news.sentiment === 'BEARISH' ? <TrendingDown className="w-3.5 h-3.5" /> :
+                                <Bell className="w-3.5 h-3.5" />}
                     </div>
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-amber-500 flex items-center gap-1">
-                                <Zap className="w-3 h-3 fill-amber-500" /> Breaking News
+                        <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-amber-500 flex items-center gap-0.5 animate-pulse">
+                                <Zap className="w-2.5 h-2.5 fill-amber-500" /> LIVE
                             </span>
-                            <span className="text-[10px] text-slate-500">Just Now</span>
+                            <span className="text-[8px] text-slate-500 font-bold">Just Now</span>
                         </div>
-                        <h4 className="text-sm font-bold text-white leading-tight mb-2 line-clamp-2">
+                        <h4 className="text-[11px] font-bold text-slate-200 leading-tight mb-1.5 line-clamp-2 pr-4">
                             {news.free_tier.title}
                         </h4>
-                        <a
-                            href={news.free_tier.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-indigo-400 hover:text-indigo-300 font-medium inline-flex items-center gap-1"
-                        >
-                            Read Full Story <ExternalLink className="w-3 h-3" />
-                        </a>
                     </div>
                 </div>
             </div>

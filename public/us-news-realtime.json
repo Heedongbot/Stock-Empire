@@ -1,27 +1,737 @@
 [
   {
-    "id": "68500815997221040",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
+    "id": "743047601914079955",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-07 19:24:27",
+    "published_at": "Thu, 05 Feb 2026 22:07:44 GMT",
     "free_tier": {
-      "title": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
-      "title_en": "Hims & Hers to stop offering compounded semaglutide pill after FDA crackdown",
-      "summary_kr": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
-      "link": "https://www.investing.com/news/stock-market-news/hims--hers-to-stop-offering-compounded-semaglutide-pill-after-fda-crackdown-4492374",
+      "title": "[해외] Stocks making the biggest moves after the bell: Amazon, Reddit, Molina Healthcare, Fortinet and more",
+      "title_en": "Stocks making the biggest moves after the bell: Amazon, Reddit, Molina Healthcare, Fortinet and more",
+      "summary_kr": "These are the stocks posting the largest moves in extended trading. ...... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/05/stocks-making-the-biggest-moves-after-the-bell-amzn-rddt-moh-team.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 66/100 수준으로 평가됩니다.",
+        "impact_score": 66,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "5562220280849720794",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 20:58:00 GMT",
+    "free_tier": {
+      "title": "[해외] ‘Guests tell me I have dust bunnies’: My $150-an-hour cleaner has become increasingly negligent. Do I fire her?",
+      "title_en": "‘Guests tell me I have dust bunnies’: My $150-an-hour cleaner has become increasingly negligent. Do I fire her?",
+      "summary_kr": "”I like her as a friend, but I’m underwhelmed as a client.”...... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/some-of-her-team-are-undocumented-my-cleaner-leaves-dust-bunnies-behind-i-pay-her-150-an-hour-do-i-make-up-an-excuse-when-i-fire-her-48b18ec1?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 69/100 수준으로 평가됩니다.",
+        "impact_score": 69,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4680323889535184232",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 17:33:17 GMT",
+    "free_tier": {
+      "title": "[해외] Stocks making the biggest moves midday: Amazon, Centene, Roblox and more",
+      "title_en": "Stocks making the biggest moves midday: Amazon, Centene, Roblox and more",
+      "summary_kr": "These are the stocks posting the largest moves in midday trading. ...... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/06/stocks-making-the-biggest-moves-midday-amzn-cnc-rblx.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 69/100 수준으로 평가됩니다.",
+        "impact_score": 69,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6744370002888282067",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-08 01:30:32",
+    "free_tier": {
+      "title": "[해외] Japan’s election: What you need to know",
+      "title_en": "Japan’s election: What you need to know",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/economy-news/japans-election-what-you-need-to-know-4492386",
       "original_source": "Investing.com"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
-        "impact_score": 74
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 51/100 수준으로 평가됩니다.",
+        "impact_score": 51,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
       },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "3574463788417332493",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 19:58:00 GMT",
+    "free_tier": {
+      "title": "[해외] Where’s the real ‘best place’ to retire? Tips to making those lists work for you.",
+      "title_en": "Where’s the real ‘best place’ to retire? Tips to making those lists work for you.",
+      "summary_kr": "Here’s a rundown of six best-places lists in the U.S. and two global ones....... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/where-should-i-retire-how-to-use-all-those-best-places-lists-to-find-your-perfect-spot-ca4e8ea0?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 45/100 수준으로 평가됩니다.",
+        "impact_score": 45,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6681490481799470864",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Fri, 06 Feb 2026 14:26:57 GMT",
+    "free_tier": {
+      "title": "[해외] Stocks making the biggest moves premarket: Amazon, Reddit, Strategy, Molina, Strategy, Eli Lilly & more",
+      "title_en": "Stocks making the biggest moves premarket: Amazon, Reddit, Strategy, Molina, Strategy, Eli Lilly & more",
+      "summary_kr": "These are the stocks posting the largest moves in premarket trading. ...... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/06/stocks-making-the-biggest-moves-premarket-amzn-rddt-mstr-moh-lly.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 94/100 수준으로 평가됩니다.",
+        "impact_score": 94,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "534167109761879003",
+    "ticker": "MARKET",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-07 23:30:08",
+    "free_tier": {
+      "title": "[해외] Dorsey’s Block cutting up to 10% of staff, Bloomberg News reports",
+      "title_en": "Dorsey’s Block cutting up to 10% of staff, Bloomberg News reports",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/stock-market-news/dorseys-block-cutting-up-to-10-of-staff-bloomberg-news-reports-4492382",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 70/100 수준으로 평가됩니다.",
+        "impact_score": 70,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2048160093234250909",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-07 22:18:35",
+    "free_tier": {
+      "title": "[해외] American Airlines CEO agrees to meet pilots union over concerns",
+      "title_en": "American Airlines CEO agrees to meet pilots union over concerns",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/stock-market-news/american-airlines-ceo-agrees-to-meet-pilots-union-over-concerns-4492381",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 42/100 수준으로 평가됩니다.",
+        "impact_score": 42,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "247964246192910511",
+    "ticker": "MARKET",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-08 01:12:25",
+    "free_tier": {
+      "title": "[해외] Washington Post publisher Will Lewis announces departure, following mass layoffs",
+      "title_en": "Washington Post publisher Will Lewis announces departure, following mass layoffs",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/economy-news/washington-post-publisher-will-lewis-announces-departure-4492383",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 78/100 수준으로 평가됩니다.",
+        "impact_score": 78,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "8295311673579113136",
+    "ticker": "MARKET",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 22:36:00 GMT",
+    "free_tier": {
+      "title": "[해외] After bitcoin’s fall, pity those wildly enthusiastic investors who borrowed billions against crypto",
+      "title_en": "After bitcoin’s fall, pity those wildly enthusiastic investors who borrowed billions against crypto",
+      "summary_kr": "The speculation that bitcoin would hit $200,000 in 2025 now seems like a dream. Because it was....... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/as-bitcoin-crashes-pity-those-wildly-enthusiastic-investors-who-borrowed-billions-against-crypto-794164bb?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 81/100 수준으로 평가됩니다.",
+        "impact_score": 81,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4001902446294170677",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 14:59:59 GMT",
+    "free_tier": {
+      "title": "[해외] As 'Sell America' trade volatility rages on, some of the biggest changes may be in your bonds",
+      "title_en": "As 'Sell America' trade volatility rages on, some of the biggest changes may be in your bonds",
+      "summary_kr": "As U.S. investors diversify portfolios highly concentrated in domestic assets, it's not just interna... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/07/sell-america-market-trade-fixed-income-international-bonds.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 57/100 수준으로 평가됩니다.",
+        "impact_score": 57,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2388458614095051167",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-08 00:48:25",
+    "free_tier": {
+      "title": "[해외] ’We will pay,’ US TV host Savannah Guthrie says in plea for mother’s return",
+      "title_en": "’We will pay,’ US TV host Savannah Guthrie says in plea for mother’s return",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/world-news/we-will-pay-us-tv-host-savannah-guthrie-says-in-plea-for-mothers-return-4492385",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 64/100 수준으로 평가됩니다.",
+        "impact_score": 64,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2859117140523410409",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 18:50:10 GMT",
+    "free_tier": {
+      "title": "[해외] Bitcoin gets slashed in half. What's behind the crypto's existential crisis",
+      "title_en": "Bitcoin gets slashed in half. What's behind the crypto's existential crisis",
+      "summary_kr": "Bitcoin nearly grazed $60,000 on Thursday as investors shied away from the asset due to growing conc... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/06/bitcoin-gets-slashed-in-half-whats-behind-the-cryptos-existential-crisis.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 48/100 수준으로 평가됩니다.",
+        "impact_score": 48,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2740091938807360209",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-08 01:30:53",
+    "free_tier": {
+      "title": "[해외] Gabbard rejects claims she withheld whistleblower complaint from Congress",
+      "title_en": "Gabbard rejects claims she withheld whistleblower complaint from Congress",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/world-news/gabbard-rejects-claims-she-withheld-whistleblower-complaint-from-congress-4492387",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 55/100 수준으로 평가됩니다.",
+        "impact_score": 55,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4301559887035456587",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 20:04:00 GMT",
+    "free_tier": {
+      "title": "[해외] Getting a doctor’s appointment will become even harder as a perfect storm hits the U.S. healthcare system",
+      "title_en": "Getting a doctor’s appointment will become even harder as a perfect storm hits the U.S. healthcare system",
+      "summary_kr": "Healthcare costs are going up across the board, and fewer people are properly insured — or insured a... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/getting-a-doctors-appointment-will-become-even-harder-as-a-perfect-storm-hits-the-u-s-healthcare-system-58385587?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 66/100 수준으로 평가됩니다.",
+        "impact_score": 66,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4575872456223505231",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 06 Feb 2026 18:10:44 GMT",
+    "free_tier": {
+      "title": "[해외] Goldman Sachs taps Anthropic’s Claude to automate accounting, compliance roles",
+      "title_en": "Goldman Sachs taps Anthropic’s Claude to automate accounting, compliance roles",
+      "summary_kr": "Goldman Sachs is building AI agents with Anthropic’s Claude to automate trade accounting and client ... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/06/anthropic-goldman-sachs-ai-model-accounting.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 55/100 수준으로 평가됩니다.",
+        "impact_score": 55,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "7091733803030784105",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 22:43:00 GMT",
+    "free_tier": {
+      "title": "[해외] ‘I love being debt-free’: I’m in my mid-50s and buying a house. Do I take out a $400K mortgage or use my Roth IRA?",
+      "title_en": "‘I love being debt-free’: I’m in my mid-50s and buying a house. Do I take out a $400K mortgage or use my Roth IRA?",
+      "summary_kr": "“I’ll fund $500,000 of that from the sale of my current house.”...... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/i-love-being-debt-free-im-in-my-mid-50s-and-buying-a-house-do-i-take-out-a-400k-mortgage-or-use-my-roth-ira-c1aa3ef7?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 58/100 수준으로 평가됩니다.",
+        "impact_score": 58,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "8668645816473040912",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 20:06:00 GMT",
+    "free_tier": {
+      "title": "[해외] There is a severe doctor shortage. How to find a good one.",
+      "title_en": "There is a severe doctor shortage. How to find a good one.",
+      "summary_kr": "What can you do if your doctor retires or quits?...... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/what-can-you-do-if-your-doctor-retires-or-quits-d633bc9d?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 67/100 수준으로 평가됩니다.",
+        "impact_score": 67,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "1134756402245273853",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Thu, 05 Feb 2026 17:39:33 GMT",
+    "free_tier": {
+      "title": "[해외] Is the AI bubble popping itself? Software's break from the tech stock boom raises concerns",
+      "title_en": "Is the AI bubble popping itself? Software's break from the tech stock boom raises concerns",
+      "summary_kr": "Many investors expect the sell-off has gone too far, saying agentic AI is unable to meaningfully hur... (AI 번역 대기중)",
+      "link": "https://www.cnbc.com/2026/02/05/is-the-ai-bubble-popping-itself-software-rout-raises-concerns.html",
+      "original_source": "CNBC Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 98/100 수준으로 평가됩니다.",
+        "impact_score": 98,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6300891335908629598",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "2026-02-07 23:48:26",
+    "free_tier": {
+      "title": "[해외] Japan votes in test for PM Takaichi as snow weighs on turnout",
+      "title_en": "Japan votes in test for PM Takaichi as snow weighs on turnout",
+      "summary_kr": "...... (AI 번역 대기중)",
+      "link": "https://www.investing.com/news/economy-news/japan-votes-in-test-for-pm-takaichi-as-snow-weighs-on-turnout-4492380",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 44/100 수준으로 평가됩니다.",
+        "impact_score": 44,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2600815236549496469",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 07 Feb 2026 22:52:00 GMT",
+    "free_tier": {
+      "title": "[해외] ‘I’m not made of money’: My heating engineer didn’t fix my radiators on his first visit. Do I pay him a second time?",
+      "title_en": "‘I’m not made of money’: My heating engineer didn’t fix my radiators on his first visit. Do I pay him a second time?",
+      "summary_kr": "“He charged $180 for the second visit for his time, including $40 for the part.”...... (AI 번역 대기중)",
+      "link": "https://www.marketwatch.com/story/im-not-made-of-money-my-heating-engineer-charged-me-twice-he-didnt-fix-the-problem-the-first-time-do-i-pay-9cc6b4b9?mod=mw_rss_topstories",
+      "original_source": "MarketWatch"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약] [일반 뉴스] 특이 사항은 없으나 시장 흐름을 지속적으로 모니터링할 필요가 있습니다. <br/> 관련 키워드 분석 결과, 시장 영향력은 47/100 수준으로 평가됩니다.",
+        "impact_score": 47,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis": {
+        "master_name": "AI Analyst",
+        "sentiment_score": 0.5,
+        "win_rate": "N/A",
+        "mdd_risk": "N/A",
+        "intent_analysis": "자동 생성된 분석입니다.",
+        "ib_consensus": 50,
+        "macro_weight": "N/A",
+        "scenarios": "N/A",
+        "transfer_themes": "General",
+        "historical_match": "N/A",
+        "full_insight": "Master Analysis is pending..."
+      },
+      "master_analysis_done": true
     }
   }
 ]
