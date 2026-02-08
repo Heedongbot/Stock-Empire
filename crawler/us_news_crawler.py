@@ -31,6 +31,10 @@ class StockNewsCrawler:
         self.history_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tistory_history.json')
         self.posted_ids = self._load_history()
         
+        # [일일 포스팅 제한]
+        self.daily_post_count = 0
+        self.last_post_date = datetime.now().date()
+        
         # Initialize OpenAI if key exists
         api_key = os.getenv("OPENAI_API_KEY")
         self.client = OpenAI(api_key=api_key) if api_key else None
@@ -39,23 +43,7 @@ class StockNewsCrawler:
         else:
             print("[WARN] OpenAI Key missing. Falling back to Heuristic Reasoning.")
 
-    def _load_history(self):
-        try:
-            if os.path.exists(self.history_file):
-                with open(self.history_file, 'r', encoding='utf-8') as f:
-                    return set(json.load(f))
-        except Exception as e:
-            print(f"[WARN] Failed to load history: {e}")
-        return set()
-
-    def _save_history(self):
-        try:
-            with open(self.history_file, 'w', encoding='utf-8') as f:
-                json.dump(list(self.posted_ids), f)
-        except Exception as e:
-            print(f"[WARN] Failed to save history: {e}")
-
-    # ... (methods translate, get_ai_insight, crawl_all_sources, _format_news_item remain unchanged) ...
+# ... (omitted methods) ...
 
     def save(self, data):
         if not data: return
@@ -78,6 +66,11 @@ class StockNewsCrawler:
                 
                 print("[INFO] Starting Tistory Auto-Posting (US Market)...")
                 
+                # 날짜 변경 확인 및 카운터 리셋
+                if datetime.now().date() != self.last_post_date:
+                    self.daily_post_count = 0
+                    self.last_post_date = datetime.now().date()
+                
                 # [중복 방지] 이미 올린 뉴스는 제외하고, 가장 최신 뉴스 선정
                 # 우선순위: 1. Breaking News  2. 일반 News (상위권)
                 
@@ -98,6 +91,11 @@ class StockNewsCrawler:
                             
                 if not target_news:
                     print("[INFO] No NEW news to post. Skipping...")
+                    return
+
+                # [일일 제한] 5개 이상이면, 긴급(Breaking) 뉴스가 아니면 스킵
+                if self.daily_post_count >= 5 and not target_news.get('is_breaking'):
+                    print(f"[INFO] Daily limit ({self.daily_post_count}/5) reached. Skipping non-breaking news.")
                     return
 
                 # 데이터 추출
@@ -136,15 +134,16 @@ class StockNewsCrawler:
                 <hr style="border: 0; border-top: 1px dashed #CBD5E1; margin: 30px 0;">
                 
                 <!-- 트래픽 유입용 홍보 섹션 -->
-                <div style="text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 30px 20px; border-radius: 15px; color: white;">
-                    <h3 style="color: #60A5FA; margin-top: 0;">🚀 아직도 뉴스를 직접 찾으시나요?</h3>
-                    <p style="margin-bottom: 25px; color: #94A3B8;">
-                        <strong>Stock Empire</strong>에서는 전 세계 금융 뉴스를 AI가 24시간 실시간으로 분석해 드립니다.<br>
-                        지금 바로 접속해서 <strong>나만의 AI 투자 비서</strong>를 만나보세요.
+                <div style="text-align: center; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 35px 25px; border-radius: 20px; color: white; border: 1px solid #334155; margin-top: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);">
+                    <p style="font-size: 14px; color: #94A3B8; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600;">⚡ 아직도 늦게 확인하시나요?</p>
+                    <h3 style="color: #60A5FA; margin: 0 0 20px 0; font-size: 22px; font-weight: 800; line-height: 1.4;">"기관들은 이미 30초 전에<br>이 뉴스를 보고 매매를 끝냈습니다."</h3>
+                    <p style="margin-bottom: 30px; color: #CBD5E1; font-size: 15px; line-height: 1.6;">
+                        <strong>Stock Empire AI</strong>는 전 세계 4대 통신사의 속보를<br>
+                        실시간으로 분석하여 <span style="color: #FCD34D;">가장 먼저</span> 알려드립니다.
                     </p>
                     <a href="https://stock-empire.vercel.app" target="_blank" 
-                       style="background-color: #3B82F6; color: white; padding: 15px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-                       👉 Stock Empire 무료 사용하기
+                       style="display: inline-block; background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%); color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39); transition: transform 0.2s;">
+                       🚀 실시간 AI 속보 무료로 보기
                     </a>
                 </div>
                 <br>
@@ -162,6 +161,7 @@ class StockNewsCrawler:
                 print(f"[SUCCESS] Posted new article: {title_kr}")
                 self.posted_ids.add(target_news['id'])
                 self._save_history()
+                self.daily_post_count += 1
                 
             except Exception as e:
                 print(f"[ERROR] US Auto-posting failed: {e}")
