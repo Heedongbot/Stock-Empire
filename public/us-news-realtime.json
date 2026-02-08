@@ -1,31 +1,6 @@
 [
   {
-    "id": "-1947402259950390442",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07 19:24:27",
-    "free_tier": {
-      "title": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
-      "title_en": "Hims & Hers to stop offering compounded semaglutide pill after FDA crackdown",
-      "summary_kr": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
-      "link": "https://www.investing.com/news/stock-market-news/hims--hers-to-stop-offering-compounded-semaglutide-pill-after-fda-crackdown-4492374",
-      "original_source": "Investing.com"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
-        "impact_score": 75
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2167851868374066632",
+    "id": "8638094865577365866",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -40,10 +15,35 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[시황 탐색] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 중립 구간입니다. 주요 변곡점 돌파를 확인하기 전까지는 공격적인 베팅보다는 소량 분할 매매로 대응하는 것이 현명합니다.",
-        "impact_score": 69
+        "impact_score": 67
       },
       "trading_strategy": {
         "action": "관망",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "68500815997221040",
+    "ticker": "US Market",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "2026-02-07 19:24:27",
+    "free_tier": {
+      "title": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
+      "title_en": "Hims & Hers to stop offering compounded semaglutide pill after FDA crackdown",
+      "summary_kr": "Hims & Hers, FDA 단속 후 복합 세마글루타이드 알약 제공 중단",
+      "link": "https://www.investing.com/news/stock-market-news/hims--hers-to-stop-offering-compounded-semaglutide-pill-after-fda-crackdown-4492374",
+      "original_source": "Investing.com"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
+        "impact_score": 77
+      },
+      "trading_strategy": {
+        "action": "매도",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
