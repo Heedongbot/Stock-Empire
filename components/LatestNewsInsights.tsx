@@ -53,7 +53,7 @@ export default function LatestNewsInsights() {
                     .sort((a, b) => (b.vip_tier.ai_analysis.impact_score || 0) - (a.vip_tier.ai_analysis.impact_score || 0))
                     .slice(0, 9); // Get Top 9
 
-                setNews(sorted);
+                if (sorted.length > 0) setNews(sorted);
             } catch (e) {
                 console.error("Failed to fetch news insights", e);
             } finally {
@@ -65,14 +65,41 @@ export default function LatestNewsInsights() {
     }, []);
 
     const nextSlide = () => {
+        if (news.length === 0) return;
         setCurrentIndex((prev) => (prev + 1) % Math.ceil(news.length / itemsPerPage));
     };
 
     const prevSlide = () => {
+        if (news.length === 0) return;
         setCurrentIndex((prev) => (prev - 1 + Math.ceil(news.length / itemsPerPage)) % Math.ceil(news.length / itemsPerPage));
     };
 
-    if (loading || news.length === 0) return null;
+    if (loading) {
+        return (
+            <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20 animate-pulse">
+                <div className="flex items-center justify-between mb-8">
+                    <div className="h-10 w-64 bg-slate-800 rounded-xl"></div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="h-96 bg-[#0a1120] border border-slate-800 rounded-3xl p-6"></div>
+                    ))}
+                </div>
+            </section>
+        );
+    }
+
+    if (news.length === 0) {
+        return (
+            <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20">
+                <div className="bg-[#0a1120] border border-slate-800 rounded-3xl p-12 text-center">
+                    <Terminal className="w-12 h-12 text-slate-700 mx-auto mb-4" />
+                    <h3 className="text-xl font-black text-slate-500 mb-2">데이터 수신 대기 중...</h3>
+                    <p className="text-slate-600 text-sm">미국 시장 데이터를 실시간으로 수집하고 있습니다.</p>
+                </div>
+            </section>
+        );
+    }
 
     // Calculate visible items for current page
     const startIdx = currentIndex * itemsPerPage;
