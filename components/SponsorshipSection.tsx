@@ -1,61 +1,28 @@
-import React, { useState } from 'react';
-import { Heart, Coffee, Crown, ExternalLink, Copy, Check } from 'lucide-react';
+import React from 'react';
+import { Lock, ShieldAlert } from 'lucide-react';
+import { DonationSection } from '@/components/DonationSection';
 
 export default function SponsorshipSection() {
-    const [copied, setCopied] = useState(false);
-    const accountNumber = "1000-6850-8663";
-    const bankName = "토스뱅크";
-    const owner = "한희동";
-
-    const handleCopy = (e: React.MouseEvent) => {
-        e.preventDefault();
-        navigator.clipboard.writeText(accountNumber);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-        // alert(`계좌번호가 복사되었습니다!\n${bankName} ${accountNumber} (${owner})`);
-    };
-
     return (
-        <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20">
-            <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#0c121d] via-[#120f2d] to-[#0c121d] border border-slate-800 shadow-2xl p-10 md:p-14">
-                {/* Background Effects */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px] pointer-events-none"></div>
-
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-                    <div className="text-center md:text-left space-y-6 max-w-2xl">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[10px] font-black tracking-widest uppercase text-amber-500">
-                            <Crown className="w-3 h-3" />
-                            Official Patronage
-                        </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-white italic tracking-tighter leading-tight">
-                            BECOME A <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600">GUARDIAN OF EMPEROR</span>
-                        </h2>
-                        <p className="text-slate-400 font-medium text-sm leading-relaxed max-w-lg">
-                            Stock Empire의 AI 엔진은 여러분의 후원으로 가동됩니다.<br />
-                            초기 개발 및 서버 운영에 기여하고 명예의 전당에 이름을 올리세요.
-                        </p>
+        <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20 animate-fade-in-up">
+            <div className="flex flex-col items-center justify-center">
+                <div className="p-10 bg-slate-900/50 border border-slate-800 rounded-[3rem] text-center max-w-3xl backdrop-blur-sm relative overflow-hidden shadow-2xl">
+                    <div className="absolute top-0 right-0 p-10 opacity-5">
+                        <Lock className="w-40 h-40 text-white" />
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <div className="relative z-10">
+                        <ShieldAlert className="w-16 h-16 text-slate-600 mx-auto mb-6" />
+                        <h2 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-6 relative inline-block">
+                            Alpha Signal Access Restricted
+                            <div className="absolute -bottom-2 left-0 w-full h-1 bg-[#00ffbd] opacity-30"></div>
+                        </h2>
+                        <p className="text-slate-400 mb-8 font-medium leading-relaxed max-w-xl mx-auto">
+                            알파 시그널은 리스크 관리를 위해 관리자(Admin) 전용으로 운영됩니다.<br />
+                            일반 사용자분들은 뉴스룸과 테마 분석을 통해 시장의 흐름을 파악하실 수 있습니다.
+                        </p>
 
-                        <button
-                            onClick={handleCopy}
-                            className="group relative px-8 py-5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl text-black font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_30px_rgba(245,158,11,0.3)] flex items-center justify-center gap-3"
-                        >
-                            {copied ? <Check className="w-5 h-5" /> : <Coffee className="w-5 h-5 group-hover:-rotate-12 transition-transform" />}
-                            <span>{copied ? "Copied!" : "Sponsor via Toss Bank"}</span>
-                            <div className="absolute inset-0 rounded-2xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all"></div>
-                        </button>
-
-                        <a
-                            href="#"
-                            className="px-8 py-5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-300 font-bold uppercase tracking-widest hover:bg-slate-800 hover:text-white transition-all flex items-center justify-center gap-3 hover:border-slate-500"
-                        >
-                            <Heart className="w-5 h-5 text-red-500 animate-pulse" />
-                            <span>Sponsoring Inquiry</span>
-                        </a>
+                        <DonationSection />
                     </div>
                 </div>
             </div>
