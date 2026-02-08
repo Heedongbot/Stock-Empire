@@ -33,7 +33,8 @@ export default function RootLayout({
     if (savedKey) setManualKey(savedKey);
   }, []);
 
-  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || manualKey;
+  // 퍼블리셔블 키가 없을 경우 하드코딩된 테스트 키를 사용 (배포 시 환경 변수 누락 방지용)
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_test_cmF0aW9uYWwtc2VhZ3VsbC05Ny5jbGVyay5hY2NvdW50cy5kZXYk" || manualKey;
 
   // 서버 사이드와 클라이언트 사이드 모두에서 최소한의 HTML 구조를 유지해야 함
   return (
