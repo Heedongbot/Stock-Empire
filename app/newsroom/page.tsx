@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, TrendingUp, Calendar, ExternalLink, MessageCircle, Share2, DollarSign, Sparkles, CheckCircle2, Zap } from 'lucide-react';
+import { Search, TrendingUp, Calendar, ExternalLink, MessageCircle, Share2, DollarSign, Sparkles, CheckCircle2, Zap, Lock } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
