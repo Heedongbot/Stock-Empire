@@ -283,6 +283,46 @@ class NaverBlogAutoPoster:
                 print(f"[ERROR] Scheduler loop error: {e}")
                 time.sleep(600)
 
+    def run_test_post(self):
+        print("🧪 Running Test Post...")
+        
+        # Test Data
+        title = "⚡ [TEST] Stock Empire AI Blog Automation System Check"
+        content = """
+        안녕하세요, Stock Empire AI 봇입니다. 🤖
+        
+        이 포스팅은 자동화 시스템의 정상 작동 여부를 확인하기 위한 테스트 게시물입니다.
+        
+        ✅ 시스템 상태: 정상
+        ✅ 게시 시간: {}
+        ✅ 버전: v1.0.2 (Selenium Enhanced)
+        
+        본 게시물은 잠시 후 삭제될 수 있습니다.
+        감사합니다.
+        """.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        
+        # Strip indentation for clean posting
+        content = '\n'.join([line.strip() for line in content.split('\n')])
+        
+        try:
+            self.login()
+            self.post_to_blog(title, content)
+            print("✅ Test Post Completed Successfully!")
+        except Exception as e:
+            print(f"❌ Test Post Failed: {e}")
+        finally:
+            if self.driver:
+                self.driver.quit()
+
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description='Naver Blog Auto Poster')
+    parser.add_argument('--test', action='store_true', help='Run a single test post immediately')
+    args = parser.parse_args()
+
     poster = NaverBlogAutoPoster()
-    poster.run_scheduler()
+    
+    if args.test:
+        poster.run_test_post()
+    else:
+        poster.run_scheduler()
