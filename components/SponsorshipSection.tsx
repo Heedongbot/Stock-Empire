@@ -1,7 +1,20 @@
-import React from 'react';
-import { Heart, Coffee, Crown, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { Heart, Coffee, Crown, ExternalLink, Copy, Check } from 'lucide-react';
 
 export default function SponsorshipSection() {
+    const [copied, setCopied] = useState(false);
+    const accountNumber = "1000-6850-8663";
+    const bankName = "토스뱅크";
+    const owner = "한희동";
+
+    const handleCopy = (e: React.MouseEvent) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(accountNumber);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        // alert(`계좌번호가 복사되었습니다!\n${bankName} ${accountNumber} (${owner})`);
+    };
+
     return (
         <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20">
             <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#0c121d] via-[#120f2d] to-[#0c121d] border border-slate-800 shadow-2xl p-10 md:p-14">
@@ -27,15 +40,14 @@ export default function SponsorshipSection() {
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
 
-                        <a
-                            href="#"
-                            onClick={(e) => { e.preventDefault(); alert("후원 링크를 준비 중입니다. 감사합니다!"); }}
+                        <button
+                            onClick={handleCopy}
                             className="group relative px-8 py-5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl text-black font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_30px_rgba(245,158,11,0.3)] flex items-center justify-center gap-3"
                         >
-                            <Coffee className="w-5 h-5 group-hover:-rotate-12 transition-transform" />
-                            <span>Buy Coffee to Dev</span>
+                            {copied ? <Check className="w-5 h-5" /> : <Coffee className="w-5 h-5 group-hover:-rotate-12 transition-transform" />}
+                            <span>{copied ? "Copied!" : "Sponsor via Toss Bank"}</span>
                             <div className="absolute inset-0 rounded-2xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all"></div>
-                        </a>
+                        </button>
 
                         <a
                             href="#"
