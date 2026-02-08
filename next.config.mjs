@@ -1,3 +1,11 @@
+import withPWAInit from 'next-pwa';
+
+const withPWA = withPWAInit({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+});
+
 const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
@@ -7,4 +15,4 @@ const nextConfig = {
     },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);
