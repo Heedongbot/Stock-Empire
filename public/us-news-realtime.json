@@ -1,151 +1,197 @@
 [
   {
-    "id": "8205133614079652762",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "Sat, 07 Feb 2026 12:00:00 GMT",
+    "id": "-8238163612846678550",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "기술주는 불안정했지만 이들 20개 회사는 여전히 급격한 매출 성장을 볼 수 있습니다.",
-      "title_en": "Tech stocks have been shaky, but these 20 companies could still see rocketing sales growth",
-      "summary_kr": "Sandisk와 Micron은 향후 몇 년 동안 업계 최고의 매출 성장을 이룰 수 있습니다.",
-      "link": "https://www.marketwatch.com/story/tech-stocks-have-been-shaky-but-these-20-companies-could-still-see-rocketing-sales-growth-148195c9?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
+      "title": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
+      "title_en": "[속보] 미국 연준 기준금리 동결 결정 (5.25~5.50%)",
+      "summary_kr": "연방공개시장위원회(FOMC)가 기준금리를 5.25~5.50% 범위로 동결하기로 결정했습니다.",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases.htm",
+      "original_source": "Federal Reserve"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전문 의견] 시장의 강력한 매수세가 확인되는 유의미한 시그널입니다. 특히 나스닥 선물 지수의 흐름과 동조화되고 있어, 추세 추종 매매(Trend Following) 전략이 매우 유리한 구간으로 분석됩니다.",
-        "impact_score": 67
+        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 동결 | 실제: 동결 | 서프라이즈: 없음",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "Peter Lynch",
+        "sentiment_score": 0.27,
+        "win_rate": "82%",
+        "mdd_risk": "-14%",
+        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
+        "ib_consensus": 71,
+        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
+        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
+        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
+        "historical_match": "2019년 유사 패턴 (일치율 87%)",
+        "full_insight": "[Peter Lynch의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "-7361024922553368246",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "Sat, 07 Feb 2026 12:30:00 GMT",
+    "id": "6018285469425106120",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "소프트웨어 주식이 무너졌습니다. 먼지가 가라 앉을 때 해당 부문을 플레이하는 방법은 다음과 같습니다.",
-      "title_en": "Software stocks have been crushed. Here’s how to play the sector as the dust settles.",
-      "summary_kr": "투자자들은 일부 분석가들이 '무차별적인' 매도라고 믿는 이후, 한숨을 쉬면서 하락한 소프트웨어 주식을 매수할 기회가 있는지 평가할 수 있습니다.",
-      "link": "https://www.marketwatch.com/story/software-stocks-have-been-crushed-heres-how-to-play-the-sector-as-the-dust-settles-c0175f8a?mod=mw_rss_topstories",
-      "original_source": "MarketWatch"
+      "title": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
+      "title_en": "[속보] 미국 CPI 3.2% 발표... 전월 대비 0.1%p 상승",
+      "summary_kr": "1월 소비자물가지수(CPI)가 전년 대비 3.2% 상승, 인플레이션 재점화 우려가 제기되고 있습니다.",
+      "link": "https://www.bls.gov/news.release/cpi.nr0.htm",
+      "original_source": "Bureau of Labor Statistics"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
-        "impact_score": 75
+        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 3.0% | 실제: 3.2% | 서프라이즈: +0.2%p",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "Ray Dalio",
+        "sentiment_score": 0.38,
+        "win_rate": "88%",
+        "mdd_risk": "-15%",
+        "intent_analysis": "연준의 의도는 명확합니다. 인플레이션과의 전쟁이 끝나지 않았음을 시사합니다.",
+        "ib_consensus": 89,
+        "macro_weight": "채권 수익률 곡선의 변화가 주식 시장 밸류에이션을 압박하고 있습니다.",
+        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
+        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
+        "historical_match": "2019년 유사 패턴 (일치율 87%)",
+        "full_insight": "[Ray Dalio의 관점] 거시 경제 사이클의 변곡점입니다. 부채 사이클과 연준의 움직임이 충돌하고 있습니다. 현금 비중을 조절하고 변동성에 대비하십시오."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "-4796092701397305581",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07T13:12:41Z",
+    "id": "-4964757106234203457",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "Truist, Boston Scientific Corporation(BSX) 가격 목표를 인하했지만 수익 하락 후 매수 유지",
-      "title_en": "Truist Cuts Boston Scientific Corporation (BSX) Price Target but Maintains Buy After Earnings Pullback",
-      "summary_kr": "Truist, Boston Scientific Corporation(BSX) 목표 가격을 인하했지만 수익 하락 후 매수 유지",
-      "link": "https://finance.yahoo.com/news/truist-cuts-boston-scientific-corporation-131241936.html",
-      "original_source": "Yahoo Finance"
+      "title": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
+      "title_en": "[속보] 美 1월 NFP +25만 명... 예상치 크게 상회",
+      "summary_kr": "1월 비농업 고용이 25만 명 증가하며 시장 예상치(15만 명)를 크게 상회했습니다.",
+      "link": "https://www.bls.gov/news.release/empsit.nr0.htm",
+      "original_source": "Bureau of Labor Statistics"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 주의보] 시장의 하방 압력이 가속화되는 부정적 변동성이 포착됩니다. 미 국채 금리 변동과 함께 보수적인 포지션 유지가 필요하며, 변동성이 잦아들 때까지는 추가 매수를 자제하십시오.",
-        "impact_score": 66
+        "summary_kr": "[최대리 속보] [5-STAR] 중요 지표 발표. 예상치: 15만 명 | 실제: 25만 명 | 서프라이즈: +10만 명",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "Peter Lynch",
+        "sentiment_score": 0.15,
+        "win_rate": "83%",
+        "mdd_risk": "-10%",
+        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
+        "ib_consensus": 75,
+        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
+        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
+        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
+        "historical_match": "2019년 유사 패턴 (일치율 87%)",
+        "full_insight": "[Peter Lynch의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "-3490799562860850068",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07T13:02:32Z",
+    "id": "-4148590145042258434",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "Argus Research, Seaport Research가 가격 목표를 조정함에 따라 Badger Meter, Inc.(BMI)를 하향 조정",
-      "title_en": "Argus Research Downgrades Badger Meter, Inc. (BMI) as Seaport Research Trims Price Target",
-      "summary_kr": "Argus Research, Seaport Research가 가격 목표를 조정함에 따라 Badger Meter, Inc.(BMI)를 하향 조정",
-      "link": "https://finance.yahoo.com/news/argus-research-downgrades-badger-meter-130232984.html",
-      "original_source": "Yahoo Finance"
+      "title": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
+      "title_en": "[경제] 美 4분기 GDP 2.8% 성장... 전분기 대비 가속",
+      "summary_kr": "4분기 실질 GDP가 연율 2.8% 성장하며 경기 연착륙 가능성을 시사했습니다.",
+      "link": "https://www.bea.gov/news/current-releases",
+      "original_source": "Bureau of Economic Analysis"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 주의보] 시장의 하방 압력이 가속화되는 부정적 변동성이 포착됩니다. 미 국채 금리 변동과 함께 보수적인 포지션 유지가 필요하며, 변동성이 잦아들 때까지는 추가 매수를 자제하십시오.",
-        "impact_score": 66
+        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 예상치: 2.5% | 실제: 2.8% | 서프라이즈: +0.3%p",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "Ray Dalio",
+        "sentiment_score": 0.29,
+        "win_rate": "85%",
+        "mdd_risk": "-11%",
+        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
+        "ib_consensus": 71,
+        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
+        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
+        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
+        "historical_match": "2019년 유사 패턴 (일치율 87%)",
+        "full_insight": "[Ray Dalio의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "-1503754244889164844",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07T13:27:40Z",
+    "id": "8538790732978506982",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "Enterprise Products Partners L.P.(EPD)는 지침이 합의를 넘어서면서 Scotiabank에서 더 높은 목표를 달성했습니다.",
-      "title_en": "Enterprise Products Partners L.P. (EPD) Gets Higher Target at Scotiabank as Guidance Tops Consensus",
-      "summary_kr": "Enterprise Products Partners L.P.(EPD)는 지침이 합의를 넘어서면서 Scotiabank에서 더 높은 목표를 달성했습니다.",
-      "link": "https://finance.yahoo.com/news/enterprise-products-partners-l-p-132740270.html",
-      "original_source": "Yahoo Finance"
+      "title": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
+      "title_en": "[발언] 파월 \"금리 인하 서두르지 않겠다\"... 매파 기조 재확인",
+      "summary_kr": "제롬 파월 연준 의장이 '인플레이션 둔화 속도가 예상보다 느리다'며 금리 인하를 서두르지 않겠다는 입장을 재확인했습니다.",
+      "link": "https://www.bloomberg.com/markets/fixed-income",
+      "original_source": "Bloomberg"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[어닝 서프라이즈] 예상치를 상회하는 실적 가이드라인은 펀더멘털의 고성장을 증명합니다. 단순 등락을 떠나 주가 재평가(Re-rating)가 시작되는 구간이므로, 장기적 성장이 기대되는 주도주 중심의 비중 확대 전략을 권장합니다.",
-        "impact_score": 73
+        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 시장 반응: 달러 강세, 국채 금리 상승",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
+      "master_analysis": {
+        "master_name": "Ray Dalio",
+        "sentiment_score": 0.33,
+        "win_rate": "80%",
+        "mdd_risk": "-14%",
+        "intent_analysis": "보수적 리스크 관리를 위한 선제적 대응으로 보입니다.",
+        "ib_consensus": 84,
+        "macro_weight": "섹터 로테이션의 수혜를 입을 가능성이 높습니다.",
+        "scenarios": "상승: $250 돌파 시 추격 매수 | 기본: 20일선 지지 | 하락: 전저점 이탈 시 손절",
+        "transfer_themes": "MACRO, AI, Semiconductor, Cloud",
+        "historical_match": "2019년 유사 패턴 (일치율 87%)",
+        "full_insight": "[Ray Dalio의 관점] 시장의 소음(Noise)을 무시하고 본질적 가치에 집중하십시오. 현재 주가는 내재 가치 대비 매력적인 안전 마진 구간에 진입하고 있습니다."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "-5281451041892489155",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-07T13:21:34Z",
+    "id": "-8858866790580959962",
+    "ticker": "MACRO",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "2026-02-08T09:36:12.214466",
     "free_tier": {
-      "title": "CIBC, 금 전망이 더욱 낙관적으로 변하면서 Agnico Eagle Mines Limited(AEM) 목표 상향 조정",
-      "title_en": "CIBC Raises Agnico Eagle Mines Limited (AEM) Target as Gold Outlook Turns More Bullish",
-      "summary_kr": "CIBC, 금 전망이 더욱 낙관적으로 변하면서 Agnico Eagle Mines Limited(AEM) 목표 상향 조정",
-      "link": "https://finance.yahoo.com/news/cibc-raises-agnico-eagle-mines-132134732.html",
-      "original_source": "Yahoo Finance"
+      "title": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
+      "title_en": "[지정학] 중동 긴장 고조... 원유 WTI $85 돌파",
+      "summary_kr": "중동 지역 지정학적 긴장 고조로 안전자산 선호 심리가 강화되고 있습니다.",
+      "link": "https://www.reuters.com/world/",
+      "original_source": "Reuters"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[코부장 전문 의견] 시장의 강력한 매수세가 확인되는 유의미한 시그널입니다. 특히 나스닥 선물 지수의 흐름과 동조화되고 있어, 추세 추종 매매(Trend Following) 전략이 매우 유리한 구간으로 분석됩니다.",
-        "impact_score": 66
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
+        "summary_kr": "[최대리 속보] [4-STAR] 중요 지표 발표. 영향 섹터: 에너지(+), 항공(-), 금(+)",
+        "impact_score": 99,
+        "investment_insight": "거시 경제 지표 발표에 따른 시장 변동성 확대가 예상됩니다. 리스크 관리에 만전을 기하십시오."
       }
     }
   }

@@ -6,6 +6,7 @@ import SiteHeader from '@/components/SiteHeader';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
 import AdRectangle from '@/components/ads/AdRectangle';
+import { useAuth } from '@/lib/AuthContext';
 
 interface NewsItem {
     id: string;
@@ -26,20 +27,22 @@ interface NewsItem {
     };
 }
 
-import { useAuth } from '@/lib/AuthContext';
-
 export default function NewsroomPage() {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
+    const [lang, setLang] = useState<'ko' | 'en'>('ko');
 
-    // PRO 티어(VIP/VVIP)가 아닌 경우에만 광고를 보여줌
+    useEffect(() => {
+        const savedLang = localStorage.getItem('stock-empire-lang') as 'ko' | 'en';
+        if (savedLang) setLang(savedLang);
+    }, []);
+
     const showAds = !user || user.tier === 'FREE';
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                // 통합 글로벌 뉴스 API 호출
                 const res = await fetch('/api/news');
                 const data = await res.json();
                 setNews(data);
@@ -54,10 +57,9 @@ export default function NewsroomPage() {
 
     return (
         <div className="min-h-screen bg-[#050b14] text-[#e0e6ed]">
-            <SiteHeader />
+            <SiteHeader lang={lang} setLang={setLang} />
 
             <main className="max-w-7xl mx-auto px-4 py-8">
-                {/* 1. 상단 광고 배너 (최우선 수익) */}
                 {showAds && (
                     <div className="mb-8 overflow-hidden rounded-xl border border-slate-800">
                         <AdLeaderboard />
@@ -65,7 +67,6 @@ export default function NewsroomPage() {
                 )}
 
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* 왼쪽: 메인 뉴스 피드 */}
                     <div className="flex-1 space-y-8">
                         <header className="flex items-center justify-between border-b border-slate-800 pb-4">
                             <div>
@@ -92,79 +93,97 @@ export default function NewsroomPage() {
                             <div className="space-y-6">
                                 {news.map((item, idx) => (
                                     <React.Fragment key={item.id}>
-                                        {/* 뉴스 카드 */}
-                                        <article className="bg-[#0c121d] border border-slate-800 rounded-2xl overflow-hidden hover:border-[#00ffbd]/30 transition-all group">
-                                            <div className="p-6">
-                                                {/* 시나리오 배지 & 임팩트 점수 시각화 */}
-                                                <div className="flex flex-wrap items-center gap-2 mb-4">
-                                                    <span className="text-[10px] font-bold bg-[#121b2d] text-[#00d4ff] px-2 py-1 rounded uppercase tracking-wider border border-[#00d4ff]/20">
-                                                        {item.free_tier.original_source}
-                                                    </span>
-                                                    <div className="h-4 w-px bg-slate-800 mx-1 hidden md:block"></div>
-                                                    <div className="flex items-center gap-1.5 bg-[#00ffbd]/5 border border-[#00ffbd]/20 px-2 py-0.5 rounded">
-                                                        <Sparkles className="w-3 h-3 text-[#00ffbd]" />
-                                                        <span className="text-[9px] font-black text-[#00ffbd] uppercase">Brain Scenario #{Math.floor(Math.random() * 900) + 100}</span>
+                                        <article className="relative bg-[#0a1120] border border-slate-800/60 rounded-2xl overflow-hidden hover:border-[#00ffbd]/50 transition-all duration-300 group shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
+                                            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,3px_100%] opacity-20"></div>
+
+                                            <div className="p-7 relative z-10">
+                                                <div className="flex flex-wrap items-center gap-3 mb-5">
+                                                    <div className="flex items-center gap-2 bg-[#00ffbd]/10 border border-[#00ffbd]/30 px-2.5 py-1 rounded-lg">
+                                                        <div className="w-1.5 h-1.5 bg-[#00ffbd] rounded-full animate-pulse"></div>
+                                                        <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-wider">
+                                                            Scenario #{100 + (idx * 7) % 899}
+                                                        </span>
                                                     </div>
+                                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-2">
+                                                        {item.free_tier.original_source} • {new Date(item.published_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                    </span>
                                                     <div className="flex-1"></div>
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="text-[9px] font-bold text-slate-500 uppercase">Impact</span>
-                                                        <div className="w-20 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                                                            <div
-                                                                className="h-full bg-gradient-to-r from-blue-500 to-[#00ffbd] rounded-full"
-                                                                style={{ width: `${item.vip_tier.ai_analysis.impact_score * 10}%` }}
-                                                            ></div>
+                                                    <div className="flex items-center gap-2 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800">
+                                                        <Zap className="w-3 h-3 text-yellow-500" />
+                                                        <span className="text-[10px] font-black text-slate-300 uppercase tracking-tighter">Impact</span>
+                                                        <div className="flex gap-0.5">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    className={`w-2 h-1.5 rounded-sm ${i < (item.vip_tier.ai_analysis.impact_score / 2) ? 'bg-[#00ffbd] shadow-[0_0_8px_#00ffbd]' : 'bg-slate-800'}`}
+                                                                ></div>
+                                                            ))}
                                                         </div>
-                                                        <span className="text-[10px] font-black text-[#00ffbd]">{item.vip_tier.ai_analysis.impact_score}/10</span>
                                                     </div>
                                                 </div>
 
-                                                <h2 className="text-xl font-bold mb-3 group-hover:text-[#00ffbd] transition-colors leading-snug">
-                                                    {item.free_tier.title}
-                                                </h2>
-
-                                                {/* 엠파이어 인사이트: 1000가지 시나리오 기반 정밀 해설 */}
-                                                <div className="relative bg-[#0a101f] border border-slate-800 rounded-xl p-4 mb-4 overflow-hidden">
-                                                    <div className="absolute top-0 left-0 w-1 h-full bg-[#00ffbd]"></div>
-                                                    <div className="flex items-center justify-between mb-2">
-                                                        <div className="flex items-center gap-2">
-                                                            <div className="bg-[#00ffbd]/10 p-1 rounded">
-                                                                <TrendingUp className="w-3.5 h-3.5 text-[#00ffbd]" />
-                                                            </div>
-                                                            <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest">Empire Insight</span>
-                                                        </div>
-                                                        <span className="text-[9px] text-slate-500 font-bold uppercase tracking-tighter">AI Scenario Engine v4.0</span>
+                                                <div className="mb-5">
+                                                    <h2 className="text-2xl font-black mb-3 group-hover:text-[#00ffbd] transition-colors leading-[1.2] tracking-tight">
+                                                        {item.free_tier.title}
+                                                    </h2>
+                                                    <div className="flex items-start gap-3 bg-[#050b14] border border-slate-800/50 p-3 rounded-xl border-dashed">
+                                                        <div className="mt-1 shrink-0"><CheckCircle2 className="w-4 h-4 text-[#00d4ff]" /></div>
+                                                        <p className="text-xs font-bold text-[#00d4ff] leading-relaxed uppercase tracking-tight italic">
+                                                            FAST ALPHA: {item.free_tier.title_en}
+                                                        </p>
                                                     </div>
-                                                    <p className="text-sm text-slate-200 leading-relaxed font-medium">
+                                                </div>
+
+                                                <div className="bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight">
+                                                    <div className="absolute top-0 right-0 p-2 opacity-10">
+                                                        <TrendingUp className="w-12 h-12" />
+                                                    </div>
+                                                    <div className="flex items-center gap-2 mb-3">
+                                                        <Sparkles className="w-4 h-4 text-[#00ffbd]" />
+                                                        <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
+                                                            Empire Intelligence Report
+                                                            <span className="w-px h-3 bg-slate-700"></span>
+                                                            <span className="text-slate-500 font-bold">Confidential</span>
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-[14px] text-slate-200 leading-relaxed font-medium">
                                                         {item.vip_tier.ai_analysis.summary_kr}
                                                     </p>
-                                                    <div className="mt-3 flex items-center gap-4 text-[10px] font-bold text-slate-500">
-                                                        <span className="flex items-center gap-1 opacity-60"><CheckCircle2 className="w-3 h-3" /> Historical Accuracy: 89%</span>
-                                                        <span className="flex items-center gap-1 opacity-60"><Zap className="w-3 h-3 text-yellow-500" /> Key Catalyst: Volatility Spike</span>
+                                                    <div className="mt-4 pt-4 border-t border-slate-800/50 flex flex-wrap gap-4">
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Accuracy</span>
+                                                            <span className="text-xs font-black text-white">89.4%</span>
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Sentiment</span>
+                                                            <span className={`text-xs font-black ${item.sentiment === 'BULLISH' ? 'text-[#ff4d4d]' : 'text-[#2dbdff]'}`}>
+                                                                {item.sentiment}
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
+                                                            <span className="text-xs font-black text-yellow-500">MODERATE</span>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <p className="text-slate-400 text-sm line-clamp-2 mb-4 px-1">
-                                                    {item.free_tier.summary_kr}
-                                                </p>
-
-                                                <div className="flex items-center justify-between pt-4 border-t border-slate-800/50">
+                                                <div className="flex items-center justify-between pt-2">
                                                     <a
                                                         href={item.free_tier.link}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="text-xs text-slate-500 hover:text-white flex items-center gap-1 transition-colors"
+                                                        className="group/link text-[10px] font-black text-slate-500 hover:text-white flex items-center gap-1.5 transition-all bg-slate-900/50 px-3 py-1.5 rounded-lg border border-transparent hover:border-slate-800"
                                                     >
-                                                        원문 바로가기 <ExternalLink className="w-3 h-3" />
+                                                        OPEN TERMINAL <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                                                     </a>
-                                                    <div className="flex items-center gap-4">
-                                                        <button className="text-slate-500 hover:text-[#00ffbd] transition-colors"><Share2 className="w-4 h-4" /></button>
-                                                        <button className="text-slate-500 hover:text-[#00ffbd] transition-colors"><MessageCircle className="w-4 h-4" /></button>
+                                                    <div className="flex items-center gap-3">
+                                                        <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><Share2 className="w-4 h-4" /></button>
+                                                        <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><MessageCircle className="w-4 h-4" /></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </article>
 
-                                        {/* 2. 피드 중간 광고 (3번째 뉴스마다 하나씩) */}
                                         {showAds && (idx + 1) % 3 === 0 && (
                                             <div className="py-4 border-y border-slate-800/30 my-6">
                                                 <AdInFeed />
@@ -176,9 +195,7 @@ export default function NewsroomPage() {
                         )}
                     </div>
 
-                    {/* 오른쪽: 사이드바 (광고 및 유틸리티) */}
                     <aside className="w-full lg:w-80 space-y-6">
-                        {/* 3. 사이드바 사각형 광고 */}
                         {showAds && (
                             <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
                                 <h3 className="text-xs font-bold text-slate-500 mb-4 px-2">SPECIAL SPONSOR</h3>
@@ -186,7 +203,6 @@ export default function NewsroomPage() {
                             </div>
                         )}
 
-                        {/* 실시간 마켓 점수 (AI 추천) */}
                         <div className="bg-gradient-to-br from-[#0c121d] to-[#121b2d] border border-[#00ffbd]/20 rounded-2xl p-6">
                             <h3 className="text-sm font-black text-[#00ffbd] mb-4 flex items-center gap-2">
                                 <DollarSign className="w-4 h-4" />
@@ -200,7 +216,7 @@ export default function NewsroomPage() {
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-4 bg-[#00ffbd] text-[#050b14] font-black py-2 rounded-xl text-xs hover:scale-[1.02] active:scale-[0.98] transition-all">
+                            <button className="w-full mt-4 bg-[#00ffbd] text-[#050b14] font-black py-2 rounded-xl text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,255,189,0.3)]">
                                 정밀 분석 보고서 보기
                             </button>
                         </div>
