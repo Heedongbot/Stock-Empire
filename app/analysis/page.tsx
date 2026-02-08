@@ -127,21 +127,7 @@ function AnalysisContent() {
 
                 {!isAdmin ? (
                     <div className="flex flex-col items-center justify-center py-20 animate-fade-in-up">
-                        <div className="p-8 bg-slate-900/50 border border-slate-800 rounded-[3rem] text-center max-w-2xl backdrop-blur-sm relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-10 opacity-5">
-                                <Lock className="w-32 h-32 text-white" />
-                            </div>
-                            <ShieldAlert className="w-16 h-16 text-slate-600 mx-auto mb-6" />
-                            <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-4">
-                                Alpha Signal Access Restricted
-                            </h2>
-                            <p className="text-slate-400 mb-8 font-medium leading-relaxed">
-                                알파 시그널은 리스크 관리를 위해 관리자(Admin) 전용으로 운영됩니다.<br />
-                                일반 사용자분들은 뉴스룸과 테마 분석을 통해 시장의 흐름을 파악하실 수 있습니다.
-                            </p>
-
-                            <DonationSection />
-                        </div>
+                        <DonationSection />
                     </div>
                 ) : loading ? (
                     <div className="flex flex-col items-center justify-center py-40">
