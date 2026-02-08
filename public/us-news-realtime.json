@@ -1,31 +1,6 @@
 [
   {
-    "id": "8638094865577365866",
-    "ticker": "US Market",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "published_at": "2026-02-06T20:09:44Z",
-    "free_tier": {
-      "title": "Palantir는 '정말 상징적'일 수 있습니다. 과대평가되고 위험도가 높은 PLTR 주식은 그렇지 않습니다.",
-      "title_en": "Palantir May Be ‘Truly Iconic.’ Overvalued, High-Risk PLTR Stock Isn’t.",
-      "summary_kr": "Palantir는 '정말 상징적'일 수 있습니다. 과대평가되고 위험도가 높은 PLTR 주식은 그렇지 않습니다.",
-      "link": "https://finance.yahoo.com/news/palantir-may-truly-iconic-overvalued-200944330.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[시황 탐색] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 중립 구간입니다. 주요 변곡점 돌파를 확인하기 전까지는 공격적인 베팅보다는 소량 분할 매매로 대응하는 것이 현명합니다.",
-        "impact_score": 65
-      },
-      "trading_strategy": {
-        "action": "관망",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "68500815997221040",
+    "id": "-1947402259950390442",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": false,
@@ -50,50 +25,25 @@
     }
   },
   {
-    "id": "4009162549604927790",
+    "id": "2167851868374066632",
     "ticker": "US Market",
-    "sentiment": "BEARISH",
+    "sentiment": "NEUTRAL",
     "is_breaking": false,
-    "published_at": "2026-02-06T19:25:18Z",
+    "published_at": "2026-02-06T20:09:44Z",
     "free_tier": {
-      "title": "Apple 주식은 AI 매도 속에서도 바위처럼 안정적입니다: AAPL 주식을 플레이하는 방법",
-      "title_en": "Apple Stock Is Steady as a Rock Amid AI Selloff: How to Play AAPL Stock",
-      "summary_kr": "Apple 주식은 AI 매도 속에서도 바위처럼 안정적입니다: AAPL 주식을 플레이하는 방법",
-      "link": "https://finance.yahoo.com/news/apple-stock-steady-rock-amid-192518495.html",
+      "title": "Palantir는 '정말 상징적'일 수 있습니다. 과대평가되고 위험도가 높은 PLTR 주식은 그렇지 않습니다.",
+      "title_en": "Palantir May Be ‘Truly Iconic.’ Overvalued, High-Risk PLTR Stock Isn’t.",
+      "summary_kr": "Palantir는 '정말 상징적'일 수 있습니다. 과대평가되고 위험도가 높은 PLTR 주식은 그렇지 않습니다.",
+      "link": "https://finance.yahoo.com/news/palantir-may-truly-iconic-overvalued-200944330.html",
       "original_source": "Yahoo Finance"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
+        "summary_kr": "[시황 탐색] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 중립 구간입니다. 주요 변곡점 돌파를 확인하기 전까지는 공격적인 베팅보다는 소량 분할 매매로 대응하는 것이 현명합니다.",
         "impact_score": 69
       },
       "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "8485127543697526843",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06T19:29:49Z",
-    "free_tier": {
-      "title": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
-      "title_en": "Reddit Stock Falls Despite Earnings Beat, $1 Billion Buyback Authorization",
-      "summary_kr": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
-      "link": "https://www.investors.com/news/technology/reddit-stock-rddt-q4-2025-earnings/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[어닝 서프라이즈] 예상치를 상회하는 실적 가이드라인은 펀더멘털의 고성장을 증명합니다. 단순 등락을 떠나 주가 재평가(Re-rating)가 시작되는 구간이므로, 장기적 성장이 기대되는 주도주 중심의 비중 확대 전략을 권장합니다.",
-        "impact_score": 74
-      },
-      "trading_strategy": {
-        "action": "매수",
+        "action": "관망",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }

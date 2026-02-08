@@ -197,38 +197,92 @@ class NaverBlogAutoPoster:
         except Exception as e:
             print(f"Publish failed: {e}")
 
-    def run_auto_posting(self):
-        # Load latest news
-        news_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'public', 'us-news-realtime.json')
-        
-        if not os.path.exists(news_file):
-            print("No news data found.")
-            return
 
-        with open(news_file, 'r', encoding='utf-8') as f:
-            news_data = json.load(f)
+    def load_history(self):
+        history_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'posted_history.json')
+        if os.path.exists(history_path):
+            with open(history_path, 'r', encoding='utf-8') as f:
+                return set(json.load(f))
+        return set()
 
-        if not news_data:
-            print("News list empty.")
-            return
+    def save_history(self, posted_ids):
+        history_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'posted_history.json')
+        with open(history_path, 'w', encoding='utf-8') as f:
+            json.dump(list(posted_ids), f)
 
-        # Pick the first item
-        target_news = news_data[0]
+    def run_scheduler(self):
+        print("🚀 Naver Blog Auto-Poster Scheduler Started!")
+        print("Focus: Breaking News (Impact Score >= 85) & Major Events")
         
-        print(f"Target News: {target_news['free_tier']['title']}")
-        blog_content = self.generate_blog_content(target_news)
-        
-        if blog_content:
-            lines = blog_content.split('\n')
-            title = lines[0].replace('제목:', '').strip()
-            body = '\n'.join(lines[1:])
-            
-            self.login()
-            self.post_to_blog(title, body)
-            
-            # Browser stays open for 10s then close? Or keep open?
-            # self.driver.quit()
+        while True:
+            try:
+                # 1. Load Data
+                news_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'public', 'us-news-realtime.json')
+                posted_ids = self.load_history()
+                
+                if not os.path.exists(news_file):
+                    print("Waiting for news data...")
+                    time.sleep(300)
+                    continue
+
+                with open(news_file, 'r', encoding='utf-8') as f:
+                    news_data = json.load(f)
+
+                # 2. Filter Candidates (High Impact & Not Posted)
+                candidates = []
+                for item in news_data:
+                    # VIP Tier 정보가 없으면 패스
+                    if 'vip_tier' not in item: continue
+                    
+                    impact = item['vip_tier'].get('ai_analysis', {}).get('impact_score', 0)
+                    is_breaking = item.get('is_breaking', False)
+                    news_id = item.get('id')
+
+                    # 조건: 이미 포스팅 안했고, (임팩트 85 이상 OR 속보)
+                    if news_id not in posted_ids and (impact >= 85 or is_breaking):
+                        candidates.append((impact, item))
+
+                # 3. Sort by Impact (Highest first)
+                candidates.sort(key=lambda x: x[0], reverse=True)
+
+                if candidates:
+                    target_score, target_news = candidates[0]
+                    print(f"\n[🔥 BREAKING DETECTED] Score: {target_score} | Title: {target_news['free_tier']['title']}")
+                    
+                    # 4. Generate & Post
+                    blog_content = self.generate_blog_content(target_news)
+                    if blog_content:
+                        lines = blog_content.split('\n')
+                        title = lines[0].replace('제목:', '').strip()
+                        body = '\n'.join(lines[1:])
+                        
+                        # 중요도에 따라 제목에 이모지 추가
+                        if target_score >= 95:
+                            title = "🚨 [긴급속보] " + title
+                        elif target_score >= 90:
+                            title = "⚡ [필독] " + title
+                        
+                        self.login()
+                        self.post_to_blog(title, body)
+                        self.driver.quit() # 메모리 관리를 위해 매번 종료
+                        self.driver = None # 초기화
+                        
+                        # 5. Update History
+                        posted_ids.add(target_news['id'])
+                        self.save_history(posted_ids)
+                        
+                        print(f"✅ Posted & Saved. Sleeping for 30 mins to avoid spamming.")
+                        time.sleep(1800) # 포스팅 후 30분 휴식
+                    else:
+                        print("Content generation failed. Skipping.")
+                else:
+                    print(f"[{datetime.now().strftime('%H:%M')}] No breaking news found. Checking again in 10 mins...")
+                    time.sleep(600) # 10분 대기
+
+            except Exception as e:
+                print(f"[ERROR] Scheduler loop error: {e}")
+                time.sleep(600)
 
 if __name__ == "__main__":
     poster = NaverBlogAutoPoster()
-    poster.run_auto_posting()
+    poster.run_scheduler()
