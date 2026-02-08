@@ -60,7 +60,7 @@ export function DonationSection(props: ComponentProps<"div">) {
                 </div>
 
                 <p className="text-[10px] text-slate-500 mt-4 font-bold uppercase tracking-widest">
-                    클릭하여 계좌번호 복사 (예금주: 정원석)
+                    클릭하여 계좌번호 복사 (예금주: 한희동)
                 </p>
 
                 <div className="mt-6 text-2xl animate-bounce">
