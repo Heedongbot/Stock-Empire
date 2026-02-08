@@ -1,56 +1,6 @@
 [
   {
-    "id": "5013624347012996314",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06T20:15:04Z",
-    "free_tier": {
-      "title": "갤럭시디지털 주가 2억 달러 자사주 매입 승인 후 18% 급등",
-      "title_en": "Galaxy Digital shares jump 18% after company approves $200 million buyback",
-      "summary_kr": "갤럭시디지털 주가 2억 달러 자사주 매입 승인 후 18% 급등",
-      "link": "https://finance.yahoo.com/news/galaxy-digital-shares-jump-18-201504974.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[코부장 전문 의견] 시장의 강력한 매수세가 확인되는 유의미한 시그널입니다. 특히 나스닥 선물 지수의 흐름과 동조화되고 있어, 추세 추종 매매(Trend Following) 전략이 매우 유리한 구간으로 분석됩니다.",
-        "impact_score": 75
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "8343428362934954049",
-    "ticker": "US Market",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06T19:25:16Z",
-    "free_tier": {
-      "title": "계속되는 글로벌 설탕 과잉 전망에 설탕 가격 하락",
-      "title_en": "Sugar Prices Sink on the Outlook for a Global Sugar Glut to Continue",
-      "summary_kr": "계속되는 글로벌 설탕 과잉 전망에 설탕 가격 하락",
-      "link": "https://finance.yahoo.com/news/sugar-prices-sink-outlook-global-192516597.html",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[긴급 시황] 패닉 셀(Panic Sell) 물량이 출회되며 투심이 급격히 얼어붙고 있습니다. 주요 이동평균선이 무너진 상태이므로, 바닥권이 확인될 때까지는 보수적인 관점에서 관망하되, 낙폭 과대주를 리스트업할 시기입니다.",
-        "impact_score": 66
-      },
-      "trading_strategy": {
-        "action": "매도",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "2167851868374066632",
+    "id": "8638094865577365866",
     "ticker": "US Market",
     "sentiment": "NEUTRAL",
     "is_breaking": false,
@@ -65,7 +15,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[시황 탐색] 거시적 불확실성으로 인해 시장이 방향성을 탐색하는 중립 구간입니다. 주요 변곡점 돌파를 확인하기 전까지는 공격적인 베팅보다는 소량 분할 매매로 대응하는 것이 현명합니다.",
-        "impact_score": 67
+        "impact_score": 65
       },
       "trading_strategy": {
         "action": "관망",
@@ -75,7 +25,7 @@
     }
   },
   {
-    "id": "-1947402259950390442",
+    "id": "68500815997221040",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": false,
@@ -90,7 +40,7 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
-        "impact_score": 73
+        "impact_score": 75
       },
       "trading_strategy": {
         "action": "매도",
@@ -100,32 +50,7 @@
     }
   },
   {
-    "id": "-9044569506661215257",
-    "ticker": "US Market",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "published_at": "2026-02-06T19:29:49Z",
-    "free_tier": {
-      "title": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
-      "title_en": "Reddit Stock Falls Despite Earnings Beat, $1 Billion Buyback Authorization",
-      "summary_kr": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
-      "link": "https://www.investors.com/news/technology/reddit-stock-rddt-q4-2025-earnings/?src=A00220&yptr=yahoo",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "summary_kr": "[어닝 서프라이즈] 예상치를 상회하는 실적 가이드라인은 펀더멘털의 고성장을 증명합니다. 단순 등락을 떠나 주가 재평가(Re-rating)가 시작되는 구간이므로, 장기적 성장이 기대되는 주도주 중심의 비중 확대 전략을 권장합니다.",
-        "impact_score": 77
-      },
-      "trading_strategy": {
-        "action": "매수",
-        "target_price": "VIP 전용",
-        "stop_loss": "VIP 전용"
-      }
-    }
-  },
-  {
-    "id": "-8797883839596815727",
+    "id": "4009162549604927790",
     "ticker": "US Market",
     "sentiment": "BEARISH",
     "is_breaking": false,
@@ -140,10 +65,35 @@
     "vip_tier": {
       "ai_analysis": {
         "summary_kr": "[리스크 감지] 유상증자 및 주주가치 희석 소식은 기관들의 이탈 신호입니다. Empire AI는 이를 강력한 하방 변곡점으로 분석하며, 성급한 저가 매수보다는 현금 비중을 늘려 리스크를 선제적으로 관리할 것을 강력 권고합니다.",
-        "impact_score": 65
+        "impact_score": 69
       },
       "trading_strategy": {
         "action": "매도",
+        "target_price": "VIP 전용",
+        "stop_loss": "VIP 전용"
+      }
+    }
+  },
+  {
+    "id": "8485127543697526843",
+    "ticker": "US Market",
+    "sentiment": "BULLISH",
+    "is_breaking": false,
+    "published_at": "2026-02-06T19:29:49Z",
+    "free_tier": {
+      "title": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
+      "title_en": "Reddit Stock Falls Despite Earnings Beat, $1 Billion Buyback Authorization",
+      "summary_kr": "수익 감소에도 불구하고 Reddit 주식 하락, 10억 달러 환매 승인",
+      "link": "https://www.investors.com/news/technology/reddit-stock-rddt-q4-2025-earnings/?src=A00220&yptr=yahoo",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[어닝 서프라이즈] 예상치를 상회하는 실적 가이드라인은 펀더멘털의 고성장을 증명합니다. 단순 등락을 떠나 주가 재평가(Re-rating)가 시작되는 구간이므로, 장기적 성장이 기대되는 주도주 중심의 비중 확대 전략을 권장합니다.",
+        "impact_score": 74
+      },
+      "trading_strategy": {
+        "action": "매수",
         "target_price": "VIP 전용",
         "stop_loss": "VIP 전용"
       }
