@@ -22,7 +22,6 @@ export default function SiteHeader() {
         { id: 'themes', path: '/themes' },
         { id: 'pro_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
-        { id: 'portfolio', path: '/portfolio' },
     ];
 
     return (
