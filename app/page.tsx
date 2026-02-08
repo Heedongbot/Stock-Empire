@@ -17,6 +17,7 @@ import { useAuth } from '@/lib/AuthContext';
 import NewsTeaser from '@/components/NewsTeaser';
 import AdInFeed from '@/components/ads/AdInFeed';
 import LatestNewsInsights from '@/components/LatestNewsInsights';
+import SponsorshipSection from '@/components/SponsorshipSection';
 
 interface AlphaSignal {
   ticker: string;
@@ -99,6 +100,9 @@ export default function Home() {
 
       {/* 📰 투데이 마켓 브리핑 (최신 지표 및 뉴스) - 대체 배치 */}
       <LatestNewsInsights />
+
+      {/* 💸 후원 및 스폰서십 섹션 */}
+      <SponsorshipSection />
 
       {/* Sector Intelligence Section */}
       <section className="max-w-7xl mx-auto px-8 py-10">
