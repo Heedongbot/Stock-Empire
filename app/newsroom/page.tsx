@@ -113,7 +113,7 @@ export default function NewsroomPage() {
                                                             {[...Array(5)].map((_, i) => (
                                                                 <div
                                                                     key={i}
-                                                                    className={`w-2 h-1.5 rounded-sm ${i < (item.vip_tier.ai_analysis.impact_score / 2) ? 'bg-[#00ffbd] shadow-[0_0_8px_#00ffbd]' : 'bg-slate-800'}`}
+                                                                    className={`w-2 h-1.5 rounded-sm ${i < (item.vip_tier.ai_analysis.impact_score / 20) ? 'bg-[#00ffbd] shadow-[0_0_8px_#00ffbd]' : 'bg-slate-800'}`}
                                                                 ></div>
                                                             ))}
                                                         </div>
@@ -132,35 +132,48 @@ export default function NewsroomPage() {
                                                     </div>
                                                 </div>
 
-                                                <div className="bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight">
-                                                    <div className="absolute top-0 right-0 p-2 opacity-10">
-                                                        <TrendingUp className="w-12 h-12" />
-                                                    </div>
-                                                    <div className="flex items-center gap-2 mb-3">
-                                                        <Sparkles className="w-4 h-4 text-[#00ffbd]" />
-                                                        <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
-                                                            Empire Intelligence Report (Unlocked)
-                                                            <span className="w-px h-3 bg-slate-700"></span>
-                                                            <span className="text-[#00ffbd] font-bold">Public Access</span>
-                                                        </span>
-                                                    </div>
-                                                    <p className="text-[14px] text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
-                                                        {item.vip_tier.ai_analysis.summary_kr}
-                                                    </p>
-                                                    <div className="mt-4 pt-4 border-t border-slate-800/50 flex flex-wrap gap-4">
-                                                        <div className="flex flex-col">
-                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Accuracy</span>
-                                                            <span className="text-xs font-black text-white">89.4%</span>
+                                                {/* BLOCKED CONTENT AREA */}
+                                                <div className="relative">
+                                                    {!user && (
+                                                        <div className="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/60 rounded-xl flex flex-col items-center justify-center text-center p-6 border border-slate-700/50">
+                                                            <Lock className="w-8 h-8 text-amber-500 mb-3" />
+                                                            <h3 className="text-lg font-black text-white mb-1 uppercase italic">Private Intelligence</h3>
+                                                            <a href="/sign-in" className="mt-2 px-6 py-2 bg-[#00ffbd] hover:bg-[#00d4ff] text-black font-black uppercase tracking-widest rounded-lg transition-all text-xs">
+                                                                Login to View
+                                                            </a>
                                                         </div>
-                                                        <div className="flex flex-col">
-                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Sentiment</span>
-                                                            <span className={`text-xs font-black ${item.sentiment === 'BULLISH' ? 'text-[#ff4d4d]' : 'text-[#2dbdff]'}`}>
-                                                                {item.sentiment}
+                                                    )}
+
+                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight ${!user ? 'blur-sm select-none opacity-50' : ''}`}>
+                                                        <div className="absolute top-0 right-0 p-2 opacity-10">
+                                                            <TrendingUp className="w-12 h-12" />
+                                                        </div>
+                                                        <div className="flex items-center gap-2 mb-3">
+                                                            <Sparkles className="w-4 h-4 text-[#00ffbd]" />
+                                                            <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
+                                                                Empire Intelligence Report
+                                                                {user && <span className="text-[#00ffbd] font-bold">(Member Access)</span>}
                                                             </span>
                                                         </div>
-                                                        <div className="flex flex-col">
-                                                            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
-                                                            <span className="text-xs font-black text-yellow-500">STABLE</span>
+                                                        <p className="text-[14px] text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
+                                                            {item.vip_tier.ai_analysis.summary_kr}
+                                                        </p>
+
+                                                        <div className="mt-4 pt-4 border-t border-slate-800/50 flex flex-wrap gap-4">
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Accuracy</span>
+                                                                <span className="text-xs font-black text-white">89.4%</span>
+                                                            </div>
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Sentiment</span>
+                                                                <span className={`text-xs font-black ${item.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
+                                                                    {item.sentiment}
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
+                                                                <span className="text-xs font-black text-yellow-500">STABLE</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,10 +187,12 @@ export default function NewsroomPage() {
                                                     >
                                                         VIEW SOURCE <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                                                     </a>
-                                                    <div className="flex items-center gap-3">
-                                                        <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><Share2 className="w-4 h-4" /></button>
-                                                        <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><MessageCircle className="w-4 h-4" /></button>
-                                                    </div>
+                                                    {user && (
+                                                        <div className="flex items-center gap-3">
+                                                            <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><Share2 className="w-4 h-4" /></button>
+                                                            <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><MessageCircle className="w-4 h-4" /></button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         </article>
