@@ -15,7 +15,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 # 환경 변수 로드
-load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'))
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'), override=True)
 
 class KRNewsCrawler:
     def __init__(self):
@@ -120,9 +120,71 @@ class KRNewsCrawler:
                 json.dump(news_list, f, indent=2, ensure_ascii=False)
             print(f"[{datetime.now()}] {len(news_list)}개의 한국 뉴스 분석 완료 및 저장됨.")
 
+            # ------------------------------------------------------------------
+            # [자동 포스팅] 티스토리 블로그 발행
+            # ------------------------------------------------------------------
+            if news_list:
+                try:
+                    # 상대 경로/절대 경로 import 호환성 처리
+                    try:
+                        from crawler.tistory_poster import TistoryAutoPoster
+                    except ImportError:
+                        from tistory_poster import TistoryAutoPoster
+                        
+                    print("[INFO] Starting Tistory Auto-Posting...")
+                    
+                    # 가장 최신 중요 뉴스 1개 선정
+                    top_news = news_list[0]
+                    
+                    # 블로그용 제목 및 본문 생성 (HTML 포맷)
+                    blog_title = f"[Stock Empire] 🚨 긴급: {top_news['free_tier']['title']}"
+                    
+                    # AI 분석 내용이 없을 경우 대비
+                    ai_score = top_news['vip_tier'].get('ai_analysis', {}).get('impact_score', 50)
+                    ai_summary = top_news['vip_tier'].get('ai_analysis', {}).get('summary_kr', 'AI 분석 데이터 없음')
+                    
+                    blog_content = f"""
+                    <h2 style="color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 10px;">📉 시장분석 리포트</h2>
+                    <p>안녕하세요, <strong>Stock Empire</strong>의 인공지능 애널리스트입니다.</p>
+                    <p>현재 시장에서 가장 주목해야 할 뉴스를 분석해 드립니다.</p>
+                    <br>
+                    
+                    <h3 style="background-color: #f8f9fa; padding: 10px;">📰 {top_news['free_tier']['title']}</h3>
+                    <p style="font-size: 16px; line-height: 1.6;">
+                    {top_news['free_tier']['summary_kr']}
+                    </p>
+                    <br>
+                    
+                    <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background-color: #f1f8ff;">
+                        <h4 style="margin-top: 0; color: #0056b3;">🤖 AI 민감도 분석</h4>
+                        <ul style="list-style-type: none; padding-left: 0;">
+                            <li><strong>🎯 영향력 점수:</strong> {ai_score}/100</li>
+                            <li><strong>📢 시장 분위기:</strong> {top_news['sentiment']}</li>
+                            <li><strong>💡 한줄 평:</strong> {ai_summary}</li>
+                        </ul>
+                    </div>
+                    
+                    <br>
+                    <p style="color: #888; font-size: 12px;">※ 본 리포트는 AI에 의해 자동 생성되었으며 투자의 책임은 본인에게 있습니다.</p>
+                    <hr>
+                    <p align="center">
+                        <a href="{top_news['free_tier']['link']}" target="_blank" style="background-color: #0056b3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">원문 기사 보러가기</a>
+                    </p>
+                    """
+                    
+                    # 태그 생성
+                    tags = ["주식", "증시", "코스피", "StockEmpire", "자동포스팅"]
+                    
+                    # 포스팅 실행
+                    poster = TistoryAutoPoster()
+                    poster.post(title=blog_title, content=blog_content, tags=tags)
+                    
+                except Exception as e:
+                    print(f"[ERROR] Auto-posting failed: {e}")
+
         except Exception as e:
             print(f"Error: {e}")
-
+            
 if __name__ == "__main__":
     crawler = KRNewsCrawler()
     crawler.crawl()

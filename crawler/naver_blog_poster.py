@@ -43,8 +43,23 @@ class NaverBlogAutoPoster:
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_argument("--start-maximized")
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
+        
+        # 윈도우 Chrome 경로 명시적 지정
+        user_home = os.path.expanduser("~")
+        paths = [
+            r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+            os.path.join(user_home, r"AppData\Local\Google\Chrome\Application\chrome.exe")
+        ]
+        
+        for p in paths:
+            if os.path.exists(p):
+                chrome_options.binary_location = p
+                print(f"[INFO] Using Chrome binary at: {p}")
+                break
         
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -142,60 +157,149 @@ class NaverBlogAutoPoster:
         except:
             pass
 
-        # 제목 입력
-        print("Writing Title...")
+    def post_to_blog(self, title, content):
+        if not self.driver: self.login()
+
+        print("[INFO] Navigating to Blog Write page...")
+        write_url = f"https://blog.naver.com/{self.naver_id}?Redirect=Write&"
+        self.driver.get(write_url)
+        time.sleep(5)
+
+        # 프레임 전환 (mainFrame)
         try:
-            # 스마트에디터 ONE의 제목 영역 찾기 (class 기반)
-            title_area = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "se-documentTitle"))
+            print("[INFO] Switching to mainFrame...")
+            WebDriverWait(self.driver, 10).until(EC.frame_to_be_available_and_switch_to_it("mainFrame"))
+        except Exception as e:
+            print(f"[ERROR] Failed to switch to mainFrame: {e}")
+            return False
+
+        # 팝업 및 도움말 닫기
+        try:
+            # 팝업 닫기 시도 (여러 종류)
+            popups = [".se-popup-button-cancel", ".se-help-panel-close-button", ".se-help-header-close-button"]
+            for selector in popups:
+                elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                for el in elements:
+                    if el.is_displayed():
+                        self.driver.execute_script("arguments[0].click();", el)
+                        print(f"[INFO] Closed popup: {selector}")
+                        time.sleep(0.5)
+        except:
+            pass
+
+        # 제목 입력
+        print("[INFO] Writing Title...")
+        try:
+            # 발행 단어 유니코드 (발행)
+            PUBLISH_TEXT = "\ubc1c\ud589" 
+            
+            title_area = WebDriverWait(self.driver, 15).until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "se-documentTitle"))
             )
             title_area.click()
+            time.sleep(0.5)
             pyperclip.copy(title)
-            title_area.find_element(By.TAG_NAME, "span").send_keys(Keys.CONTROL, 'v')
+            webdriver.ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+            time.sleep(1)
+            
+            # 제목 칸 탈출 (완전하게)
+            print("[INFO] Exiting title field...")
+            self.driver.execute_script("document.activeElement.blur(); window.getSelection().removeAllRanges();")
             time.sleep(1)
         except Exception as e:
-            print(f"Title input failed: {e}")
+            print(f"[ERROR] Title input failed: {e}")
+            return False
 
         # 본문 입력
-        print("Writing Content...")
+        print("[INFO] Writing Content...")
         try:
-            # 본문 영역 찾기
-            content_area = self.driver.find_element(By.CLASS_NAME, "se-main-container")
-            content_area.click()
+            # 본문 영역 강제 활성화 (정중앙 클릭 + 스페이스)
+            self.driver.execute_script("window.scrollTo(0, 500);")
+            time.sleep(1)
+            # 자바스크립트로 본문 영역 강제 클릭
+            self.driver.execute_script("var el = document.querySelector('.se-main-container'); if(el) el.click();")
+            time.sleep(0.5)
+            webdriver.ActionChains(self.driver).send_keys(Keys.SPACE).perform()
+            time.sleep(1)
             
-            # 내용을 클립보드에 복사해서 붙여넣기 (빠르고 안정적)
             pyperclip.copy(content)
-            
-            # ActionChains 또는 그냥 body에 send_keys
-            # 스마트에디터는 iframe이 아닐 수 있음 (ONE은 div 편집)
-            # 포커스 후 붙여넣기
             webdriver.ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
             time.sleep(3)
             
         except Exception as e:
-            print(f"Content input failed: {e}")
+            print(f"[ERROR] Content input failed: {e}")
+            return False
 
-        # 발행 버튼 클릭
-        print("Publishing...")
+        # 발행 버튼 클릭 (전방위 무차별 타격 로직)
+        def multi_click_publish(label_k):
+            print(f"[INFO] Multi-scanning for '{label_k}'...")
+            script = """
+                var label = arguments[0];
+                var regex = new RegExp(label);
+                // 방해 요소 제거
+                document.querySelectorAll('.se-help-header, .se-popup-close').forEach(el => el.style.display = 'none');
+                
+                var all = Array.from(document.querySelectorAll('button, span, div, a, [role="button"]'));
+                var targets = all.filter(el => {
+                    var text = (el.innerText || el.textContent || "").trim();
+                    var aria = el.getAttribute('aria-label') || "";
+                    return (regex.test(text) || regex.test(aria)) && el.offsetParent !== null;
+                });
+                
+                if (targets.length > 0) {
+                    console.log("[JS] Found " + targets.length + " targets.");
+                    targets.forEach(t => {
+                        try { t.click(); } catch(e) {}
+                        // 마우스 이벤트 시뮬레이션
+                        ['mousedown', 'mouseup', 'click'].forEach(name => {
+                            var ev = new MouseEvent(name, {bubbles: true, cancelable: true, view: window});
+                            t.dispatchEvent(ev);
+                        });
+                    });
+                    return true;
+                }
+                return false;
+            """
+            return self.driver.execute_script(script, label_k)
+
         try:
-            # 1. 상단 '발행' 버튼
-            publish_btn1 = self.driver.find_element(By.CLASS_NAME, "publish_btn") # 클래스명 확인 필요 "publish_btn__m9Khh" 등 동적일 수 있음. 보통 "발행" 텍스트로 찾음
-            # XPath로 '발행' 텍스트를 가진 버튼 찾기
-            publish_btn1 = self.driver.find_element(By.XPATH, "//button[contains(text(), '발행')]")
-            publish_btn1.click()
-            time.sleep(1)
-
-            # 2. 발행 설정 팝업의 하단 '발행' 버튼
-            publish_btn2 = WebDriverWait(self.driver, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'confirm_btn')] | //button[span[text()='발행']]"))
-            )
-            publish_btn2.click()
+            PUBLISH_K = "\ubc1c\ud589"
             
-            print(f"Successfully posted: {title}")
-            time.sleep(5)
+            # 1단계: 발행 버튼 클릭
+            if not multi_click_publish(PUBLISH_K):
+                print("[WARN] 1st button not found, trying backup...")
+                self.driver.execute_script("document.querySelector('button[class*=\"publish\"]').click();")
+            
+            time.sleep(4) 
+
+            # 2단계: 최종 확인 버튼 (팝업 내)
+            print("[INFO] Attempting final confirmation...")
+            multi_click_publish(PUBLISH_K)
+            time.sleep(2)
+            # 엔터 백업
+            webdriver.ActionChains(self.driver).send_keys(Keys.ENTER).perform()
+
+            # 성공 확인 (프레임 탈출 후 URL 체크)
+            self.driver.switch_to.default_content()
+            print("[INFO] Final URL verification...")
+            success = False
+            for _ in range(15):
+                curr_url = self.driver.current_url
+                if "Write" not in curr_url and "blog.naver.com" in curr_url:
+                    print(f"[SUCCESS] Posted successfully!")
+                    success = True
+                    break
+                time.sleep(1)
+            
+            if not success:
+                self.driver.save_screenshot("publish_error.png")
+                raise Exception(f"URL did not change. Current: {self.driver.current_url}")
+            
+            return True
             
         except Exception as e:
-            print(f"Publish failed: {e}")
+            print(f"[ERROR] Publish failed: {e}")
+            return False
 
 
     def load_history(self):
@@ -211,7 +315,7 @@ class NaverBlogAutoPoster:
             json.dump(list(posted_ids), f)
 
     def run_scheduler(self):
-        print("🚀 Naver Blog Auto-Poster Scheduler Started!")
+        print("[START] Naver Blog Auto-Poster Scheduler Started!")
         print("Focus: Breaking News (Impact Score >= 85) & Major Events")
         
         while True:
@@ -247,7 +351,7 @@ class NaverBlogAutoPoster:
 
                 if candidates:
                     target_score, target_news = candidates[0]
-                    print(f"\n[🔥 BREAKING DETECTED] Score: {target_score} | Title: {target_news['free_tier']['title']}")
+                    print(f"\n[BREAKING DETECTED] Score: {target_score} | Title: {target_news['free_tier']['title']}")
                     
                     # 4. Generate & Post
                     blog_content = self.generate_blog_content(target_news)
@@ -256,7 +360,7 @@ class NaverBlogAutoPoster:
                         title = lines[0].replace('제목:', '').strip()
                         body = '\n'.join(lines[1:])
                         
-                        # 중요도에 따라 제목에 이모지 추가
+                        # 중요도에 따라 제목에 이모지 추가 (블로그 제목에는 이모지 가능)
                         if target_score >= 95:
                             title = "🚨 [긴급속보] " + title
                         elif target_score >= 90:
@@ -271,7 +375,7 @@ class NaverBlogAutoPoster:
                         posted_ids.add(target_news['id'])
                         self.save_history(posted_ids)
                         
-                        print(f"✅ Posted & Saved. Sleeping for 30 mins to avoid spamming.")
+                        print(f"[SUCCESS] Posted & Saved. Sleeping for 30 mins to avoid spamming.")
                         time.sleep(1800) # 포스팅 후 30분 휴식
                     else:
                         print("Content generation failed. Skipping.")
@@ -284,7 +388,7 @@ class NaverBlogAutoPoster:
                 time.sleep(600)
 
     def run_test_post(self):
-        print("🧪 Running Test Post...")
+        print("[TEST] Running Test Post...")
         
         # Test Data
         title = "⚡ [TEST] Stock Empire AI Blog Automation System Check"
@@ -306,10 +410,15 @@ class NaverBlogAutoPoster:
         
         try:
             self.login()
-            self.post_to_blog(title, content)
-            print("✅ Test Post Completed Successfully!")
+            result = self.post_to_blog(title, content)
+            
+            if result:
+                print("[SUCCESS] Test Post Completed Successfully!")
+            else:
+                 print("[ERROR] Test Post Failed!")
+
         except Exception as e:
-            print(f"❌ Test Post Failed: {e}")
+            print(f"[ERROR] Test Post Failed: {e}")
         finally:
             if self.driver:
                 self.driver.quit()

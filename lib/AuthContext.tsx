@@ -52,9 +52,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (user.email === '66683300hd@gmail.com') {
             user.role = 'ADMIN';
             user.tier = 'PRO';
-        } else if (user.email === 'lgh425@gmail.com') {
-            user.role = 'USER';
-            user.tier = 'PRO';
         }
     }
 
