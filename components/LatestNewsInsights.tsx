@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Newspaper, Zap, Lock, ArrowRight, PlayCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Newspaper, Zap, Lock, ArrowRight, PlayCircle, Terminal, ChevronRight } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 
 interface NewsItem {
@@ -54,15 +55,23 @@ export default function LatestNewsInsights() {
     return (
         <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20">
             {/* Header */}
-            <div className="flex items-center gap-4 mb-8">
-                <div className="bg-red-500/20 p-3 rounded-xl border border-red-500/30">
-                    <Newspaper className="w-6 h-6 text-red-500" />
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                    <div className="bg-[#00ffbd]/10 p-3 rounded-xl border border-[#00ffbd]/30">
+                        <Terminal className="w-6 h-6 text-[#00ffbd]" />
+                    </div>
+                    <div>
+                        <h2 className="text-3xl font-black text-white italic tracking-tighter">LIVE EMPIRE TERMINAL</h2>
+                        <div className="flex items-center gap-2 mt-1">
+                            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Real-time Market Intelligence</span>
+                        </div>
+                    </div>
                 </div>
-                <h2 className="text-3xl font-black text-white italic tracking-tighter">오늘의 주요 뉴스</h2>
-                <div className="px-3 py-1 bg-slate-800 rounded-full border border-slate-700 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-[#00ffbd] rounded-full animate-pulse"></span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">AI 분석 완료</span>
-                </div>
+
+                <Link href="/newsroom" className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-black uppercase tracking-widest border border-slate-700 hover:border-[#00ffbd]/50 transition-all group">
+                    Enter Terminal <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
             </div>
 
             {/* Grid */}
