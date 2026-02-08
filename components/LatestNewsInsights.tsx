@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Zap, TrendingUp, TrendingDown, Star, AlertTriangle, ChevronRight, Activity } from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
 
 interface NewsItem {
     id: string;
@@ -20,6 +21,7 @@ interface NewsItem {
 }
 
 export default function LatestNewsInsights() {
+    const { user } = useAuth(); // Check auth
     const [news, setNews] = useState<NewsItem[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -60,10 +62,7 @@ export default function LatestNewsInsights() {
     if (loading || news.length === 0) return null;
 
     const currentItem = news[currentIndex];
-    // Extract insight text only: The format is [Empire AI 요약]\nInsight...\n\n[내용 번역]...
-    // We want to show the Insight part prominently.
     const fullSummary = currentItem.vip_tier.ai_analysis.summary_kr || "";
-    // Split by double newline to separate Insight from Translation if possible
     const parts = fullSummary.split('\n\n');
     const insightSection = parts[0] || fullSummary;
     const bodySection = parts.length > 1 ? parts[1] : "";
@@ -76,7 +75,7 @@ export default function LatestNewsInsights() {
                     <Activity className="w-64 h-64 text-white" />
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                <div className="flex flex-col md:flex-row gap-8 items-start relative z-10 text-left">
                     {/* Header / Controls */}
                     <div className="md:w-1/3 w-full">
                         <div className="flex items-center gap-2 mb-4">
@@ -102,46 +101,61 @@ export default function LatestNewsInsights() {
                         </div>
                     </div>
 
-                    {/* Content Card */}
-                    <div className="md:w-2/3 w-full bg-slate-900/50 border border-slate-700/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1 ${currentItem.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500 border border-green-500/20' : currentItem.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'}`}>
-                                {currentItem.sentiment === 'BULLISH' ? <TrendingUp className="w-3 h-3" /> : currentItem.sentiment === 'BEARISH' ? <TrendingDown className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
-                                {currentItem.sentiment}
-                            </span>
-                            <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 flex items-center gap-1">
-                                <Star className="w-3 h-3 fill-blue-400" />
-                                IMPACT {currentItem.vip_tier.ai_analysis.impact_score}
-                            </span>
-                        </div>
-
-                        <h3 className="text-xl md:text-2xl font-bold text-white mb-6 leading-snug">
-                            {currentItem.free_tier.title}
-                        </h3>
-
-                        <div className="space-y-4">
-                            <div className="bg-[#050b14] p-5 rounded-xl border-l-4 border-l-[#00ffbd] border-y border-r border-slate-800">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Zap className="w-4 h-4 text-[#00ffbd] fill-[#00ffbd]" />
-                                    <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest">Empire AI Insight</span>
-                                </div>
-                                <p className="text-sm text-slate-200 font-medium leading-relaxed whitespace-pre-wrap">
-                                    {insightSection.replace(/\[Empire AI 요약\]/g, '').trim()}
+                    {/* Content Card (Blurred if not logged in) */}
+                    <div className="md:w-2/3 w-full relative">
+                        {!user && (
+                            <div className="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/60 rounded-2xl flex flex-col items-center justify-center text-center p-6 border border-slate-700/50">
+                                <AlertTriangle className="w-12 h-12 text-amber-500 mb-4" />
+                                <h3 className="text-xl font-black text-white mb-2 uppercase italic">Members Only Analysis</h3>
+                                <p className="text-slate-400 text-xs font-medium mb-6 max-w-xs">
+                                    시장 핵심 분석은 회원에게만 제공됩니다. <br />지금 로그인하여 1%의 정보를 확인하세요.
                                 </p>
+                                <a href="/sign-in" className="px-8 py-3 bg-[#00ffbd] hover:bg-[#00d4ff] text-black font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#00ffbd]/20">
+                                    Login to Unlock
+                                </a>
+                            </div>
+                        )}
+
+                        <div className={`bg-slate-900/50 border border-slate-700/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-all ${!user ? 'blur-sm opacity-50 select-none' : ''}`}>
+                            <div className="flex items-center gap-3 mb-4">
+                                <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1 ${currentItem.sentiment === 'BULLISH' ? 'bg-green-500/10 text-green-500 border border-green-500/20' : currentItem.sentiment === 'BEARISH' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'}`}>
+                                    {currentItem.sentiment === 'BULLISH' ? <TrendingUp className="w-3 h-3" /> : currentItem.sentiment === 'BEARISH' ? <TrendingDown className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
+                                    {currentItem.sentiment}
+                                </span>
+                                <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 flex items-center gap-1">
+                                    <Star className="w-3 h-3 fill-blue-400" />
+                                    IMPACT {currentItem.vip_tier.ai_analysis.impact_score}
+                                </span>
                             </div>
 
-                            {bodySection && (
-                                <div className="pl-4 border-l border-slate-800">
-                                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
-                                        {bodySection.replace(/\[내용 번역\]/g, '').trim()}
+                            <h3 className="text-xl md:text-2xl font-bold text-white mb-6 leading-snug">
+                                {currentItem.free_tier.title}
+                            </h3>
+
+                            <div className="space-y-4">
+                                <div className="bg-[#050b14] p-5 rounded-xl border-l-4 border-l-[#00ffbd] border-y border-r border-slate-800">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Zap className="w-4 h-4 text-[#00ffbd] fill-[#00ffbd]" />
+                                        <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest">Empire AI Insight</span>
+                                    </div>
+                                    <p className="text-sm text-slate-200 font-medium leading-relaxed whitespace-pre-wrap">
+                                        {insightSection.replace(/\[Empire AI 요약\]/g, '').trim()}
                                     </p>
                                 </div>
-                            )}
-                        </div>
 
-                        <div className="mt-6 flex justify-end">
-                            <div className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">
-                                Analyzing Source: {currentItem.id.substring(0, 8)}...
+                                {bodySection && (
+                                    <div className="pl-4 border-l border-slate-800">
+                                        <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+                                            {bodySection.replace(/\[내용 번역\]/g, '').trim()}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="mt-6 flex justify-end">
+                                <div className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">
+                                    Analyzing Source: {currentItem.id.substring(0, 8)}...
+                                </div>
                             </div>
                         </div>
                     </div>
