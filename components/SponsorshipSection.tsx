@@ -26,10 +26,10 @@ export default function SponsorshipSection() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+
                         <a
-                            href="https://toss.me/wonseokjung"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); alert("후원 링크를 준비 중입니다. 감사합니다!"); }}
                             className="group relative px-8 py-5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl text-black font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_30px_rgba(245,158,11,0.3)] flex items-center justify-center gap-3"
                         >
                             <Coffee className="w-5 h-5 group-hover:-rotate-12 transition-transform" />
