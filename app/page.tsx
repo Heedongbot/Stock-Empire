@@ -36,8 +36,26 @@ export default function Home() {
   const t = translations[lang];
   const { user } = useAuth();
 
+  const [marketData, setMarketData] = useState<Record<string, { price: number; change: number }>>({});
   const [signals, setSignals] = useState<AlphaSignal[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Fetch Market Data for Sectors
+  useEffect(() => {
+    const fetchMarketData = async () => {
+      const tickers = ['NVDA', 'MSFT', 'PLTR', 'TSLA', 'RIVN', 'ENPH', 'AMD', 'AVGO', 'INTC', 'COIN', 'PYPL', 'SQ'].join(',');
+      try {
+        const res = await fetch(`/api/stock-price?tickers=${tickers}`);
+        if (res.ok) {
+          const data = await res.json();
+          setMarketData(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch market data", e);
+      }
+    };
+    fetchMarketData();
+  }, []);
 
   // 알파 시그널 페칭 (Admin 전용으로 내부 필터링은 API에서도 하겠지만 UI에서도 처리)
   useEffect(() => {
@@ -68,9 +86,7 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="relative pt-20 pb-40 overflow-hidden">
-        {/* EVENT BANNER: 전면 무료화 공지 */}
-
-
+        {/* HERO BACKGROUND & CONTENT */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-radial from-[#00ffbd]/10 via-transparent to-transparent opacity-50 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-8 relative z-10 text-center mt-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-[10px] font-black tracking-widest uppercase text-[#00ffbd] mb-8 animate-fade-in">
@@ -122,7 +138,7 @@ export default function Home() {
           {[
             { id: 'ai-revolution', name: 'AI 혁명', icon: Cpu, color: 'from-purple-600/20 to-indigo-600/5', tickers: ['NVDA', 'MSFT', 'PLTR'] },
             { id: 'ev-energy', name: 'EV & 클린 에너지', icon: Zap, color: 'from-green-600/20 to-emerald-600/5', tickers: ['TSLA', 'RIVN', 'ENPH'] },
-            { id: 'semiconductors', name: '반도체 가이츠', icon: ActivityIcon, color: 'from-blue-600/20 to-cyan-600/5', tickers: ['NVDA', 'AMD', 'AVGO'] },
+            { id: 'semiconductors', name: '반도체 가이츠', icon: ActivityIcon, color: 'from-blue-600/20 to-cyan-600/5', tickers: ['AMD', 'AVGO', 'INTC'] }, // Fixed duplicate NVDA in logic usually, but OK here
             { id: 'fintech-crypto', name: '핀테크 & 크립토', icon: Milestone, color: 'from-orange-600/20 to-amber-600/5', tickers: ['COIN', 'PYPL', 'SQ'] }
           ].map((theme, i) => (
             <Link
@@ -132,9 +148,27 @@ export default function Home() {
             >
               <theme.icon className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform" />
               <h3 className="text-xl font-black text-white uppercase italic mb-4 group-hover:text-[#00ffbd]">{theme.name}</h3>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {theme.tickers.map(t => <span key={t} className="text-[9px] font-black text-slate-500">{t}</span>)}
+
+              <div className="space-y-3 mb-8">
+                {theme.tickers.map(t => {
+                  const data = marketData[t];
+                  const isUp = data?.change >= 0;
+                  return (
+                    <div key={t} className="flex items-center justify-between text-xs bg-black/20 p-2 rounded-lg">
+                      <span className="font-bold text-slate-300">{t}</span>
+                      {data ? (
+                        <div className={`flex items-center gap-1 font-black ${isUp ? 'text-[#00ffbd]' : 'text-[#ff4d4d]'}`}>
+                          <span>{data.price.toFixed(2)}</span>
+                          <span className="text-[10px] opacity-80">({data.change > 0 ? '+' : ''}{data.change.toFixed(2)}%)</span>
+                        </div>
+                      ) : (
+                        <span className="text-slate-600 animate-pulse">...</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
+
               <div className="mt-auto text-[10px] font-black text-slate-500 uppercase group-hover:text-white transition-colors">분석 리포트 보기 →</div>
             </Link>
           ))}
