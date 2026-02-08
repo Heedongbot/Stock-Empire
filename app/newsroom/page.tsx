@@ -144,7 +144,7 @@ export default function NewsroomPage() {
                                                             <span className="text-[#00ffbd] font-bold">Public Access</span>
                                                         </span>
                                                     </div>
-                                                    <p className="text-[14px] text-slate-200 leading-relaxed font-medium">
+                                                    <p className="text-[14px] text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
                                                         {item.vip_tier.ai_analysis.summary_kr}
                                                     </p>
                                                     <div className="mt-4 pt-4 border-t border-slate-800/50 flex flex-wrap gap-4">
