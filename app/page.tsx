@@ -149,7 +149,7 @@ export default function Home() {
         <AdInFeed />
       </div>
 
-      <NewsTeaser lang={lang} openPayment={() => { }} />
+
 
       {/* Stats Summary Area */}
       <section className="py-24 px-8 max-w-7xl mx-auto text-center">
