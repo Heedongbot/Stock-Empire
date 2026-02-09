@@ -337,6 +337,18 @@ class TistoryAutoPoster:
 
             print(f"[INFO] Current URL: {self.driver.current_url}")
 
+            # [추가] 임시저장 경고창 처리 (이어서 작성하시겠습니까?)
+            try:
+                WebDriverWait(self.driver, 3).until(EC.alert_is_present())
+                alert = self.driver.switch_to.alert
+                alert_text = alert.text
+                print(f"[INFO] 임시저장 알림 감지: {alert_text[:30]}...")
+                alert.dismiss()  # "아니요" 클릭 (새로 작성)
+                print("[INFO] 임시저장 무시, 새 글 작성 시작")
+                time.sleep(2)
+            except:
+                pass  # 알림 없으면 그냥 진행
+
             # 1. 제목 입력 (팝업 처리 포함)
             print("[INFO] Clearing potential blocking layers...")
             
