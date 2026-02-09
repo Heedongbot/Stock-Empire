@@ -157,20 +157,33 @@ class TistoryAutoPoster:
             self.driver.get(write_url)
             time.sleep(3)
 
-            # 1. 제목 입력
-            title_input = WebDriverWait(self.driver, 15).until(
-                EC.element_to_be_clickable((By.ID, "title-field"))
-            )
+            # 1. 제목 입력 (더 길게 대기)
+            print("[INFO] Waiting for editor to load...")
+            try:
+                title_input = WebDriverWait(self.driver, 30).until(
+                    EC.element_to_be_clickable((By.ID, "title-field"))
+                )
+            except Exception as e:
+                print("[WARN] title-field not clickable, trying fallback selector...")
+                title_input = WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, "input[placeholder*='제목'], #title-field"))
+                )
+            
             title_input.clear()
             title_input.send_keys(title)
-            time.sleep(1)
-
+            print("[INFO] Title entered.")
+            time.sleep(2)
+            
             # 2. 태그 입력
             if tags:
-                tag_input = self.driver.find_element(By.ID, "tag-field")
-                tag_input.send_keys(tags)
-                tag_input.send_keys(Keys.ENTER)
-                time.sleep(1)
+                try:
+                    tag_input = self.driver.find_element(By.ID, "tag-field")
+                    tag_input.send_keys(tags)
+                    tag_input.send_keys(Keys.ENTER)
+                    time.sleep(1)
+                    print("[INFO] Tags entered.")
+                except:
+                    print("[WARN] Could not find tag-field, skipping tags.")
 
             # 3. 본문 입력 (에디터 프레임 전환 필요할 수 있음)
             try:
