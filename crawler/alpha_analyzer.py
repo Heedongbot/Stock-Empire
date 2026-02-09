@@ -46,7 +46,7 @@ class AlphaAnalyzer:
                 return None
                 
             data = res.json()
-            chart_data = data['result'][0]
+            chart_data = data['chart']['result'][0]
             quotes = chart_data['indicators']['quote'][0]
             timestamps = chart_data['timestamp']
             
