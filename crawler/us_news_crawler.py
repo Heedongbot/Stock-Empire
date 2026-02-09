@@ -264,11 +264,21 @@ class StockNewsCrawler:
                 
                 tags = ["미국주식", "나스닥", "S&P500", "StockEmpire", "AI투자"]
                 poster = TistoryAutoPoster()
-                poster.post(title=blog_title, content=blog_content, tags=tags)
+                poster.setup_driver()
                 
-                self.posted_ids.add(target_news['id'])
-                self._save_history()
-                self.daily_post_count += 1
+                login_success = poster.login()
+                if login_success:
+                    if poster.post(title=blog_title, content=blog_content, tags=",".join(tags)):
+                        self.posted_ids.add(target_news['id'])
+                        self._save_history()
+                        self.daily_post_count += 1
+                        print(f"[SUCCESS] Tistory post created for: {title_kr}")
+                    else:
+                        print("[ERROR] Tistory post method failed.")
+                else:
+                    print("[ERROR] Tistory login failed. Skipping post.")
+                
+                poster.close()
             except Exception as e:
                 print(f"[ERROR] US Auto-posting failed: {e}")
 
