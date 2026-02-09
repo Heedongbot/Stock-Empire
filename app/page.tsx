@@ -47,6 +47,15 @@ export default function Home() {
     setScanning(true);
     try {
       const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
+      const contentType = res.headers.get("content-type");
+
+      if (!res.ok || !contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        console.error("Analysis API failed:", text);
+        alert(`분석 에러 (${res.status}): API KEY 설정이 필요합니다.`);
+        return;
+      }
+
       const data = await res.json();
       if (data.error) {
         alert(data.error);
@@ -56,10 +65,15 @@ export default function Home() {
       setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
     } catch (e) {
       console.error("Deep Scan failed", e);
+      alert("연결 오류가 발생했습니다.");
     } finally {
       setScanning(false);
     }
   };
+
+  const filteredSignals = searchTerm
+    ? signals.filter(s => s.ticker.toLowerCase().includes(searchTerm.toLowerCase()) || s.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    : signals.slice(0, 4);
 
   // Fetch Market Data for Sectors
   useEffect(() => {
@@ -186,10 +200,24 @@ export default function Home() {
               <div key={i} className="min-w-[300px] h-64 bg-slate-900/30 border border-slate-800 rounded-3xl animate-pulse" />
             ))}
           </div>
+        ) : filteredSignals.length === 0 ? (
+          <div className="py-20 text-center bg-slate-900/20 border border-slate-800/50 rounded-[3rem]">
+            <Search className="w-12 h-12 text-slate-800 mx-auto mb-6" />
+            <h3 className="text-xl font-black text-white italic uppercase mb-4">No Signals Found</h3>
+            <p className="text-slate-500 text-sm font-bold uppercase tracking-widest max-w-md mx-auto mb-8">
+              "{searchTerm}" 에 대한 로컬 분석 데이터가 없습니다. <br />
+              상단의 <span className="text-[#00ffbd]">Deep Scan</span> 버튼을 눌러보세요!
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {signals.slice(0, 4).map((sig, idx) => (
-              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl">
+            {filteredSignals.map((sig, idx) => (
+              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl relative overflow-hidden">
+                {(sig as any).is_real_time && (
+                  <div className="absolute top-0 left-0 px-3 py-1 bg-[#00ffbd] text-black text-[8px] font-black uppercase tracking-tighter rounded-br-lg z-10 animate-pulse">
+                    Live Analyzed
+                  </div>
+                )}
                 <div className="flex justify-between items-start mb-6">
                   <div className="px-2 py-1 bg-slate-950 border border-slate-800 rounded text-[10px] font-black text-white">{sig.ticker}</div>
                   <div className={`text-[10px] font-black uppercase tracking-widest ${sig.sentiment === 'BULLISH' ? 'text-[#00ffbd]' : 'text-[#ff4d4d]'}`}>

@@ -136,7 +136,10 @@ function VVIPAlphaContent() {
                             <div key={i} className="h-[450px] bg-slate-900/40 border border-slate-800 rounded-[2.5rem] animate-pulse"></div>
                         ))
                     ) : (
-                        signals.map((sig) => (
+                        (searchTerm
+                            ? signals.filter(s => s.ticker.toLowerCase().includes(searchTerm.toLowerCase()) || s.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                            : signals
+                        ).map((sig) => (
                             <div key={sig.id} className="group relative bg-[#0a0f1e] border border-slate-800/80 rounded-[2.5rem] p-8 hover:border-[#00ffbd]/30 transition-all duration-500 hover:translate-y-[-8px] shadow-2xl overflow-hidden">
                                 {!user && (
                                     <div className="absolute inset-0 z-30 backdrop-blur-md bg-slate-900/40 flex flex-col items-center justify-center p-8 text-center">

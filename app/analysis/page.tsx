@@ -46,6 +46,15 @@ function AnalysisContent() {
         setScanning(true);
         try {
             const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
+            const contentType = res.headers.get("content-type");
+
+            if (!res.ok || !contentType || !contentType.includes("application/json")) {
+                const text = await res.text();
+                console.error("Analysis API failed:", text);
+                alert(`분석 서버 에러 (${res.status}): 환경 변수(API KEY) 설정이 완료되었는지 확인해주세요.`);
+                return;
+            }
+
             const data = await res.json();
             if (data.error) {
                 alert(data.error);
@@ -56,7 +65,7 @@ function AnalysisContent() {
             setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
         } catch (e) {
             console.error("Deep Scan failed", e);
-            alert("분석 서버 연결에 실패했습니다.");
+            alert("연결 오류: 인터넷 연결이나 서버 상태를 확인해주세요.");
         } finally {
             setScanning(false);
         }

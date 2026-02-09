@@ -7,8 +7,17 @@ import path from 'path';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    if (!apiKey) {
+        return NextResponse.json({
+            error: 'OpenAI API 키가 설정되지 않았습니다. Vercel 환경 변수를 확인해주세요.',
+            code: 'MISSING_API_KEY'
+        }, { status: 500 });
+    }
+
     const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
+        apiKey: apiKey,
     });
 
     const { searchParams } = new URL(request.url);
@@ -21,7 +30,16 @@ export async function GET(request: Request) {
     try {
         // 1. Fetch live price from Yahoo Finance
         const priceUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${ticker}`;
-        const priceRes = await fetch(priceUrl);
+        const priceRes = await fetch(priceUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        });
+
+        if (!priceRes.ok) {
+            throw new Error(`Yahoo Finance API error: ${priceRes.status}`);
+        }
+
         const priceData = await priceRes.json();
 
         let currentPrice = 0;
