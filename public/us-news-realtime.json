@@ -1,10 +1,10 @@
 [
   {
-    "id": "yh_-1676839441703517609",
-    "timestamp": "2026-02-09T10:53:44.935282",
+    "id": "yh_-8247037507583079458",
+    "timestamp": "2026-02-09T11:02:58.865771",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BULLISH",
     "is_breaking": true,
     "free_tier": {
       "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
@@ -13,36 +13,17 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주 인플레이션 데이터와 1월 작업 보고서 지연은 주식 시장에 큰 영향을 미칠 수 있는 주요 경제 지표로, 투자자들은 이에 따른 시장 반응을 면밀히 주시해야 합니다.",
+        "summary_kr": "이번 주 발표될 인플레이션 데이터와 지연된 1월 고용 보고서는 주식 시장의 큰 방향성을 결정할 중요한 요소이며, 특히 금리 정책에 중대한 영향을 미칠 수 있습니다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_-4147009941435261056",
-    "timestamp": "2026-02-09T10:53:52.421312",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/this-probably-seems-overdone-wall-street-strategists-weigh-in-on-software-stock-sell-off-160003877.html",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "'아마도 지나친 것 같다': 월스트리트 전략가들은 소프트웨어 주식 매각에 무게를 두고 있다",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 70,
-        "summary_kr": "소프트웨어 주식의 패닉 매도는 경기 불확실성을 반영하며, 이는 투자자들의 신뢰를 저하시키고 자금의 유출을 초래할 수 있다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_-228004277053579952",
-    "timestamp": "2026-02-09T10:54:01.530424",
+    "id": "yh_3628629468481130714",
+    "timestamp": "2026-02-09T11:03:16.326617",
     "source": "Yahoo Finance",
     "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-50000-apple-boeing-jpmorgan-ai-stocks/?src=A00220&yptr=yahoo",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BULLISH",
     "is_breaking": false,
     "free_tier": {
       "title": "다우존스 선물 상승; 구매 영역에서 Apple, Boeing, AI 주식으로 다우가 50K를 넘어섰습니다. 하지만 시장은 여전히 ​​분열되어 있습니다.",
@@ -50,8 +31,8 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "현재 시장은 다양한 주식들이 매수 구간에 있지만, 전체적으로는 양극화된 모습으로 보입니다.",
+        "impact_score": 85,
+        "summary_kr": "애플, 보잉 및 AI 주식이 매수 영역에 들어서는 가운데 다우가 5만을 초과했으며, 이는 투자자들이 기회를 엿보는 긍정적인 신호입니다.",
         "is_indicator": false
       }
     }
