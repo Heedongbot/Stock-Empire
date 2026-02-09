@@ -14,10 +14,10 @@ def main():
     print("=" * 60)
 
     # 1. US News Crawler (with Tistory Auto-Posting)
-    us_crawler = run_process("python crawler/us_news_crawler.py", "US News Crawler")
+    us_crawler = run_process(f"{sys.executable} crawler/us_news_crawler.py", "US News Crawler")
     
     # 2. VVIP Alpha Analyzer (Real-time Signal Detection)
-    alpha_analyzer = run_process("python crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
+    alpha_analyzer = run_process(f"{sys.executable} crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
     
     print("\n[SUCCESS] All Engines Launched! 🚀")
     print("The system is now autonomously monitoring the global market.")
@@ -29,11 +29,11 @@ def main():
             # Check if processes are alive
             if us_crawler.poll() is not None:
                 print("[WARN] US News Crawler stopped. Restarting...")
-                us_crawler = run_process("python crawler/us_news_crawler.py", "US News Crawler")
+                us_crawler = run_process(f"{sys.executable} crawler/us_news_crawler.py", "US News Crawler")
             
             if alpha_analyzer.poll() is not None:
                 print("[WARN] VVIP Alpha Analyzer stopped. Restarting...")
-                alpha_analyzer = run_process("python crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
+                alpha_analyzer = run_process(f"{sys.executable} crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
                 
     except KeyboardInterrupt:
         print("\n[INFO] Shutting down all engines...")
