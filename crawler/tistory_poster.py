@@ -207,10 +207,11 @@ class TistoryAutoPoster:
                 print("[INFO] 4단계: 인증 정보 제출 완료. 리다이렉트 대기 중...")
                 
                 # 7. 성공 확인 (로그인 후 티스토리 홈 또는 관리자로 돌아오는지)
+                print("[INFO] 5단계: 폰 인증 대기 중... (최대 2분 기다립니다)")
                 start_time = time.time()
-                while time.time() - start_time < 60:
+                while time.time() - start_time < 120:
                     curr_url = self.driver.current_url
-                    print(f"[DEBUG] Login URL: {curr_url}")
+                    print(f"[DEBUG] Current URL: {curr_url}")
                     
                     # 카카오 보안/확인 페이지 처리
                     if "kakao.com" in curr_url:
