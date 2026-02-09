@@ -1,29 +1,10 @@
 [
   {
-    "id": "yh_1420248106154709481",
-    "timestamp": "2026-02-09T10:37:21.130938",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/the-white-house-says-it-wants-a-strong-us-dollar-investors-are-still-keeping-their-distance-140014369.html",
-    "sentiment": "BEARISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "백악관은 미국 달러 강세를 원한다고 밝혔습니다. 투자자들은 여전히 ​​거리를 두고 있다.",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "달러 강세가 투자 심리를 위축시켜, 기술주와 대형주 같은 민감한 주식들의 변동성에 영향을 줄 수 있다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_-6787593037033848900",
-    "timestamp": "2026-02-09T10:37:26.108191",
+    "id": "yh_518152230855131498",
+    "timestamp": "2026-02-09T10:44:53.446528",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BULLISH",
     "is_breaking": true,
     "free_tier": {
       "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
@@ -32,14 +13,14 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 인플레이션 데이터와 지연된 1월 고용 보고서는 주식 시장의 주요 방향성을 좌우할 수 있는 중요한 내용입니다.",
+        "summary_kr": "이번 주 물가 인플레이션 데이터와 1월 고용 보고서는 주식 가격에 큰 영향을 미칠 것으로 보이며, 경제 회복의 신호를 주기 때문이다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_9112737640363491912",
-    "timestamp": "2026-02-09T10:37:33.027934",
+    "id": "yh_-2766066325405700838",
+    "timestamp": "2026-02-09T10:45:00.483137",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/this-probably-seems-overdone-wall-street-strategists-weigh-in-on-software-stock-sell-off-160003877.html",
     "sentiment": "BEARISH",
@@ -50,15 +31,15 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 70,
-        "summary_kr": "소프트웨어 주식의 급락은 시장의 심리를 반영하며, 투자자들은 기술 주식에 대한 신뢰를 재고해야 할 상황입니다.",
+        "impact_score": 75,
+        "summary_kr": "소프트웨어 주가 폭락은 시장의 과열을 반영하며, 투자자들은 향후 기술주에 대한 재평가가 필요할 것이다.",
         "is_indicator": false
       }
     }
   },
   {
-    "id": "yh_4800293034435221089",
-    "timestamp": "2026-02-09T10:37:40.677128",
+    "id": "yh_879054738460051581",
+    "timestamp": "2026-02-09T10:45:10.382004",
     "source": "Yahoo Finance",
     "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-50000-apple-boeing-jpmorgan-ai-stocks/?src=A00220&yptr=yahoo",
     "sentiment": "BULLISH",
@@ -69,27 +50,27 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 90,
-        "summary_kr": "미국 시장의 지표인 다우지수가 50K를 돌파하며, 애플과 보잉 같은 대기업 주식이 매수 구역에 들어옴에 따라 본격적인 상승세를 기대할 수 있다.",
+        "impact_score": 85,
+        "summary_kr": "애플, 보잉 및 AI 주식이 매수 구역에 있다는 것과는 별개로 시장이 여전히 분열되어 있어 투자자들은 신중해야 한다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_6345431291683773563",
-    "timestamp": "2026-02-09T10:37:45.756659",
+    "id": "yh_-3932524674945925204",
+    "timestamp": "2026-02-09T10:45:17.571004",
     "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/jefferies-reiterates-buy-boeing-company-051306767.html",
+    "link": "https://finance.yahoo.com/news/citigroup-lifts-price-target-rtx-051309925.html",
     "sentiment": "BULLISH",
     "is_breaking": false,
     "free_tier": {
-      "title": "Jefferies, 4분기 실적에 이어 Boeing Company(BA)에 대한 매수 재확인",
+      "title": "씨티그룹, RTX Corporation(RTX)의 목표 가격을 238달러로 상향 조정하고 매수 등급 유지",
       "summary_kr": ""
     },
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 70,
-        "summary_kr": "제프리의 매수 재진술은 보잉의 긍정적인 분기 실적이 투자자 신뢰를 높이고 주가 상승을 유도할 수 있음을 나타냅니다.",
+        "summary_kr": "시티그룹이 RTX의 목표 주가를 상향 조정한 것은 주식 투자자들에게 긍정적인 신호로 작용할 수 있습니다.",
         "is_indicator": false
       }
     }
