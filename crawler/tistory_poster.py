@@ -517,29 +517,56 @@ class TistoryAutoPoster:
             print("[INFO] Clicking Publish (Step 1: Open Layer)...")
             try:
                 # Step 1: 발행 레이어 열기
-                try:
-                    publish_btn = WebDriverWait(self.driver, 10).until(
-                        EC.element_to_be_clickable((By.ID, "publish-layer-btn"))
-                    )
-                    self.driver.execute_script("arguments[0].click();", publish_btn)
-                except:
-                    # JS 폴백
-                    self.driver.execute_script("document.getElementById('publish-layer-btn').click();")
+                layer_btn_script = """
+                    var selectors = ["#publish-layer-btn", ".btn_publish", "button.btn_g", "//button[contains(text(), '완료')]"];
+                    for(var s of selectors) {
+                        var el = s.startsWith('//') ? 
+                            document.evaluate(s, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue :
+                            document.querySelector(s);
+                        if(el && el.innerText.includes('완료') || (el && el.id === 'publish-layer-btn')) {
+                            el.click();
+                            return true;
+                        }
+                    }
+                    // Fallback to any button with "완료" text
+                    var btns = document.querySelectorAll('button');
+                    for(var b of btns) { if(b.innerText.includes('완료')) { b.click(); return true; } }
+                    return false;
+                """
+                if not self.driver.execute_script(layer_btn_script):
+                    # Python fallback
+                    try:
+                        p_btn = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "publish-layer-btn")))
+                        self.driver.execute_script("arguments[0].click();", p_btn)
+                    except: pass
                 
-                time.sleep(2)
+                time.sleep(3)
                 print("[INFO] Publish layer opened. Step 2: Click final publish...")
                 
                 # Step 2: 최종 발행 버튼 클릭
-                try:
-                    final_btn = WebDriverWait(self.driver, 10).until(
-                        EC.element_to_be_clickable((By.ID, "publish-btn"))
-                    )
-                    self.driver.execute_script("arguments[0].click();", final_btn)
-                except:
-                    # JS 폴백
-                    self.driver.execute_script("document.getElementById('publish-btn').click();")
+                final_publish_script = """
+                    var selectors = ["#publish-btn", ".btn_confirm", "button.btn_g.highlight", "//button[contains(text(), '발행')]"];
+                    for(var s of selectors) {
+                        var el = s.startsWith('//') ? 
+                            document.evaluate(s, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue :
+                            document.querySelector(s);
+                        if(el) {
+                            el.click();
+                            return true;
+                        }
+                    }
+                    // Fallback to any button with "발행" text
+                    var btns = document.querySelectorAll('button');
+                    for(var b of btns) { if(b.innerText.includes('발행')) { b.click(); return true; } }
+                    return false;
+                """
+                if not self.driver.execute_script(final_publish_script):
+                    try:
+                        f_btn = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "publish-btn")))
+                        self.driver.execute_script("arguments[0].click();", f_btn)
+                    except: pass
                 
-                time.sleep(3)
+                time.sleep(5)
                 print("[SUCCESS] Post published! Check your blog!")
                 return True
             except Exception as e:
