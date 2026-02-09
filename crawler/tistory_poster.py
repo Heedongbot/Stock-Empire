@@ -12,10 +12,9 @@ import os
 # ==============================================================================
 # [설정] 티스토리 정보
 # ==============================================================================
-TISTORY_ID = "66683300hd@gmail.com"
-TISTORY_PW = "gmlehd05"
-BLOG_URL = "https://stock-empire.tistory.com"
-# ==============================================================================
+TISTORY_ID = os.getenv("TISTORY_ID")
+TISTORY_PW = os.getenv("TISTORY_PW")
+TISTORY_BLOG_NAME = os.getenv("TISTORY_BLOG_NAME")
 
 class TistoryAutoPoster:
     def __init__(self):
@@ -24,7 +23,7 @@ class TistoryAutoPoster:
     def setup_driver(self):
         print("[INFO] Setting up Headless Chrome Driver for Linux...")
         options = Options()
-        options.add_argument("--headless=new") # 리눅스 서버용 무인 모드
+        options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
@@ -40,102 +39,63 @@ class TistoryAutoPoster:
             self.driver = webdriver.Chrome(options=options)
 
     def login(self):
-        if not self.driver: self.setup_driver()
-        
-        print(f"[INFO] Logging in with {TISTORY_ID}...")
-        self.driver.get("https://www.tistory.com/auth/login")
-        time.sleep(2)
-        
+        print("[INFO] Logging in to Tistory...")
         try:
-            # 1. '카카오계정으로 로그인' 버튼 클릭 (노란 버튼)
-            try:
-                kakao_login_btn = WebDriverWait(self.driver, 5).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, ".link_kakao_id, .btn_login"))
-                )
-                kakao_login_btn.click()
-                print("[INFO] Clicked 'Login with Kakao' button.")
-            except:
-                print("[INFO] Direct login page or button not found.")
-
-            # 2. 카카오 로그인 폼 입력
-            id_input = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.NAME, "loginId"))
-            )
-            id_input.clear()
-            id_input.send_keys(TISTORY_ID)
+            self.driver.get("https://www.tistory.com/auth/login")
+            time.sleep(2)
             
+            # 카카오 로그인 버튼 클릭 (일반적으로 카카오 계정 사용)
+            kakao_btn = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "btn_login.link_kakao"))
+            )
+            kakao_btn.click()
+            time.sleep(2)
+            
+            # 아이디/비번 입력
+            id_input = WebDriverWait(self.driver, 10).until(EC.presence_of_element_to_be_clickable((By.NAME, "loginId")))
             pw_input = self.driver.find_element(By.NAME, "password")
-            pw_input.clear()
+            
+            id_input.send_keys(TISTORY_ID)
             pw_input.send_keys(TISTORY_PW)
             pw_input.send_keys(Keys.ENTER)
             
-            # 3. 로그인 완료 대기 (URL 변화 확인)
-            print("[INFO] Waiting for login completion...")
-            WebDriverWait(self.driver, 30).until(
-                lambda d: "auth/login" not in d.current_url and "kakao.com" not in d.current_url
-            )
-            
-            # 메인 페이지 로딩 대기
-            time.sleep(3)
-            print(f"[SUCCESS] Login successful! Current URL: {self.driver.current_url}")
+            time.sleep(5) # 로그인 처리 대기
+            print("[INFO] Login sequence completed.")
             return True
-
         except Exception as e:
             print(f"[ERROR] Login failed: {e}")
-            self.driver.save_screenshot("tistory_login_fail.png")
+            self.driver.save_screenshot("tistory_login_error.png")
             return False
 
-    def post(self, title, content, tags=[]):
-        if not self.driver: 
-            if not self.login(): return False
-
-        print("[INFO] Navigating to Write page...")
-        write_url = f"{BLOG_URL}/manage/newpost"
-        self.driver.get(write_url)
-        time.sleep(5)
-        
+    def post(self, title, content, tags=""):
+        print(f"[INFO] Posting to Tistory: {title}")
         try:
-            # 1. 팝업 닫기 (혹시 있으면)
-            try:
-                close_btn = self.driver.find_element(By.CSS_SELECTOR, ".tit_layer .btn_close")
-                if close_btn.is_displayed():
-                    close_btn.click()
-            except: pass
+            # 글쓰기 페이지 이동
+            write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/post"
+            self.driver.get(write_url)
+            time.sleep(3)
 
-            # 2. 제목 입력
-            print("[INFO] Writing Title...")
-            title_input = None
-            try:
-                # 여러 셀렉터 시도
-                selectors = [(By.ID, "post-title-inp"), (By.CSS_SELECTOR, "textarea[placeholder='제목을 입력하세요']")]
-                for by, val in selectors:
-                    try:
-                        title_input = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((by, val)))
-                        break
-                    except: continue
-                
-                if title_input:
-                    title_input.click()
-                    time.sleep(0.5)
-                    # 리눅스에서는 pyperclip 대신 바로 입력
-                    title_input.send_keys(title)
-                else:
-                    raise Exception("Title input not found")
-            except Exception as e:
-                print(f"[ERROR] Title input failed: {e}")
-                self.driver.save_screenshot("tistory_error_title.png")
-                return False
-
+            # 1. 제목 입력
+            title_input = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_to_be_clickable((By.ID, "title-field"))
+            )
+            title_input.send_keys(title)
             time.sleep(1)
 
-            # 3. 본문 입력 (기본 모드에서 붙여넣기 전략)
-            print("[INFO] Writing Content...")
+            # 2. 태그 입력
+            if tags:
+                tag_input = self.driver.find_element(By.ID, "tag-field")
+                tag_input.send_keys(tags)
+                tag_input.send_keys(Keys.ENTER)
+                time.sleep(1)
+
+            # 3. 본문 입력 (에디터 프레임 전환 필요할 수 있음)
             try:
-                # iframe 전환 시도 (티스토리 구형/신형 에디터 대응)
-                frames = self.driver.find_elements(By.TAG_NAME, "iframe")
+                # 티스토리 신규 에디터는 iframe 구조일 수 있음
+                iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
                 editor_frame = None
-                for frame in frames:
-                    if "editor" in frame.get_attribute("id") or "editor" in frame.get_attribute("src"):
+                for frame in iframes:
+                    if "editor" in frame.get_attribute("id").lower():
                         editor_frame = frame
                         break
                 
@@ -150,11 +110,7 @@ class TistoryAutoPoster:
                 body_input.click()
                 time.sleep(0.5)
                 
-                # 내용 붙여넣기
-                pyperclip.copy(content) # HTML 태그가 그대로 들어갈 수 있음. (텍스트로)
-                # HTML 모드 전환이 안되면 텍스트로 들어가므로, 
-                # 이번엔 HTML 모드 전환 버튼을 JS로 강제 클릭 시도
-                
+                # HTML 모드 전환 시도
                 self.driver.switch_to.default_content() # 다시 메인으로
                 
                 # HTML 모드 버튼 찾기 (JS 실행)
@@ -185,17 +141,22 @@ class TistoryAutoPoster:
 
                 if switched:
                     print("[INFO] JS Switched to HTML mode.")
-                    # JS로 직접 본문 내용 주입 (가장 확실함)
+                    # JS로 직접 본문 내용 주입
+                    safe_content = content.replace("`", "\\`").replace("${", "\\${")
                     self.driver.execute_script(f"""
                         var cm = document.querySelector('.CodeMirror');
                         if(cm && cm.CodeMirror) {{
-                            cm.CodeMirror.setValue(`{content}`);
+                            cm.CodeMirror.setValue(`{safe_content}`);
                         }} else {{
-                            document.querySelector('#tinymce').innerHTML = `{content}`;
+                            var editor = document.querySelector('#tinymce');
+                            if(editor) editor.innerHTML = `{safe_content}`;
                         }}
                     """)
                 else:
                     print("[WARN] HTML mode switch failed. Pasting as text.")
+                    # 다시 프레임으로 가야할 수도 있음
+                    if editor_frame:
+                        self.driver.switch_to.frame(editor_frame)
                     body_input.send_keys(content)
 
             except Exception as e:
@@ -206,48 +167,36 @@ class TistoryAutoPoster:
             time.sleep(3)
 
             # 4. 발행 버튼 클릭
+            self.driver.switch_to.default_content() # 최종 발행 시에는 메인 컨텐츠로
             print("[INFO] Clicking Publish (Step 1)...")
             try:
-                # '완료' 버튼 (ID: publish-layer-btn)
-                done_btn = WebDriverWait(self.driver, 10).until(
-                    EC.element_to_be_clickable((By.ID, "publish-layer-btn"))
-                )
-                done_btn.click()
-                print("[INFO] Clicked 'Done' button.")
-                time.sleep(2)
+                publish_btn = self.driver.find_element(By.ID, "publish-layer-btn")
+                publish_btn.click()
+                time.sleep(1)
                 
-                # 최종 '발행' 버튼 (레이어 팝업 내)
-                print("[INFO] Clicking Final Publish (Step 2)...")
-                
-                # 팝업 내 발행 버튼 찾기 (보통 button[type='submit'] 또는 .btn_apply)
                 final_btn = WebDriverWait(self.driver, 10).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, "#publish-btn, button[type='submit'], .btn_apply"))
+                    EC.element_to_be_clickable((By.ID, "publish-btn"))
                 )
-                
-                # 공개 설정 라디오 버튼 (공개)
-                try:
-                    public_radio = self.driver.find_element(By.ID, "open20") 
-                    if public_radio: public_radio.click()
-                except: pass
-                
                 final_btn.click()
-                print("[SUCCESS] Posted successfully!")
+                print("[SUCCESS] Post published!")
                 return True
-                
             except Exception as e:
-                # 버튼을 못 찾으면 스크린샷
-                print(f"[ERROR] Publish button click failed: {e}")
+                print(f"[ERROR] Final publish failed: {e}")
                 self.driver.save_screenshot("tistory_error_publish.png")
                 return False
 
         except Exception as e:
-            print(f"[ERROR] General error: {e}")
+            print(f"[ERROR] Posting process failed: {e}")
             return False
 
+    def close(self):
+        if self.driver:
+            self.driver.quit()
+
 if __name__ == "__main__":
+    # Test
     poster = TistoryAutoPoster()
-    # 테스트용
-    poster.post(
-        title="[테스트] Stock Empire 자동 포스팅 테스트",
-        content="<p>이것은 <strong>Stock Empire</strong> 봇이 작성한 자동 포스팅입니다.</p><p>티스토리 크롤링 성공!</p>"
-    )
+    poster.setup_driver()
+    if poster.login():
+        poster.post("자동 포스팅 테스트", "<p>Hello World</p>", "AI,주식")
+    poster.close()

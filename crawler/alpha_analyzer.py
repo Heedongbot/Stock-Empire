@@ -46,9 +46,14 @@ class AlphaAnalyzer:
                 return None
                 
             data = res.json()
-            chart_data = data['chart']['result'][0]
+            if 'chart' in data and data['chart']['result']:
+                chart_data = data['chart']['result'][0]
+            else:
+                print(f"[WARN] {symbol}: Unexpected API response format: {data}")
+                return None
+                
             quotes = chart_data['indicators']['quote'][0]
-            timestamps = chart_data['timestamp']
+            timestamps = chart_data.get('timestamp', [])
             
             # Close 가격 리스트 추출
             closes = quotes['close']
