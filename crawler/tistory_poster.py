@@ -10,16 +10,26 @@ import time
 import os
 from dotenv import load_dotenv
 
-# Load environment variables (Absolute Path Target)
-env_path = os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env")
-load_dotenv(env_path)
+# Load environment variables (Multi-Path Attempt)
+env_paths = [
+    os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env"),
+    os.path.join(os.getcwd(), ".env"),
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+]
+for p in env_paths:
+    if os.path.exists(p):
+        load_dotenv(p)
+        print(f"[DEBUG] Loaded env from: {p}")
+        break
 
-# ==============================================================================
-# [설정] 티스토리 정보
-# ==============================================================================
 TISTORY_ID = os.getenv("TISTORY_ID")
 TISTORY_PW = os.getenv("TISTORY_PW")
 TISTORY_BLOG_NAME = os.getenv("TISTORY_BLOG_NAME")
+
+if TISTORY_ID:
+    print(f"[DEBUG] Verified Env: ID is loaded (starts with {TISTORY_ID[:2]}...)")
+else:
+    print("[ERROR] TISTORY_ID is NOT loaded! Check your .env file.")
 
 class TistoryAutoPoster:
     def __init__(self):
