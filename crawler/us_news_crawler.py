@@ -43,7 +43,148 @@ class StockNewsCrawler:
         else:
             print("[WARN] OpenAI Key missing. Falling back to Heuristic Reasoning.")
 
-# ... (omitted methods) ...
+    def _load_history(self):
+        if os.path.exists(self.history_file):
+            try:
+                with open(self.history_file, 'r', encoding='utf-8') as f:
+                    return set(json.load(f))
+            except:
+                return set()
+        return set()
+
+    def _save_history(self):
+        with open(self.history_file, 'w', encoding='utf-8') as f:
+            json.dump(list(self.posted_ids), f)
+
+    def fetch_yahoo_finance(self, limit=10):
+        url = "https://finance.yahoo.com/news/rssindex"
+        news_items = []
+        try:
+            res = requests.get(url, headers=self.headers, timeout=10)
+            soup = BeautifulSoup(res.content, 'xml')
+            items = soup.find_all('item')[:limit]
+            
+            for item in items:
+                title = item.title.text
+                link = item.link.text
+                pub_date = item.pubDate.text
+                description = item.description.text if item.description else ""
+                
+                news_items.append({
+                    'id': f"yh_{hash(link)}",
+                    'source': 'Yahoo Finance',
+                    'title': title,
+                    'excerpt': description,
+                    'link': link,
+                    'time': pub_date,
+                    'is_breaking': 'breaking' in title.lower() or 'urgent' in title.lower()
+                })
+        except Exception as e:
+            print(f"[ERROR] Yahoo Finance fetch failed: {e}")
+        return news_items
+
+    def fetch_investing_com(self, limit=10):
+        url = "https://www.investing.com/news/stock-market-news"
+        news_items = []
+        try:
+            res = requests.get(url, headers=self.headers, timeout=10)
+            soup = BeautifulSoup(res.content, 'html.parser')
+            articles = soup.find_all('article', class_='articleItem')[:limit]
+            
+            for article in articles:
+                text_div = article.find('div', class_='textDiv')
+                if not text_div: continue
+                
+                a_tag = text_div.find('a', class_='title')
+                title = a_tag.text.strip()
+                link = "https://www.investing.com" + a_tag['href']
+                excerpt = text_div.find('p').text.strip()
+                time_span = text_div.find('span', class_='date')
+                pub_time = time_span.text if time_span else ""
+                
+                news_items.append({
+                    'id': f"iv_{hash(link)}",
+                    'source': 'Investing.com',
+                    'title': title,
+                    'excerpt': excerpt,
+                    'link': link,
+                    'time': pub_time,
+                    'is_breaking': False
+                })
+        except Exception as e:
+            print(f"[ERROR] Investing.com fetch failed: {e}")
+        return news_items
+
+    def analyze_with_ai(self, item):
+        if not self.client:
+            return {
+                'impact_score': 50,
+                'summary_kr': item['excerpt_kr'],
+                'market_sentiment': 'NEUTRAL'
+            }
+        
+        prompt = f"""
+        Analyze this US stock market news:
+        Title: {item['title']}
+        Summary: {item['excerpt']}
+        
+        Provide a 1-sentence expert insight in Korean. 
+        Rate impact (0-100) and sentiment (BULLISH/BEARISH/NEUTRAL).
+        Return JSON format: {{"impact_score": int, "summary_kr": str, "market_sentiment": str}}
+        """
+        
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                response_format={{ "type": "json_object" }}
+            )
+            return json.loads(response.choices[0].message.content)
+        except:
+            return {
+                'impact_score': 50,
+                'summary_kr': item['excerpt_kr'],
+                'market_sentiment': 'NEUTRAL'
+            }
+
+    def crawl_all_sources(self, limit=10):
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling US Market News...")
+        raw_news = self.fetch_yahoo_finance(limit=limit) + self.fetch_investing_com(limit=limit)
+        
+        processed_news = []
+        for item in raw_news:
+            try:
+                # Basic Translation
+                item['excerpt_kr'] = self.translator.translate(item['excerpt'])
+                item['title_kr'] = self.translator.translate(item['title'])
+                
+                # AI Analysis
+                ai_data = self.analyze_with_ai(item)
+                
+                processed_news.append({
+                    'id': item['id'],
+                    'timestamp': datetime.now().isoformat(),
+                    'source': item['source'],
+                    'link': item['link'],
+                    'sentiment': ai_data['market_sentiment'],
+                    'is_breaking': item['is_breaking'],
+                    'free_tier': {
+                        'title': item['title_kr'],
+                        'summary_kr': item['excerpt_kr']
+                    },
+                    'vip_tier': {
+                        'ai_analysis': {
+                            'impact_score': ai_data['impact_score'],
+                            'summary_kr': ai_data['summary_kr']
+                        }
+                    }
+                })
+                # Prevent rate limits
+                time.sleep(1)
+            except Exception as e:
+                print(f"[ERROR] Processing news item failed: {e}")
+                
+        return processed_news
 
     def save(self, data):
         if not data: return
@@ -58,7 +199,6 @@ class StockNewsCrawler:
         # ------------------------------------------------------------------
         if clean_data:
             try:
-                # 상대 경로/절대 경로 import 호환성 처리
                 try:
                     from crawler.tistory_poster import TistoryAutoPoster
                 except ImportError:
@@ -66,23 +206,16 @@ class StockNewsCrawler:
                 
                 print("[INFO] Starting Tistory Auto-Posting (US Market)...")
                 
-                # 날짜 변경 확인 및 카운터 리셋
                 if datetime.now().date() != self.last_post_date:
                     self.daily_post_count = 0
                     self.last_post_date = datetime.now().date()
                 
-                # [중복 방지] 이미 올린 뉴스는 제외하고, 가장 최신 뉴스 선정
-                # 우선순위: 1. Breaking News  2. 일반 News (상위권)
-                
                 target_news = None
-                
-                # 1. Breaking News 중에서 안 올린 것 찾기
                 for item in clean_data:
                     if item.get('is_breaking') and item['id'] not in self.posted_ids:
                         target_news = item
                         break
                         
-                # 2. 없다면 일반 뉴스 중에서 안 올린 것 찾기
                 if not target_news:
                     for item in clean_data:
                         if item['id'] not in self.posted_ids:
@@ -93,94 +226,62 @@ class StockNewsCrawler:
                     print("[INFO] No NEW news to post. Skipping...")
                     return
 
-                # [일일 제한] 5개 이상이면, 긴급(Breaking) 뉴스가 아니면 스킵
                 if self.daily_post_count >= 5 and not target_news.get('is_breaking'):
                     print(f"[INFO] Daily limit ({self.daily_post_count}/5) reached. Skipping non-breaking news.")
                     return
 
-                # 데이터 추출
                 title_kr = target_news['free_tier']['title']
                 summary_kr = target_news['free_tier']['summary_kr']
                 ai_summary = target_news['vip_tier']['ai_analysis']['summary_kr']
                 impact_score = target_news['vip_tier']['ai_analysis']['impact_score']
                 sentiment = target_news['sentiment']
                 
-                # 블로그용 제목 (이모지 포함)
                 blog_title = f"[Stock Empire] 🇺🇸 미장 속보: {title_kr}"
-                
-                # 블로그 본문 (HTML + 홍보 링크)
                 blog_content = f"""
                 <h2 style="color: #0F172A; border-bottom: 2px solid #2563EB; padding-bottom: 10px;">🇺🇸 미국 증시 AI 속보</h2>
                 <p><strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.</p>
                 <br>
-                
                 <h3 style="background-color: #EFF6FF; padding: 15px; border-left: 5px solid #2563EB;">📰 {title_kr}</h3>
-                <p style="font-size: 16px; line-height: 1.7; color: #334155;">
-                {summary_kr}
-                </p>
+                <p style="font-size: 16px; line-height: 1.7; color: #334155;">{summary_kr}</p>
                 <br>
-                
                 <div style="border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; background-color: #F8FAFC;">
                     <h4 style="margin-top: 0; color: #2563EB;">🤖 AI 워룸(War Room) 분석</h4>
                     <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                        <li style="margin-bottom: 8px;"><strong>⚡ 파급력 점수:</strong> <span style="background-color: #FEF3C7; padding: 2px 6px; border-radius: 4px;">{impact_score}/100</span></li>
+                        <li style="margin-bottom: 8px;"><strong>⚡ 파급력 점수:</strong> {impact_score}/100</li>
                         <li style="margin-bottom: 8px;"><strong>🌊 시장 감지:</strong> {sentiment}</li>
                         <li style="margin-top: 12px; font-weight: bold; color: #0F172A;">💡 코부장 Insight:</li>
                         <li style="color: #475569; padding-left: 10px; border-left: 3px solid #CBD5E1;">{ai_summary}</li>
                     </ul>
                 </div>
-                
                 <br>
                 <hr style="border: 0; border-top: 1px dashed #CBD5E1; margin: 30px 0;">
-                
-                <!-- 트래픽 유입용 홍보 섹션 -->
-                <div style="text-align: center; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 35px 25px; border-radius: 20px; color: white; border: 1px solid #334155; margin-top: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);">
-                    <p style="font-size: 14px; color: #94A3B8; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600;">⚡ 아직도 늦게 확인하시나요?</p>
-                    <h3 style="color: #60A5FA; margin: 0 0 20px 0; font-size: 22px; font-weight: 800; line-height: 1.4;">"기관들은 이미 30초 전에<br>이 뉴스를 보고 매매를 끝냈습니다."</h3>
-                    <p style="margin-bottom: 30px; color: #CBD5E1; font-size: 15px; line-height: 1.6;">
-                        <strong>Stock Empire AI</strong>는 전 세계 4대 통신사의 속보를<br>
-                        실시간으로 분석하여 <span style="color: #FCD34D;">가장 먼저</span> 알려드립니다.
-                    </p>
-                    <a href="https://stock-empire.vercel.app" target="_blank" 
-                       style="display: inline-block; background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%); color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39); transition: transform 0.2s;">
-                       🚀 실시간 AI 속보 무료로 보기
-                    </a>
+                <div style="text-align: center; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 35px 25px; border-radius: 20px; color: white;">
+                    <h3 style="color: #60A5FA;">"가장 먼저 실시간 속보를 확인하세요"</h3>
+                    <a href="https://stock-empire.vercel.app" style="color: #00ffbd;">🚀 실시간 AI 속보 보기</a>
                 </div>
-                <br>
-                <p style="color: #94A3B8; font-size: 11px; text-align: center;">※ 본 포스팅은 Stock Empire AI 엔진에 의해 자동 생성되었습니다.</p>
+                <p style="text-align: center; font-size: 11px;">※ 본 포스팅은 Stock Empire AI 엔진에 의해 자동 생성되었습니다.</p>
                 """
                 
-                # 태그
-                tags = ["미국주식", "나스닥", "S&P500", "StockEmpire", "AI투자", "해외주식"]
-                
-                # 포스팅 실행
+                tags = ["미국주식", "나스닥", "S&P500", "StockEmpire", "AI투자"]
                 poster = TistoryAutoPoster()
                 poster.post(title=blog_title, content=blog_content, tags=tags)
                 
-                # [성공 시 기록 저장]
-                print(f"[SUCCESS] Posted new article: {title_kr}")
                 self.posted_ids.add(target_news['id'])
                 self._save_history()
                 self.daily_post_count += 1
-                
             except Exception as e:
                 print(f"[ERROR] US Auto-posting failed: {e}")
 
 def main():
     crawler = StockNewsCrawler()
     print("Stock Empire Crawler Started (Interval: 30min)")
-    print("Press Ctrl+C to stop.")
-    
     while True:
         try:
             news = crawler.crawl_all_sources(limit=15)
             crawler.save(news)
         except Exception as e:
             print(f"[ERROR] Main loop error: {e}")
-        
-        # Wait 30 minutes
-        print("Waiting 30 minutes...")
-        time.sleep(1800) 
+        time.sleep(1800)
 
 if __name__ == "__main__":
     main()
