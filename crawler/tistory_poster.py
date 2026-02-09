@@ -28,7 +28,10 @@ class TistoryAutoPoster:
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
         options.add_argument("--window-size=1920,1080")
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36")
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
         
         # Explicit binary location for Google Chrome on Ubuntu
         chrome_bin = "/usr/bin/google-chrome"
@@ -36,42 +39,60 @@ class TistoryAutoPoster:
             options.binary_location = chrome_bin
         
         try:
-            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+            # Try to use system chrome/chromedriver first
+            self.driver = webdriver.Chrome(options=options)
         except Exception as e:
-            print(f"[ERROR] First driver setup attempt failed: {e}")
+            print(f"[INFO] System driver failed, trying webdriver-manager: {e}")
             try:
-                # Second attempt with direct path
-                self.driver = webdriver.Chrome(options=options)
+                from webdriver_manager.chrome import ChromeDriverManager
+                self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
             except Exception as e2:
-                print(f"[ERROR] Second driver setup attempt failed: {e2}")
-                self.driver = None # Explicitly set to None if failed
+                print(f"[ERROR] Driver setup failed: {e2}")
+                self.driver = None
 
     def login(self):
         if not self.driver:
             print("[ERROR] Driver is not initialized. Cannot login.")
             return False
-        print("[INFO] Logging in to Tistory...")
+        
+        print("[INFO] Logging in to Tistory (Stealth Mode)...")
         try:
-            self.driver.get("https://www.tistory.com/auth/login")
-            time.sleep(2)
+            self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+                "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            })
             
-            # 카카오 로그인 버튼 클릭 (일반적으로 카카오 계정 사용)
-            kakao_btn = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable((By.CLASS_NAME, "btn_login.link_kakao"))
-            )
-            kakao_btn.click()
-            time.sleep(2)
+            self.driver.get("https://www.tistory.com/auth/login")
+            time.sleep(3)
+            
+            # 카카오 로그인 버튼 클릭 (다양한 셀렉터 시도)
+            try:
+                kakao_btn = WebDriverWait(self.driver, 15).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, ".btn_login.link_kakao, .link_kakao, a[href*='kakao']"))
+                )
+                self.driver.execute_script("arguments[0].click();", kakao_btn)
+                print("[INFO] Kakao login button clicked.")
+            except:
+                print("[WARN] Kakao button not found directly, trying redirect...")
+                self.driver.get("https://accounts.kakao.com/login?continue=https%3A%2F%2Fwww.tistory.com%2Fauth%2Fkakao%2Fredirect")
+
+            time.sleep(3)
             
             # 아이디/비번 입력
-            id_input = WebDriverWait(self.driver, 10).until(EC.presence_of_element_to_be_clickable((By.NAME, "loginId")))
-            pw_input = self.driver.find_element(By.NAME, "password")
+            id_field = WebDriverWait(self.driver, 15).until(
+                EC.presence_of_element_located((By.NAME, "loginId"))
+            )
+            pw_field = self.driver.find_element(By.NAME, "password")
             
-            id_input.send_keys(TISTORY_ID)
-            pw_input.send_keys(TISTORY_PW)
-            pw_input.send_keys(Keys.ENTER)
+            id_field.send_keys(TISTORY_ID)
+            pw_field.send_keys(TISTORY_PW)
+            pw_field.send_keys(Keys.ENTER)
             
-            time.sleep(5) # 로그인 처리 대기
-            print("[INFO] Login sequence completed.")
+            # 로그인 후 메인이나 관리 페이지 대기
+            WebDriverWait(self.driver, 20).until(
+                lambda d: "tistory.com" in d.current_url and "login" not in d.current_url
+            )
+            
+            print("[INFO] Login successful!")
             return True
         except Exception as e:
             print(f"[ERROR] Login failed: {e}")
