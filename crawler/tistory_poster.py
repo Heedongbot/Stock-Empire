@@ -10,26 +10,35 @@ import time
 import os
 from dotenv import load_dotenv
 
-# Load environment variables (Multi-Path Attempt + Manual Parser)
+# Load environment variables (Extra Robust Manual Parser)
 def robust_load_env():
     env_paths = [
         os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env"),
         os.path.join(os.getcwd(), ".env"),
         os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
     ]
+    found_keys = []
     for p in env_paths:
         if os.path.exists(p):
-            load_dotenv(p)
-            print(f"[DEBUG] dotenv loaded from: {p}")
-            # Manual fallback parser if os.getenv still fails
+            print(f"[DEBUG] Scanning .env file at: {p}")
             try:
-                with open(p, "r", encoding="utf-8") as f:
+                with open(p, "r", encoding="utf-8", errors='ignore') as f:
                     for line in f:
+                        line = line.strip()
                         if "=" in line and not line.startswith("#"):
-                            k, v = line.strip().split("=", 1)
-                            os.environ[k.strip()] = v.strip().strip('"').strip("'")
-            except: pass
+                            k, v = line.split("=", 1)
+                            key = k.strip()
+                            # Clean up quotes and whitespace from the value
+                            val = v.strip().strip('"').strip("'").strip()
+                            os.environ[key] = val
+                            found_keys.append(key)
+                print(f"[DEBUG] Loaded keys from file: {', '.join(found_keys)}")
+            except Exception as e:
+                print(f"[DEBUG] Error reading file: {e}")
             break
+    
+    # Also load via standard method as backup
+    load_dotenv()
 
 robust_load_env()
 
