@@ -11,9 +11,9 @@ import Link from "next/link";
 export default function AdminPage() {
     const [stats, setStats] = useState({
         totalUsers: 0,
-        newUsersToday: 0,
-        proUsers: 0,
-        revenue: "₩0",
+        dailySignups: 0,
+        weeklySignups: 0,
+        monthlySignups: 0,
         activeCrawlers: 0,
         aiLoad: "0.00s",
         historyCount: 0,
@@ -105,37 +105,37 @@ export default function AdminPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-blue-500/30 transition-all group relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                            <Users size={80} />
+                            <UserPlus size={80} />
                         </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">총 사용자 현황</p>
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">금일 가입자 (TODAY)</p>
                         <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.totalUsers.toLocaleString()}</h2>
-                            <span className="text-green-500 text-[10px] font-black flex items-center gap-1 mb-1 bg-green-500/10 px-2 py-0.5 rounded-full">
-                                <UserPlus className="w-3 h-3" /> +{stats.newUsersToday}
+                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.dailySignups.toLocaleString()}</h2>
+                            <span className="text-blue-500 text-[10px] font-black flex items-center gap-1 mb-1 bg-blue-500/10 px-2 py-0.5 rounded-full">
+                                <Users className="w-3 h-3" /> 누적 {stats.totalUsers.toLocaleString()}
                             </span>
                         </div>
                     </div>
 
                     <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-indigo-500/30 transition-all group relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                            <Crown size={80} />
+                            <Activity size={80} />
                         </div>
-                        <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-3">PRO 프리미엄 멤버십</p>
+                        <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-3">이번주 가입자 (WEEKLY)</p>
                         <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.proUsers}</h2>
+                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.weeklySignups.toLocaleString()}</h2>
                             <span className="text-indigo-500 text-[10px] font-black mb-1 italic uppercase tracking-widest flex items-center gap-1">
-                                <Sparkles size={10} className="text-indigo-500 fill-indigo-500" /> 프리미엄 서비스
+                                <TrendingUp size={10} className="text-indigo-500" /> 주간 성장세
                             </span>
                         </div>
                     </div>
 
                     <div className="premium-card p-8 border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/10 transition-all group relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity text-amber-500">
-                            <TrendingUp size={80} />
+                            <BarChart3 size={80} />
                         </div>
-                        <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">이번 달 누적 매출</p>
+                        <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">이번달 가입자 (MONTHLY)</p>
                         <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.revenue}</h2>
+                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.monthlySignups.toLocaleString()}</h2>
                             <TrendingUp className="text-amber-500 w-6 h-6 mb-1 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
                         </div>
                     </div>
