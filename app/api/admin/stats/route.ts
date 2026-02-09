@@ -92,10 +92,10 @@ export async function GET() {
     const month = today.substring(0, 7);
 
     const stats = {
-        totalUsers: totalClerkUsers || 1625,
-        dailySignups: dailySignups || Math.floor(Math.random() * 5) + 1,
-        weeklySignups: weeklySignups || Math.floor(Math.random() * 20) + 15,
-        monthlySignups: monthlySignups || Math.floor(Math.random() * 50) + 60,
+        totalUsers: totalClerkUsers,
+        dailySignups: dailySignups,
+        weeklySignups: weeklySignups,
+        monthlySignups: monthlySignups,
         activeCrawlers: 2,
         aiLoad: `${(0.8 + Math.random() * 4 / 10).toFixed(2)}s`,
         historyCount: totalNewsCount,
