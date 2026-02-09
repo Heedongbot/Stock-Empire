@@ -167,12 +167,17 @@ class StockNewsCrawler:
         Title: {item['title']}
         Excerpt: {item['excerpt']}
         
-        Focus ONLY on financial impact. If the news is not directly related to stock prices, economic data, or market trends, rate it low.
+        CRITICAL RULES:
+        1. Focus ONLY on things that move STOCK PRICES (Nvidia, Tesla, Apple, etc.) or macro-economic indicators (CPI, Jobs, FOMC, GDP).
+        2. If the news is about politics (unless it impacts stocks), celebrity, general tech not related to investment, or low-impact news, return impact_score: 0.
+        3. For economic indicators (e.g., Inflation, Jobs report, Interest rates), give it a HIGH score (>85).
+        
         Return JSON format: 
         {{
-            "impact_score": int (0-100, how much will this move the market?),
-            "summary_kr": "1-sentence sharp expert analysis in Korean explaining WHY this makes money or saves money",
-            "market_sentiment": "BULLISH/BEARISH/NEUTRAL"
+            "impact_score": int (0-100),
+            "summary_kr": "1-sentence sharp expert analysis in Korean (Expert Boss style). Why does this matter for MONEY?",
+            "market_sentiment": "BULLISH/BEARISH/NEUTRAL",
+            "is_indicator": boolean (true if this is a macro-economic indicator announcement)
         }}
         """
         
@@ -184,10 +189,18 @@ class StockNewsCrawler:
             )
             analysis = json.loads(response.choices[0].message.content)
             
-            # Filter out "trash" news - strictly require high impact
-            if analysis.get('impact_score', 0) < 40:
-                print(f"[DEBUG] Filtering out low impact news: {item['title']} (Score: {analysis.get('impact_score')})")
+            # Filter out "trash" news - strictly require high impact or indicator
+            score = analysis.get('impact_score', 0)
+            is_indicator = analysis.get('is_indicator', False)
+            
+            if score < 60 and not is_indicator:
+                print(f"[DEBUG] Filtering out low impact/irrelevant news: {item['title']} (Score: {score})")
                 return None
+            
+            # If it's an indicator, force it to be breaking news for immediate Tistory posting
+            if is_indicator:
+                item['is_breaking'] = True
+                
             return analysis
         except:
             return None
@@ -221,7 +234,8 @@ class StockNewsCrawler:
                         'vip_tier': {
                             'ai_analysis': {
                                 'impact_score': ai_data.get('impact_score', 50),
-                                'summary_kr': ai_data.get('summary_kr', '분석 중...')
+                                'summary_kr': ai_data.get('summary_kr', '분석 중...'),
+                                'is_indicator': ai_data.get('is_indicator', False)
                             }
                         }
                     })
@@ -285,7 +299,10 @@ class StockNewsCrawler:
                 impact_score = target_news['vip_tier']['ai_analysis']['impact_score']
                 sentiment = target_news['sentiment']
                 
-                blog_title = f"[Stock Empire] 🇺🇸 미장 속보: {title_kr}"
+                is_indicator = target_news['vip_tier']['ai_analysis'].get('is_indicator', False)
+                
+                emoji = "🚨 [긴급 지표]" if is_indicator else "🇺🇸 미장 속보"
+                blog_title = f"[Stock Empire] {emoji} {title_kr}"
                 blog_content = f"""
                 <h2 style="color: #0F172A; border-bottom: 2px solid #2563EB; padding-bottom: 10px;">🇺🇸 미국 증시 AI 속보</h2>
                 <p><strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.</p>
@@ -340,7 +357,8 @@ def main():
             crawler.save(news)
         except Exception as e:
             print(f"[ERROR] Main loop error: {e}")
-        time.sleep(1800)
+        # Reduce interval to 5 minutes for "real-time" indicator monitoring
+        time.sleep(300)
 
 if __name__ == "__main__":
     main()
