@@ -233,24 +233,41 @@ class TistoryAutoPoster:
                             self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
-                            # [보강] 더 다양한 버튼 텍스트 대응 (완료, 로그인 하기, 가기 등)
-                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기')]"
+                            # [강화] 텍스트 기반 버튼 찾기 (한국어/영어 모두)
+                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'Next') or contains(text(),'Continue') or contains(text(),'Confirm')]"
                             cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
-                            for btn in cont_btns:
-                                if btn.is_displayed():
-                                    btn_text = btn.text or "Button"
-                                    print(f"[INFO] 카카오 리다이렉트 버튼 발견 및 클릭: {btn_text}")
+                            
+                            # [추가] 클래스명 기반 파란색/주요 버튼들 무조건 수집 (카카오 특유의 버튼들)
+                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login")
+                            
+                            all_clickable = cont_btns + primary_btns
+                            for btn in all_clickable:
+                                if btn.is_displayed() and btn.is_enabled():
+                                    btn_text = btn.text or btn.get_attribute("innerText") or "Action Button"
+                                    print(f"[INFO] 카카오 인터랙션 버튼 감지 및 클릭 시도: {btn_text}")
                                     self.driver.execute_script("arguments[0].click();", btn)
-                                    time.sleep(3)
+                                    time.sleep(2)
                         except: pass
                         
                         # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
-                        self.driver.save_screenshot("debug_login_step.png")
+                        self.driver.save_screenshot("debug_login_current.png")
                     
-                    # 로그인 성공 상태 확인
+                    # 로그인 성공 상태 확인 (URL 변화 외에도 '글쓰기'나 '로그아웃' 버튼이 보이면 성공으로 간주)
+                    is_logged_in = False
                     if "tistory.com" in curr_url and "auth/login" not in curr_url and "kakao.com" not in curr_url:
-                        print(f"[SUCCESS] 로그인 검증 성공! (현재 URL: {curr_url})")
-                        time.sleep(3) # 안정화를 위해 조금 더 대기
+                        is_logged_in = True
+                    
+                    try:
+                        # 화면에 로그아웃이나 글쓰기 메뉴가 있는지 체크 (URL 감지 실패 대비)
+                        check_elements = self.driver.find_elements(By.CSS_SELECTOR, ".link_logout, .btn_write, #tistryLogout, .txt_id")
+                        if check_elements and any(e.is_displayed() for e in check_elements):
+                            print("[INFO] 화면 요소 기반 로그인 성공 감지!")
+                            is_logged_in = True
+                    except: pass
+
+                    if is_logged_in:
+                        print(f"[SUCCESS] 로그인 최종 검증 성공! (현재 URL: {curr_url})")
+                        time.sleep(3)
                         return True
                     
                     time.sleep(3)
