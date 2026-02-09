@@ -158,17 +158,41 @@ class TistoryAutoPoster:
             self.driver.get(write_url)
             time.sleep(5) # 에디터 로딩시간 충분히 확보
 
-            # 1. 제목 입력 (더 길게 대기)
+            # 1. 제목 입력 (팝업 처리 포함)
             print("[INFO] Waiting for editor to load...")
+            time.sleep(5) # 페이지 완전 로딩 대기
+            
+            # 혹시 모를 팝업/모달 닫기 (새 에디터 안내 등)
             try:
-                title_input = WebDriverWait(self.driver, 30).until(
+                popups = self.driver.find_elements(By.CSS_SELECTOR, ".btn_close, .close, .modal-close")
+                for p in popups:
+                    if p.is_displayed():
+                        p.click()
+                        print("[INFO] Closed a popup.")
+            except: pass
+
+            try:
+                # 1. 제목 입력 시도 (ID: title-field 가 표준)
+                title_input = WebDriverWait(self.driver, 20).until(
                     EC.element_to_be_clickable((By.ID, "title-field"))
                 )
             except Exception as e:
-                print("[WARN] title-field not clickable, trying fallback selector...")
-                title_input = WebDriverWait(self.driver, 15).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, "input[placeholder*='제목'], #title-field"))
-                )
+                print("[WARN] title-field not clickable, trying all possible selectors...")
+                self.driver.save_screenshot("post_debug_before_title.png")
+                # Fallback: 모든 제목 형태의 input 검색
+                selectors = ["#title-field", "input[placeholder*='제목']", ".textarea_tit", "#tx_article_title"]
+                title_input = None
+                for selector in selectors:
+                    try:
+                        title_input = self.driver.find_element(By.CSS_SELECTOR, selector)
+                        if title_input: break
+                    except: continue
+                
+                if not title_input:
+                    print("[ERROR] Title input not found. Saving source...")
+                    with open("post_error_source.html", "w", encoding="utf-8") as f:
+                        f.write(self.driver.page_source)
+                    return False
             
             title_input.clear()
             title_input.send_keys(title)
