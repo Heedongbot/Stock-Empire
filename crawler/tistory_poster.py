@@ -10,17 +10,28 @@ import time
 import os
 from dotenv import load_dotenv
 
-# Load environment variables (Multi-Path Attempt)
-env_paths = [
-    os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env"),
-    os.path.join(os.getcwd(), ".env"),
-    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
-]
-for p in env_paths:
-    if os.path.exists(p):
-        load_dotenv(p)
-        print(f"[DEBUG] Loaded env from: {p}")
-        break
+# Load environment variables (Multi-Path Attempt + Manual Parser)
+def robust_load_env():
+    env_paths = [
+        os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env"),
+        os.path.join(os.getcwd(), ".env"),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+    ]
+    for p in env_paths:
+        if os.path.exists(p):
+            load_dotenv(p)
+            print(f"[DEBUG] dotenv loaded from: {p}")
+            # Manual fallback parser if os.getenv still fails
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    for line in f:
+                        if "=" in line and not line.startswith("#"):
+                            k, v = line.strip().split("=", 1)
+                            os.environ[k.strip()] = v.strip().strip('"').strip("'")
+            except: pass
+            break
+
+robust_load_env()
 
 TISTORY_ID = os.getenv("TISTORY_ID")
 TISTORY_PW = os.getenv("TISTORY_PW")

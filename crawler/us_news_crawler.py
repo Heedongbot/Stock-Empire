@@ -15,10 +15,27 @@ from deep_translator import GoogleTranslator
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# Load environment variables (Absolute Path Target)
-env_path = os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env")
-load_dotenv(env_path)
-print(f"[INFO] Loading Environment Variables from {env_path}")
+# Load environment variables (Multi-Path Attempt + Manual Parser)
+def robust_load_env():
+    env_paths = [
+        os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env"),
+        os.path.join(os.getcwd(), ".env"),
+    ]
+    for p in env_paths:
+        if os.path.exists(p):
+            load_dotenv(p)
+            print(f"[DEBUG] dotenv loaded from: {p}")
+            # Manual fallback parser if os.getenv still fails
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    for line in f:
+                        if "=" in line and not line.startswith("#"):
+                            k, v = line.strip().split("=", 1)
+                            os.environ[k.strip()] = v.strip().strip('"').strip("'")
+            except: pass
+            break
+
+robust_load_env()
 
 class StockNewsCrawler:
     def __init__(self):
@@ -178,24 +195,25 @@ class StockNewsCrawler:
                 # AI Analysis
                 ai_data = self.analyze_with_ai(item)
                 
-                processed_news.append({
-                    'id': item['id'],
-                    'timestamp': datetime.now().isoformat(),
-                    'source': item['source'],
-                    'link': item['link'],
-                    'sentiment': ai_data['market_sentiment'],
-                    'is_breaking': item['is_breaking'],
-                    'free_tier': {
-                        'title': item['title_kr'],
-                        'summary_kr': item['excerpt_kr']
-                    },
-                    'vip_tier': {
-                        'ai_analysis': {
-                            'impact_score': ai_data['impact_score'],
-                            'summary_kr': ai_data['summary_kr']
+                if ai_data:
+                    processed_news.append({
+                        'id': item['id'],
+                        'timestamp': datetime.now().isoformat(),
+                        'source': item['source'],
+                        'link': item['link'],
+                        'sentiment': ai_data.get('market_sentiment', 'NEUTRAL'),
+                        'is_breaking': item['is_breaking'],
+                        'free_tier': {
+                            'title': item['title_kr'],
+                            'summary_kr': item['excerpt_kr']
+                        },
+                        'vip_tier': {
+                            'ai_analysis': {
+                                'impact_score': ai_data.get('impact_score', 50),
+                                'summary_kr': ai_data.get('summary_kr', '분석 중...')
+                            }
                         }
-                    }
-                })
+                    })
                 # Prevent rate limits
                 time.sleep(1)
             except Exception as e:
