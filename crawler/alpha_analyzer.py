@@ -168,6 +168,18 @@ class AlphaAnalyzer:
             json.dump(data, f, ensure_ascii=False, indent=2)
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Alpha Signals (Multi-Strategy) updated.")
 
+        # ------------------------------------------------------------------
+        # [웹사이트 동기화] Vercel 자동 업데이트를 위한 GitHub Push
+        # ------------------------------------------------------------------
+        try:
+            print("[INFO] Syncing alpha data to GitHub...")
+            os.system('git add public/alpha-signals.json')
+            os.system('git commit -m "update: Alpha signals [skip ci]"')
+            os.system('git push origin main')
+            print("[SUCCESS] Alpha data synced.")
+        except Exception as e:
+            print(f"[WARN] Git sync failed: {e}")
+
 if __name__ == "__main__":
     analyzer = AlphaAnalyzer()
     print("=" * 60)

@@ -256,6 +256,18 @@ class StockNewsCrawler:
         with open(self.output_path, 'w', encoding='utf-8') as f:
             json.dump(clean_data, f, ensure_ascii=False, indent=2)
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Saved {len(clean_data)} items to {self.output_path}")
+        
+        # ------------------------------------------------------------------
+        # [웹사이트 동기화] Vercel 자동 업데이트를 위한 GitHub Push
+        # ------------------------------------------------------------------
+        try:
+            print("[INFO] Syncing data to GitHub for Vercel update...")
+            os.system('git add public/us-news-realtime.json')
+            os.system('git commit -m "update: US market news [skip ci]"')
+            os.system('git push origin main')
+            print("[SUCCESS] Data synced to GitHub.")
+        except Exception as e:
+            print(f"[WARN] Git sync failed: {e}")
 
         # ------------------------------------------------------------------
         # [자동 포스팅] 티스토리 블로그 발행 (미국 주식 버전)
@@ -350,7 +362,7 @@ class StockNewsCrawler:
 
 def main():
     crawler = StockNewsCrawler()
-    print("Stock Empire Crawler Started (Interval: 30min)")
+    print("Stock Empire Crawler Started (Interval: 5min)")
     while True:
         try:
             news = crawler.crawl_all_sources(limit=15)
