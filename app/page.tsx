@@ -203,7 +203,7 @@ export default function Home() {
             <Award className="w-5 h-5 hover:text-[#00ffbd] cursor-pointer" />
           </div>
           <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em] mb-8">
-            &copy; 2026 STOCK EMPIRE INC. KOREA ALPHA TEST VERSION.
+            &copy; 2026 STOCK EMPIRE INC. GLOBAL ALPHA TEST VERSION.
           </p>
           <div className="max-w-3xl mx-auto border-t border-slate-900 pt-8 opacity-50">
             <p className="text-[10px] text-slate-600 leading-relaxed font-medium">

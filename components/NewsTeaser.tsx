@@ -27,16 +27,16 @@ export default function NewsTeaser({ lang, openPayment }: { lang: 'ko' | 'en', o
         },
         {
             id: 2,
-            title: lang === 'ko' ? "삼성전자, 1.4nm 공정 양산 성공... 파운드리 점유율 확대" : "Samsung Electronic Success in 1.4nm Mass Production",
+            title: lang === 'ko' ? "엔비디아, 차세대 블랙웰 칩 대량 양산... AI 가속기 시장 독점 가속화" : "Nvidia Starts Mass Production of Blackwell Chips",
             summary: lang === 'ko'
-                ? "삼성전자가 세계 최초로 1.4나모 공정 양산에 성공하며 TSMC와의 격차를 좁히기 시작했습니다..."
-                : "Samsung succeeds in 1.4nm mass production, closing the gap with TSMC...",
+                ? "엔비디아가 차세대 AI 가속기 블랙웰의 양산 공정에 돌입하며 전 세계 데이터센터 시장 점유율 90% 수성에 나섰습니다..."
+                : "Nvidia enters mass production for its next-gen Blackwell AI accelerators, securing its 90% data center market share...",
             ai_analysis_preview: lang === 'ko'
                 ? "반도체 업황은 '초격차' 시대로 진입 중..."
                 : "Semiconductor industry entering 'Super-Gap' era...",
             ai_analysis_full: lang === 'ko'
-                ? "1.4nm 양산 성공은 향후 AI 반도체 수주 경쟁에서 우위를 점할 수 있는 핵심 지표입니다. 한국 반도체 섹터 전반에 긍정적인 온기가 퍼질 것으로 보이며, 특히 후공정 관련주들에 주목할 필요가 있습니다..."
-                : "Success in 1.4nm is a key metric for AI chip orders. Positive sentiment will spread across the KR semi sector, especially back-end equipment stocks...",
+                ? "블랙웰의 성공적인 양산은 향후 AI 반도체 주도권 전쟁에서 엔비디아의 위치를 더욱 공고히 할 것입니다. US 반도체 섹터 전반에 강력한 호재로 작용할 것이며, 특히 나스닥 기술주의 랠리를 견인할 핵심 동력입니다..."
+                : "Successful production of Blackwell solidifies Nvidia's lead in the AI chip war. This is a strong catalyst for the US semi sector and a key driver for the Nasdaq tech rally...",
         },
         {
             id: 3,

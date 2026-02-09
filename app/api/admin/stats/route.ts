@@ -9,7 +9,6 @@ export async function GET() {
     const rootDir = process.cwd();
     const analyticsPath = path.join(rootDir, 'data', 'analytics.json');
     const usNewsPath = path.join(rootDir, 'public', 'us-news-realtime.json');
-    const krNewsPath = path.join(rootDir, 'public', 'kr-news-realtime.json');
 
     let statsData = {
         total_visitors: 0,
@@ -60,23 +59,18 @@ export async function GET() {
 
     try {
         let usNews = [];
-        let krNews = [];
 
         if (fs.existsSync(usNewsPath)) {
             const usData = fs.readFileSync(usNewsPath, 'utf-8');
             usNews = JSON.parse(usData);
         }
-        if (fs.existsSync(krNewsPath)) {
-            const krData = fs.readFileSync(krNewsPath, 'utf-8');
-            krNews = JSON.parse(krData);
-        }
 
-        totalNewsCount = usNews.length + krNews.length;
+        totalNewsCount = usNews.length;
         crawlerStatus = totalNewsCount > 0 ? "정상 가동" : "점검 필요";
 
         // 최신 뉴스 기반 로그 생성
-        const allNews = [...usNews, ...krNews].slice(0, 5);
-        recentLogs = allNews.map((news: any, index) => ({
+        const latestNews = usNews.slice(0, 5);
+        recentLogs = latestNews.map((news: any, index: number) => ({
             id: index,
             time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
             type: "뉴스",

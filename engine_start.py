@@ -20,10 +20,7 @@ def main():
     # 1. US News Crawler (with Tistory Auto-Posting)
     us_crawler = run_process(f"{sys.executable} crawler/us_news_crawler.py", "US News Crawler")
     
-    # 2. KR News Crawler (with Tistory Auto-Posting)
-    kr_crawler = run_process(f"{sys.executable} crawler/kr_crawler.py", "KR News Crawler")
-
-    # 3. VVIP Alpha Analyzer (Real-time Signal Detection)
+    # 2. VVIP Alpha Analyzer (Real-time Signal Detection)
     alpha_analyzer = run_process(f"{sys.executable} crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
     
     print("\n[SUCCESS] All Engines Launched! 🚀")
@@ -38,10 +35,6 @@ def main():
                 print("[WARN] US News Crawler stopped. Restarting...")
                 us_crawler = run_process(f"{sys.executable} crawler/us_news_crawler.py", "US News Crawler")
             
-            if kr_crawler.poll() is not None:
-                print("[WARN] KR News Crawler stopped. Restarting...")
-                kr_crawler = run_process(f"{sys.executable} crawler/kr_crawler.py", "KR News Crawler")
-
             if alpha_analyzer.poll() is not None:
                 print("[WARN] VVIP Alpha Analyzer stopped. Restarting...")
                 alpha_analyzer = run_process(f"{sys.executable} crawler/alpha_analyzer.py", "VVIP Alpha Analyzer")
@@ -49,7 +42,6 @@ def main():
     except KeyboardInterrupt:
         print("\n[INFO] Shutting down all engines...")
         us_crawler.terminate()
-        kr_crawler.terminate()
         alpha_analyzer.terminate()
         print("[INFO] System offline.")
 

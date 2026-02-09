@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 
 export default function TickerTape() {
     const [stats, setStats] = useState([
-        { label: 'KOSPI', value: '2,580', change: '+1.2%', up: true },
+        { label: 'S&P 500', value: '5,023', change: '+0.8%', up: true },
         { label: 'NASDAQ', value: '16,234', change: '-0.3%', up: false },
         { label: 'NVDA', value: '$880', change: '+5.8%', up: true },
-        { label: 'USDKRW', value: '1,325', change: '+0.8%', up: true },
+        { label: 'AAPL', value: '$189', change: '+1.2%', up: true },
         { label: 'BTC/USD', value: '$64,200', change: '+3.4%', up: true },
         { label: 'GOLD', value: '$2,150', change: '-0.1%', up: false },
     ]);
 
     const [hotPicks, setHotPicks] = useState([
-        { name: '삼성전자', change: '+3.2%', type: 'HOT' },
-        { name: 'SK하이닉스', change: '+4.1%', type: 'HOT' },
-        { name: '카카오', change: '-2.9%', type: 'CRASH' }
+        { name: 'TESLA', change: '+3.2%', type: 'HOT' },
+        { name: 'MICROSOFT', change: '+1.8%', type: 'HOT' },
+        { name: 'INTEL', change: '-2.9%', type: 'CRASH' }
     ]);
 
     return (
