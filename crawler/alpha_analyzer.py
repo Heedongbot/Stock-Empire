@@ -4,7 +4,7 @@ VVIP Alpha Analyzer v2.0 - Multi-Strategy Engine
 - Source: Empire Institutional Data
 """
 
-import yfinance as yf
+import requests
 import json
 import os
 from datetime import datetime
