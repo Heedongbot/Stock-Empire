@@ -233,32 +233,34 @@ class TistoryAutoPoster:
                             self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
-                            # [강화] 텍스트 기반 버튼 찾기 (한국어/영어 모두 포함)
-                            # '다음에 하기', '나중에 변경' 등을 추가하여 비번 변경 창을 돌파
-                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'시작하기') or contains(text(),'다음에') or contains(text(),'나중에') or contains(text(),'변경') or contains(text(),'Skip') or contains(text(),'Later')]"
+                            # [최종 강화] 모든 가능한 긍정 버튼 텍스트 대응
+                            xpath_query = "//button[contains(.,'계속') or contains(.,'확인') or contains(.,'동의') or contains(.,'허용') or contains(.,'완료') or contains(.,'로그인') or contains(.,'가기') or contains(.,'시작하기') or contains(.,'다음에') or contains(.,'나중에') or contains(.,'변경') or contains(.,'Skip') or contains(.,'Later') or contains(.,'Agree') or contains(.,'Accept')]"
                             cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
                             
-                            # [추가] 계정 선택 화면 대응 (prompt=select_account 상황)
+                            # [추가] 계정 선택 화면 대응 (li 태그 안의 프로필 링크 등)
                             try:
-                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email, .txt_id")
+                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email, .txt_id, .tit_item, .link_account")
                                 for link in account_links:
                                     inner_text = link.text or link.get_attribute("innerText") or ""
                                     if user_id in inner_text or "gmlehd" in inner_text:
-                                        print(f"[INFO] 계정 선택 감지 및 클릭: {inner_text[:10]}...")
+                                        print(f"[INFO] 계정 선택 감지 및 클릭: {inner_text[:15]}...")
                                         self.driver.execute_script("arguments[0].click();", link)
-                                        time.sleep(4) # 선택 후 좀 더 대기
+                                        time.sleep(4)
                             except: pass
 
-                            # [추가] 클래스명 기반 파란색/주요 버튼들 무조건 수집
-                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm, .btn_confirm2")
+                            # [추가] 모든 'btn_g highlihgt' 클래스 (카카오/티스토리 공통 주요 버튼)
+                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm, .btn_confirm2, button[type='submit']")
                             
                             all_clickable = cont_btns + primary_btns
                             for btn in all_clickable:
-                                if btn.is_displayed() and btn.is_enabled():
-                                    btn_text = btn.text or btn.get_attribute("innerText") or "Action Button"
-                                    print(f"[INFO] 카카오 인터랙션 버튼 감지 및 클릭 시도: {btn_text}")
-                                    self.driver.execute_script("arguments[0].click();", btn)
-                                    time.sleep(3) # 사람처럼 천천히
+                                try:
+                                    if btn.is_displayed() and btn.is_enabled():
+                                        btn_text = (btn.text or btn.get_attribute("innerText") or "Action").strip()
+                                        if btn_text and len(btn_text) < 20: # 너무 긴 텍스트는 제외
+                                            print(f"[INFO] 인터랙션 버튼 클릭 시도: {btn_text}")
+                                            self.driver.execute_script("arguments[0].click();", btn)
+                                            time.sleep(3)
+                                except: pass
                         except: pass
                         
                         # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
