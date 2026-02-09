@@ -30,15 +30,26 @@ class TistoryAutoPoster:
         options.add_argument("--window-size=1920,1080")
         options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         
+        # Explicit binary location for Google Chrome on Ubuntu
+        chrome_bin = "/usr/bin/google-chrome"
+        if os.path.exists(chrome_bin):
+            options.binary_location = chrome_bin
+        
         try:
             self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         except Exception as e:
-            print(f"[ERROR] Driver setup failed: {e}")
-            # Fallback for Ubuntu
-            options.binary_location = "/usr/bin/google-chrome"
-            self.driver = webdriver.Chrome(options=options)
+            print(f"[ERROR] First driver setup attempt failed: {e}")
+            try:
+                # Second attempt with direct path
+                self.driver = webdriver.Chrome(options=options)
+            except Exception as e2:
+                print(f"[ERROR] Second driver setup attempt failed: {e2}")
+                self.driver = None # Explicitly set to None if failed
 
     def login(self):
+        if not self.driver:
+            print("[ERROR] Driver is not initialized. Cannot login.")
+            return False
         print("[INFO] Logging in to Tistory...")
         try:
             self.driver.get("https://www.tistory.com/auth/login")
