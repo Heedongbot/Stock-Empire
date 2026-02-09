@@ -204,24 +204,42 @@ function AnalysisContent() {
                         </div>
 
                         <div className="p-10 text-center">
-                            {/* 전면 무료화에 따라 모든 내용 공개 또는 리스크로 인한 제약 설명 */}
-                            <div className="bg-[#050b14] border border-[#00ffbd]/20 p-8 rounded-3xl mb-8">
-                                <h4 className="text-xs font-black text-[#00ffbd] uppercase tracking-widest mb-4 italic">Empire AI Semantic Report</h4>
-                                <p className="text-slate-300 leading-relaxed italic text-sm">
-                                    "{selectedSignal.ai_reason}"
-                                </p>
-                            </div>
+                            {!user ? (
+                                <div className="space-y-8">
+                                    <div className="py-12 bg-[#050b14] border border-slate-800 rounded-3xl">
+                                        <Lock className="w-12 h-12 text-amber-500 mx-auto mb-6 animate-pulse" />
+                                        <h4 className="text-lg font-black text-white mb-2 uppercase italic">Analysis Locked</h4>
+                                        <p className="text-xs text-slate-500 font-bold leading-relaxed italic">
+                                            심층 AI 분석 리포트는 정예 대원만 열람할 수 있습니다. <br />
+                                            포털에 접속하여 권한을 획득하십시오.
+                                        </p>
+                                    </div>
+                                    <a href="/sign-in" className="block w-full py-4 bg-[#00ffbd] text-black rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all">
+                                        로그인하여 잠금 해제
+                                    </a>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* 전면 무료화에 따라 모든 내용 공개 또는 리스크로 인한 제약 설명 */}
+                                    <div className="bg-[#050b14] border border-[#00ffbd]/20 p-8 rounded-3xl mb-8">
+                                        <h4 className="text-xs font-black text-[#00ffbd] uppercase tracking-widest mb-4 italic">Empire AI Semantic Report</h4>
+                                        <p className="text-slate-300 leading-relaxed italic text-sm">
+                                            "{selectedSignal.ai_reason}"
+                                        </p>
+                                    </div>
 
-                            <p className="text-[10px] text-slate-600 font-bold uppercase mb-8">
-                                상세 진입/청산 전략은 리스크 관리를 위해 커맨드 센터에서 별도로 확인 가능합니다.
-                            </p>
+                                    <p className="text-[10px] text-slate-600 font-bold uppercase mb-8">
+                                        상세 진입/청산 전략은 리스크 관리를 위해 커맨드 센터에서 별도로 확인 가능합니다.
+                                    </p>
 
-                            <button
-                                onClick={() => setSelectedSignal(null)}
-                                className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
-                            >
-                                분석 닫기
-                            </button>
+                                    <button
+                                        onClick={() => setSelectedSignal(null)}
+                                        className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
+                                    >
+                                        분석 닫기
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -104,6 +104,15 @@ function VVIPAlphaContent() {
                     ) : (
                         signals.map((sig) => (
                             <div key={sig.id} className="group relative bg-[#0a0f1e] border border-slate-800/80 rounded-[2.5rem] p-8 hover:border-[#00ffbd]/30 transition-all duration-500 hover:translate-y-[-8px] shadow-2xl overflow-hidden">
+                                {!user && (
+                                    <div className="absolute inset-0 z-30 backdrop-blur-md bg-slate-900/40 flex flex-col items-center justify-center p-8 text-center">
+                                        <Lock className="w-10 h-10 text-amber-500 mb-4" />
+                                        <h4 className="text-white font-black italic uppercase tracking-widest text-sm mb-4">Elite Alpha Locked</h4>
+                                        <a href="/sign-in" className="px-6 py-2.5 bg-[#00ffbd] text-black font-black uppercase text-[10px] rounded-xl hover:scale-105 transition-all">
+                                            Unlock Now
+                                        </a>
+                                    </div>
+                                )}
                                 <div className="absolute top-0 right-0 p-8">
                                     <div className="flex flex-col items-end gap-2">
                                         <div className="flex items-center gap-1.5 px-3 py-1 bg-[#00ffbd]/10 border border-[#00ffbd]/20 rounded-full">

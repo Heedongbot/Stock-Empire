@@ -133,9 +133,20 @@ export default function NewsroomPage() {
                                                     </div>
                                                 </div>
 
-                                                {/* OPEN CONTENT AREA */}
+                                                {/* PROTECTED CONTENT AREA */}
                                                 <div className="relative">
-                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight`}>
+                                                    {!user && (
+                                                        <div className="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/60 rounded-xl flex flex-col items-center justify-center text-center p-6 border border-slate-700/50">
+                                                            <Lock className="w-8 h-8 text-amber-500 mb-3" />
+                                                            <h3 className="text-lg font-black text-white mb-1 uppercase italic">Private Intelligence</h3>
+                                                            <p className="text-[10px] text-slate-400 font-bold mb-4 uppercase">이 분석은 정예 대원에게만 공개됩니다.</p>
+                                                            <a href="/sign-in" className="px-6 py-2 bg-[#00ffbd] hover:bg-[#00d4ff] text-black font-black uppercase tracking-widest rounded-lg transition-all text-xs">
+                                                                Portal Login
+                                                            </a>
+                                                        </div>
+                                                    )}
+
+                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight ${!user ? 'blur-md select-none opacity-50' : ''}`}>
                                                         <div className="absolute top-0 right-0 p-2 opacity-10">
                                                             <TrendingUp className="w-12 h-12" />
                                                         </div>

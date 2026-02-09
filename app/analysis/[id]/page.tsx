@@ -206,9 +206,25 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                                         </div>
                                     </div>
 
-                                    <div className="bg-[#00ffbd]/5 p-8 rounded-3xl border border-[#00ffbd]/20 italic text-white font-bold leading-relaxed clean-text">
-                                        "{report?.intent || "전략적 분석 데이터가 준비 중입니다."}"
-                                    </div>
+                                    {!user ? (
+                                        <div className="bg-slate-950 p-12 rounded-3xl text-center border border-white/5 relative overflow-hidden">
+                                            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm z-10" />
+                                            <div className="relative z-20">
+                                                <Lock className="w-12 h-12 text-amber-500 mx-auto mb-6 animate-pulse" />
+                                                <h4 className="text-lg font-black text-white mb-2 uppercase italic">Elite Intelligence Locked</h4>
+                                                <p className="text-xs text-slate-500 font-bold leading-relaxed italic mb-8">
+                                                    세부 분석 및 대응 전략은 본부 로그인 후 열람 가능합니다.
+                                                </p>
+                                                <a href="/sign-in" className="px-8 py-3 bg-[#00ffbd] text-black font-black uppercase text-[10px] rounded-xl hover:scale-105 transition-all">
+                                                    사령부 접속하기
+                                                </a>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="bg-[#00ffbd]/5 p-8 rounded-3xl border border-[#00ffbd]/20 italic text-white font-bold leading-relaxed clean-text">
+                                            "{report?.intent || "전략적 분석 데이터가 준비 중입니다."}"
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 shadow-2xl">
