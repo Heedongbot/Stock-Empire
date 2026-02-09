@@ -31,9 +31,13 @@ class AlphaAnalyzer:
     def analyze_stock(self, symbol):
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Deep Analyzing {symbol}...")
         try:
+            # AWS 차단 방지를 위한 세션 설정
             ticker = yf.Ticker(symbol)
-            df = ticker.history(period="60d") # 60 days of data for indicators
-            if len(df) < 30: return None
+            # period를 5d로 줄여서 차단 확률 감소 시도
+            df = ticker.history(period="30d", interval="1d", proxy=None)
+            if df is None or len(df) < 10: 
+                print(f"[WARN] {symbol}: No data fetched (Yahoo Finance Blocked on AWS)")
+                return None
             
             curr_price = df['Close'].iloc[-1]
             prev_price = df['Close'].iloc[-2]
