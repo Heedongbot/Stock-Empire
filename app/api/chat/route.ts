@@ -1,21 +1,20 @@
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-const apiKey = process.env.OPENAI_API_KEY;
-
 export async function POST(req: Request) {
+    const apiKey = process.env.GEMINI_API_KEY;
+
     if (!apiKey) {
         return NextResponse.json(
-            { error: "OpenAI API Key is missing in server environment. Please restart the server." },
+            { error: "Google Gemini API Key is missing in server environment. Please check GEMINI_API_KEY." },
             { status: 500 }
         );
     }
 
-    const openai = new OpenAI({
-        apiKey: apiKey,
-    });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     try {
         const { message, masterId } = await req.json();
@@ -75,21 +74,23 @@ export async function POST(req: Request) {
 
         const systemPrompt = personas[masterId] || personas['buffett'];
 
-        const completion = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                { role: "system", content: "You are a world-class investment master. You must speak mostly in Korean unless asked otherwise." },
-                { role: "user", content: systemPrompt }
+        const result = await model.generateContent({
+            contents: [
+                { role: "user", parts: [{ text: "You are a world-class investment master. You must speak mostly in Korean unless asked otherwise." }] },
+                { role: "user", parts: [{ text: systemPrompt }] }
             ],
-            temperature: 0.7,
+            generationConfig: {
+                maxOutputTokens: 1000,
+                temperature: 0.7,
+            },
         });
 
-        const reply = completion.choices[0].message.content;
+        const reply = result.response.text();
 
         return NextResponse.json({ reply });
 
     } catch (error: any) {
-        console.error("OpenAI API Error:", error);
+        console.error("Gemini API Error:", error);
         return NextResponse.json({
             error: error.message || "Failed to generate response",
             details: error

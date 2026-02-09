@@ -1,23 +1,24 @@
-
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from 'fs';
 import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
         return NextResponse.json({
-            error: 'OpenAI API 키가 설정되지 않았습니다. Vercel 환경 변수를 확인해주세요.',
+            error: 'Google Gemini API 키가 설정되지 않았습니다. Vercel 환경 변수(GEMINI_API_KEY)를 확인해주세요.',
             code: 'MISSING_API_KEY'
         }, { status: 500 });
     }
 
-    const openai = new OpenAI({
-        apiKey: apiKey,
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        generationConfig: { responseMimeType: "application/json" }
     });
 
     const { searchParams } = new URL(request.url);
@@ -55,13 +56,12 @@ export async function GET(request: Request) {
             return NextResponse.json({ error: 'Invalid ticker or market data unavailable' }, { status: 404 });
         }
 
-        // 2. Load context (optional: recent news for better AI analysis)
+        // 2. Load context
         let newsContext = "";
         try {
             const newsPath = path.join(process.cwd(), 'public', 'us-news-realtime.json');
             if (fs.existsSync(newsPath)) {
                 const newsData = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-                // Filter news related to the ticker
                 const relatedNews = newsData
                     .filter((n: any) => n.free_tier?.title?.includes(ticker) || n.free_tier?.summary?.includes(ticker))
                     .slice(0, 3);
@@ -74,10 +74,10 @@ export async function GET(request: Request) {
             console.error("Context load error:", e);
         }
 
-        // 3. Prompt OpenAI for professional analysis
+        // 3. Prompt Gemini for professional analysis
         const prompt = `
-당신은 최고의 퀀트 트레이더이자 주식 분석 전문가 '코다리'입니다.
-다음 종목에 대해 실시간 데이터를 바탕으로 심층 분석을 수행하고, 투자 전략을 제시하세요.
+당신은 최고의 퀀트 트레이더이자 주식 분석 전문가 '코다리'입니다. 
+다음 종목에 대해 실시간 데이터를 바탕으로 심층 분석을 수행하고, 투자 전략을 제시하세요. 
 
 종목: ${companyName} (${ticker})
 현재가: $${currentPrice} (${changePct.toFixed(2)}%)
@@ -104,13 +104,10 @@ ${newsContext || "뉴스 정보 없음"}
 언어: 한국어
 `;
 
-        const response = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [{ role: "user", content: prompt }],
-            response_format: { type: "json_object" }
-        });
+        const resultResponse = await model.generateContent(prompt);
+        const responseText = resultResponse.response.text();
+        const result = JSON.parse(responseText || '{}');
 
-        const result = JSON.parse(response.choices[0].message.content || '{}');
         result.id = `${ticker}-${Date.now()}`;
         result.updated_at = new Date().toISOString();
         result.is_real_time = true;
