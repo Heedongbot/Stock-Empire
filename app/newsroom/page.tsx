@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Search, TrendingUp, Calendar, ExternalLink, MessageCircle, Share2, DollarSign, Sparkles, CheckCircle2, Zap, Lock } from 'lucide-react';
+import { Search, TrendingUp, Calendar, ExternalLink, MessageCircle, Share2, DollarSign, Sparkles, CheckCircle2, Zap, Lock, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
@@ -132,28 +133,22 @@ export default function NewsroomPage() {
                                                     </div>
                                                 </div>
 
-                                                {/* BLOCKED CONTENT AREA */}
+                                                {/* OPEN CONTENT AREA */}
                                                 <div className="relative">
-                                                    {!user && (
-                                                        <div className="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/60 rounded-xl flex flex-col items-center justify-center text-center p-6 border border-slate-700/50">
-                                                            <Lock className="w-8 h-8 text-amber-500 mb-3" />
-                                                            <h3 className="text-lg font-black text-white mb-1 uppercase italic">Private Intelligence</h3>
-                                                            <a href="/sign-in" className="mt-2 px-6 py-2 bg-[#00ffbd] hover:bg-[#00d4ff] text-black font-black uppercase tracking-widest rounded-lg transition-all text-xs">
-                                                                Login to View
-                                                            </a>
-                                                        </div>
-                                                    )}
-
-                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight ${!user ? 'blur-sm select-none opacity-50' : ''}`}>
+                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight`}>
                                                         <div className="absolute top-0 right-0 p-2 opacity-10">
                                                             <TrendingUp className="w-12 h-12" />
                                                         </div>
-                                                        <div className="flex items-center gap-2 mb-3">
-                                                            <Sparkles className="w-4 h-4 text-[#00ffbd]" />
-                                                            <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
-                                                                Empire Intelligence Report
-                                                                {user && <span className="text-[#00ffbd] font-bold">(Member Access)</span>}
-                                                            </span>
+                                                        <div className="flex items-center justify-between mb-3">
+                                                            <div className="flex items-center gap-2">
+                                                                <Sparkles className="w-4 h-4 text-[#00ffbd]" />
+                                                                <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
+                                                                    Empire Intelligence Report
+                                                                </span>
+                                                            </div>
+                                                            <Link href={`/analysis/news-us-${idx}`} className="text-[10px] font-black text-[#00ffbd] hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
+                                                                심층 분석 열기 <ChevronRight className="w-3 h-3" />
+                                                            </Link>
                                                         </div>
                                                         <p className="text-[14px] text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
                                                             {item.vip_tier.ai_analysis.summary_kr}
@@ -172,7 +167,7 @@ export default function NewsroomPage() {
                                                             </div>
                                                             <div className="flex flex-col">
                                                                 <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
-                                                                <span className="text-xs font-black text-yellow-500">STABLE</span>
+                                                                <span className="text-xs font-black text-white px-1.5 py-0.5 rounded bg-green-500/10 border border-green-500/20">STABLE</span>
                                                             </div>
                                                         </div>
                                                     </div>

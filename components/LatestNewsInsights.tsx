@@ -177,17 +177,15 @@ export default function LatestNewsInsights() {
                             </div>
 
                             <div className="relative group/box mt-auto">
-                                {!user && (
-                                    <div className="absolute inset-0 z-20 backdrop-blur-sm bg-slate-950/80 rounded-xl flex flex-col items-center justify-center text-center p-4 border border-slate-800/50">
-                                        <Lock className="w-6 h-6 text-amber-500 mb-2" />
-                                        <p className="text-[10px] text-slate-400 font-bold mb-3">VIP Insight Locked</p>
-                                    </div>
-                                )}
-
-                                <div className={`bg-[#050b14] border border-slate-800 rounded-xl p-5 ${!user ? 'opacity-30 blur-[2px]' : ''}`}>
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <Zap className="w-3 h-3 text-[#00ffbd] fill-[#00ffbd]" />
-                                        <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest">AI Analysis</span>
+                                <div className={`bg-[#050b14] border border-slate-800 rounded-xl p-5 hover:border-[#00ffbd]/30 transition-colors cursor-pointer`}>
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className="flex items-center gap-2">
+                                            <Zap className="w-3 h-3 text-[#00ffbd] fill-[#00ffbd]" />
+                                            <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest">AI Analysis</span>
+                                        </div>
+                                        <Link href={`/analysis/news-us-${startIdx + idx}`} className="text-[9px] font-black text-slate-500 hover:text-[#00ffbd] uppercase flex items-center gap-1 transition-colors">
+                                            Full Report <ChevronRight className="w-3 h-3" />
+                                        </Link>
                                     </div>
                                     <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
                                         {insightContent || insightTitle}

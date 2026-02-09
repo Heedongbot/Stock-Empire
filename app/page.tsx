@@ -57,13 +57,9 @@ export default function Home() {
     fetchMarketData();
   }, []);
 
-  // 알파 시그널 페칭 (Admin 전용으로 내부 필터링은 API에서도 하겠지만 UI에서도 처리)
+  // 알파 시그널 페칭 (전면 무료화에 따라 모든 유저에게 공개)
   useEffect(() => {
     const fetchSignals = async () => {
-      if (user?.role !== 'ADMIN') {
-        setLoading(false);
-        return;
-      }
       try {
         const res = await fetch(`/api/alpha-signals?lang=${lang}&t=${Number(new Date())}`);
         const data = await res.json();
@@ -77,7 +73,7 @@ export default function Home() {
       }
     };
     fetchSignals();
-  }, [user]);
+  }, [lang]);
 
   return (
     <div className="min-h-screen pb-20 bg-[#050b14] text-[#e2e8f0] font-sans">

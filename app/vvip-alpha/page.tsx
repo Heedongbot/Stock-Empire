@@ -32,15 +32,9 @@ function VVIPAlphaContent() {
     const [signals, setSignals] = useState<AlphaSignal[]>([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
-    const isAdmin = user?.role === 'ADMIN';
-
     useEffect(() => {
-        if (isAdmin) {
-            fetchSignals();
-        } else {
-            setLoading(false); // 일반 유저에게는 로딩 중단
-        }
-    }, [isAdmin]);
+        fetchSignals();
+    }, []);
 
     const fetchSignals = async () => {
         setLoading(true);
@@ -57,32 +51,6 @@ function VVIPAlphaContent() {
         }
     };
 
-    // 보스(ADMIN)가 아닌 경우 접근 차단 화면 노출
-    if (!isAdmin) {
-        return (
-            <div className="min-h-screen bg-[#050b14] text-slate-100 font-sans">
-                <SiteHeader />
-                <main className="max-w-4xl mx-auto px-6 py-32 text-center">
-                    <div className="inline-flex p-6 bg-slate-900 rounded-full mb-8 border border-white/5">
-                        <Lock className="w-16 h-16 text-[#00ffbd] animate-pulse" />
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-6">
-                        PRIVATE CONTROL ZONE
-                    </h1>
-                    <p className="text-slate-400 text-lg mb-12 font-medium leading-relaxed">
-                        이 구역은 고위험 알파 시그널 통제 센터입니다.<br />
-                        리스크 관리를 위해 보스(ADMIN) 전용으로 운영됩니다.
-                    </p>
-                    <Link href="/" className="inline-flex items-center gap-2 px-10 py-4 bg-[#00ffbd] hover:bg-[#00d4ff] text-black rounded-2xl font-black uppercase tracking-widest transition-all">
-                        메인 터미널로 복귀 <ChevronRight className="w-5 h-5" />
-                    </Link>
-                    <div className="mt-20">
-                        <AdLeaderboard />
-                    </div>
-                </main>
-            </div>
-        );
-    }
 
     return (
         <div className="min-h-screen bg-[#020617] text-slate-100 font-sans">
