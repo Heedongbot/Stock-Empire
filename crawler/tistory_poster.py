@@ -233,14 +233,19 @@ class TistoryAutoPoster:
                             self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
-                            # '확인' 또는 '계속하기' 버튼 찾기
-                            cont_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용')]")
+                            # [보강] 더 다양한 버튼 텍스트 대응 (완료, 로그인 하기, 가기 등)
+                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기')]"
+                            cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
                             for btn in cont_btns:
                                 if btn.is_displayed():
-                                    print(f"[INFO] 카카오 리다이렉트 버튼 클릭: {btn.text}")
+                                    btn_text = btn.text or "Button"
+                                    print(f"[INFO] 카카오 리다이렉트 버튼 발견 및 클릭: {btn_text}")
                                     self.driver.execute_script("arguments[0].click();", btn)
-                                    time.sleep(2)
+                                    time.sleep(3)
                         except: pass
+                        
+                        # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
+                        self.driver.save_screenshot("debug_login_step.png")
                     
                     # 로그인 성공 상태 확인
                     if "tistory.com" in curr_url and "auth/login" not in curr_url and "kakao.com" not in curr_url:
