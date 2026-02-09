@@ -4,11 +4,13 @@ import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
+    const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+    });
+
     const { searchParams } = new URL(request.url);
     const ticker = searchParams.get('ticker')?.toUpperCase();
 
