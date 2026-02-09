@@ -326,18 +326,8 @@ class TistoryAutoPoster:
                     return False
 
             self.driver.get(write_url)
-            time.sleep(5)
             
-            # 튕겼는지 확인 (로그인 페이지로 리다이렉트 된 경우)
-            if "auth/login" in self.driver.current_url:
-                print("[WARN] Session lost or not synced. Retrying login sequence...")
-                self.login()
-                self.driver.get(write_url)
-                time.sleep(5)
-
-            print(f"[INFO] Current URL: {self.driver.current_url}")
-
-            # [추가] 임시저장 경고창 처리 (이어서 작성하시겠습니까?)
+            # [최우선] 임시저장 경고창 처리 (페이지 로드 직후 바로 처리)
             try:
                 WebDriverWait(self.driver, 3).until(EC.alert_is_present())
                 alert = self.driver.switch_to.alert
@@ -348,6 +338,27 @@ class TistoryAutoPoster:
                 time.sleep(2)
             except:
                 pass  # 알림 없으면 그냥 진행
+            
+            time.sleep(3)
+            
+            # 튕겼는지 확인 (로그인 페이지로 리다이렉트 된 경우)
+            if "auth/login" in self.driver.current_url:
+                print("[WARN] Session lost or not synced. Retrying login sequence...")
+                self.login()
+                self.driver.get(write_url)
+                
+                # 재시도 시에도 alert 처리
+                try:
+                    WebDriverWait(self.driver, 3).until(EC.alert_is_present())
+                    alert = self.driver.switch_to.alert
+                    alert.dismiss()
+                    time.sleep(2)
+                except:
+                    pass
+                    
+                time.sleep(3)
+
+            print(f"[INFO] Current URL: {self.driver.current_url}")
 
             # 1. 제목 입력 (팝업 처리 포함)
             print("[INFO] Clearing potential blocking layers...")
