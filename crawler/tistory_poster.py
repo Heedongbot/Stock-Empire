@@ -379,10 +379,12 @@ class TistoryAutoPoster:
                         f.write(self.driver.page_source)
                     return False
             
-            # 제목 입력
-            self.driver.execute_script("arguments[0].value = '';", title_input)
-            title_input.send_keys(title)
-            print("[INFO] Title entered successfully.")
+            # 제목 입력 (BMP 에러 방지를 위해 JS 사용)
+            self.driver.execute_script("arguments[0].value = arguments[1];", title_input, title)
+            # 입력값 반영을 위한 이벤트 발생
+            self.driver.execute_script("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", title_input)
+            self.driver.execute_script("arguments[0].dispatchEvent(new Event('change', { bubbles: true }));", title_input)
+            print("[INFO] Title entered successfully via JS.")
             time.sleep(2)
             
             # 2. 태그 입력
@@ -483,7 +485,14 @@ class TistoryAutoPoster:
                     print("[WARN] HTML mode switch failed. Trying basic injection.")
                     if editor_frame:
                         self.driver.switch_to.frame(editor_frame)
-                    body_input.send_keys(content)
+                    # BMP 에러 방지를 위해 JS 사용
+                    self.driver.execute_script("""
+                        if (arguments[0].isContentEditable) {
+                            arguments[0].innerText = arguments[1];
+                        } else {
+                            arguments[0].value = arguments[1];
+                        }
+                    """, body_input, content)
                 
                 # 다시 기본 모드로 전환 시도 (저장 트리거를 위해)
                 self.driver.switch_to.default_content()
