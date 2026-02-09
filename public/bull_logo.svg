@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <!-- 배경: 깊은 네이비 블루 -->
+    <rect width="512" height="512" rx="100" fill="#0F172A"/>
+    
+    <!-- 본격적인 황금 물소 로고 (SVG Path) -->
+    <!-- 역동적으로 돌진하는 황금 황소의 실루엣을 기하학적으로 표현 -->
+    <g transform="translate(60, 100) scale(1.1)">
+        <!-- 몸통 및 근육 라인 -->
+        <path d="M340 120 C360 100, 390 120, 380 150 C370 170, 340 180, 320 175 L280 160 C240 140, 200 160, 160 210 C120 260, 80 280, 40 270 C20 265, 10 240, 30 220 C50 200, 100 180, 140 140 C180 100, 240 80, 300 100 Z" fill="#EAB308" />
+        
+        <!-- 머리와 뿔 (강력한 인상) -->
+        <path d="M320 175 L360 210 C380 230, 400 220, 390 190 L370 140 C410 130, 430 150, 420 180 C410 210, 380 260, 330 250 C290 240, 270 200, 300 170 Z" fill="#FACC15" />
+        
+        <!-- 돌진하는 다리 라인 -->
+        <path d="M160 210 L140 280 C135 300, 110 300, 115 280 L130 220 Z" fill="#CA8A04" />
+        <path d="M280 160 L300 280 C305 300, 330 300, 325 280 L300 200 Z" fill="#CA8A04" />
+        
+        <!-- 빛나는 하이라이트 (입체감) -->
+        <path d="M300 100 C250 85, 200 105, 160 145" stroke="#FFFFFF" stroke-width="4" fill="none" opacity="0.4" />
+        <path d="M370 145 C390 135, 410 140, 415 160" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.5" />
+    </g>
+    
+    <!-- 상승 차트 그래프 (금융 앱 정체성 추가) -->
+    <path d="M50 420 L150 380 L250 400 L350 320 L450 350 L480 280" stroke="#22D3EE" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="480" cy="280" r="8" fill="#22D3EE">
+        <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+</svg>

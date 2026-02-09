@@ -1,0 +1,4 @@
+#Mon Feb 09 16:19:15 KST 2026
+base.0=C\:\\Users\\66683\\OneDrive\\바탕 화면\\연구자동화\\stock-empire\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

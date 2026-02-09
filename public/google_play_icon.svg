@@ -1,0 +1,45 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iconGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDE68A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D97706;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#78350F;stop-opacity:1" />
+    </linearGradient>
+    <filter id="iconGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- 배경: 둥근 사각형 (플레이스토어 표준 대응) -->
+  <rect width="512" height="512" rx="100" fill="#0F172A"/>
+  
+  <!-- 중앙 황금 물소 심볼 -->
+  <g transform="translate(256, 240) scale(2.5)">
+    <!-- 뿔과 상단 얼굴 -->
+    <path d="M-60,-90 
+             C-50,-60 -30,-40 -10,-30
+             C-7,-20 -5,-10 -5,10
+             L0,30
+             L5,10
+             C5,-10 7,-20 10,-30
+             C30,-40 50,-60 60,-90
+             C40,-70 20,-60 5,-55
+             C7,-50 10,-40 10,-30
+             H-10
+             C-10,-40 -7,-50 -5,-55
+             C-20,-60 -40,-70 -60,-90 Z" 
+          fill="url(#iconGold)" filter="url(#iconGlow)"/>
+    
+    <!-- 얼굴 하단 (V라인) -->
+    <path d="M0,30 
+             L-20,40
+             C-10,50 -5,55 0,65
+             C5,55 10,50 20,40
+             Z" 
+          fill="url(#iconGold)" />
+  </g>
+  
+  <!-- 하단 무늬 (상승 차트 느낌) -->
+  <path d="M100 450 L150 400 L200 420 L300 350 L412 450" fill="none" stroke="#00FFBD" stroke-width="8" stroke-linecap="round" opacity="0.5" filter="url(#iconGlow)"/>
+</svg>

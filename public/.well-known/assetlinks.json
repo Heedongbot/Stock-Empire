@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.stockempire.app",
+            "sha256_cert_fingerprints": [
+                "C2:3E:33:6D:A6:7F:51:83:66:FF:5B:76:E5:AA:4B:88:7A:D7:F6:73:33:B1:BA:AC:19:7C:8E:AF:99:F8:8D:92"
+            ]
+        }
+    }
+]
