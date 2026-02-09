@@ -156,47 +156,59 @@ class TistoryAutoPoster:
             write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/newpost"
             print(f"[INFO] Navigating to: {write_url}")
             self.driver.get(write_url)
-            time.sleep(5) # 에디터 로딩시간 충분히 확보
+            time.sleep(7) # 에디터 로딩시간 충분히 확보
+            print(f"[INFO] Current URL after navigation: {self.driver.current_url}")
 
             # 1. 제목 입력 (팝업 처리 포함)
-            print("[INFO] Waiting for editor to load...")
-            time.sleep(5) # 페이지 완전 로딩 대기
+            print("[INFO] Clearing potential blocking layers...")
             
-            # 혹시 모를 팝업/모달 닫기 (새 에디터 안내 등)
+            # 혹시 모를 팝업/모달 전방위 소탕 (KR 텍스트 포함)
             try:
-                popups = self.driver.find_elements(By.CSS_SELECTOR, ".btn_close, .close, .modal-close")
-                for p in popups:
-                    if p.is_displayed():
-                        p.click()
-                        print("[INFO] Closed a popup.")
+                # 1) 일반적인 닫기 버튼
+                popups = self.driver.find_elements(By.CSS_SELECTOR, ".btn_close, .close, .modal-close, button[class*='close']")
+                # 2) 텍스트 기반 닫기/확인 버튼 (XPATH)
+                text_buttons = self.driver.find_elements(By.XPATH, "//button[contains(text(), '닫기') or contains(text(), '확인') or contains(text(), '다음') or contains(text(), '동의')]")
+                
+                for btn in (popups + text_buttons):
+                    if btn.is_displayed():
+                        print(f"[INFO] Clicking blocking element: {btn.text or 'Popup'}")
+                        self.driver.execute_script("arguments[0].click();", btn)
+                        time.sleep(1)
             except: pass
 
+            print("[INFO] Attempting to find Title input...")
             try:
-                # 1. 제목 입력 시도 (ID: title-field 가 표준)
-                title_input = WebDriverWait(self.driver, 20).until(
+                # 1. 표준 ID 시도
+                title_input = WebDriverWait(self.driver, 15).until(
                     EC.element_to_be_clickable((By.ID, "title-field"))
                 )
-            except Exception as e:
-                print("[WARN] title-field not clickable, trying all possible selectors...")
-                self.driver.save_screenshot("post_debug_before_title.png")
-                # Fallback: 모든 제목 형태의 input 검색
-                selectors = ["#title-field", "input[placeholder*='제목']", ".textarea_tit", "#tx_article_title"]
-                title_input = None
-                for selector in selectors:
-                    try:
-                        title_input = self.driver.find_element(By.CSS_SELECTOR, selector)
-                        if title_input: break
-                    except: continue
+            except:
+                print("[WARN] title-field not clickable, trying JS fallback...")
+                # JS로 강제 검색 및 포커스
+                js_title_finder = """
+                    var selectors = ["#title-field", "input[placeholder*='제목']", ".textarea_tit", "#tx_article_title"];
+                    for(var s of selectors) {
+                        var el = document.querySelector(s);
+                        if(el) {
+                            el.focus();
+                            return el;
+                        }
+                    }
+                    return null;
+                """
+                title_input = self.driver.execute_script(js_title_finder)
                 
                 if not title_input:
-                    print("[ERROR] Title input not found. Saving source...")
+                    print("[ERROR] Title input not found by all means. Saving source...")
+                    self.driver.save_screenshot("post_error_final.png")
                     with open("post_error_source.html", "w", encoding="utf-8") as f:
                         f.write(self.driver.page_source)
                     return False
             
-            title_input.clear()
+            # 제목 입력
+            self.driver.execute_script("arguments[0].value = '';", title_input)
             title_input.send_keys(title)
-            print("[INFO] Title entered.")
+            print("[INFO] Title entered successfully.")
             time.sleep(2)
             
             # 2. 태그 입력
