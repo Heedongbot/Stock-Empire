@@ -182,6 +182,15 @@ class TistoryAutoPoster:
                 
                 # 6. 로그인 버튼 클릭
                 try:
+                    # [추가] 기기 신뢰 체크박스 처리
+                    trust_checkbox = self.driver.find_elements(By.CSS_SELECTOR, "input[type='checkbox'], .lab_check")
+                    for chk in trust_checkbox:
+                        try:
+                            inner = chk.get_attribute("innerText") or ""
+                            if "기기" in inner or "신뢰" in inner:
+                                self.driver.execute_script("arguments[0].click();", chk)
+                        except: pass
+                    
                     submit_btn = self.driver.find_element(By.CSS_SELECTOR, ".btn_g.highlight.submit, button[type='submit']")
                     self.driver.execute_script("arguments[0].click();", submit_btn)
                 except:
@@ -191,18 +200,24 @@ class TistoryAutoPoster:
                 
                 # 7. 성공 확인 (로그인 후 티스토리 홈 또는 관리자로 돌아오는지)
                 start_time = time.time()
-                while time.time() - start_time < 45:
+                while time.time() - start_time < 60:
                     curr_url = self.driver.current_url
+                    print(f"[DEBUG] Login URL: {curr_url}")
                     
                     # 카카오 보안/확인 페이지 처리
                     if "kakao.com" in curr_url:
+                        if "confirm" in curr_url or "security" in curr_url:
+                            print("[ALERT] 🚨 카카오 2단계 인증이 필요한 상황입니다!")
+                            print("[ALERT] 대표님 핸드폰 카카오톡 메시지를 확인하시고 '예, 제가 로그인했습니다'를 눌러주세요!")
+                        
                         try:
                             # '확인' 또는 '계속하기' 버튼 찾기
-                            cont_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의')]")
-                            if cont_btns:
-                                print(f"[INFO] 카카오 중간 확인 페이지 버튼 클릭: {cont_btns[0].text}")
-                                self.driver.execute_script("arguments[0].click();", cont_btns[0])
-                                time.sleep(2)
+                            cont_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용')]")
+                            for btn in cont_btns:
+                                if btn.is_displayed():
+                                    print(f"[INFO] 카카오 리다이렉트 버튼 클릭: {btn.text}")
+                                    self.driver.execute_script("arguments[0].click();", btn)
+                                    time.sleep(2)
                         except: pass
                     
                     # 로그인 성공 상태 확인
@@ -211,15 +226,16 @@ class TistoryAutoPoster:
                         time.sleep(3) # 안정화를 위해 조금 더 대기
                         return True
                     
-                    time.sleep(2)
+                    time.sleep(3)
                 
                 print("[WARN] 자동 리다이렉트 감지 실패. 최종 세션 체크 중...")
                 self.driver.get(f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/posts")
-                time.sleep(3)
+                time.sleep(5)
                 if "auth/login" not in self.driver.current_url:
                     print("[SUCCESS] 최종 세션 확인 완료!")
                     return True
                 else:
+                    self.driver.save_screenshot("login_failure_final.png")
                     return False
 
             except Exception as e:
