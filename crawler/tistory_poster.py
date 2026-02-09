@@ -10,8 +10,9 @@ import time
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables (Absolute Path Target)
+env_path = os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env")
+load_dotenv(env_path)
 
 # ==============================================================================
 # [설정] 티스토리 정보

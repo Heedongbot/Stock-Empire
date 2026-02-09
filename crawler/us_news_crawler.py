@@ -15,8 +15,10 @@ from deep_translator import GoogleTranslator
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# Load local environment variables
-load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'), override=True)
+# Load environment variables (Absolute Path Target)
+env_path = os.path.join(os.path.expanduser("~"), "Stock-Empire", ".env")
+load_dotenv(env_path)
+print(f"[INFO] Loading Environment Variables from {env_path}")
 
 class StockNewsCrawler:
     def __init__(self):
