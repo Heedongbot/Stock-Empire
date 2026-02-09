@@ -1,9 +1,5 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-from datetime import datetime
-import time
-
+import sys
+import io
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -13,6 +9,15 @@ import time
 import random
 from openai import OpenAI
 from dotenv import load_dotenv
+
+# Force UTF-8 encoding for stdout/stderr to avoid CP949 errors on Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # 환경 변수 로드
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.local'), override=True)
@@ -177,7 +182,10 @@ class KRNewsCrawler:
                     
                     # 포스팅 실행
                     poster = TistoryAutoPoster()
-                    poster.post(title=blog_title, content=blog_content, tags=tags)
+                    poster.setup_driver()
+                    if poster.login():
+                        poster.post(title=blog_title, content=blog_content, tags=",".join(tags))
+                    poster.close()
                     
                 except Exception as e:
                     print(f"[ERROR] Auto-posting failed: {e}")

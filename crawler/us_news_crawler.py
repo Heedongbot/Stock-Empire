@@ -4,6 +4,8 @@ US Stock News Crawler (Live & Translated)
 - Feature: Korean Translation, Breaking News Detection, 30-min Interval
 """
 
+import sys
+import io
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -14,6 +16,15 @@ import random
 from deep_translator import GoogleTranslator
 from openai import OpenAI
 from dotenv import load_dotenv
+
+# Force UTF-8 encoding for stdout/stderr to avoid CP949 errors on Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Load environment variables (Multi-Path Attempt + Manual Parser)
 def robust_load_env():

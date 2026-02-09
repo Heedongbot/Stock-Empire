@@ -1,3 +1,7 @@
+import sys
+import io
+import os
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -6,11 +10,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-import time
-import os
 from dotenv import load_dotenv
 
-# Load environment variables (Extra Robust Manual Parser)
+# Force UTF-8 encoding for stdout/stderr to avoid CP949 errors on Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 def robust_load_env():
     print("[INFO] Starting robust_load_env sequence...")
     env_paths = [
@@ -228,9 +237,17 @@ class TistoryAutoPoster:
     def post(self, title, content, tags=""):
         print(f"[INFO] Posting to Tistory: {title}")
         try:
-            # 글쓰기 페이지 이동 (manage/newpost 가 진짜 주소입니다!)
             write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/newpost"
             print(f"[INFO] Navigating to: {write_url}")
+            
+            # Ensure driver is ready
+            if not self.driver:
+                print("[INFO] Auto-initializing driver for post...")
+                self.setup_driver()
+                if not self.login():
+                    print("[ERROR] Failed to login during auto-init. Aborting post.")
+                    return False
+
             self.driver.get(write_url)
             time.sleep(5)
             

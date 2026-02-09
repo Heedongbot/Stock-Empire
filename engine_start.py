@@ -5,9 +5,11 @@ import os
 
 def run_process(command, name):
     print(f"[INFO] Starting {name}...")
-    # -u 옵션을 추가하여 실시간 로그 기록 강제
+    # -u 옵션을 추가하여 실시간 로그 기록 강제, 인코딩 환경변수 추가
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
     full_command = command.replace("python3", "python3 -u").replace(sys.executable, f"{sys.executable} -u")
-    return subprocess.Popen(full_command, shell=True)
+    return subprocess.Popen(full_command, shell=True, env=env)
 
 def main():
     print("=" * 60)
