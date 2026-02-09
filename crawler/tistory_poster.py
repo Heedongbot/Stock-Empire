@@ -233,37 +233,40 @@ class TistoryAutoPoster:
                             self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
-                            # [최종 강화] 모든 가능한 긍정 버튼 텍스트 대응
-                            xpath_query = "//button[contains(.,'계속') or contains(.,'확인') or contains(.,'동의') or contains(.,'허용') or contains(.,'완료') or contains(.,'로그인') or contains(.,'가기') or contains(.,'시작하기') or contains(.,'다음에') or contains(.,'나중에') or contains(.,'변경') or contains(.,'Skip') or contains(.,'Later') or contains(.,'Agree') or contains(.,'Accept')]"
+                            # 1. 계정 선택 화면인 경우 (prompt=select_account)
+                            if "select_account" in curr_url or "authorize" in curr_url:
+                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email, .txt_id, .tit_item, .link_account, [class*='profile'], [class*='account']")
+                                for link in account_links:
+                                    try:
+                                        if link.is_displayed():
+                                            inner_text = (link.text or link.get_attribute("innerText") or "").strip()
+                                            # 대표님 계정 이메일 조각이나 프로필이 보이면 즉시 클릭
+                                            if not inner_text or user_id[:5] in inner_text or "gmlehd" in inner_text:
+                                                print(f"[INFO] 계정/프로필 감지 및 클릭 시도: {inner_text[:15]}...")
+                                                self.driver.execute_script("arguments[0].click();", link)
+                                                time.sleep(2)
+                                                break
+                                    except: pass
+
+                            # 2. 모든 가능한 긍정 버튼 전방위 클릭
+                            xpath_query = "//button[contains(.,'계속') or contains(.,'확인') or contains(.,'동의') or contains(.,'허용') or contains(.,'완료') or contains(.,'로그인') or contains(.,'가기') or contains(.,'시작하기') or contains(.,'다음에') or contains(.,'나중에') or contains(.,'변경') or contains(.,'Skip') or contains(.,'Later') or contains(.,'Agree') or contains(.,'Accept') or contains(.,'Continue') or contains(.,'Log In')]"
                             cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
                             
-                            # [추가] 계정 선택 화면 대응 (li 태그 안의 프로필 링크 등)
-                            try:
-                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email, .txt_id, .tit_item, .link_account")
-                                for link in account_links:
-                                    inner_text = link.text or link.get_attribute("innerText") or ""
-                                    if user_id in inner_text or "gmlehd" in inner_text:
-                                        print(f"[INFO] 계정 선택 감지 및 클릭: {inner_text[:15]}...")
-                                        self.driver.execute_script("arguments[0].click();", link)
-                                        time.sleep(4)
-                            except: pass
-
-                            # [추가] 모든 'btn_g highlihgt' 클래스 (카카오/티스토리 공통 주요 버튼)
-                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm, .btn_confirm2, button[type='submit']")
+                            # 클래스 기반 주요 버튼 추가 수집
+                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g, .btn_confirm, .submit, .btn_login, .btn_confirm2, button[type='submit'], .link_done")
                             
-                            all_clickable = cont_btns + primary_btns
-                            for btn in all_clickable:
+                            for btn in (cont_btns + primary_btns):
                                 try:
                                     if btn.is_displayed() and btn.is_enabled():
                                         btn_text = (btn.text or btn.get_attribute("innerText") or "Action").strip()
-                                        if btn_text and len(btn_text) < 20: # 너무 긴 텍스트는 제외
+                                        if btn_text and len(btn_text) < 30:
                                             print(f"[INFO] 인터랙션 버튼 클릭 시도: {btn_text}")
                                             self.driver.execute_script("arguments[0].click();", btn)
-                                            time.sleep(3)
+                                            time.sleep(2)
                                 except: pass
                         except: pass
                         
-                        # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
+                        # 장면 저장
                         self.driver.save_screenshot("debug_login_current.png")
                     
                     # 로그인 성공 상태 확인 (URL 변화 외에도 '글쓰기'나 '로그아웃' 버튼이 보이면 성공으로 간주)
