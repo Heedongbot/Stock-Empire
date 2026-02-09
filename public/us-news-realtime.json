@@ -1,10 +1,29 @@
 [
   {
-    "id": "yh_-1718724683980328079",
-    "timestamp": "2026-02-09T11:08:33.276616",
+    "id": "yh_1503132068271938228",
+    "timestamp": "2026-02-09T11:13:39.571217",
+    "source": "Yahoo Finance",
+    "link": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-refinance-rates-today-monday-february-9-2026-110100339.html",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "free_tier": {
+      "title": "2026년 2월 9일 오늘의 모기지 및 재융자 이자율: 낮은 이자율은 경제적 요인에 따라 달라집니다.",
+      "summary_kr": ""
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "impact_score": 90,
+        "summary_kr": "모기지 및 재융자 금리는 경제적 요인에 따라 좌우되며, 이는 주식 시장 전반에 영향을 미칠 수 있습니다.",
+        "is_indicator": true
+      }
+    }
+  },
+  {
+    "id": "yh_-2370164894640992009",
+    "timestamp": "2026-02-09T11:14:08.934121",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "BULLISH",
+    "sentiment": "NEUTRAL",
     "is_breaking": true,
     "free_tier": {
       "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
@@ -13,7 +32,7 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주에 발표될 CPI 및 지표들은 인플레이션과 고용 데이터에 대한 투자자들의 신뢰도를 좌우하며, 이는 주식시장에서 큰 변동성을 초래할 수 있다.",
+        "summary_kr": "이번 주 발표될 인플레이션 데이터와 지연된 1월 고용보고서는 투자자들에게 중요한 신호가 될 것으로 보이며, 이는 주식 가격에 큰 영향을 미칠 수 있습니다.",
         "is_indicator": true
       }
     }
