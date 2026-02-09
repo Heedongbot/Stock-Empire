@@ -1,7 +1,7 @@
 [
   {
-    "id": "yh_1503132068271938228",
-    "timestamp": "2026-02-09T11:13:39.571217",
+    "id": "yh_-3021198464104865963",
+    "timestamp": "2026-02-09T11:16:14.585974",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-refinance-rates-today-monday-february-9-2026-110100339.html",
     "sentiment": "NEUTRAL",
@@ -13,17 +13,36 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "모기지 및 재융자 금리는 경제적 요인에 따라 좌우되며, 이는 주식 시장 전반에 영향을 미칠 수 있습니다.",
+        "summary_kr": "2026년 2월 9일 현재의 낮은 모기지 및 재융자 금리는 경제적 요인에 따라 주가의 방향성을 결정짓는 중요한 신호입니다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_-2370164894640992009",
-    "timestamp": "2026-02-09T11:14:08.934121",
+    "id": "yh_-5690670811085357787",
+    "timestamp": "2026-02-09T11:16:33.660569",
+    "source": "Yahoo Finance",
+    "link": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-waver-as-dow-looks-to-keep-rallying-above-50000-001401373.html",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "free_tier": {
+      "title": "오늘의 주식 시장: 다우가 50,000 이상으로 계속 상승할 것으로 예상됨에 따라 다우, S&P 500, 나스닥 선물이 흔들리고 있습니다.",
+      "summary_kr": ""
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "impact_score": 90,
+        "summary_kr": "현재 경제 지표와 시장 유동성의 연관성이 명확하게 드러나면서 주식 시장은 긍정적인 영향을 받을 전망입니다.",
+        "is_indicator": true
+      }
+    }
+  },
+  {
+    "id": "yh_-3581730396158062943",
+    "timestamp": "2026-02-09T11:16:43.265460",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BULLISH",
     "is_breaking": true,
     "free_tier": {
       "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
@@ -32,7 +51,7 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주 발표될 인플레이션 데이터와 지연된 1월 고용보고서는 투자자들에게 중요한 신호가 될 것으로 보이며, 이는 주식 가격에 큰 영향을 미칠 수 있습니다.",
+        "summary_kr": "이번 주 발표될 인플레이션 데이터와 지연된 1월 고용 보고서는 주식 가격에 중대한 영향을 미칠 수 있으므로, 투자자들은 이에 주의를 기울여야 합니다.",
         "is_indicator": true
       }
     }
