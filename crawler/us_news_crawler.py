@@ -124,28 +124,33 @@ class StockNewsCrawler:
             }
         
         prompt = f"""
-        Analyze this US stock market news:
+        Analyze this US market news for professional stock traders:
         Title: {item['title']}
-        Summary: {item['excerpt']}
+        Excerpt: {item['excerpt']}
         
-        Provide a 1-sentence expert insight in Korean. 
-        Rate impact (0-100) and sentiment (BULLISH/BEARISH/NEUTRAL).
-        Return JSON format: {{"impact_score": int, "summary_kr": str, "market_sentiment": str}}
+        Focus ONLY on financial impact. If the news is not directly related to stock prices, economic data, or market trends, rate it low.
+        Return JSON format: 
+        {{
+            "impact_score": int (0-100, how much will this move the market?),
+            "summary_kr": "1-sentence sharp expert analysis in Korean explaining WHY this makes money or saves money",
+            "market_sentiment": "BULLISH/BEARISH/NEUTRAL"
+        }}
         """
         
         try:
             response = self.client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}],
-                response_format={{ "type": "json_object" }}
+                response_format={ "type": "json_object" }
             )
-            return json.loads(response.choices[0].message.content)
+            analysis = json.loads(response.choices[0].message.content)
+            
+            # Filter out "trash" news - only high impact or extreme sentiment
+            if analysis['impact_score'] < 30 and analysis['market_sentiment'] == 'NEUTRAL':
+                return None
+            return analysis
         except:
-            return {
-                'impact_score': 50,
-                'summary_kr': item['excerpt_kr'],
-                'market_sentiment': 'NEUTRAL'
-            }
+            return None
 
     def crawl_all_sources(self, limit=10):
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Crawling US Market News...")
