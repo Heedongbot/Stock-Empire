@@ -1,26 +1,7 @@
 [
   {
-    "id": "yh_-7381628544014035636",
-    "timestamp": "2026-02-09T11:32:36.035195",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-as-dow-looks-to-keep-rallying-above-50000-001401715.html",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "오늘의 주식 시장: Dow, S&P 500, Nasdaq 선물은 Dow가 50,000 이상으로 계속 상승할 것으로 예상됨에 따라 하락했습니다.",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "현재 다우 지수가 50,000을 유지하려는 배경은 투자심리에 긍정적인 영향을 미치지만, 전반적인 시장 상승 모멘텀에는 인플레이션 압력과 금리 결정 요인이 더욱 중요하다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_1177302098234603239",
-    "timestamp": "2026-02-09T11:32:38.241451",
+    "id": "yh_9185680652288377742",
+    "timestamp": "2026-02-09T11:38:04.784356",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/us-software-stocks-tumble-sparks-110304896.html",
     "sentiment": "BEARISH",
@@ -31,15 +12,15 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "AI 관련 주식의 급락은 투자자들에게 경제 전반의 불안감을 주며, 특히 기술주에 대한 시장 심리가 위축될 수 있습니다.",
+        "impact_score": 70,
+        "summary_kr": "AI 관련 주식의 하락은 시장 전반에 걸쳐 조정 신호를 시사하며, 이는 투자자들의 심리에 부정적인 영향을 미칠 수 있다.",
         "is_indicator": false
       }
     }
   },
   {
-    "id": "yh_-92301326408026113",
-    "timestamp": "2026-02-09T11:32:40.593121",
+    "id": "yh_1789054843799952916",
+    "timestamp": "2026-02-09T11:38:06.962046",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-refinance-rates-today-monday-february-9-2026-110100339.html",
     "sentiment": "BULLISH",
@@ -51,14 +32,33 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "금리가 낮으면 대출과 소비자 지출이 증가할 수 있어 주식 시장에 긍정적인 영향을 미칩니다.",
+        "summary_kr": "저금리는 경제 전반에 긍정적인 영향을 미쳐 주식 시장 상승으로 이어질 가능성이 높습니다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_5713566396525221327",
-    "timestamp": "2026-02-09T11:33:09.244963",
+    "id": "yh_3771390583483201065",
+    "timestamp": "2026-02-09T11:38:29.910153",
+    "source": "Yahoo Finance",
+    "link": "https://finance.yahoo.com/news/the-white-house-says-it-wants-a-strong-us-dollar-investors-are-still-keeping-their-distance-140014369.html",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "free_tier": {
+      "title": "백악관은 미국 달러 강세를 원한다고 밝혔습니다. 투자자들은 여전히 ​​거리를 두고 있다.",
+      "summary_kr": ""
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "impact_score": 85,
+        "summary_kr": "강한 달러는 미국 기업의 해외 수익에 부정적 영향을 미치지만, 이는 물가 안정을 통해 침체를 방지할 수 있다는 점에서 중요하다.",
+        "is_indicator": true
+      }
+    }
+  },
+  {
+    "id": "yh_-1678347489846149847",
+    "timestamp": "2026-02-09T11:38:34.896823",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
     "sentiment": "NEUTRAL",
@@ -70,7 +70,7 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주 소비자 물가 지수(CPI)와 지연된 1월 고용 보고서는 금리와 인플레이션 전망에 중대한 영향을 미치며, 이는 주식 가격 결정에 불가결하다.",
+        "summary_kr": "이번 인플레이션 데이터와 1월 고용보고서 지연은 시장의 방향성을 결정하는 중요한 변수로, 주가에 직접적인 영향을 미칠 수 있습니다.",
         "is_indicator": true
       }
     }
