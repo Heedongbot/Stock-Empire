@@ -16,7 +16,6 @@ import os
 TISTORY_ID = "66683300hd@gmail.com"
 TISTORY_PW = "gmlehd05"
 BLOG_URL = "https://stock-empire.tistory.com"
-CHROME_BINARY_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 # ==============================================================================
 
 class TistoryAutoPoster:
@@ -24,18 +23,22 @@ class TistoryAutoPoster:
         self.driver = None
 
     def setup_driver(self):
-        print("[INFO] Setting up Chrome Driver...")
+        print("[INFO] Setting up Headless Chrome Driver for Linux...")
         options = Options()
-        if os.path.exists(CHROME_BINARY_PATH):
-            options.binary_location = CHROME_BINARY_PATH
-            print(f"[INFO] Using Chrome binary at: {CHROME_BINARY_PATH}")
-        
-        options.add_argument("--start-maximized")
-        options.add_argument("--disable-gpu")
+        options.add_argument("--headless=new") # 리눅스 서버용 무인 모드
         options.add_argument("--no-sandbox")
-        # options.add_argument("--headless") # 디버깅을 위해 headless 끔
-
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        
+        try:
+            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        except Exception as e:
+            print(f"[ERROR] Driver setup failed: {e}")
+            # Fallback for Ubuntu
+            options.binary_location = "/usr/bin/google-chrome"
+            self.driver = webdriver.Chrome(options=options)
 
     def login(self):
         if not self.driver: self.setup_driver()
@@ -115,8 +118,8 @@ class TistoryAutoPoster:
                 if title_input:
                     title_input.click()
                     time.sleep(0.5)
-                    pyperclip.copy(title)
-                    webdriver.ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+                    # 리눅스에서는 pyperclip 대신 바로 입력
+                    title_input.send_keys(title)
                 else:
                     raise Exception("Title input not found")
             except Exception as e:
@@ -183,19 +186,18 @@ class TistoryAutoPoster:
 
                 if switched:
                     print("[INFO] JS Switched to HTML mode.")
-                    
-                    # HTML 모드에서는 textarea나 CodeMirror에 포커스를 줘야 함
-                    # JS로 포커스 강제
-                    self.driver.execute_script("var cm = document.querySelector('.CodeMirror'); if(cm && cm.CodeMirror) cm.CodeMirror.focus();")
-                    time.sleep(0.5)
-
-                    webdriver.ActionChains(self.driver).send_keys(Keys.END).perform() # 맨 뒤로
-                    time.sleep(0.5)
-                    webdriver.ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+                    # JS로 직접 본문 내용 주입 (가장 확실함)
+                    self.driver.execute_script(f"""
+                        var cm = document.querySelector('.CodeMirror');
+                        if(cm && cm.CodeMirror) {{
+                            cm.CodeMirror.setValue(`{content}`);
+                        }} else {{
+                            document.querySelector('#tinymce').innerHTML = `{content}`;
+                        }}
+                    """)
                 else:
                     print("[WARN] HTML mode switch failed. Pasting as text.")
-                    body_input.click()
-                    webdriver.ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+                    body_input.send_keys(content)
 
             except Exception as e:
                 print(f"[ERROR] Content input failed: {e}")

@@ -6,7 +6,7 @@ deep-translator==1.11.4
 openai==1.10.0
 python-dotenv==1.0.1
 lxml==5.1.0
-yfinance==0.2.36
+yfinance==0.2.37
 pandas==2.2.0
 numpy==1.26.3
 schedule==1.2.1
