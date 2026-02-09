@@ -31,7 +31,28 @@ interface AlphaSignal {
 function VVIPAlphaContent() {
     const [signals, setSignals] = useState<AlphaSignal[]>([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [scanning, setScanning] = useState(false);
     const { user } = useAuth();
+
+    const handleDeepScan = async () => {
+        if (!searchTerm) return;
+        setScanning(true);
+        try {
+            const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            // 실시간 분석 결과 목록 처음에 추가
+            setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
+        } catch (e) {
+            console.error("Deep Scan failed", e);
+        } finally {
+            setScanning(false);
+        }
+    };
     useEffect(() => {
         fetchSignals();
     }, []);
@@ -78,21 +99,34 @@ function VVIPAlphaContent() {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4 w-full md:w-auto">
-                        <div className="flex-1 md:flex-none relative">
+                    <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                        <div className="flex-1 md:flex-none relative w-full md:w-80 group">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                             <input
                                 type="text"
-                                placeholder="데이터 모니터링..."
-                                className="bg-slate-900 border border-slate-800 rounded-2xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-[#00ffbd]/50 w-full"
+                                placeholder="데이터 즉시 분석 (티커 입력)..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
+                                className="bg-slate-900 border border-slate-800 rounded-2xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-[#00ffbd]/50 w-full transition-all"
                             />
                         </div>
-                        <button
-                            onClick={fetchSignals}
-                            className="p-3 bg-slate-900 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all active:scale-95"
-                        >
-                            <RefreshCw className={`w-5 h-5 text-slate-400 ${loading ? 'animate-spin' : ''}`} />
-                        </button>
+                        <div className="flex gap-2 w-full md:w-auto">
+                            <button
+                                onClick={handleDeepScan}
+                                disabled={scanning || !searchTerm}
+                                className={`flex-1 md:flex-none px-6 py-3 bg-gradient-to-tr from-[#00ffbd] to-blue-600 text-black text-[10px] font-black uppercase tracking-widest rounded-2xl hover:scale-105 transition-all shadow-lg shadow-[#00ffbd]/10 flex items-center justify-center gap-2 ${scanning ? 'animate-pulse opacity-70' : ''}`}
+                            >
+                                {scanning ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
+                                {scanning ? 'SCANNING' : 'DEEP SCAN'}
+                            </button>
+                            <button
+                                onClick={fetchSignals}
+                                className="p-3 bg-slate-900 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all active:scale-95"
+                            >
+                                <RefreshCw className={`w-5 h-5 text-slate-400 ${loading ? 'animate-spin' : ''}`} />
+                            </button>
+                        </div>
                     </div>
                 </div>
 

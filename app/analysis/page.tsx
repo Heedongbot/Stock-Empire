@@ -158,8 +158,15 @@ function AnalysisContent() {
                         <p className="text-slate-500 text-xs font-black uppercase tracking-[0.5em] animate-pulse">알파 데이터 동기화 중...</p>
                     </div>
                 ) : filteredSignals.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 animate-fade-in-up">
-                        <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-12 text-center">현재 분석중인 종목이 없습니다. <br /> 잠시 후 다시 확인해주세요.</p>
+                    <div className="flex flex-col items-center justify-center py-32 animate-fade-in-up text-center">
+                        <X className="w-12 h-12 text-slate-800 mb-6" />
+                        <h3 className="text-xl font-black text-white italic uppercase tracking-tighter mb-4">
+                            No Local Analysis Found
+                        </h3>
+                        <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-12 max-w-md">
+                            "{searchTerm}" 에 대한 로컬 분석 데이터가 없습니다. <br />
+                            상단의 <span className="text-[#00ffbd]">Deep Scan</span> 버튼을 눌러 실시간 AI 분석을 시작하시겠습니까?
+                        </p>
                         <DonationSection />
                     </div>
                 ) : (
