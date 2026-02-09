@@ -116,6 +116,66 @@ export default function Home() {
       {/* 💸 후원 및 스폰서십 섹션 */}
       <SponsorshipSection />
 
+      {/* LIVE ALPHA SIGNALS (MAIN PAGE - FULL OPEN) */}
+      <section className="max-w-7xl mx-auto px-8 py-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10" />
+
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-5 h-5 text-[#00ffbd] fill-[#00ffbd]" />
+              <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">Live Alpha Signals</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
+              Market <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffbd] to-blue-500">Breakthroughs</span>
+            </h2>
+          </div>
+          <Link href="/analysis" className="text-xs font-black text-slate-500 hover:text-[#00ffbd] uppercase tracking-widest flex items-center gap-2 transition-colors">
+            전체 분석 보기 <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {loading ? (
+          <div className="flex gap-4 overflow-hidden">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="min-w-[300px] h-64 bg-slate-900/30 border border-slate-800 rounded-3xl animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {signals.slice(0, 4).map((sig, idx) => (
+              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="px-2 py-1 bg-slate-950 border border-slate-800 rounded text-[10px] font-black text-white">{sig.ticker}</div>
+                  <div className={`text-[10px] font-black uppercase tracking-widest ${sig.sentiment === 'BULLISH' ? 'text-[#00ffbd]' : 'text-[#ff4d4d]'}`}>
+                    {sig.sentiment}
+                  </div>
+                </div>
+                <h3 className="text-lg font-black text-white mb-4 uppercase truncate">{sig.name}</h3>
+                <div className="space-y-4 mb-6">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-500 font-bold uppercase">Confidence</span>
+                    <span className="text-[#00ffbd] font-black">{sig.impact_score}%</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-slate-950/50 p-2 rounded-lg border border-slate-800">
+                      <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Target</div>
+                      <div className="text-xs font-black text-[#00ffbd]">${sig.target_price}</div>
+                    </div>
+                    <div className="bg-slate-950/50 p-2 rounded-lg border border-slate-800">
+                      <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Stop</div>
+                      <div className="text-xs font-black text-red-500">${sig.stop_loss}</div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-[10px] text-slate-400 leading-relaxed italic line-clamp-2">
+                  {sig.ai_reason}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
       {/* Sector Intelligence Section */}
       <section className="max-w-7xl mx-auto px-8 py-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -134,7 +194,7 @@ export default function Home() {
           {[
             { id: 'ai-revolution', name: 'AI 혁명', icon: Cpu, color: 'from-purple-600/20 to-indigo-600/5', tickers: ['NVDA', 'MSFT', 'PLTR'] },
             { id: 'ev-energy', name: 'EV & 클린 에너지', icon: Zap, color: 'from-green-600/20 to-emerald-600/5', tickers: ['TSLA', 'RIVN', 'ENPH'] },
-            { id: 'semiconductors', name: '반도체 가이츠', icon: ActivityIcon, color: 'from-blue-600/20 to-cyan-600/5', tickers: ['AMD', 'AVGO', 'INTC'] }, // Fixed duplicate NVDA in logic usually, but OK here
+            { id: 'semiconductors', name: '반도체 가이츠', icon: ActivityIcon, color: 'from-blue-600/20 to-cyan-600/5', tickers: ['AMD', 'AVGO', 'INTC'] },
             { id: 'fintech-crypto', name: '핀테크 & 크립토', icon: Milestone, color: 'from-orange-600/20 to-amber-600/5', tickers: ['COIN', 'PYPL', 'SQ'] }
           ].map((theme, i) => (
             <Link
@@ -178,8 +238,6 @@ export default function Home() {
         </div>
         <AdInFeed />
       </div>
-
-
 
       {/* Stats Summary Area */}
       <section className="py-24 px-8 max-w-7xl mx-auto text-center">

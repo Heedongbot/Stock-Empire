@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import {
     Activity, Zap, Target, ShieldAlert, ChevronRight,
     ArrowUpRight, BarChart3, TrendingUp,
-    Search, Cpu, X, Database, Lock
+    Search, Cpu, X, Database, Lock, RefreshCw
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { useAuth } from '@/lib/AuthContext';
@@ -39,7 +39,28 @@ function AnalysisContent() {
     const [filter, setFilter] = useState('ALL');
     const [selectedSignal, setSelectedSignal] = useState<AlphaSignal | null>(null);
     const [searchTerm, setSearchTerm] = useState(initialSearch);
+    const [scanning, setScanning] = useState(false);
 
+    const handleDeepScan = async () => {
+        if (!searchTerm) return;
+        setScanning(true);
+        try {
+            const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            // 실시간 분석 결과를 목록 처음에 추가하고 선택
+            setSelectedSignal(data);
+            setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
+        } catch (e) {
+            console.error("Deep Scan failed", e);
+            alert("분석 서버 연결에 실패했습니다.");
+        } finally {
+            setScanning(false);
+        }
+    };
 
     useEffect(() => {
         const fetchSignals = async () => {
@@ -94,15 +115,26 @@ function AnalysisContent() {
                     </div>
 
                     <div className="flex flex-col gap-6 w-full md:w-auto items-end">
-                        <div className="relative w-full md:w-80 group">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                            <input
-                                type="text"
-                                className="block w-full pl-11 pr-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-sm font-bold text-white placeholder-slate-600 focus:border-[#00ffbd] transition-all"
-                                placeholder="종목/티커 검색"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
+                        <div className="flex gap-3 w-full md:w-auto">
+                            <div className="relative w-full md:w-64 group">
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                                <input
+                                    type="text"
+                                    className="block w-full pl-11 pr-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-sm font-bold text-white placeholder-slate-600 focus:border-[#00ffbd] transition-all"
+                                    placeholder="익절/손절가 즉시 분석 (티커 입력)"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
+                                />
+                            </div>
+                            <button
+                                onClick={handleDeepScan}
+                                disabled={scanning}
+                                className={`px-6 py-3 bg-gradient-to-r from-[#00ffbd] to-blue-500 text-black text-xs font-black uppercase tracking-widest rounded-xl hover:scale-105 transition-all shadow-lg shadow-[#00ffbd]/20 flex items-center gap-2 ${scanning ? 'animate-pulse opacity-70' : ''}`}
+                            >
+                                {scanning ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
+                                {scanning ? 'Analyzing...' : 'Deep Scan'}
+                            </button>
                         </div>
 
                         <div className="flex flex-wrap gap-2 p-2 bg-slate-900/50 rounded-2xl border border-slate-800">
