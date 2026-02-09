@@ -233,24 +233,24 @@ class TistoryAutoPoster:
                             self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
-                            # [강화] 텍스트 기반 버튼 찾기 (한국어/영어 모두)
-                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'Next') or contains(text(),'Continue') or contains(text(),'Confirm') or contains(text(),'시작하기')]"
+                            # [강화] 텍스트 기반 버튼 찾기 (한국어/영어 모두 포함)
+                            # '다음에 하기', '나중에 변경' 등을 추가하여 비번 변경 창을 돌파
+                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'시작하기') or contains(text(),'다음에') or contains(text(),'나중에') or contains(text(),'변경') or contains(text(),'Skip') or contains(text(),'Later')]"
                             cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
                             
                             # [추가] 계정 선택 화면 대응 (prompt=select_account 상황)
                             try:
-                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email")
+                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email, .txt_id")
                                 for link in account_links:
                                     inner_text = link.text or link.get_attribute("innerText") or ""
-                                    if user_id in inner_text:
-                                        print(f"[INFO] 계정 선택 감지 및 클릭: {user_id}")
+                                    if user_id in inner_text or "gmlehd" in inner_text:
+                                        print(f"[INFO] 계정 선택 감지 및 클릭: {inner_text[:10]}...")
                                         self.driver.execute_script("arguments[0].click();", link)
-                                        time.sleep(3)
+                                        time.sleep(4) # 선택 후 좀 더 대기
                             except: pass
 
                             # [추가] 클래스명 기반 파란색/주요 버튼들 무조건 수집
-                            # 카카오의 주요 버튼 클래스들: .btn_g, .highlight, .btn_confirm, .submit
-                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm")
+                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm, .btn_confirm2")
                             
                             all_clickable = cont_btns + primary_btns
                             for btn in all_clickable:
@@ -258,7 +258,8 @@ class TistoryAutoPoster:
                                     btn_text = btn.text or btn.get_attribute("innerText") or "Action Button"
                                     print(f"[INFO] 카카오 인터랙션 버튼 감지 및 클릭 시도: {btn_text}")
                                     self.driver.execute_script("arguments[0].click();", btn)
-                                    time.sleep(2)
+                                    time.sleep(3) # 사람처럼 천천히
+                        except: pass
                         except: pass
                         
                         # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
