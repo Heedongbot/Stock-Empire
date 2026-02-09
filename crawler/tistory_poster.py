@@ -152,10 +152,11 @@ class TistoryAutoPoster:
     def post(self, title, content, tags=""):
         print(f"[INFO] Posting to Tistory: {title}")
         try:
-            # 글쓰기 페이지 이동
-            write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/post"
+            # 글쓰기 페이지 이동 (manage/newpost 가 진짜 주소입니다!)
+            write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/newpost"
+            print(f"[INFO] Navigating to: {write_url}")
             self.driver.get(write_url)
-            time.sleep(3)
+            time.sleep(5) # 에디터 로딩시간 충분히 확보
 
             # 1. 제목 입력 (더 길게 대기)
             print("[INFO] Waiting for editor to load...")
