@@ -37,9 +37,18 @@ class StockNewsCrawler:
         self.daily_post_count = 0
         self.last_post_date = datetime.now().date()
         
-        # Initialize OpenAI if key exists
+        # Environment variables are loaded in global scope
         api_key = os.getenv("OPENAI_API_KEY")
-        self.client = OpenAI(api_key=api_key) if api_key else None
+        if not api_key:
+            print("[ERROR] OPENAI_API_KEY not found in environment!")
+            self.client = None
+        else:
+            try:
+                # Direct initialization without extra parameters to avoid 'proxies' error
+                self.client = OpenAI(api_key=api_key)
+            except Exception as e:
+                print(f"[ERROR] OpenAI Client Init Failed: {e}")
+                self.client = None
         if self.client:
             print("[INFO] OpenAI Intelligence Engine: ACTIVE")
         else:
