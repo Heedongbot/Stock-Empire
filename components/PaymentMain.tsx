@@ -22,8 +22,26 @@ export default function PaymentModal({ isOpen, onClose, plan, onComplete, lang }
 
     if (!isOpen) return null;
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         setStep('PROCESSING');
+
+        // 실제 매출 트래킹 요청
+        try {
+            await fetch('/api/admin/track', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'PAYMENT',
+                    payload: {
+                        amount: plan === 'PRO' ? 29900 : 0,
+                        plan: plan
+                    }
+                })
+            });
+        } catch (e) {
+            console.error("Payment tracking failed", e);
+        }
+
         setTimeout(() => {
             setStep('SUCCESS');
             setTimeout(() => {

@@ -222,8 +222,11 @@ class StockNewsCrawler:
         return processed_news
 
     def save(self, data):
-        if not data: return
+        if not data:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] No news data to save.")
+            return
         clean_data = [item for item in data if item is not None]
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Attempting to save {len(clean_data)} items.")
         os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
         with open(self.output_path, 'w', encoding='utf-8') as f:
             json.dump(clean_data, f, ensure_ascii=False, indent=2)

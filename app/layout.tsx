@@ -10,6 +10,7 @@ import TickerTape from "@/components/TickerTape";
 import SiteFooter from "@/components/SiteFooter";
 import BottomNav from "@/components/BottomNav";
 import InstallPWA from "@/components/InstallPWA";
+import VisitorTracker from "@/components/VisitorTracker";
 import BreakingNewsToast from "./components/BreakingNewsToast";
 import Script from "next/script";
 
@@ -92,6 +93,7 @@ export default function RootLayout({
           // 정상 가동
           <ClerkProvider publishableKey={publishableKey} localization={koKR}>
             <AuthProvider>
+              <VisitorTracker />
               <TickerTape />
               <div className="pb-20 lg:pb-0">
                 {children}

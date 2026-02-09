@@ -187,4 +187,10 @@ class KRNewsCrawler:
             
 if __name__ == "__main__":
     crawler = KRNewsCrawler()
-    crawler.crawl()
+    print("Stock Empire KR Crawler Started (Interval: 30min)")
+    while True:
+        try:
+            crawler.crawl()
+        except Exception as e:
+            print(f"[ERROR] Main loop error: {e}")
+        time.sleep(1800)

@@ -20,7 +20,9 @@ export default function AdminPage() {
         lastBackup: "방금 전",
         systemStatus: "최적화됨",
         crawlerStatus: "대기 중",
-        timestamp: "-"
+        timestamp: "-",
+        todayVisitors: 0,
+        monthlyVisitors: 0
     });
 
     const [logs, setLogs] = useState([
@@ -135,6 +137,27 @@ export default function AdminPage() {
                         <div className="flex items-end justify-between relative z-10">
                             <h2 className="text-4xl font-black text-white tracking-tighter">{stats.revenue}</h2>
                             <TrendingUp className="text-amber-500 w-6 h-6 mb-1 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-green-500/30 transition-all group relative overflow-hidden">
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">오늘 다녀간 사람 (VISTORS)</p>
+                        <div className="flex items-end justify-between relative z-10">
+                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.todayVisitors.toLocaleString()}</h2>
+                            <div className="text-green-500 text-[10px] font-black flex items-center gap-1 mb-1">
+                                <Activity size={12} /> 실시간 추적 중
+                            </div>
+                        </div>
+                    </div>
+                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-purple-500/30 transition-all group relative overflow-hidden">
+                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">이달 다녀간 사람 (MONTHLY)</p>
+                        <div className="flex items-end justify-between relative z-10">
+                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.monthlyVisitors.toLocaleString()}</h2>
+                            <div className="text-purple-500 text-[10px] font-black flex items-center gap-1 mb-1">
+                                <BarChart3 size={12} /> 트래픽 요약
+                            </div>
                         </div>
                     </div>
                 </div>
