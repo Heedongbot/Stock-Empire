@@ -5,7 +5,9 @@ import os
 
 def run_process(command, name):
     print(f"[INFO] Starting {name}...")
-    return subprocess.Popen(command, shell=True)
+    # -u 옵션을 추가하여 실시간 로그 기록 강제
+    full_command = command.replace("python3", "python3 -u").replace(sys.executable, f"{sys.executable} -u")
+    return subprocess.Popen(full_command, shell=True)
 
 def main():
     print("=" * 60)
