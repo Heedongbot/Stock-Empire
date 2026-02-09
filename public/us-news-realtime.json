@@ -1,40 +1,552 @@
 [
   {
-    "id": "yh_-3555428506060540549",
-    "timestamp": "2026-02-09T11:55:37.284317",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-refinance-rates-today-monday-february-9-2026-110100339.html",
-    "sentiment": "NEUTRAL",
+    "id": "6363590676716521969",
+    "ticker": "MARKET",
+    "sentiment": "BULLISH",
     "is_breaking": true,
+    "published_at": "Mon, 04 Nov 2024 08:36:00 GMT",
     "free_tier": {
-      "title": "2026년 2월 9일 오늘의 모기지 및 재융자 이자율: 낮은 이자율은 경제적 요인에 따라 달라집니다.",
-      "summary_kr": ""
+      "title": "[돈 되는 시그널] Moncler가 입찰에 참여할 수 있다는 보도에 Burberry 주가 상승",
+      "title_en": "Burberry shares rise on report Moncler could bid for it",
+      "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/burberry-shares-rise-on-report-moncler-could-bid-for-it-9de42b98?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 90,
-        "summary_kr": "오늘 발표된 주택담보대출 및 재융자 금리는 경제적 요소에 따라 달라지며, 이는 소비자의 지출 능력과 기업 투자에 직접적인 영향을 미쳐 시장에 큰 중요성을 갖는다.",
-        "is_indicator": true
-      }
+        "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+        "impact_score": 92,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
     }
   },
   {
-    "id": "yh_6377708113310626537",
-    "timestamp": "2026-02-09T11:56:04.179197",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
+    "id": "5789903514067166978",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Wed, 04 Feb 2026 13:35:38 GMT",
     "free_tier": {
-      "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
-      "summary_kr": ""
+      "title": "[해외] 시판 전 가장 큰 움직임을 보이는 주식: AMD, Uber, Eli Lilly, Super Micro, Chipotle, Enphase 등",
+      "title_en": "Stocks making the biggest moves premarket: AMD, Uber, Eli Lilly, Super Micro, Chipotle, Enphase and more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/04/stocks-making-the-biggest-moves-premarket-amd-uber-lly-smcc-cmg-enph.html",
+      "original_source": "CNBC (Market)"
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 90,
-        "summary_kr": "이번 주의 소비자물가지수(CPI)와 '지연된' 1월 고용 보고서는 인플레이션 압력과 노동 시장 동향을 파악하는 데 핵심적이며, 이는 주식 가격에 직접적인 영향을 줄 수 있습니다.",
-        "is_indicator": true
-      }
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 54,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "9024257078477809527",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Mon, 09 Feb 2026 15:02:48 GMT",
+    "free_tier": {
+      "title": "[해외] 시판 전 가장 큰 움직임을 보이는 주식: Oracle, Novo Nordisk, Hims & Hers Health, Kroger 등",
+      "title_en": "Stocks making the biggest moves premarket: Oracle, Novo Nordisk, Hims & Hers Health, Kroger and more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/09/stocks-making-the-biggest-moves-premarket-oracle-novo-nordisk-hims-hers-health-kroger-and-more.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 66,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "5977161201501787645",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Mon, 02 Feb 2026 12:58:46 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 시판 전 가장 큰 움직임을 보이는 주식: Oracle, Nvidia, 희토류, 전략 등",
+      "title_en": "Stocks making the biggest moves premarket: Oracle, Nvidia, rare earths, Strategy & more",
+      "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/02/stocks-making-the-biggest-moves-premarket-orcl-nvda-dis-mstr.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 94,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6539380857065182927",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Mon, 28 Oct 2024 07:08:00 GMT",
+    "free_tier": {
+      "title": "[해외] Trainline은 올해 두 번째로 지침을 강화합니다.",
+      "title_en": "Trainline boosts guidance for the second time this year",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/trainline-boosts-guidance-for-the-second-time-this-year-513373f6?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 71,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "7589492422914104466",
+    "ticker": "MARKET",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "Wed, 30 Oct 2024 12:22:00 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 이익이 예상치에 미치지 못하자 Wingstop의 주가는 12% 하락했습니다.",
+      "title_en": "Wingstop’s stock slides 12% after profit falls short of estimates",
+      "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/wingstops-stock-slides-12-after-profit-falls-short-of-estimates-1146f0ec?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+        "impact_score": 97,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "338934103787139695",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Sat, 28 Dec 2024 00:32:00 GMT",
+    "free_tier": {
+      "title": "[해외] 트럼프, 대법원에 틱톡 금지 중단 요청",
+      "title_en": "Trump asks Supreme Court to pause TikTok ban",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/trump-asks-supreme-court-to-pause-tiktok-ban-2b724ae6?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 67,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "5631282694912785582",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Wed, 04 Feb 2026 22:05:57 GMT",
+    "free_tier": {
+      "title": "[해외] 정오에 가장 큰 움직임을 보이는 주식: MGM Resorts, Amgen, Advanced Micro Devices, Enphase 등",
+      "title_en": "Stocks making the biggest moves midday: MGM Resorts, Amgen, Advanced Micro Devices, Enphase & more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n정오 거래에서 가장 큰 움직임을 보이는 일부 주식을 확인하십시오....",
+      "link": "https://www.cnbc.com/2026/02/04/stocks-making-the-biggest-moves-midday-mgm-amgn-amd-enph.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n정오 거래에서 가장 큰 움직임을 보이는 일부 주식을 확인하십시오....",
+        "impact_score": 64,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "8565471105064530580",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Thu, 29 Jan 2026 22:50:30 GMT",
+    "free_tier": {
+      "title": "[해외] 영업시간 이후 가장 큰 움직임을 보이는 주식: Apple, Robinhood, Visa, Sandisk 등",
+      "title_en": "Stocks making the biggest moves after hours: Apple, Robinhood, Visa, Sandisk and more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/01/29/stocks-making-the-biggest-moves-after-hours-aapl-hood-v-sndk.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 57,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4950527768384662071",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Tue, 03 Feb 2026 22:21:51 GMT",
+    "free_tier": {
+      "title": "[해외] 영업 시간 이후 가장 큰 움직임을 보이는 주식: Chipotle, Advanced Micro Devices, Amgen 등",
+      "title_en": "Stocks making the biggest moves after hours: Chipotle, Advanced Micro Devices, Amgen and more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/03/stocks-making-the-biggest-moves-after-hours-cmg-amd-amgn-and-more.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 55,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "8883413441067137805",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Thu, 05 Feb 2026 17:39:33 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] AI 버블은 저절로 터지는 걸까? 소프트웨어가 기술주 붐에서 벗어나 우려를 불러일으키고 있습니다.",
+      "title_en": "Is the AI bubble popping itself? Software's break from the tech stock boom raises concerns",
+      "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n많은 투자자들은 에이전트 AI가 해당 분야의 기존 기업에 의미 있는 타격을 줄 수 없다고 말하면서 매각이 너무 심할 것으로 예상하고 있습니다. ...",
+      "link": "https://www.cnbc.com/2026/02/05/is-the-ai-bubble-popping-itself-software-rout-raises-concerns.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n많은 투자자들은 에이전트 AI가 해당 분야의 기존 기업에 의미 있는 타격을 줄 수 없다고 말하면서 매각이 너무 심할 것으로 예상하고 있습니다. ...",
+        "impact_score": 91,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "1786300331794890244",
+    "ticker": "MARKET",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "Tue, 29 Oct 2024 07:08:00 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 노바티스, 올해 매출 및 이익 가이던스 인상",
+      "title_en": "Novartis hikes sales and profit guidance for the year",
+      "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/novartis-hikes-sales-and-profit-guidance-for-the-year-eed24ebf?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+        "impact_score": 97,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6271485147739342927",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Fri, 06 Feb 2026 14:26:57 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 시판 전 가장 큰 움직임을 보이는 주식: Amazon, Reddit, Strategy, Molina, Strategy, Eli Lilly 등",
+      "title_en": "Stocks making the biggest moves premarket: Amazon, Reddit, Strategy, Molina, Strategy, Eli Lilly & more",
+      "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/06/stocks-making-the-biggest-moves-premarket-amzn-rddt-mstr-moh-lly.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 시판 전 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 99,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "7902535109225608607",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": true,
+    "published_at": "Thu, 05 Feb 2026 12:56:36 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 시판 전 가장 큰 움직임을 보이는 주식: Qualcomm, Strategy, Align, Estee Lauder 등",
+      "title_en": "Stocks making the biggest moves premarket: Qualcomm, Strategy, Align, Estee Lauder and more",
+      "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 프리마켓에서 가장 큰 움직임을 보이는 주식들입니다....",
+      "link": "https://www.cnbc.com/2026/02/05/stocks-making-the-biggest-moves-premarket-.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[변동성 확대] 거시경제 리스크가 부각되고 있습니다. 관망 후 대응이 필요합니다.\n\n[내용 번역]\n이는 프리마켓에서 가장 큰 움직임을 보이는 주식들입니다....",
+        "impact_score": 91,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "7985349363634570583",
+    "ticker": "MARKET",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Thu, 06 Feb 2025 13:34:00 GMT",
+    "free_tier": {
+      "title": "[해외] 미국의 생산성은 4분기에 둔화되고 단위 노동 비용은 가속화됩니다.",
+      "title_en": "U.S. productivity slows down in fourth quarter while unit labor costs accelerate",
+      "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/u-s-productivity-slows-down-in-fourth-quarter-while-unit-labor-costs-accelerate-3c2b9092?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 85,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "5141595705941363085",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Thu, 29 Jan 2026 16:46:07 GMT",
+    "free_tier": {
+      "title": "[해외] 정오에 가장 큰 움직임을 보이는 주식: ServiceNow, Salesforce, Southwest, Carnival 등",
+      "title_en": "Stocks making the biggest moves midday: ServiceNow, Salesforce, Southwest, Carnival & more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n정오 거래에서 가장 큰 움직임을 보이는 주식은 다음과 같습니다....",
+      "link": "https://www.cnbc.com/2026/01/29/stocks-making-the-biggest-moves-midday-now-crm-luv-ccl.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n정오 거래에서 가장 큰 움직임을 보이는 주식은 다음과 같습니다....",
+        "impact_score": 52,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "7982778416748078914",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Tue, 03 Feb 2026 21:29:57 GMT",
+    "free_tier": {
+      "title": "[해외] 시판 전 가장 큰 움직임을 보이는 주식: Palantir Technologies, Merck, Pfizer 등",
+      "title_en": "Stocks making the biggest moves premarket: Palantir Technologies, Merck, Pfizer & more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 초기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/03/stocks-making-the-biggest-moves-premarket-pltr-mrk-pfe.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 초기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 64,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6126358049700023784",
+    "ticker": "MARKET",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "published_at": "Fri, 07 Feb 2025 20:26:00 GMT",
+    "free_tier": {
+      "title": "[돈 되는 시그널] 12월 소비자신용 증가율 급증",
+      "title_en": "Consumer credit growth soars in December",
+      "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/consumer-credit-growth-soars-in-december-d405d18e?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[상승 신호] 긍정적인 모멘텀이 확인되었습니다. 매수세 유입이 기대됩니다.\n\n[내용 번역]\nNone",
+        "impact_score": 96,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "4897371387667884274",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Thu, 24 Oct 2024 06:28:00 GMT",
+    "free_tier": {
+      "title": "[해외] 런던 증권거래소 그룹(London Stock Exchange Group)은 Tradeweb의 주도로 수입이 증가했다고 밝혔습니다.",
+      "title_en": "London Stock Exchange Group says income grew, led by Tradeweb",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/london-stock-exchange-group-says-income-grew-led-by-tradeweb-65d00f97?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 78,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "2980439643456473260",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Fri, 01 Nov 2024 07:36:00 GMT",
+    "free_tier": {
+      "title": "[해외] Kazatomprom, 3분기 생산량 17% 증가 보고",
+      "title_en": "Kazatomprom reports 17% increase in production during the third quarter",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/kazatomprom-reports-17-increase-in-production-during-the-third-quarter-68742d5c?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 60,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "8216800372121191824",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Thu, 31 Oct 2024 08:09:00 GMT",
+    "free_tier": {
+      "title": "[해외] Anheuser-Busch InBev의 매출이 예상치에 미치지 못하면서 주가가 하락했습니다.",
+      "title_en": "Anheuser-Busch InBev shares slip as sales come up shy of estimates",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/anheuser-busch-inbev-shares-slip-as-sales-come-up-shy-of-estimates-508282c4?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 74,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6741063987275574287",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Tue, 12 Nov 2024 13:53:00 GMT",
+    "free_tier": {
+      "title": "[해외] 제너럴모터스(GM)가 주행거리 300마일의 신형 순수 전기 캐딜락 비스티크(Vistiq)를 공개했다.",
+      "title_en": "General Motors unveils new all-electric Cadillac called the Vistiq with 300-mile range",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/general-motors-unveils-new-all-electric-cadillac-called-the-vistiq-with-300-mile-range-c16fb8a6?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 54,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "6118443962303367014",
+    "ticker": "MARKET",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Thu, 03 Jul 2025 12:36:00 GMT",
+    "free_tier": {
+      "title": "[해외] 실업수당 청구건수 5월 중순 이후 최저치로 하락",
+      "title_en": "Jobless claims fall to lowest level since mid-May",
+      "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/jobless-claims-fall-to-lowest-level-since-mid-may-bda58e3b?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 77,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "3460844490924531379",
+    "ticker": "MARKET",
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
+    "published_at": "Mon, 02 Feb 2026 23:31:35 GMT",
+    "free_tier": {
+      "title": "[해외] 영업시간 이후 가장 큰 움직임을 보이는 주식: Palantir, NXP Semiconductors, DaVita 등",
+      "title_en": "Stocks making the biggest moves after hours: Palantir, NXP Semiconductors, DaVita and more",
+      "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+      "link": "https://www.cnbc.com/2026/02/02/stocks-making-the-biggest-moves-after-hours-pltr-nxpi-dva.html",
+      "original_source": "CNBC (Market)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[시장 동향] 주요 시장 뉴스로 모니터링이 필요합니다.\n\n[내용 번역]\n이는 장기 거래에서 가장 큰 움직임을 보이는 주식입니다. ...",
+        "impact_score": 57,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
+    }
+  },
+  {
+    "id": "985079783454834552",
+    "ticker": "MARKET",
+    "sentiment": "BEARISH",
+    "is_breaking": false,
+    "published_at": "Tue, 19 Nov 2024 08:55:00 GMT",
+    "free_tier": {
+      "title": "[해외] 푸틴 대통령이 핵 교리를 업데이트했다는 보도로 미국 주식 선물과 채권 수익률이 하락",
+      "title_en": "U.S. stock futures and bond yields drop on reports Putin has updated nuclear doctrine",
+      "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+      "link": "https://www.marketwatch.com/story/u-s-stock-futures-and-bond-yields-drop-on-reports-putin-has-updated-nuclear-doctrine-4b9792c4?mod=mw_rss_marketpulse",
+      "original_source": "MarketWatch (Pulse)"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "summary_kr": "[Empire AI 요약]\n[하락 주의] 부정적인 시그널이 감지되었습니다. 리스크 관리가 필요합니다.\n\n[내용 번역]\nNone",
+        "impact_score": 84,
+        "investment_insight": "제공된 뉴스를 바탕으로 한 AI의 즉각적인 시장 대응 전략입니다."
+      },
+      "master_analysis_done": true
     }
   }
 ]

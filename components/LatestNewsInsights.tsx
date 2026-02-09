@@ -48,10 +48,11 @@ export default function LatestNewsInsights() {
                 if (!res.ok) return;
                 const data: NewsItem[] = await res.json();
 
+                // AI 분석 요약이 있고, 시장 영향력이 높은 순으로 최대 15개 수집
                 const sorted = data
                     .filter(item => item.vip_tier?.ai_analysis?.summary_kr)
                     .sort((a, b) => (b.vip_tier.ai_analysis.impact_score || 0) - (a.vip_tier.ai_analysis.impact_score || 0))
-                    .slice(0, 9); // Get Top 9
+                    .slice(0, 15);
 
                 if (sorted.length > 0) setNews(sorted);
             } catch (e) {
@@ -124,21 +125,29 @@ export default function LatestNewsInsights() {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                        <button onClick={prevSlide} className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors border border-slate-700">
-                            <ChevronLeft className="w-5 h-5" />
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-3 bg-slate-900/50 p-1.5 rounded-xl border border-slate-800">
+                        <button
+                            onClick={prevSlide}
+                            className="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#00ffbd] transition-all hover:scale-105 active:scale-95 border border-slate-700 shadow-lg"
+                            title="이전 기사"
+                        >
+                            <ChevronLeft className="w-6 h-6" />
                         </button>
-                        <div className="flex gap-1">
-                            {Array.from({ length: Math.ceil(news.length / itemsPerPage) }).map((_, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`w-2 h-2 rounded-full transition-all ${currentIndex === idx ? 'bg-[#00ffbd] w-4' : 'bg-slate-700'}`}
-                                />
-                            ))}
+
+                        <div className="px-4 flex flex-col items-center">
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-tighter">Terminal Feed</span>
+                            <span className="text-xs font-black text-white italic">
+                                PAGE {currentIndex + 1} <span className="text-slate-700 mx-1">/</span> {Math.ceil(news.length / itemsPerPage)}
+                            </span>
                         </div>
-                        <button onClick={nextSlide} className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors border border-slate-700">
-                            <ChevronRight className="w-5 h-5" />
+
+                        <button
+                            onClick={nextSlide}
+                            className="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#00ffbd] transition-all hover:scale-105 active:scale-95 border border-slate-700 shadow-lg"
+                            title="다음 기사"
+                        >
+                            <ChevronRight className="w-6 h-6" />
                         </button>
                     </div>
 

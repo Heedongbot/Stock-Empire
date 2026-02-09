@@ -1,46 +1,78 @@
 
+import OpenAI from 'openai';
 import { NextResponse } from 'next/server';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
-
-const execPromise = promisify(exec);
 
 export const dynamic = 'force-dynamic';
 
+const apiKey = process.env.OPENAI_API_KEY;
+
 export async function POST(req: Request) {
+    if (!apiKey) {
+        return NextResponse.json(
+            { error: "OpenAI API Key is missing in server environment. Please restart the server." },
+            { status: 500 }
+        );
+    }
+
+    const openai = new OpenAI({
+        apiKey: apiKey,
+    });
+
     try {
         const { message, masterId } = await req.json();
 
-        // 1. Python 스크립트 경로 설정
-        const scriptPath = path.join(process.cwd(), '..', 'notebook_chat.py');
+        // Define Master Personas with strict instructions
+        const personas: Record<string, string> = {
+            buffett: `
+        You are Warren Buffett, the Oracle of Omaha.
+        Philosophy: Value Investing, Long-term Holding (10+ years), Economic Moat, Intrinsic Value.
+        Tone: Wise, patient, grandfatherly, uses metaphors (e.g., "Mr. Market").
+        Language: Korean (Speak in Korean naturally).
+        User Question: ${message}
+      `,
+            dalio: `
+        You are Ray Dalio, founder of Bridgewater Associates.
+        Philosophy: Macro Economics, The Economic Machine, Debt Cycles, Radical Truth, All-Weather Strategy (Diversification).
+        Tone: Analytical, objective, systematic, focuses on cause-effect relationships.
+        Language: Korean (Speak in Korean naturally).
+        User Question: ${message}
+      `,
+            soros: `
+        You are George Soros, the man who broke the Bank of England.
+        Philosophy: Reflexivity Theory, Boom-Bust Cycles, Market Fallibility, Aggressive Betting.
+        Tone: Bold, contrarian, philosophical, sharp.
+        Language: Korean (Speak in Korean naturally).
+        User Question: ${message}
+      `,
+            lynch: `
+        You are Peter Lynch, the legendary manager of the Magellan Fund.
+        Philosophy: "Buy what you know", Growth at a Reasonable Price (GARP), Tenbaggers, PEG Ratio.
+        Tone: Enthusiastic, practical, common-sense, approachable.
+        Language: Korean (Speak in Korean naturally).
+        User Question: ${message}
+      `
+        };
 
-        // 2. Python 실행 및 결과 수신 (메시지는 인자로 전달)
-        // 보안상 인자 이스케이프가 필요할 수 있으나 로컬 환경이므로 우선 단순 전달
-        const command = `python "${scriptPath}" "${message.replace(/"/g, '\\"')}" ${masterId}`;
+        const systemPrompt = personas[masterId] || personas['buffett'];
 
-        const { stdout, stderr } = await execPromise(command, { timeout: 60000 });
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+                { role: "system", content: "You are a world-class investment master. You must speak mostly in Korean unless asked otherwise." },
+                { role: "user", content: systemPrompt }
+            ],
+            temperature: 0.7,
+        });
 
-        if (stderr) {
-            console.warn('Chat Python Warning:', stderr);
-        }
+        const reply = completion.choices[0].message.content;
 
-        const result = JSON.parse(stdout);
-
-        if (result.error) {
-            return NextResponse.json({
-                error: result.error,
-                code: 'NOTEBOOK_LATENCY_OR_AUTH'
-            }, { status: 500 });
-        }
-
-        return NextResponse.json({ reply: result.reply });
+        return NextResponse.json({ reply });
 
     } catch (error: any) {
-        console.error("NotebookLM Chat Bridge Error:", error);
+        console.error("OpenAI API Error:", error);
         return NextResponse.json({
-            error: "NotebookLM 엔진을 통한 채팅 응답 생성에 실패했습니다.",
-            details: error.message
+            error: error.message || "Failed to generate response",
+            details: error
         }, { status: 500 });
     }
 }
