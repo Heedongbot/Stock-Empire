@@ -133,9 +133,15 @@ class TistoryAutoPoster:
                 pw_field.send_keys(user_pw)
                 pw_field.send_keys(Keys.ENTER)
                 
-                # 로그인 완료 대기 (메인 페이지 이동 확인)
-                time.sleep(5)
-                print("[INFO] Login successful!")
+                # 로그인 완료 대기 (URL 변화 확인)
+                WebDriverWait(self.driver, 20).until(
+                    lambda d: "tistory.com" in d.current_url and "auth/login" not in d.current_url
+                )
+                print(f"[INFO] Login successful! Current URL: {self.driver.current_url}")
+                
+                # 세션 동기화를 위해 블로그 메인 한 번 방문
+                self.driver.get(f"https://{TISTORY_BLOG_NAME}.tistory.com")
+                time.sleep(2)
                 return True
             except Exception as e:
                 print(f"[ERROR] Login interaction failed: {e}")
@@ -156,8 +162,16 @@ class TistoryAutoPoster:
             write_url = f"https://{TISTORY_BLOG_NAME}.tistory.com/manage/newpost"
             print(f"[INFO] Navigating to: {write_url}")
             self.driver.get(write_url)
-            time.sleep(7) # 에디터 로딩시간 충분히 확보
-            print(f"[INFO] Current URL after navigation: {self.driver.current_url}")
+            time.sleep(5)
+            
+            # 튕겼는지 확인 (로그인 페이지로 리다이렉트 된 경우)
+            if "auth/login" in self.driver.current_url:
+                print("[WARN] Session lost or not synced. Retrying login sequence...")
+                self.login()
+                self.driver.get(write_url)
+                time.sleep(5)
+
+            print(f"[INFO] Current URL: {self.driver.current_url}")
 
             # 1. 제목 입력 (팝업 처리 포함)
             print("[INFO] Clearing potential blocking layers...")
