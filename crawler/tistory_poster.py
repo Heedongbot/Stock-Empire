@@ -158,9 +158,10 @@ class TistoryAutoPoster:
             time.sleep(3)
 
             # 1. 제목 입력
-            title_input = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_to_be_clickable((By.ID, "title-field"))
+            title_input = WebDriverWait(self.driver, 15).until(
+                EC.element_to_be_clickable((By.ID, "title-field"))
             )
+            title_input.clear()
             title_input.send_keys(title)
             time.sleep(1)
 
