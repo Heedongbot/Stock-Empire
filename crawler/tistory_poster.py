@@ -206,9 +206,22 @@ class TistoryAutoPoster:
                     
                     # 카카오 보안/확인 페이지 처리
                     if "kakao.com" in curr_url:
-                        if "confirm" in curr_url or "security" in curr_url:
-                            print("[ALERT] 🚨 카카오 2단계 인증이 필요한 상황입니다!")
+                        if "confirm" in curr_url or "security" in curr_url or "selectVerificationMethod" in curr_url:
+                            print("[ALERT] 🚨 카카오 인증(2단계) 또는 방법 선택이 필요한 상황입니다!")
+                            
+                            # [추가] 인증 방법 버튼 소탕 (카톡으로 인증하기 등)
+                            try:
+                                # 다양한 인증 버튼 셀렉터 (리스트 아이콘, 버튼 등)
+                                choice_btns = self.driver.find_elements(By.CSS_SELECTOR, "button.btn_choice, .link_choice, .choice_item, ul.list_choice li button")
+                                for btn in choice_btns:
+                                    if btn.is_displayed():
+                                        print(f"[INFO] 인증 방법 선택 버튼 클릭: {btn.text or 'Auth Method'}")
+                                        self.driver.execute_script("arguments[0].click();", btn)
+                                        time.sleep(3)
+                            except: pass
+
                             print("[ALERT] 대표님 핸드폰 카카오톡 메시지를 확인하시고 '예, 제가 로그인했습니다'를 눌러주세요!")
+                            self.driver.save_screenshot("kakao_verification_needed.png")
                         
                         try:
                             # '확인' 또는 '계속하기' 버튼 찾기
