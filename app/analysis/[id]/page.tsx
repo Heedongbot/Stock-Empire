@@ -3,7 +3,7 @@
 import {
     Globe, Zap, ArrowUpRight, Play, ChevronRight,
     TrendingUp, Activity, BarChart3, PieChart,
-    Network, Lock, Shield, AlertCircle, BookOpen, ExternalLink, ArrowLeft, MousePointer2, Layers,
+    Network, Lock, Shield, ShieldCheck, AlertCircle, BookOpen, ExternalLink, ArrowLeft, MousePointer2, Layers,
     Flame, ShieldAlert, Sparkles, Star, Clock
 } from "lucide-react";
 import { useEffect, useState, use } from "react";
@@ -206,19 +206,9 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
                                         </div>
                                     </div>
 
-                                    {!isAdmin ? (
-                                        <div className="bg-slate-950 p-12 rounded-3xl text-center border border-white/5">
-                                            <Lock className="w-12 h-12 text-red-500 mx-auto mb-6 animate-pulse" />
-                                            <h4 className="text-lg font-black text-white mb-2 uppercase">Access Restricted</h4>
-                                            <p className="text-xs text-slate-500 font-bold leading-relaxed italic">
-                                                이 구역은 보스(ADMIN) 전용입니다. <br /> 리스크 관리를 위해 핵심 동향 분석은 승인된 유저만 열람 가능합니다.
-                                            </p>
-                                        </div>
-                                    ) : (
-                                        <div className="bg-[#00ffbd]/5 p-8 rounded-3xl border border-[#00ffbd]/20 italic text-white font-bold leading-relaxed clean-text">
-                                            "{report?.intent}"
-                                        </div>
-                                    )}
+                                    <div className="bg-[#00ffbd]/5 p-8 rounded-3xl border border-[#00ffbd]/20 italic text-white font-bold leading-relaxed clean-text">
+                                        "{report?.intent || "전략적 분석 데이터가 준비 중입니다."}"
+                                    </div>
                                 </div>
 
                                 <div className="bg-[#0a1120] border border-slate-800 rounded-[3rem] p-12 shadow-2xl">

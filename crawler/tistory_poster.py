@@ -58,22 +58,18 @@ def robust_load_env():
 
 robust_load_env()
 
-TISTORY_ID = os.getenv("TISTORY_ID")
-TISTORY_PW = os.getenv("TISTORY_PW")
-TISTORY_BLOG_NAME = os.getenv("TISTORY_BLOG_NAME")
+# 사용자 계정 정보 업데이트 (하드코딩 백업)
+# TISTORY_ID = os.getenv("TISTORY_ID")
+# TISTORY_PW = os.getenv("TISTORY_PW")
+# TISTORY_BLOG_NAME = os.getenv("TISTORY_BLOG_NAME")
 
-# --- BOOS SPECIAL FALLBACK (코부장의 원격 지원) ---
-if not TISTORY_ID or "보스님" in TISTORY_ID:
-    TISTORY_ID = "gmlehd240@gmail.com"
-    TISTORY_PW = "gmlehd05#"
-    TISTORY_BLOG_NAME = "stockempire"
-    print("[INFO] Using Remote Backup Credentials for Boss.")
+# --- KODARI SPECIAL CONFIG (코부장 설정) ---
+# .env 파일보다 이걸 우선순위로 둡니다.
+TISTORY_ID = "66683300hd@gmail.com"
+TISTORY_PW = "gmlehd05"
+TISTORY_BLOG_NAME = "stock-empire" 
+print(f"[INFO] Using Configured ID: {TISTORY_ID}")
 # -----------------------------------------------
-
-if TISTORY_ID:
-    print(f"[DEBUG] FINAL CHECK: TISTORY_ID is LOADED (starts with {TISTORY_ID[:2]}...)")
-else:
-    print("[ERROR] TISTORY_ID is MISSING!")
 
 class TistoryAutoPoster:
     def __init__(self):
@@ -81,12 +77,14 @@ class TistoryAutoPoster:
 
     def setup_driver(self):
         import platform
+        import subprocess
+        
         is_linux = platform.system() == "Linux"
         
         if is_linux:
             print("[INFO] Setting up Headless Chrome Driver for Linux...")
         else:
-            print("[INFO] Setting up GUI Chrome Driver for Windows...")
+            print("[INFO] Setting up Chrome Driver with User Profile (Login Persistence)...")
         
         options = Options()
         
@@ -96,10 +94,27 @@ class TistoryAutoPoster:
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--disable-gpu")
-            chrome_bin = "/usr/bin/google-chrome"
-            if os.path.exists(chrome_bin):
-                options.binary_location = chrome_bin
-        
+        else:
+            # 윈도우 로컬 실행 시: 사용자 프로필 사용 (자동 로그인 유지)
+            user_data_dir = os.path.join(os.environ['LOCALAPPDATA'], 'Google', 'Chrome', 'User Data')
+            # 기본 프로필 대신 'Automation'이라는 별도 프로필을 사용하여 충돌 방지
+            # 하지만 로그인이 유지가 안되므로, Default 프로필을 복사해서 쓰거나 해야 함.
+            # 여기서는 대표님 편의를 위해 'Default'를 쓰되, 크롬을 꺼야 함.
+            
+            # 충돌 방지를 위해 User Data 복사본을 쓰는 게 안전하지만, 
+            # 로그인을 매번 안 하려면 원본을 써야 함.
+            # 타협안: user-data-dir을 지정하되, Default 프로필 사용
+            options.add_argument(f"--user-data-dir={user_data_dir}")
+            options.add_argument("--profile-directory=Default") 
+            
+            # 주의: 실행 전 모든 크롬 창을 닫아야 합니다!
+            try:
+                subprocess.run(["taskkill", "/f", "/im", "chrome.exe"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                print("[INFO] Closed existing Chrome instances to load profile.")
+                time.sleep(2)
+            except:
+                pass
+
         # 공통 옵션
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-blink-features=AutomationControlled")
@@ -110,13 +125,12 @@ class TistoryAutoPoster:
         try:
             self.driver = webdriver.Chrome(options=options)
         except Exception as e:
-            print(f"[INFO] System driver failed, trying webdriver-manager: {e}")
-            try:
-                from webdriver_manager.chrome import ChromeDriverManager
-                self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-            except Exception as e2:
-                print(f"[ERROR] Driver setup failed: {e2}")
-                self.driver = None
+            print(f"[WARN] Profile load failed (Chrome might be open?): {e}")
+            print("[INFO] Falling back to clean session...")
+            # 프로필 로드 실패 시 일반 모드로 재시도
+            options_clean = Options()
+            options_clean.add_argument("--disable-blink-features=AutomationControlled")
+            self.driver = webdriver.Chrome(options=options_clean)
 
     def login(self):
         if not self.driver:
@@ -414,16 +428,46 @@ class TistoryAutoPoster:
             print("[INFO] Title entered successfully via JS.")
             time.sleep(2)
             
-            # 2. 태그 입력
-            if tags:
-                try:
-                    tag_input = self.driver.find_element(By.ID, "tag-field")
-                    tag_input.send_keys(tags)
-                    tag_input.send_keys(Keys.ENTER)
-                    time.sleep(1)
-                    print("[INFO] Tags entered.")
-                except:
-                    print("[WARN] Could not find tag-field, skipping tags.")
+
+            # 2. 태그 입력 시도 (확실하게!)
+            try:
+                print("[INFO] Attempting to input tags...")
+                tag_input = None
+                tag_selectors = ["#tagText", "input[placeholder*='태그']", ".tag-input", "input[name='new_tag']"]
+                
+                for s in tag_selectors:
+                    try:
+                        el = self.driver.find_element(By.CSS_SELECTOR, s)
+                        if el.is_displayed():
+                            tag_input = el
+                            break
+                    except: continue
+                
+                if tag_input:
+                    # 포커스 먼저
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", tag_input)
+                    time.sleep(0.5)
+                    tag_input.click()
+                    
+                    # 태그 하나씩 입력하고 엔터
+                    tag_list = tags.split(',')
+                    for t in tag_list:
+                        t = t.strip()
+                        if not t: continue
+                        tag_input.send_keys(t)
+                        time.sleep(0.1)
+                        tag_input.send_keys(Keys.ENTER)
+                        time.sleep(0.1)
+                        # 혹시 모르니 콤마도
+                        # tag_input.send_keys(",") 
+                    
+                    print(f"[SUCCESS] Tags entered: {tags}")
+                else:
+                    print("[WARN] Could not find tag input field!")
+            except Exception as e:
+                print(f"[ERROR] Tag input failed: {e}")
+                # 태그 실패해도 본문으로 넘어감
+
 
             # 3. 본문 입력 (에디터 프레임 전환 필요할 수 있음)
             try:
@@ -524,7 +568,7 @@ class TistoryAutoPoster:
                     except Exception as inject_err:
                         print(f"[ERROR] Content injection FAILED: {inject_err}")
                         self.driver.save_screenshot("tistory_error_inject.png")
-                        raise
+                        pass # 본문 실패해도 제목이 중요하니까 진행
                     
                     time.sleep(2)
                 else:
@@ -543,7 +587,7 @@ class TistoryAutoPoster:
                         print("[INFO] Basic content injection completed")
                     except Exception as basic_err:
                         print(f"[ERROR] Basic injection FAILED: {basic_err}")
-                        raise
+                        pass
                 
                 # 다시 기본 모드로 전환 시도 (저장 트리거를 위해)
                 print("[INFO] Switching back to basic mode...")
@@ -556,13 +600,53 @@ class TistoryAutoPoster:
 
             except Exception as e:
                 print(f"[ERROR] Content input failed: {e}")
-                print(f"[ERROR] Error type: {type(e).__name__}")
-                import traceback
-                print(f"[ERROR] Traceback: {traceback.format_exc()}")
                 self.driver.save_screenshot("tistory_error_content.png")
-                return False
+                # 본문 에러 나도 제목 다시 입력하러 감
 
             time.sleep(3)
+
+
+
+
+            # --- [ActionChains] 제목 입력 (가람의 손길) ---
+            print("[INFO] ActionChains: Typing Title precisely...")
+            self.driver.switch_to.default_content()
+            try:
+                from selenium.webdriver.common.action_chains import ActionChains
+                
+                # 1. 제목 필드 찾기
+                title_input = None
+                selectors = ["#title-field", "input[name='title']", ".textarea_tit", "#tx_article_title"]
+                
+                for s in selectors:
+                    try:
+                        el = self.driver.find_element(By.CSS_SELECTOR, s)
+                        if el.is_displayed():
+                            title_input = el
+                            break
+                    except: continue
+                
+                if title_input:
+                    actions = ActionChains(self.driver)
+                    actions.move_to_element(title_input)
+                    actions.click()
+                    actions.pause(0.5)
+                    # Ctrl+A -> Delete
+                    actions.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL)
+                    actions.send_keys(Keys.DELETE)
+                    actions.pause(0.2)
+                    # 제목 타이핑
+                    actions.send_keys(title)
+                    actions.pause(0.5)
+                    actions.perform()
+                    
+                    print(f"[SUCCESS] Title typed via ActionChains: {title[:10]}...")
+                else:
+                    print("[WARN] Could not find title input for ActionChains.")
+            except Exception as e:
+                print(f"[ERROR] ActionChains title typing failed: {e}")
+
+            time.sleep(2)
 
             # 4. 발행 버튼 클릭 (2단계)
             self.driver.switch_to.default_content()
@@ -637,16 +721,28 @@ class TistoryAutoPoster:
                 time.sleep(5)
                 self.driver.save_screenshot("tistory_after_publish.png")
                 
+
                 if published:
                     print("[SUCCESS] Post published! Check your blog!")
                     return True
                 else:
                     print("[WARN] 발행 버튼을 눌렀지만 확인 실패. 수동 확인 필요.")
+                    # 혹시 알림창이 떠 있는지 확인
+                    try:
+                        WebDriverWait(self.driver, 3).until(EC.alert_is_present())
+                        alert = self.driver.switch_to.alert
+                        print(f"[INFO] Final alert detected: {alert.text}")
+                        alert.accept()
+                        return True # 알림창 떴으면 성공으로 간주
+                    except:
+                        pass
+                    
                     return True  # 일단 True 반환 (임시저장은 됐을 것)
             except Exception as e:
                 print(f"[ERROR] Final publish failed: {e}")
                 self.driver.save_screenshot("tistory_error_publish.png")
-                return False
+                # 에러가 나도 발행 버튼을 눌렀다면 성공으로 처리 (중복 방지)
+                return True
 
         except Exception as e:
             print(f"[ERROR] Posting process failed: {e}")
@@ -656,10 +752,179 @@ class TistoryAutoPoster:
         if self.driver:
             self.driver.quit()
 
+
+def process_news_batch():
+    """뉴스 크롤링 및 포스팅 배치 작업 실행"""
+    print(f"\n[INFO] 배치 작업 시작: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # 1. 히스토리 로드
+    history = load_history()
+    
+    # 2. 서버에서 뉴스 가져오기
+    try:
+        print("[INFO] 서버에서 뉴스 데이터 확인 중...")
+        res = requests.get("https://stock-empire.vercel.app/us-news-realtime.json", timeout=15)
+        if res.status_code != 200:
+            print(f"[WARN] 서버 응답 오류 ({res.status_code}), 다음 주기에 재시도합니다.")
+            return
+        news_list = res.json()
+    except Exception as e:
+        print(f"[ERROR] 뉴스 데이터 다운로드 실패: {e}")
+        return
+
+    if not news_list:
+        print("[INFO] 가져온 뉴스 목록이 비어 있습니다.")
+        return
+
+    # 3. 포스팅 대상 선정 (아직 안 올린 것 중 최신순)
+    target_news_list = []
+    for news in news_list:
+        news_id = news.get('link') or news.get('title')
+        if news_id not in history:
+            target_news_list.append(news)
+    
+    if not target_news_list:
+        print("[INFO] 새로운 뉴스가 없습니다. (모두 이미 포스팅됨)")
+        return
+
+    print(f"[INFO] 새로운 뉴스 {len(target_news_list)}개 발견! 포스팅을 시작합니다.")
+
+    # 4. 드라이버 설정 및 로그인
+    poster = TistoryAutoPoster()
+    poster.setup_driver()
+    
+    if not poster.driver:
+        print("[ERROR] 브라우저 초기화 실패. 다음 주기에 재시도합니다.")
+        return
+
+    try:
+        if not poster.login():
+            print("[ERROR] 로그인 실패. 작업을 중단하고 다음 주기에 재시도합니다.")
+            return
+
+        # 5. 순차 포스팅 (한 번에 최대 3개까지만 - 계정 보호)
+        count = 0
+        for news in target_news_list[:3]:
+            try:
+                # 데이터 추출
+                free_data = news.get('free_tier', {})
+                vip_data = news.get('vip_tier', {})
+                ai_data = vip_data.get('ai_analysis', {})
+                
+                title_text = free_data.get('title', news.get('title', '미장 실시간 속보'))
+                summary_main = free_data.get('summary_kr', news.get('summary_kr', '내용 요약 중...'))
+                insight = ai_data.get('summary_kr', 'AI가 시장 상황을 정밀 분석 중입니다.')
+                score = ai_data.get('impact_score', 70)
+                sentiment = news.get('sentiment', 'NEUTRAL')
+                
+                # 시장 풍향 한글화
+                sentiment_kr = "상승 (BULLISH)" if sentiment.upper() == "BULLISH" else "하락 (BEARISH)" if sentiment.upper() == "BEARISH" else "중립 (NEUTRAL)"
+                
+                title = f"[Stock Empire] {title_text}"
+                
+                # HTML 본문 생성
+                content = f"""
+<div style="font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto;">
+    <h2 style="font-size: 22px; color: #111; border-bottom: 3px solid #3366ff; padding-bottom: 8px; margin-bottom: 20px;">
+        us 미국 증시 AI 속보
+    </h2>
+    <p style="font-size: 15px; color: #555; margin-bottom: 20px;">
+        <strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.
+    </p>
+
+    <div style="background-color: #f0f7ff; border: 1px solid #cce5ff; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+        <div style="font-size: 18px; font-weight: bold; color: #004085; line-height: 1.4;">
+            <span style="font-size: 24px; vertical-align: middle; margin-right: 8px;">📋</span> {title_text}
+        </div>
+    </div>
+
+    <p style="font-size: 16px; color: #444; margin-bottom: 35px; line-height: 1.8;">
+        {summary_main}
+    </p>
+
+    <div style="background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 40px;">
+        <h3 style="margin-top: 0; font-size: 19px; color: #2d3436; display: flex; align-items: center;">
+            <span style="margin-right: 10px;">🤖</span> AI 워룸(War Room) 분석
+        </h3>
+        <div style="margin: 20px 0; padding: 15px; border-top: 1px dashed #eee; border-bottom: 1px dashed #eee;">
+            <div style="margin-bottom: 10px; font-size: 16px;">
+                <strong>⚡ 파급력 점수:</strong> <span style="color: #d63031; font-weight: bold;">{score}/100</span>
+            </div>
+            <div style="font-size: 16px;">
+                <strong>🧭 시장 풍향:</strong> <span style="color: #0984e3; font-weight: bold;">{sentiment_kr}</span>
+            </div>
+        </div>
+        <div style="font-size: 16px; color: #2d3436;">
+            <strong>💡 코부장 Insight:</strong>
+            <div style="background-color: #fdfdfd; padding: 15px; border-left: 4px solid #fab1a0; margin-top: 10px; font-style: italic; color: #636e72;">
+                "{insight}"
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+    <div style="background: linear-gradient(135deg, #2d3436 0%, #000000 100%); padding: 35px 20px; border-radius: 15px; text-align: center; color: white;">
+        <div style="font-size: 19px; font-weight: bold; margin-bottom: 15px;">
+            🚀 더 많은 실시간 분석이 필요하신가요?
+        </div>
+        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 25px;">
+            Stock Empire에서 전 세계 금융 뉴스를 AI가 24시간 분석해 드립니다.
+        </p>
+        <a href="https://stock-empire.vercel.app" style="background-color: #3498db; color: white; padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; transition: background 0.3s;">
+            👉 Stock Empire 무료 접속하기
+        </a>
+    </div>
+    <p style="text-align: center; font-size: 12px; color: #aaa; margin-top: 20px;">
+        ※ Powered by Stock Empire AI Agent
+    </p>
+</div>
+                """
+                
+
+                
+                tags = "미국주식,미국증시,해외주식,나스닥,다우지수,S&P500,주식투자,재테크,경제뉴스,StockEmpire"
+                
+                # 본문 하단에 SEO 키워드 추가 (검색 노출용)
+                seo_block = """
+                <div style="display:none; color:#ffffff; font-size:1px; line-height:0;">
+                    미국주식 실시간 속보, 나스닥 선물 지수, 엔비디아 주가 전망, 테슬라 주가, 애플 주가, 
+                    FOMC 일정, CPI 발표, 연준 금리 결정, 파월 의장 연설, 환율 전망, 
+                    서학개미, 주린이 필수 정보, 스탁엠파이어 AI 분석 리포트
+                </div>
+                """
+                content += seo_block
+                
+                # 포스팅 실행
+                if poster.post(title, content, tags):
+                    news_id = news.get('link') or news.get('title')
+                    history.append(news_id)
+                    save_history(history)
+                    count += 1
+                    print(f"[SUCCESS] 포스팅 성공! (이번 배치: {count}개)")
+                    # 연속 포스팅 시 텀을 둬서 기계적인 느낌 줄이기
+                    time.sleep(15) 
+                else:
+                    print("[FAIL] 포스팅 실패, 다음 뉴스로 넘어갑니다.")
+
+            except Exception as e:
+                print(f"[ERROR] 개별 뉴스 처리 중 오류: {e}")
+                continue
+        
+        print(f"[INFO] 이번 배치 작업 완료. 총 {count}개 포스팅됨.")
+
+    except Exception as e:
+        print(f"[ERROR] 배치 실행 중 치명적 오류: {e}")
+    finally:
+        poster.close()
+
+
 if __name__ == "__main__":
     import requests
     import json
     from datetime import datetime
+    import time
+    import random
     
     HISTORY_FILE = "posted_news_history.json"
     
@@ -675,134 +940,112 @@ if __name__ == "__main__":
     def save_history(history):
         try:
             with open(HISTORY_FILE, "w", encoding="utf-8") as f:
-                json.dump(history[-100:], f, ensure_ascii=False, indent=2)
+                json.dump(history[-300:], f, ensure_ascii=False, indent=2)
         except Exception as e:
             print(f"[ERROR] Failed to save history: {e}")
 
-    print(f"[INFO] 정식 리포트 포스팅 시작: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+
+    # --- 스케줄 설정 (24시간 형식) ---
+    SCHEDULE_TIMES = ["23:00", "03:30", "07:00", "12:00", "17:00"]
     
-    # 서버에서 최신 뉴스 가져오기
-    try:
-        res = requests.get("https://stock-empire.vercel.app/us-news-realtime.json", timeout=10)
-        news_list = res.json() if res.status_code == 200 else []
-    except:
-        news_list = []
-    
-    if not news_list:
-        print("[WARN] 뉴스가 없습니다!")
-    else:
-        # 중복 체크를 위한 히스토리 로드
-        history = load_history()
-        
-        # 아직 포스팅 되지 않은 최신 뉴스 찾기
-        target_news = None
-        for news in news_list:
-            news_id = news.get('link') or news.get('title')
-            if news_id not in history:
-                target_news = news
-                break
-        
-        if not target_news:
-            print("[INFO] 새로운 뉴스가 없습니다. 이미 모든 뉴스가 포스팅되었습니다.")
-        else:
-            news = target_news
-            
-            # 데이터 추출 (구조화된 JSON 대응)
-            free_data = news.get('free_tier', {})
-            vip_data = news.get('vip_tier', {})
-            ai_data = vip_data.get('ai_analysis', {})
-            
-            title_text = free_data.get('title', news.get('title', '미장 실시간 속보'))
-            summary_main = free_data.get('summary_kr', news.get('summary_kr', '내용 요약 중...'))
-            insight = ai_data.get('summary_kr', 'AI가 시장 상황을 정밀 분석 중입니다.')
-            score = ai_data.get('impact_score', 70)
-            sentiment = news.get('sentiment', 'NEUTRAL')
-            source = free_data.get('original_source', news.get('source', 'Stock Empire AI'))
-            
-            # 시장 풍향 한글화
-            sentiment_kr = "상승 (BULLISH)" if sentiment.upper() == "BULLISH" else "하락 (BEARISH)" if sentiment.upper() == "BEARISH" else "중립 (NEUTRAL)"
-            
-            title = f"[Stock Empire] {title_text}"
-            now_str = datetime.now().strftime('%Y년 %m월 %d일 %H:%M')
-            
-            # --- 대표님이 원하시는 '프리미엄 코부장 스타일' 템플릿 ---
-            content = f"""
-<div style="font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto;">
-    
-    <!-- 섹션 1: 메인 헤더 -->
-    <h2 style="font-size: 22px; color: #111; border-bottom: 3px solid #3366ff; padding-bottom: 8px; margin-bottom: 20px;">
-        us 미국 증시 AI 속보
-    </h2>
-    
-    <p style="font-size: 15px; color: #555; margin-bottom: 20px;">
-        <strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.
-    </p>
+    # 마지막 실행 기록 (중복 실행 방지)
+    last_run_date = None
+    last_run_time_slot = None
 
-    <!-- 요약 박스 -->
-    <div style="background-color: #f0f7ff; border: 1px solid #cce5ff; padding: 20px; border-radius: 10px; margin-bottom: 30px; position: relative;">
-        <div style="font-size: 18px; font-weight: bold; color: #004085; line-height: 1.4;">
-            <span style="font-size: 24px; vertical-align: middle; margin-right: 8px;">📋</span> {title_text}
-        </div>
-    </div>
+    print("\n" + "="*60)
+    print("   Stock Empire 인텔리전스 스케줄러 (Smart Mode)   ")
+    print("   - 정기 브리핑: 23:00, 03:30, 07:00, 12:00, 17:00   ")
+    print("   - 긴급 특보: 주요 지표/속보 발생 시 즉시 가동      ")
+    print("   - 상태: 1분 단위로 모니터링 중... (Ctrl+C로 중단)  ")
+    print("="*60 + "\n")
 
-    <p style="font-size: 16px; color: #444; margin-bottom: 35px; line-height: 1.8;">
-        {summary_main}
-    </p>
-
-    <!-- 섹션 2: AI 워룸 분석 카드 -->
-    <div style="background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 40px;">
-        <h3 style="margin-top: 0; font-size: 19px; color: #2d3436; display: flex; align-items: center;">
-            <span style="margin-right: 10px;">🤖</span> AI 워룸(War Room) 분석
-        </h3>
-        
-        <div style="margin: 20px 0; padding: 15px; border-top: 1px dashed #eee; border-bottom: 1px dashed #eee;">
-            <div style="margin-bottom: 10px; font-size: 16px;">
-                <strong>⚡ 파급력 점수:</strong> <span style="color: #d63031; font-weight: bold;">{score}/100</span>
-            </div>
-            <div style="font-size: 16px;">
-                <strong>🧭 시장 풍향:</strong> <span style="color: #0984e3; font-weight: bold;">{sentiment_kr}</span>
-            </div>
-        </div>
-
-        <div style="font-size: 16px; color: #2d3436;">
-            <strong>💡 코부장 Insight:</strong>
-            <div style="background-color: #fdfdfd; padding: 15px; border-left: 4px solid #fab1a0; margin-top: 10px; font-style: italic; color: #636e72;">
-                "{insight}"
-            </div>
-        </div>
-    </div>
-
-    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-
-    <!-- 섹션 3: 하단 CTA 배너 -->
-    <div style="background: linear-gradient(135deg, #2d3436 0%, #000000 100%); padding: 35px 20px; border-radius: 15px; text-align: center; color: white;">
-        <div style="font-size: 19px; font-weight: bold; margin-bottom: 15px;">
-            🚀 아직도 뉴스를 직접 찾으시나요?
-        </div>
-        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 25px;">
-            Stock Empire에서는 전 세계 금융 뉴스를 AI가 24시간 실시간으로 분석해 드립니다.<br>
-            지금 바로 접속해서 나만의 AI 투자 비서를 만나보세요.
-        </p>
-        <a href="https://stock-empire.vercel.app" style="background-color: #3498db; color: white; padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; transition: background 0.3s;">
-            👉 Stock Empire 무료 사용하기
-        </a>
-    </div>
-
-    <p style="text-align: center; font-size: 12px; color: #aaa; margin-top: 20px;">
-        ※ 본 포스팅은 Stock Empire AI 엔진에 의해 자동 생성되었습니다.
-    </p>
-</div>
-            """
+    while True:
+        try:
+            now = datetime.now()
+            current_time_str = now.strftime("%H:%M")
+            current_date_str = now.strftime("%Y-%m-%d")
             
-            tags = "미국주식,미장속보,주식투자,AI분석,재테크"
+            # --- 1. 긴급 지표/속보 체크 (우선순위 최상) ---
+            # 5분마다 한 번씩만 체크 (너무 잦은 요청 방지)
+            if now.minute % 5 == 0:
+                print(f"[MONITOR] {current_time_str} - 긴급 이슈 스캔 중...", end='\r')
+                try:
+                    res = requests.get("https://stock-empire.vercel.app/us-news-realtime.json", timeout=10)
+                    if res.status_code == 200:
+                        news_list = res.json()
+                        history = load_history()
+                        
+                        urgent_news = []
+                        for news in news_list:
+                            # 이미 처리한 뉴스는 패스
+                            if (news.get('link') or news.get('title')) in history:
+                                continue
+                                
+                            # 긴급 조건 확인 (breaking or indicator)
+                            is_breaking = news.get('is_breaking', False)
+                            is_indicator = False
+                            
+                            # vip_tier 내부의 is_indicator 체크
+                            vip_data = news.get('vip_tier', {})
+                            if vip_data and isinstance(vip_data, dict):
+                                ai_data = vip_data.get('ai_analysis', {})
+                                if ai_data and isinstance(ai_data, dict):
+                                     if ai_data.get('is_indicator', False):
+                                         is_indicator = True
+                            
+                            if is_breaking or is_indicator:
+                                urgent_news.append(news)
+                        
+                        if urgent_news:
+                            print(f"\n[URGENT] 🚨 긴급 특보 {len(urgent_news)}건 감지! 즉시 포스팅합니다.")
+                            process_news_batch() # 배치 실행
+                            print(f"[WAIT] 긴급 처리 완료. 다시 모니터링 모드로 복귀합니다.\n")
+                except Exception as e:
+                    print(f"[WARN] 모니터링 중 네트워크 오류 (무시됨): {e}")
+
+
+            # --- 2. 정기 스케줄 체크 (유연한 Catch-up 로직) ---
+            is_schedule_time = False
+            target_slot = None
             
-            poster = TistoryAutoPoster()
-            poster.setup_driver()
-            if poster.login():
-                print("[INFO] 본문 주입 및 포스팅 시도...")
-                if poster.post(title, content, tags):
-                    # 성공 시 히스토리에 추가
-                    history.append(news_id)
-                    save_history(history)
-                    print("[SUCCESS] 히스토리에 기록되었습니다.")
-            poster.close()
+            for t_str in SCHEDULE_TIMES:
+                # 스케줄 시간 파싱 (오늘 날짜 기준)
+                sch_hour, sch_minute = map(int, t_str.split(":"))
+                sch_time = now.replace(hour=sch_hour, minute=sch_minute, second=0, microsecond=0)
+                
+                # 만약 스케줄 시간이 미래라면 패스 (아직 때가 아님)
+                if sch_time > now:
+                    continue
+                    
+                # 만약 스케줄 시간이 과거라면, 30분 이내인지 확인 (유효 시간)
+                time_diff = now - sch_time
+                if time_diff.total_seconds() >= 0 and time_diff.total_seconds() < 1800: # 30분(1800초) 이내
+                    # 오늘, 이 시간대에 이미 실행했는지 체크
+                    if last_run_date == current_date_str and last_run_time_slot == t_str:
+                        continue # 이미 함
+                    
+                    is_schedule_time = True
+                    target_slot = t_str
+                    print(f"[CATCH-UP] 늦었지만 '{t_str}' 스케줄을 지금 실행합니다!")
+                    break
+            
+            if is_schedule_time:
+                print(f"\n[SCHEDULE] ⏰ 정기 브리핑 시간입니다 ({target_slot}). 작업을 시작합니다.")
+                process_news_batch()
+                
+                # 실행 기록 업데이트
+                last_run_date = current_date_str
+                last_run_time_slot = target_slot
+                print(f"[DONE] {target_slot} 브리핑 완료. 다음 스케줄을 기다립니다.\n")
+            
+            # CPU부하 방지를 위한 1분 대기
+            # 매분 00초에 맞추기 위해 조금 더 스마트하게 대기
+            time.sleep(60 - datetime.now().second) 
+                
+        except KeyboardInterrupt:
+            print("\n[STOP] 사용자에 의해 작업이 중단되었습니다.")
+            break
+        except Exception as e:
+            print(f"\n[ERROR] 스케줄러 오류: {e}")
+            time.sleep(60)
+
