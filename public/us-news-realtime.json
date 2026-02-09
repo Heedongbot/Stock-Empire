@@ -1,26 +1,7 @@
 [
   {
-    "id": "yh_5146497678098735372",
-    "timestamp": "2026-02-09T10:48:19.360364",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-waver-as-dow-looks-to-keep-rallying-above-50000-001401373.html",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "오늘의 주식 시장: 다우가 50,000 이상으로 계속 상승할 것으로 예상됨에 따라 다우, S&P 500, 나스닥 선물이 흔들리고 있습니다.",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "미국 주식 시장의 강세가 지속되고 있지만, 5만 선을 유지하려는 다우 지수의 움직임은 투자자에게 주목받을 중요한 시점입니다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_-2118635867730965801",
-    "timestamp": "2026-02-09T10:48:26.271085",
+    "id": "yh_-1676839441703517609",
+    "timestamp": "2026-02-09T10:53:44.935282",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
     "sentiment": "NEUTRAL",
@@ -32,14 +13,14 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주 발표될 인플레이션 데이터와 1월 고용 보고서는 주식 시장에 중대한 영향을 미칠 수 있는 결정적인 요소입니다.",
+        "summary_kr": "이번 주 인플레이션 데이터와 1월 작업 보고서 지연은 주식 시장에 큰 영향을 미칠 수 있는 주요 경제 지표로, 투자자들은 이에 따른 시장 반응을 면밀히 주시해야 합니다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_-4066519318959366740",
-    "timestamp": "2026-02-09T10:48:33.247340",
+    "id": "yh_-4147009941435261056",
+    "timestamp": "2026-02-09T10:53:52.421312",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/this-probably-seems-overdone-wall-street-strategists-weigh-in-on-software-stock-sell-off-160003877.html",
     "sentiment": "BEARISH",
@@ -51,45 +32,26 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 70,
-        "summary_kr": "소프트웨어 주식 매도가 과도하다는 의견이 있지만, 이는 투자자 신뢰에 부정적 영향을 미칠 수 있습니다.",
+        "summary_kr": "소프트웨어 주식의 패닉 매도는 경기 불확실성을 반영하며, 이는 투자자들의 신뢰를 저하시키고 자금의 유출을 초래할 수 있다.",
         "is_indicator": false
       }
     }
   },
   {
-    "id": "yh_-6864928736877000991",
-    "timestamp": "2026-02-09T10:48:42.755641",
+    "id": "yh_-228004277053579952",
+    "timestamp": "2026-02-09T10:54:01.530424",
     "source": "Yahoo Finance",
     "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-50000-apple-boeing-jpmorgan-ai-stocks/?src=A00220&yptr=yahoo",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
+    "sentiment": "NEUTRAL",
+    "is_breaking": false,
     "free_tier": {
       "title": "다우존스 선물 상승; 구매 영역에서 Apple, Boeing, AI 주식으로 다우가 50K를 넘어섰습니다. 하지만 시장은 여전히 ​​분열되어 있습니다.",
       "summary_kr": ""
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 85,
-        "summary_kr": "이번 Dow 지수 상승과 주요 주식들이 매수 영역에 있다는 것은 투자자들의 긍정적 심리를 반영하며, 시장의 전반적인 상승세를 기대하게 한다.",
-        "is_indicator": true
-      }
-    }
-  },
-  {
-    "id": "yh_2899953940891742070",
-    "timestamp": "2026-02-09T10:48:50.050354",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/citigroup-lifts-price-target-rtx-051309925.html",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "씨티그룹, RTX Corporation(RTX)의 목표 가격을 238달러로 상향 조정하고 매수 등급 유지",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 60,
-        "summary_kr": "RTX 주식에 대한 Citigroup의 긍정적인 재평가는 투자자들 사이에서 신뢰를 높이며, 단기적으로 주가 상승을 유도할 가능성이 있다.",
+        "impact_score": 75,
+        "summary_kr": "현재 시장은 다양한 주식들이 매수 구간에 있지만, 전체적으로는 양극화된 모습으로 보입니다.",
         "is_indicator": false
       }
     }
