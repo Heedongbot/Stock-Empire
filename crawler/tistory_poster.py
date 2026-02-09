@@ -477,59 +477,88 @@ class TistoryAutoPoster:
 
                 if switched:
                     print("[INFO] JS Switched to HTML mode.")
+                    print("[INFO] Starting content injection...")
                     # JS로 직접 본문 내용 주입 (강력한 동기화 포함)
                     safe_content = content.replace("`", "\\`").replace("${", "\\${")
+                    print(f"[DEBUG] Content length: {len(safe_content)} chars")
+                    
                     injection_script = f"""
                         function inject() {{
+                            console.log("[INJECT] Starting injection");
                             // 1. CodeMirror (HTML 모드) 처리
                             var cm = document.querySelector('.CodeMirror');
                             if(cm && cm.CodeMirror) {{
+                                console.log("[INJECT] CodeMirror found, setting value");
                                 cm.CodeMirror.setValue(`{safe_content}`);
                                 cm.CodeMirror.save(); // 기본 textarea로 동기화
+                                console.log("[INJECT] CodeMirror updated");
                             }}
                             
                             // 2. TinyMCE (기본 에디터) 처리
                             if (window.tinymce && tinymce.activeEditor) {{
+                                console.log("[INJECT] TinyMCE found, setting content");
                                 tinymce.activeEditor.setContent(`{safe_content}`);
                                 tinymce.activeEditor.save();
+                                console.log("[INJECT] TinyMCE updated");
                             }}
 
                             // 3. 강제 데이터 처리 이벤트 발생
                             var event = new Event('change', {{ bubbles: true }});
                             var textarea = document.querySelector('textarea.editor-textarea');
                             if(textarea) {{
+                                console.log("[INJECT] Textarea found, setting value");
                                 textarea.value = `{safe_content}`;
                                 textarea.dispatchEvent(event);
+                                console.log("[INJECT] Textarea updated");
                             }}
                             
+                            console.log("[INJECT] Injection complete");
                             return true;
                         }}
                         return inject();
                     """
-                    self.driver.execute_script(injection_script)
+                    
+                    try:
+                        result = self.driver.execute_script(injection_script)
+                        print(f"[SUCCESS] Content injection completed: {result}")
+                    except Exception as inject_err:
+                        print(f"[ERROR] Content injection FAILED: {inject_err}")
+                        self.driver.save_screenshot("tistory_error_inject.png")
+                        raise
+                    
                     time.sleep(2)
                 else:
                     print("[WARN] HTML mode switch failed. Trying basic injection.")
                     if editor_frame:
                         self.driver.switch_to.frame(editor_frame)
                     # BMP 에러 방지를 위해 JS 사용
-                    self.driver.execute_script("""
-                        if (arguments[0].isContentEditable) {
-                            arguments[0].innerText = arguments[1];
-                        } else {
-                            arguments[0].value = arguments[1];
-                        }
-                    """, body_input, content)
+                    try:
+                        self.driver.execute_script("""
+                            if (arguments[0].isContentEditable) {
+                                arguments[0].innerText = arguments[1];
+                            } else {
+                                arguments[0].value = arguments[1];
+                            }
+                        """, body_input, content)
+                        print("[INFO] Basic content injection completed")
+                    except Exception as basic_err:
+                        print(f"[ERROR] Basic injection FAILED: {basic_err}")
+                        raise
                 
                 # 다시 기본 모드로 전환 시도 (저장 트리거를 위해)
+                print("[INFO] Switching back to basic mode...")
                 self.driver.switch_to.default_content()
                 self.driver.execute_script("var btn = document.querySelector('#editor-mode-layer-btn-open'); if(btn) btn.click();")
                 time.sleep(0.5)
                 self.driver.execute_script("var basicBtn = document.querySelector('#editor-mode-basic'); if(basicBtn) basicBtn.click();")
                 time.sleep(2)
+                print("[INFO] Content section completed successfully")
 
             except Exception as e:
                 print(f"[ERROR] Content input failed: {e}")
+                print(f"[ERROR] Error type: {type(e).__name__}")
+                import traceback
+                print(f"[ERROR] Traceback: {traceback.format_exc()}")
                 self.driver.save_screenshot("tistory_error_content.png")
                 return False
 
