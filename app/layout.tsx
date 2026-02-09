@@ -8,6 +8,8 @@ import { koKR } from "@clerk/localizations";
 import { AuthProvider } from "@/lib/AuthContext";
 import TickerTape from "@/components/TickerTape";
 import SiteFooter from "@/components/SiteFooter";
+import BottomNav from "@/components/BottomNav";
+import InstallPWA from "@/components/InstallPWA";
 import BreakingNewsToast from "./components/BreakingNewsToast";
 import Script from "next/script";
 
@@ -91,7 +93,11 @@ export default function RootLayout({
           <ClerkProvider publishableKey={publishableKey} localization={koKR}>
             <AuthProvider>
               <TickerTape />
-              {children}
+              <div className="pb-20 lg:pb-0">
+                {children}
+              </div>
+              <BottomNav />
+              <InstallPWA />
               <SiteFooter />
               <BreakingNewsToast />
             </AuthProvider>

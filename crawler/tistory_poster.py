@@ -131,17 +131,39 @@ class TistoryAutoPoster:
                 
                 id_field.send_keys(user_id)
                 pw_field.send_keys(user_pw)
-                pw_field.send_keys(Keys.ENTER)
+                time.sleep(1)
                 
-                # 로그인 완료 대기 (URL 변화 확인)
-                WebDriverWait(self.driver, 20).until(
-                    lambda d: "tistory.com" in d.current_url and "auth/login" not in d.current_url
-                )
-                print(f"[INFO] Login successful! Current URL: {self.driver.current_url}")
+                # 엔터 대신 직접 로그인 버튼 클릭 시도
+                try:
+                    submit_btn = self.driver.find_element(By.CSS_SELECTOR, ".btn_g.highlight.submit, button[type='submit']")
+                    self.driver.execute_script("arguments[0].click();", submit_btn)
+                except:
+                    pw_field.send_keys(Keys.ENTER)
+                
+                print("[INFO] Credentials submitted. Waiting for Kakao and Tistory handshake...")
+                
+                # 카카오 특유의 '로그인 상태 유지' 등 중간 페이지 돌파 (JS 강제 이동)
+                start_time = time.time()
+                while time.time() - start_time < 30:
+                    curr_url = self.driver.current_url
+                    if "tistory.com" in curr_url and "auth/login" not in curr_url:
+                        print(f"[SUCCESS] Real Login Confirmed! At: {curr_url}")
+                        break
+                    
+                    # 카카오 중간 단계에 머물러 있으면 강제로 계속 진행
+                    if "kakao.com" in curr_url:
+                        try:
+                            # '계속하기' 혹은 '확인' 버튼이 있으면 클릭
+                            cont_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(),'계속') or contains(text(),'확인')]")
+                            for b in cont_btns: 
+                                if b.is_displayed(): b.click()
+                        except: pass
+                    
+                    time.sleep(2)
                 
                 # 세션 동기화를 위해 블로그 메인 한 번 방문
                 self.driver.get(f"https://{TISTORY_BLOG_NAME}.tistory.com")
-                time.sleep(2)
+                time.sleep(3)
                 return True
             except Exception as e:
                 print(f"[ERROR] Login interaction failed: {e}")
