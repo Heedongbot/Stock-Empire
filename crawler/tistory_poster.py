@@ -131,7 +131,13 @@ class TistoryAutoPoster:
             return False
         
         print(f"[INFO] Logging in to Tistory (Human-like behavior mode)...")
-        try:
+            # 0. 완전 초기화 (기존 세션/쿠키 삭제)
+            print("[INFO] 0단계: 기존 세션 정리를 위해 로그아웃 및 쿠키 삭제")
+            self.driver.delete_all_cookies()
+            # 카카오 로그아웃 URL 강제 접속
+            self.driver.get("https://accounts.kakao.com/logout?continue=https://www.tistory.com/auth/login")
+            time.sleep(2)
+            
             # 1. 스텔스 모드 강화 (navigator.webdriver 완벽 제거)
             self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
                 "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
@@ -139,7 +145,8 @@ class TistoryAutoPoster:
             
             # 2. 블로그 메인 접속 (자연스러운 유입)
             blog_url = f"https://{TISTORY_BLOG_NAME}.tistory.com"
-            print(f"[INFO] 1단계: 블로그 메인 유입 ({blog_url})")
+            print(f"[INFO: TARGET BLOG] {blog_url}")
+            print(f"[INFO] 1단계: 블로그 메인 유입")
             self.driver.get(blog_url)
             time.sleep(2)
             
