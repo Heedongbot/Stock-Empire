@@ -24,6 +24,9 @@ interface AlphaSignal {
     target_price: number;
     stop_loss: number;
     ai_reason: string;
+    technical_analysis?: string;
+    fundamental_analysis?: string;
+    action_plan?: string;
     updated_at: string;
     strategy: string;
 }
@@ -46,26 +49,17 @@ function AnalysisContent() {
         setScanning(true);
         try {
             const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
-            const contentType = res.headers.get("content-type");
-
-            if (!res.ok || !contentType || !contentType.includes("application/json")) {
-                const text = await res.text();
-                console.error("Analysis API failed:", text);
-                alert(`분석 서버 에러 (${res.status}): 환경 변수(API KEY) 설정이 완료되었는지 확인해주세요.`);
-                return;
-            }
-
             const data = await res.json();
             if (data.error) {
                 alert(data.error);
                 return;
             }
-            // 실시간 분석 결과를 목록 처음에 추가하고 선택
-            setSelectedSignal(data);
+            // 실시간 분석 결과를 목록 처음에 추가하고 모달 자동 팝업
             setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
+            setSelectedSignal(data);
         } catch (e) {
             console.error("Deep Scan failed", e);
-            alert("연결 오류: 인터넷 연결이나 서버 상태를 확인해주세요.");
+            alert("연결 오류: 서버 상태를 확인해주세요.");
         } finally {
             setScanning(false);
         }
@@ -234,60 +228,89 @@ function AnalysisContent() {
             {/* Signal Detail Modal */}
             {selectedSignal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setSelectedSignal(null)} />
-                    <div className="relative bg-[#0f172a] border border-slate-700 w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl">
-                        <div className="bg-slate-900/50 p-8 border-b border-slate-800 flex justify-between items-center">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-[#00ffbd] rounded-2xl">
-                                    <Zap className="w-6 h-6 text-black" />
+                    <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setSelectedSignal(null)} />
+                    <div className="relative bg-[#0a1120] border border-slate-700 w-full max-w-4xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col animate-zoom-in">
+                        <div className="bg-slate-900/50 p-6 md:p-8 border-b border-slate-800 flex justify-between items-center">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-[#00ffbd]/10 border border-[#00ffbd]/30 rounded-2xl">
+                                    <Cpu className="w-8 h-8 text-[#00ffbd]" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-black text-white italic uppercase tracking-tighter">{selectedSignal.ticker}</h3>
-                                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{selectedSignal.strategy}</p>
+                                    <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">{selectedSignal.ticker}</h3>
+                                    <p className="text-[10px] text-[#00ffbd] font-black uppercase tracking-[0.3em]">NotebookLM Strategic Intelligence Report</p>
                                 </div>
                             </div>
-                            <button onClick={() => setSelectedSignal(null)} className="text-slate-500 hover:text-white transition-colors">
+                            <button onClick={() => setSelectedSignal(null)} className="p-3 bg-slate-800 hover:bg-slate-700 rounded-2xl text-slate-500 hover:text-white transition-all">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
 
-                        <div className="p-10 text-center">
+                        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
                             {!user ? (
-                                <div className="space-y-8">
-                                    <div className="py-12 bg-[#050b14] border border-slate-800 rounded-3xl">
-                                        <Lock className="w-12 h-12 text-amber-500 mx-auto mb-6 animate-pulse" />
-                                        <h4 className="text-lg font-black text-white mb-2 uppercase italic">Analysis Locked</h4>
-                                        <p className="text-xs text-slate-500 font-bold leading-relaxed italic">
-                                            심층 AI 분석 리포트는 정예 대원만 열람할 수 있습니다. <br />
-                                            포털에 접속하여 권한을 획득하십시오.
-                                        </p>
-                                    </div>
-                                    <a href="/sign-in" className="block w-full py-4 bg-[#00ffbd] text-black rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all">
-                                        로그인하여 잠금 해제
+                                <div className="py-20 text-center">
+                                    <Lock className="w-16 h-16 text-amber-500 mx-auto mb-8 animate-bounce" />
+                                    <h4 className="text-xl font-black text-white mb-4 uppercase italic">Elite Analysis Locked</h4>
+                                    <p className="text-sm text-slate-500 font-bold leading-relaxed italic mb-10 max-w-md mx-auto">
+                                        심층 AI 분석 리포트는 사령관(Boss) 전용 데이터입니다. <br />
+                                        지금 로그인하여 마스터들의 실전 대응 계획을 확인하십시오.
+                                    </p>
+                                    <a href="/sign-in" className="inline-block px-10 py-4 bg-[#00ffbd] text-black font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-all">
+                                        기밀 문서 해제하기
                                     </a>
                                 </div>
                             ) : (
-                                <>
-                                    {/* 전면 무료화에 따라 모든 내용 공개 또는 리스크로 인한 제약 설명 */}
-                                    <div className="bg-[#050b14] border border-[#00ffbd]/20 p-8 rounded-3xl mb-8">
-                                        <h4 className="text-xs font-black text-[#00ffbd] uppercase tracking-widest mb-4 italic">Empire AI Semantic Report</h4>
-                                        <p className="text-slate-300 leading-relaxed italic text-sm">
+                                <div className="space-y-10">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="bg-slate-900/80 p-6 rounded-3xl border border-slate-800">
+                                            <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Technical</div>
+                                            <p className="text-sm text-slate-300 leading-relaxed font-medium">{selectedSignal.technical_analysis || "기술적 지표 분석 데이터가 부족합니다."}</p>
+                                        </div>
+                                        <div className="bg-slate-900/80 p-6 rounded-3xl border border-slate-800">
+                                            <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Fundamental</div>
+                                            <p className="text-sm text-slate-300 leading-relaxed font-medium">{selectedSignal.fundamental_analysis || "기본 가치 분석 데이터 로딩 중..."}</p>
+                                        </div>
+                                        <div className="bg-[#00ffbd]/5 p-6 rounded-3xl border border-[#00ffbd]/20 shadow-lg">
+                                            <div className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest mb-3">Action Plan</div>
+                                            <p className="text-sm text-white leading-relaxed font-black">{selectedSignal.action_plan || "마스터의 대응 계획이 수립되지 않았습니다."}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="p-8 bg-black/40 rounded-[2.5rem] border border-slate-800 relative overflow-hidden">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <Zap className="w-5 h-5 text-[#00ffbd] fill-[#00ffbd]" />
+                                            <span className="text-xs font-black text-white uppercase tracking-widest">Master's Intelligence Summary</span>
+                                        </div>
+                                        <p className="text-xl font-black text-white italic leading-tight italic">
                                             "{selectedSignal.ai_reason}"
                                         </p>
                                     </div>
 
-                                    <p className="text-[10px] text-slate-600 font-bold uppercase mb-8">
-                                        상세 진입/청산 전략은 리스크 관리를 위해 커맨드 센터에서 별도로 확인 가능합니다.
-                                    </p>
-
-                                    <button
-                                        onClick={() => setSelectedSignal(null)}
-                                        className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
-                                    >
-                                        분석 닫기
-                                    </button>
-                                </>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-800 text-center">
+                                            <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Target</div>
+                                            <div className="text-lg font-black text-[#00ffbd]">${selectedSignal.target_price}</div>
+                                        </div>
+                                        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-800 text-center">
+                                            <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Stop Loss</div>
+                                            <div className="text-lg font-black text-red-500">${selectedSignal.stop_loss}</div>
+                                        </div>
+                                        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-800 text-center">
+                                            <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Impact</div>
+                                            <div className="text-lg font-black text-blue-500">{selectedSignal.impact_score}%</div>
+                                        </div>
+                                        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-800 text-center">
+                                            <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Sentiment</div>
+                                            <div className={`text-lg font-black ${selectedSignal.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>{selectedSignal.sentiment}</div>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
+                        </div>
+
+                        <div className="p-6 bg-slate-900/50 border-t border-slate-800 flex justify-center">
+                            <p className="text-[9px] text-slate-700 font-bold uppercase tracking-[0.3em]">
+                                AUTHENTICATED ALPHA DATA STREAM - GLOBAL EMPIRE TERMINAL v1.5
+                            </p>
                         </div>
                     </div>
                 </div>

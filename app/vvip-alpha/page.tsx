@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import {
     Crown, TrendingUp, TrendingDown, Target, ShieldAlert,
     ArrowLeft, Activity, Zap, ShieldCheck, RefreshCw, ChevronRight,
-    Search, BarChart4, Waves, BrainCircuit, Lock
+    Search, BarChart4, Waves, BrainCircuit, Lock, FileText, X
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { useAuth } from '@/lib/AuthContext';
@@ -33,6 +33,7 @@ function VVIPAlphaContent() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [scanning, setScanning] = useState(false);
+    const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
     const { user } = useAuth();
 
     const handleDeepScan = async () => {
@@ -45,8 +46,9 @@ function VVIPAlphaContent() {
                 alert(data.error);
                 return;
             }
-            // 실시간 분석 결과 목록 처음에 추가
+            // 실시간 분석 결과 목록 처음에 추가 및 모달 팝업
             setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
+            setSelectedAnalysis(data);
         } catch (e) {
             console.error("Deep Scan failed", e);
         } finally {
@@ -206,18 +208,119 @@ function VVIPAlphaContent() {
                                 </div>
 
                                 <div className="relative pt-6 border-t border-slate-800">
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <BrainCircuit className="w-4 h-4 text-yellow-500" />
-                                        <span className="text-[10px] font-black text-white uppercase tracking-widest">ALPHA INSIGHT</span>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex items-center gap-2">
+                                            <BrainCircuit className="w-4 h-4 text-yellow-500" />
+                                            <span className="text-[10px] font-black text-white uppercase tracking-widest">ALPHA INSIGHT</span>
+                                        </div>
+                                        <button
+                                            onClick={() => setSelectedAnalysis(sig)}
+                                            className="text-[9px] font-black text-[#00ffbd] hover:text-white flex items-center gap-1 transition-colors uppercase"
+                                        >
+                                            Report <ChevronRight className="w-3 h-3" />
+                                        </button>
                                     </div>
-                                    <p className="text-[11px] leading-relaxed text-slate-400 italic">
+                                    <p className="text-[11px] leading-relaxed text-slate-400 italic mb-6">
                                         {sig.ai_reason}
                                     </p>
+                                    <button
+                                        onClick={() => setSelectedAnalysis(sig)}
+                                        className="w-full py-4 bg-slate-900 border border-slate-800 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-[#00ffbd] hover:bg-[#00ffbd] hover:text-black transition-all flex items-center justify-center gap-2"
+                                    >
+                                        <FileText className="w-4 h-4" />
+                                        Open Full Report
+                                    </button>
                                 </div>
                             </div>
                         ))
                     )}
                 </div>
+
+                {/* Analysis Details Modal */}
+                {selectedAnalysis && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+                        <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setSelectedAnalysis(null)} />
+                        <div className="relative w-full max-w-5xl max-h-[90vh] bg-[#020617] border border-[#00ffbd]/20 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col animate-zoom-in">
+                            {/* Modal Header */}
+                            <div className="p-10 border-b border-white/5 flex justify-between items-center bg-gradient-to-r from-[#00ffbd]/10 to-transparent">
+                                <div className="flex items-center gap-6">
+                                    <div className="p-4 bg-[#00ffbd] rounded-3xl shadow-lg shadow-[#00ffbd]/30">
+                                        <ShieldCheck className="w-10 h-10 text-black" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-3xl font-black text-white italic tracking-tighter uppercase">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
+                                        <p className="text-[11px] font-black text-[#00ffbd] uppercase tracking-[0.4em]">Boss Strategic Intelligence Report (Powered by NotebookLM)</p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedAnalysis(null)}
+                                    className="p-4 bg-slate-900 hover:bg-slate-800 rounded-3xl text-slate-500 hover:text-white transition-all border border-white/5"
+                                >
+                                    <X className="w-8 h-8" />
+                                </button>
+                            </div>
+
+                            {/* Modal Body */}
+                            <div className="flex-1 overflow-y-auto p-10 custom-scrollbar style={{ scrollbarWidth: 'none' }}">
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                                    <div className="bg-slate-900/50 p-8 rounded-[2.5rem] border border-white/5">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <BarChart4 className="w-4 h-4 text-blue-400" />
+                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Technical Report</span>
+                                        </div>
+                                        <p className="text-sm text-slate-300 leading-relaxed font-medium">
+                                            {selectedAnalysis.technical_analysis || "현 시점 집계된 기술적 지표가 부족합니다."}
+                                        </p>
+                                    </div>
+                                    <div className="bg-slate-900/50 p-8 rounded-[2.5rem] border border-white/5">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <Activity className="w-4 h-4 text-purple-400" />
+                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Fundamental View</span>
+                                        </div>
+                                        <p className="text-sm text-slate-300 leading-relaxed font-medium">
+                                            {selectedAnalysis.fundamental_analysis || "기업 가치 및 거시 경제 데이터 로드 중..."}
+                                        </p>
+                                    </div>
+                                    <div className="bg-[#00ffbd]/5 p-8 rounded-[2.5rem] border border-[#00ffbd]/20 shadow-xl shadow-[#00ffbd]/5">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <Target className="w-4 h-4 text-[#00ffbd]" />
+                                            <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-[0.2em] italic underline decoration-2 underline-offset-4">Strategic Action Plan</span>
+                                        </div>
+                                        <p className="text-sm text-white leading-relaxed font-black">
+                                            {selectedAnalysis.action_plan || "대응 시나리오가 생성되지 않았습니다."}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="p-8 bg-gradient-to-br from-[#0a1120] to-[#020617] rounded-[2.5rem] border border-[#00ffbd]/10 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-8 opacity-10">
+                                        <BrainCircuit className="w-32 h-32 text-[#00ffbd]" />
+                                    </div>
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <Zap className="w-5 h-5 text-[#00ffbd] fill-[#00ffbd]" />
+                                        <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">Master's Intelligence Summary</span>
+                                    </div>
+                                    <p className="text-2xl font-black text-white italic leading-tight max-w-2xl relative z-10">
+                                        "{selectedAnalysis.ai_reason}"
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="p-8 bg-slate-950 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                                <p className="text-[10px] text-slate-700 font-bold uppercase tracking-[0.4em]">
+                                    BOSS TERMINAL v1.5 ALPHA - SECURE DATA LINK ESTABLISHED
+                                </p>
+                                <div className="flex items-center gap-4">
+                                    <span className="text-[9px] text-slate-500 font-bold uppercase">Confidence Score: {selectedAnalysis.impact_score}%</span>
+                                    <div className="w-32 h-1.5 bg-slate-900 rounded-full overflow-hidden">
+                                        <div className="h-full bg-[#00ffbd]" style={{ width: `${selectedAnalysis.impact_score}%` }}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className="mt-20">
                     <AdLeaderboard />
                 </div>

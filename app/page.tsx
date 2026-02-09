@@ -5,7 +5,7 @@ import {
   ArrowUpRight, Sparkles, ChevronRight,
   TrendingUp, TrendingDown, Cpu, Zap, Lock, Search, RefreshCw,
   ShieldCheck, CheckCircle2, Activity as ActivityIcon,
-  BookOpen, MessageSquare, Award, Loader2, Milestone, Database
+  BookOpen, MessageSquare, Award, Loader2, Milestone, Database, FileText, X
 } from 'lucide-react';
 import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
@@ -41,6 +41,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [scanning, setScanning] = useState(false);
+  const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
 
   const handleDeepScan = async () => {
     if (!searchTerm) return;
@@ -61,8 +62,10 @@ export default function Home() {
         alert(data.error);
         return;
       }
-      // 실시간 분석 결과 목록 처음에 추가
+
+      // 실시간 분석 결과 목록 처음에 추가 및 모달 자동 팝업
       setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
+      setSelectedAnalysis(data);
     } catch (e) {
       console.error("Deep Scan failed", e);
       alert("연결 오류가 발생했습니다.");
@@ -212,7 +215,7 @@ export default function Home() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredSignals.map((sig, idx) => (
-              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl relative overflow-hidden">
+              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl relative overflow-hidden flex flex-col">
                 {(sig as any).is_real_time && (
                   <div className="absolute top-0 left-0 px-3 py-1 bg-[#00ffbd] text-black text-[8px] font-black uppercase tracking-tighter rounded-br-lg z-10 animate-pulse">
                     Live Analyzed
@@ -224,26 +227,38 @@ export default function Home() {
                     {sig.sentiment}
                   </div>
                 </div>
-                <h3 className="text-lg font-black text-white mb-4 uppercase truncate">{sig.name}</h3>
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between text-xs">
+                <h3 className="text-xl font-black text-white mb-2 uppercase truncate">{sig.name}</h3>
+
+                <div className="space-y-3 mb-6">
+                  <div className="flex justify-between text-[10px]">
                     <span className="text-slate-500 font-bold uppercase">Confidence</span>
                     <span className="text-[#00ffbd] font-black">{sig.impact_score}%</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-slate-950/50 p-2 rounded-lg border border-slate-800">
-                      <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Target</div>
-                      <div className="text-xs font-black text-[#00ffbd]">${sig.target_price}</div>
+                  <div className="grid grid-cols-2 gap-2 text-center">
+                    <div className="bg-slate-950/50 p-2 rounded-xl border border-slate-800">
+                      <div className="text-[7px] text-slate-600 font-bold uppercase mb-0.5">Target</div>
+                      <div className="text-sm font-black text-[#00ffbd] tracking-tighter">${sig.target_price}</div>
                     </div>
-                    <div className="bg-slate-950/50 p-2 rounded-lg border border-slate-800">
-                      <div className="text-[8px] text-slate-600 font-bold uppercase mb-1">Stop</div>
-                      <div className="text-xs font-black text-red-500">${sig.stop_loss}</div>
+                    <div className="bg-slate-950/50 p-2 rounded-xl border border-slate-800">
+                      <div className="text-[7px] text-slate-600 font-bold uppercase mb-0.5">Stop Loss</div>
+                      <div className="text-sm font-black text-red-500 tracking-tighter">${sig.stop_loss}</div>
                     </div>
                   </div>
                 </div>
-                <p className="text-[10px] text-slate-400 leading-relaxed italic line-clamp-2">
-                  {sig.ai_reason}
-                </p>
+
+                <div className="p-3 bg-black/40 rounded-2xl border border-slate-800/50 mb-6 flex-grow">
+                  <p className="text-[10px] text-slate-400 leading-relaxed italic line-clamp-3">
+                    "{sig.ai_reason}"
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setSelectedAnalysis(sig)}
+                  className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#00ffbd] group-hover:border-[#00ffbd]/30 transition-all flex items-center justify-center gap-2"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  Full AI Report
+                </button>
               </div>
             ))}
           </div>
@@ -341,6 +356,74 @@ export default function Home() {
       </footer>
 
       <QuizWidget />
+
+      {/* Analysis Details Modal */}
+      {selectedAnalysis && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setSelectedAnalysis(null)} />
+          <div className="relative w-full max-w-4xl max-h-[90vh] bg-[#0a1120] border border-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col animate-zoom-in">
+            {/* Modal Header */}
+            <div className="p-8 border-b border-slate-800 flex justify-between items-center bg-slate-900/30">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-[#00ffbd]/10 rounded-2xl border border-[#00ffbd]/30">
+                  <ShieldCheck className="w-8 h-8 text-[#00ffbd]" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-black text-white italic tracking-tighter uppercase">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
+                  <p className="text-[10px] font-black text-[#00ffbd] uppercase tracking-[0.3em]">Deep Analysis via NotebookLM Intelligent Engine</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedAnalysis(null)}
+                className="p-3 bg-slate-800 hover:bg-slate-700 rounded-2xl text-slate-400 hover:text-white transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800">
+                  <div className="text-[10px] font-black text-slate-500 uppercase mb-2">Technical Analysis</div>
+                  <p className="text-sm text-slate-300 leading-relaxed font-medium">
+                    {selectedAnalysis.technical_analysis || "기술적 지표 분석 데이터가 없습니다."}
+                  </p>
+                </div>
+                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800">
+                  <div className="text-[10px] font-black text-slate-500 uppercase mb-2">Fundamental Analysis</div>
+                  <p className="text-sm text-slate-300 leading-relaxed font-medium">
+                    {selectedAnalysis.fundamental_analysis || "기본적 분석 데이터가 없습니다."}
+                  </p>
+                </div>
+                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 border-[#00ffbd]/30 shadow-lg shadow-[#00ffbd]/5">
+                  <div className="text-[10px] font-black text-[#00ffbd] uppercase mb-2 italic">Master's Action Plan</div>
+                  <p className="text-sm text-white leading-relaxed font-bold">
+                    {selectedAnalysis.action_plan || "대응 계획 데이터가 없습니다."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-6 bg-[#00ffbd]/5 rounded-3xl border border-[#00ffbd]/20">
+                <div className="flex items-center gap-2 mb-4">
+                  <Zap className="w-4 h-4 text-[#00ffbd]" />
+                  <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">AI Strategic Summary</span>
+                </div>
+                <p className="text-lg font-black text-white italic leading-snug">
+                  "{selectedAnalysis.ai_reason}"
+                </p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-6 bg-slate-900/30 border-t border-slate-800 flex justify-center">
+              <p className="text-[9px] text-slate-600 font-bold uppercase tracking-widest">
+                본 리포트는 NotebookLM에 의해 생성된 마스터 지능형 포트폴리오 전략입니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
