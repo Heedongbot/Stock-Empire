@@ -31,12 +31,22 @@ class AlphaAnalyzer:
     def analyze_stock(self, symbol):
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Deep Analyzing {symbol}...")
         try:
-            # AWS 차단 방지를 위한 세션 설정
-            ticker = yf.Ticker(symbol)
-            # period를 5d로 줄여서 차단 확률 감소 시도
-            df = ticker.history(period="30d", interval="1d", proxy=None)
-            if df is None or len(df) < 10: 
-                print(f"[WARN] {symbol}: No data fetched (Yahoo Finance Blocked on AWS)")
+            # AWS 차단 방지를 위한 브라우저 위장 세션 설정
+            import requests
+            session = requests.Session()
+            session.headers.update({
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+                'Accept': 'application/json, text/plain, */*',
+                'Origin': 'https://finance.yahoo.com',
+                'Referer': 'https://finance.yahoo.com/'
+            })
+            
+            ticker = yf.Ticker(symbol, session=session)
+            # 데이터를 15일치로 최소화하여 차단 리스크 감소
+            df = ticker.history(period="1mo", interval="1d")
+            
+            if df is None or len(df) < 5: 
+                print(f"[WARN] {symbol}: Data fetch incomplete. Skipping.")
                 return None
             
             curr_price = df['Close'].iloc[-1]
