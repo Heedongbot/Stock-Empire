@@ -131,6 +131,7 @@ class TistoryAutoPoster:
             return False
         
         print(f"[INFO] Logging in to Tistory (Human-like behavior mode)...")
+        try:
             # 0. 완전 초기화 (기존 세션/쿠키 삭제)
             print("[INFO] 0단계: 기존 세션 정리를 위해 로그아웃 및 쿠키 삭제")
             self.driver.delete_all_cookies()
