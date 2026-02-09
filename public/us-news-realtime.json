@@ -1,7 +1,7 @@
 [
   {
-    "id": "yh_-8247037507583079458",
-    "timestamp": "2026-02-09T11:02:58.865771",
+    "id": "yh_-1718724683980328079",
+    "timestamp": "2026-02-09T11:08:33.276616",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
     "sentiment": "BULLISH",
@@ -13,27 +13,8 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 주 발표될 인플레이션 데이터와 지연된 1월 고용 보고서는 주식 시장의 큰 방향성을 결정할 중요한 요소이며, 특히 금리 정책에 중대한 영향을 미칠 수 있습니다.",
+        "summary_kr": "이번 주에 발표될 CPI 및 지표들은 인플레이션과 고용 데이터에 대한 투자자들의 신뢰도를 좌우하며, 이는 주식시장에서 큰 변동성을 초래할 수 있다.",
         "is_indicator": true
-      }
-    }
-  },
-  {
-    "id": "yh_3628629468481130714",
-    "timestamp": "2026-02-09T11:03:16.326617",
-    "source": "Yahoo Finance",
-    "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-50000-apple-boeing-jpmorgan-ai-stocks/?src=A00220&yptr=yahoo",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "다우존스 선물 상승; 구매 영역에서 Apple, Boeing, AI 주식으로 다우가 50K를 넘어섰습니다. 하지만 시장은 여전히 ​​분열되어 있습니다.",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 85,
-        "summary_kr": "애플, 보잉 및 AI 주식이 매수 영역에 들어서는 가운데 다우가 5만을 초과했으며, 이는 투자자들이 기회를 엿보는 긍정적인 신호입니다.",
-        "is_indicator": false
       }
     }
   }
