@@ -145,8 +145,9 @@ class StockNewsCrawler:
             )
             analysis = json.loads(response.choices[0].message.content)
             
-            # Filter out "trash" news - only high impact or extreme sentiment
-            if analysis['impact_score'] < 30 and analysis['market_sentiment'] == 'NEUTRAL':
+            # Filter out "trash" news - strictly require high impact
+            if analysis.get('impact_score', 0) < 40:
+                print(f"[DEBUG] Filtering out low impact news: {item['title']} (Score: {analysis.get('impact_score')})")
                 return None
             return analysis
         except:

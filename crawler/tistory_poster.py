@@ -66,34 +66,38 @@ class TistoryAutoPoster:
             
             # 카카오 로그인 버튼 클릭 (다양한 셀렉터 시도)
             try:
-                kakao_btn = WebDriverWait(self.driver, 15).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, ".btn_login.link_kakao, .link_kakao, a[href*='kakao']"))
-                )
-                self.driver.execute_script("arguments[0].click();", kakao_btn)
-                print("[INFO] Kakao login button clicked.")
-            except:
-                print("[WARN] Kakao button not found directly, trying redirect...")
+                # 1. Direct Kakao Login URL skip for robustness
                 self.driver.get("https://accounts.kakao.com/login?continue=https%3A%2F%2Fwww.tistory.com%2Fauth%2Fkakao%2Fredirect")
+            except:
+                print("[WARN] Direct redirect failed, trying manual click...")
+                self.driver.get("https://www.tistory.com/auth/login")
+                time.sleep(2)
+                btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_login.link_kakao, .link_kakao, a[href*='kakao']")
+                if btns:
+                    self.driver.execute_script("arguments[0].click();", btns[0])
+                else:
+                    return False
 
             time.sleep(3)
             
             # 아이디/비번 입력
-            id_field = WebDriverWait(self.driver, 15).until(
-                EC.presence_of_element_located((By.NAME, "loginId"))
-            )
-            pw_field = self.driver.find_element(By.NAME, "password")
-            
-            id_field.send_keys(TISTORY_ID)
-            pw_field.send_keys(TISTORY_PW)
-            pw_field.send_keys(Keys.ENTER)
-            
-            # 로그인 후 메인이나 관리 페이지 대기
-            WebDriverWait(self.driver, 20).until(
-                lambda d: "tistory.com" in d.current_url and "login" not in d.current_url
-            )
-            
-            print("[INFO] Login successful!")
-            return True
+            try:
+                id_field = WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located((By.NAME, "loginId"))
+                )
+                pw_field = self.driver.find_element(By.NAME, "password")
+                
+                id_field.send_keys(TISTORY_ID)
+                pw_field.send_keys(TISTORY_PW)
+                pw_field.send_keys(Keys.ENTER)
+                
+                # 로그인 후 대기
+                time.sleep(5)
+                print("[INFO] Login successful!")
+                return True
+            except Exception as e:
+                print(f"[ERROR] Interaction failed: {e}")
+                return False
         except Exception as e:
             print(f"[ERROR] Login failed: {e}")
             self.driver.save_screenshot("tistory_login_error.png")
