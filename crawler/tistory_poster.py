@@ -65,7 +65,7 @@ TISTORY_BLOG_NAME = os.getenv("TISTORY_BLOG_NAME")
 # --- BOOS SPECIAL FALLBACK (코부장의 원격 지원) ---
 if not TISTORY_ID or "보스님" in TISTORY_ID:
     TISTORY_ID = "gmlehd240@gmail.com"
-    TISTORY_PW = "gmlehd05"
+    TISTORY_PW = "gmlehd05#"
     TISTORY_BLOG_NAME = "stockempire"
     print("[INFO] Using Remote Backup Credentials for Boss.")
 # -----------------------------------------------
