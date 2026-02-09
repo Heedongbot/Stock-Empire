@@ -234,11 +234,23 @@ class TistoryAutoPoster:
                         
                         try:
                             # [강화] 텍스트 기반 버튼 찾기 (한국어/영어 모두)
-                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'Next') or contains(text(),'Continue') or contains(text(),'Confirm')]"
+                            xpath_query = "//button[contains(text(),'계속') or contains(text(),'확인') or contains(text(),'동의') or contains(text(),'허용') or contains(text(),'완료') or contains(text(),'로그인') or contains(text(),'가기') or contains(text(),'Next') or contains(text(),'Continue') or contains(text(),'Confirm') or contains(text(),'시작하기')]"
                             cont_btns = self.driver.find_elements(By.XPATH, xpath_query)
                             
-                            # [추가] 클래스명 기반 파란색/주요 버튼들 무조건 수집 (카카오 특유의 버튼들)
-                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login")
+                            # [추가] 계정 선택 화면 대응 (prompt=select_account 상황)
+                            try:
+                                account_links = self.driver.find_elements(By.CSS_SELECTOR, "li .link_profile, .list_account .link_login, .txt_email")
+                                for link in account_links:
+                                    inner_text = link.text or link.get_attribute("innerText") or ""
+                                    if user_id in inner_text:
+                                        print(f"[INFO] 계정 선택 감지 및 클릭: {user_id}")
+                                        self.driver.execute_script("arguments[0].click();", link)
+                                        time.sleep(3)
+                            except: pass
+
+                            # [추가] 클래스명 기반 파란색/주요 버튼들 무조건 수집
+                            # 카카오의 주요 버튼 클래스들: .btn_g, .highlight, .btn_confirm, .submit
+                            primary_btns = self.driver.find_elements(By.CSS_SELECTOR, ".btn_g.highlight, .btn_confirm, .submit, .btn_login, .btn_g.btn_confirm")
                             
                             all_clickable = cont_btns + primary_btns
                             for btn in all_clickable:
