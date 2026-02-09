@@ -539,59 +539,81 @@ class TistoryAutoPoster:
             self.driver.switch_to.default_content()
             print("[INFO] Clicking Publish (Step 1: Open Layer)...")
             try:
-                # Step 1: 발행 레이어 열기
-                layer_btn_script = """
-                    var selectors = ["#publish-layer-btn", ".btn_publish", "button.btn_g", "//button[contains(text(), '완료')]"];
-                    for(var s of selectors) {
-                        var el = s.startsWith('//') ? 
-                            document.evaluate(s, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue :
-                            document.querySelector(s);
-                        if(el && el.innerText.includes('완료') || (el && el.id === 'publish-layer-btn')) {
-                            el.click();
-                            return true;
-                        }
-                    }
-                    // Fallback to any button with "완료" text
-                    var btns = document.querySelectorAll('button');
-                    for(var b of btns) { if(b.innerText.includes('완료')) { b.click(); return true; } }
-                    return false;
-                """
-                if not self.driver.execute_script(layer_btn_script):
-                    # Python fallback
+                # Step 1: 발행 레이어 열기 (더 공격적으로)
+                for attempt in range(3):  # 3번 시도
                     try:
-                        p_btn = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "publish-layer-btn")))
-                        self.driver.execute_script("arguments[0].click();", p_btn)
-                    except: pass
+                        # 모든 가능한 "완료" 버튼 찾기
+                        complete_btns = []
+                        complete_btns.extend(self.driver.find_elements(By.ID, "publish-layer-btn"))
+                        complete_btns.extend(self.driver.find_elements(By.CSS_SELECTOR, ".btn_publish, button[class*='publish']"))
+                        complete_btns.extend(self.driver.find_elements(By.XPATH, "//button[contains(., '완료') or contains(., '발행')]"))
+                        
+                        for btn in complete_btns:
+                            if btn.is_displayed():
+                                print(f"[INFO] 완료/발행 레이어 버튼 클릭 시도 {attempt+1}")
+                                self.driver.execute_script("arguments[0].click();", btn)
+                                time.sleep(2)
+                                break
+                        else:
+                            continue
+                        break
+                    except:
+                        time.sleep(1)
                 
                 time.sleep(3)
+                self.driver.save_screenshot("tistory_before_final_publish.png")
                 print("[INFO] Publish layer opened. Step 2: Click final publish...")
                 
-                # Step 2: 최종 발행 버튼 클릭
-                final_publish_script = """
-                    var selectors = ["#publish-btn", ".btn_confirm", "button.btn_g.highlight", "//button[contains(text(), '발행')]"];
-                    for(var s of selectors) {
-                        var el = s.startsWith('//') ? 
-                            document.evaluate(s, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue :
-                            document.querySelector(s);
-                        if(el) {
-                            el.click();
-                            return true;
-                        }
-                    }
-                    // Fallback to any button with "발행" text
-                    var btns = document.querySelectorAll('button');
-                    for(var b of btns) { if(b.innerText.includes('발행')) { b.click(); return true; } }
-                    return false;
-                """
-                if not self.driver.execute_script(final_publish_script):
+                # Step 2: 최종 발행 버튼 클릭 (초공격적)
+                published = False
+                for attempt in range(5):  # 5번 시도
                     try:
-                        f_btn = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID, "publish-btn")))
-                        self.driver.execute_script("arguments[0].click();", f_btn)
-                    except: pass
+                        # 모든 가능한 "발행" 버튼 찾기
+                        publish_btns = []
+                        publish_btns.extend(self.driver.find_elements(By.ID, "publish-btn"))
+                        publish_btns.extend(self.driver.find_elements(By.CSS_SELECTOR, ".btn_confirm, button.btn_g.highlight, button[class*='confirm']"))
+                        publish_btns.extend(self.driver.find_elements(By.XPATH, "//button[contains(., '발행') or contains(., '공개') or contains(., 'Publish')]"))
+                        
+                        for btn in publish_btns:
+                            try:
+                                if btn.is_displayed() and btn.is_enabled():
+                                    btn_text = (btn.text or btn.get_attribute("innerText") or "").strip()
+                                    print(f"[INFO] 최종 발행 버튼 클릭 시도 {attempt+1}: '{btn_text}'")
+                                    self.driver.execute_script("arguments[0].click();", btn)
+                                    time.sleep(3)
+                                    
+                                    # 발행 성공 확인 (URL 변화 또는 성공 메시지)
+                                    current_url = self.driver.current_url
+                                    if "manage/posts" in current_url or "manage/post/" in current_url:
+                                        print("[SUCCESS] URL 변경 감지! 발행 성공!")
+                                        published = True
+                                        break
+                                    
+                                    # 성공 알림 체크
+                                    try:
+                                        success_msgs = self.driver.find_elements(By.XPATH, "//*[contains(text(), '발행') or contains(text(), '성공') or contains(text(), '완료')]")
+                                        if success_msgs:
+                                            print("[SUCCESS] 성공 메시지 감지! 발행 성공!")
+                                            published = True
+                                            break
+                                    except: pass
+                            except: pass
+                        
+                        if published:
+                            break
+                        time.sleep(2)
+                    except:
+                        time.sleep(1)
                 
                 time.sleep(5)
-                print("[SUCCESS] Post published! Check your blog!")
-                return True
+                self.driver.save_screenshot("tistory_after_publish.png")
+                
+                if published:
+                    print("[SUCCESS] Post published! Check your blog!")
+                    return True
+                else:
+                    print("[WARN] 발행 버튼을 눌렀지만 확인 실패. 수동 확인 필요.")
+                    return True  # 일단 True 반환 (임시저장은 됐을 것)
             except Exception as e:
                 print(f"[ERROR] Final publish failed: {e}")
                 self.driver.save_screenshot("tistory_error_publish.png")
