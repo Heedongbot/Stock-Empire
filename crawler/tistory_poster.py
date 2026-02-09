@@ -260,7 +260,6 @@ class TistoryAutoPoster:
                                     self.driver.execute_script("arguments[0].click();", btn)
                                     time.sleep(3) # 사람처럼 천천히
                         except: pass
-                        except: pass
                         
                         # 주기적으로 스크린샷 찍어서 디버깅 (현재 무엇을 보는지)
                         self.driver.save_screenshot("debug_login_current.png")
