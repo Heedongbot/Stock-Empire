@@ -1,7 +1,7 @@
 [
   {
-    "id": "yh_9185680652288377742",
-    "timestamp": "2026-02-09T11:38:04.784356",
+    "id": "yh_1240190263881212777",
+    "timestamp": "2026-02-09T11:44:58.009456",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/us-software-stocks-tumble-sparks-110304896.html",
     "sentiment": "BEARISH",
@@ -12,18 +12,18 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 70,
-        "summary_kr": "AI 관련 주식의 하락은 시장 전반에 걸쳐 조정 신호를 시사하며, 이는 투자자들의 심리에 부정적인 영향을 미칠 수 있다.",
+        "impact_score": 75,
+        "summary_kr": "인공지능 관련 거래가 시장을 재편함에 따라 소프트웨어 주식의 하락은 투자자들에게 신중한 접근이 필요함을 시사합니다.",
         "is_indicator": false
       }
     }
   },
   {
-    "id": "yh_1789054843799952916",
-    "timestamp": "2026-02-09T11:38:06.962046",
+    "id": "yh_981931271348293473",
+    "timestamp": "2026-02-09T11:45:00.447694",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-refinance-rates-today-monday-february-9-2026-110100339.html",
-    "sentiment": "BULLISH",
+    "sentiment": "BEARISH",
     "is_breaking": true,
     "free_tier": {
       "title": "2026년 2월 9일 오늘의 모기지 및 재융자 이자율: 낮은 이자율은 경제적 요인에 따라 달라집니다.",
@@ -32,36 +32,17 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "저금리는 경제 전반에 긍정적인 영향을 미쳐 주식 시장 상승으로 이어질 가능성이 높습니다.",
+        "summary_kr": "오늘의 모기지 및 재융자 금리는 경제적 요인에 달려있어, 이는 금리 변동에 따른 주식 시장의 영향을 결정짓는 중요한 신호입니다.",
         "is_indicator": true
       }
     }
   },
   {
-    "id": "yh_3771390583483201065",
-    "timestamp": "2026-02-09T11:38:29.910153",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/the-white-house-says-it-wants-a-strong-us-dollar-investors-are-still-keeping-their-distance-140014369.html",
-    "sentiment": "NEUTRAL",
-    "is_breaking": true,
-    "free_tier": {
-      "title": "백악관은 미국 달러 강세를 원한다고 밝혔습니다. 투자자들은 여전히 ​​거리를 두고 있다.",
-      "summary_kr": ""
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 85,
-        "summary_kr": "강한 달러는 미국 기업의 해외 수익에 부정적 영향을 미치지만, 이는 물가 안정을 통해 침체를 방지할 수 있다는 점에서 중요하다.",
-        "is_indicator": true
-      }
-    }
-  },
-  {
-    "id": "yh_-1678347489846149847",
-    "timestamp": "2026-02-09T11:38:34.896823",
+    "id": "yh_4934999425747531955",
+    "timestamp": "2026-02-09T11:45:28.921109",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/dow-50000-sets-table-for-inflation-data-delayed-january-jobs-report-what-to-watch-this-week-123826626.html",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BULLISH",
     "is_breaking": true,
     "free_tier": {
       "title": "인플레이션 데이터에 대한 다우 50,000 세트 테이블, 지연된 1월 일자리 보고서: 이번 주에 주목해야 할 사항",
@@ -70,7 +51,7 @@
     "vip_tier": {
       "ai_analysis": {
         "impact_score": 90,
-        "summary_kr": "이번 인플레이션 데이터와 1월 고용보고서 지연은 시장의 방향성을 결정하는 중요한 변수로, 주가에 직접적인 영향을 미칠 수 있습니다.",
+        "summary_kr": "이번 인플레이션 데이터와 지연된 1월 고용 보고서는 주식 시장에 큰 영향을 미치는 주요 경제 지표로, 투자자들은 이를 통해 향후 금리 인상 방향성을 예측할 수 있습니다.",
         "is_indicator": true
       }
     }
