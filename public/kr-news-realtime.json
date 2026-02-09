@@ -1,39 +1,39 @@
 [
   {
-    "id": "2469735600009227569",
+    "id": "7246957391228456531",
     "market": "KR",
     "ticker": "KOSPI",
     "sentiment": "BULLISH",
-    "published_at": "2026-02-08 20:29:37.041051",
+    "published_at": "2026-02-09 17:56:34.756806",
     "free_tier": {
-      "title": "빗썸 \"일주일간 수수료 면제\"?비트코인 오지급 보상 개시",
-      "summary_kr": "사상 초유의 비트코인 오지급 사고가 발생한 빗썸이 순차적으로 피해 보상을 시작한다. 8일 빗썸은 보도자료를 통해 \"고객 예치 자산과 거래소 보유...아이뉴스24|2026-02-08 20:18",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0001003985&office_id=031&mode=LSS2D&type=0§ion_id=101§ion_id2=258§ion_id3=&date=20260208&page=1",
-      "original_source": "아이뉴스24"
+      "title": "제주항공, 지난해 4분기 영업이익 186억…5개 분기만 흑자 전환",
+      "summary_kr": "GST(083450)는 주당 650원의 현금 결산배당을 결정했다고 9일 공시했다. 시가배당율은 2.4%이며 배당금총액은 약 116억원이다. 배당금은 오는 3월 26일 주주...이데일리|2026-02-09 17:54",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0004588480&office_id=011&mode=LSS2D&type=0§ion_id=101§ion_id2=258§ion_id3=&date=20260209&page=1",
+      "original_source": "이데일리"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "비트코인 사고로 신뢰도 하락, 단기적 영향 우려.",
-        "impact_score": 70,
+        "summary_kr": "제주항공 흑자 전환, 긍정적 신호.",
+        "impact_score": 85,
         "investment_insight": "실시간 수급 데이터 기반 대응 권장"
       }
     }
   },
   {
-    "id": "-1969994164088546072",
+    "id": "5182921735709667634",
     "market": "KR",
     "ticker": "KOSPI",
     "sentiment": "BULLISH",
-    "published_at": "2026-02-08 20:29:38.500170",
+    "published_at": "2026-02-09 17:56:35.302632",
     "free_tier": {
-      "title": "‘2배 베팅’ 몰리는 개미... 1월에만 15만명 가세",
-      "summary_kr": "'두배 베팅'의 공격적인 투자가 급증하고 있다. 지난달 레버리지와 곱버스(인버스 2배) 상장지수상품(ETP) 매매를 위해 관련 교육을 이수한 투...파이낸셜뉴스|2026-02-08 18:54",
-      "link": "https://finance.naver.com/news/news_read.naver?article_id=0005475173&office_id=014&mode=LSS2D&type=0§ion_id=101§ion_id2=258§ion_id3=&date=20260208&page=1",
-      "original_source": "파이낸셜뉴스"
+      "title": "대신증권, '리테일·이자수익' 확대에 영업익 254%↑",
+      "summary_kr": "위탁매매 수수료 확대 등에 힘입어 대신증권의 지난해 영업이익이 큰 폭으로 늘었다. 대신증권은 2025년 연결 기준 영업이익 2955억원, 당기순...아이뉴스24|2026-02-09 17:47",
+      "link": "https://finance.naver.com/news/news_read.naver?article_id=0001004370&office_id=031&mode=LSS2D&type=0§ion_id=101§ion_id2=258§ion_id3=&date=20260209&page=1",
+      "original_source": "아이뉴스24"
     },
     "vip_tier": {
       "ai_analysis": {
-        "summary_kr": "개미 투자자들의 레버리지 투자 증가, 주가 변동성 확대 우려.",
+        "summary_kr": "리테일 수익 증가로 성장 기대감",
         "impact_score": 85,
         "investment_insight": "실시간 수급 데이터 기반 대응 권장"
       }
