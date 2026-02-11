@@ -10,6 +10,7 @@ import SiteHeader from '@/components/SiteHeader';
 import { useAuth } from '@/lib/AuthContext';
 import Link from 'next/link';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
+import StockLogo from '@/components/StockLogo'; // Import added
 
 interface AlphaSignal {
     id: string;
@@ -34,6 +35,16 @@ function VVIPAlphaContent() {
     const [searchTerm, setSearchTerm] = useState('');
     const [scanning, setScanning] = useState(false);
     const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
+    const [exchangeRate, setExchangeRate] = useState(1435); // 초기값
+
+    useEffect(() => {
+        fetch('/api/exchange-rate')
+            .then(res => res.json())
+            .then(data => {
+                if (data.rate) setExchangeRate(data.rate);
+            })
+            .catch(err => console.error('Failed to load exchange rate:', err));
+    }, []);
     const { user } = useAuth();
 
     const handleDeepScan = async () => {
@@ -101,32 +112,24 @@ function VVIPAlphaContent() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                        <div className="flex-1 md:flex-none relative w-full md:w-80 group">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    {/* Google-style Central Search - Main Page Style */}
+                    <div className="w-full md:w-[500px] relative group z-20">
+                        <div className="relative">
                             <input
                                 type="text"
-                                placeholder="종목 즉시 분석 (애플, 테슬라...)"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
-                                className="bg-white border border-slate-300 rounded-2xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 w-full transition-all shadow-sm"
+                                placeholder="종목 즉시 분석 (애플, 테슬라...)"
+                                className="w-full px-6 md:px-8 py-4 md:py-5 rounded-[2rem] bg-white border-2 border-slate-300 shadow-xl shadow-blue-500/5 text-base md:text-lg font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all placeholder:text-slate-300 pr-32 md:pr-40"
                             />
-                        </div>
-                        <div className="flex gap-2 w-full md:w-auto">
                             <button
                                 onClick={handleDeepScan}
-                                disabled={scanning || !searchTerm}
-                                className={`flex-1 md:flex-none px-6 py-3 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-slate-800 hover:scale-105 transition-all shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2 ${scanning ? 'animate-pulse opacity-70' : ''}`}
+                                disabled={scanning}
+                                className="absolute right-2 top-2 bottom-2 md:right-3 md:top-3 md:bottom-3 px-6 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-full md:rounded-[1.5rem] font-black text-xs md:text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20"
                             >
-                                {scanning ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 text-blue-400" />}
-                                {scanning ? '분석 중...' : '긴급 분석'}
-                            </button>
-                            <button
-                                onClick={fetchSignals}
-                                className="p-3 bg-white border border-slate-300 rounded-2xl hover:bg-slate-50 transition-all active:scale-95 shadow-sm"
-                            >
-                                <RefreshCw className={`w-5 h-5 text-slate-500 ${loading ? 'animate-spin' : ''}`} />
+                                {scanning ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Search className="w-4 h-4" />}
+                                <span className="hidden md:inline">{scanning ? '분석 중...' : 'DEEP SCAN'}</span>
                             </button>
                         </div>
                     </div>
@@ -194,7 +197,7 @@ function VVIPAlphaContent() {
                                         <span className="text-[10px] text-slate-500 font-black uppercase">현재가</span>
                                         <div className="text-right">
                                             <div className="text-2xl font-black font-mono text-slate-900">${sig.price.toFixed(2)}</div>
-                                            <div className="text-[10px] text-slate-400 font-bold">약 {Math.round(sig.price * 1345).toLocaleString()}원</div>
+                                            <div className="text-[10px] text-slate-400 font-bold">약 {Math.round(sig.price * exchangeRate).toLocaleString()}원</div>
                                         </div>
                                     </div>
 
@@ -202,12 +205,12 @@ function VVIPAlphaContent() {
                                         <div className="flex flex-col gap-2 p-4 bg-red-50 border border-red-100 rounded-2xl">
                                             <span className="text-[9px] text-red-500 font-black">목표가 (익절)</span>
                                             <div className="text-xl font-black font-mono text-red-600">${sig.target_price.toFixed(2)}</div>
-                                            <div className="text-[9px] text-red-400 font-semibold">약 {Math.round(sig.target_price * 1345).toLocaleString()}원</div>
+                                            <div className="text-[9px] text-red-400 font-semibold">약 {Math.round(sig.target_price * exchangeRate).toLocaleString()}원</div>
                                         </div>
                                         <div className="flex flex-col gap-2 p-4 bg-blue-50 border border-blue-100 rounded-2xl">
                                             <span className="text-[9px] text-blue-500 font-black">손절가 (컷)</span>
                                             <div className="text-xl font-black font-mono text-blue-600">${sig.stop_loss.toFixed(2)}</div>
-                                            <div className="text-[9px] text-blue-400 font-semibold">약 {Math.round(sig.stop_loss * 1345).toLocaleString()}원</div>
+                                            <div className="text-[9px] text-blue-400 font-semibold">약 {Math.round(sig.stop_loss * exchangeRate).toLocaleString()}원</div>
                                         </div>
                                     </div>
                                 </div>

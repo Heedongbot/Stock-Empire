@@ -107,105 +107,125 @@ export default function LatestNewsInsights() {
     const visibleNews = news.slice(startIdx, startIdx + itemsPerPage);
 
     return (
-        <section className="max-w-7xl mx-auto px-6 relative z-30 mb-24 animate-fade-in-up">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
+        <section className="max-w-7xl mx-auto px-6 relative z-30 mb-20 bg-gradient-to-b from-transparent to-slate-50/50 pt-10 rounded-[4rem]">
+            {/* Header Area */}
+            <div className="flex flex-col md:flex-row justify-between items-end mb-10 px-4">
                 <div className="flex items-center gap-4">
-                    <div className="bg-blue-50 p-3 rounded-2xl border border-blue-100 shadow-sm">
-                        <Terminal className="w-6 h-6 text-blue-600" />
+                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30 animate-pulse">
+                        <Newspaper className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter">LIVE EMPIRE TERMINAL</h2>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                            </span>
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Real-time Market Intelligence</span>
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="flex w-2 h-2 bg-red-500 rounded-full animate-ping" />
+                            <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">LIVE BROADCAST</span>
                         </div>
+                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 italic tracking-tighter leading-none">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">BREAKING</span> NEWS
+                        </h2>
+                        <p className="text-slate-400 text-xs font-bold mt-2 uppercase tracking-widest">
+                            AI가 전 세계 14,000개 언론사를 24시간 감시 중입니다
+                        </p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center bg-white p-1 rounded-2xl border border-slate-200 shadow-sm">
-                        <button
-                            onClick={prevSlide}
-                            className="p-3 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-all active:scale-95"
-                            title="이전 기사"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-
-                        <div className="px-4 flex flex-col items-center">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Feed</span>
-                            <span className="text-xs font-black text-slate-900">
-                                {currentIndex + 1} <span className="text-slate-300 mx-1">/</span> {Math.ceil(news.length / itemsPerPage)}
-                            </span>
-                        </div>
-
-                        <button
-                            onClick={nextSlide}
-                            className="p-3 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-all active:scale-95"
-                            title="다음 기사"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
-                    </div>
-
-                    <Link href="/newsroom" className="flex md:flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-slate-900/10 transition-all group hover:-translate-y-0.5 w-full md:w-auto">
-                        More News <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                <div className="flex items-center gap-2 bg-white p-1 rounded-full border border-slate-200 shadow-sm mt-4 md:mt-0">
+                    <button onClick={prevSlide} className="w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center transition-all active:scale-95 text-slate-400 hover:text-slate-900">
+                        <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <span className="text-[10px] font-black text-slate-300 w-12 text-center">
+                        {currentIndex + 1} / {Math.ceil(news.length / itemsPerPage)}
+                    </span>
+                    <button onClick={nextSlide} className="w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition-all active:scale-95 text-white shadow-lg shadow-slate-900/20">
+                        <ChevronRight className="w-5 h-5" />
+                    </button>
+                    <Link href="/newsroom" className="ml-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 transition-colors">
+                        MORE NEWS
                     </Link>
                 </div>
             </div>
 
-            {/* Grid / Carousel Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {visibleNews.map((item, idx) => {
-                    const fullSummary = item.vip_tier?.ai_analysis?.summary_kr || "";
-                    const insightTitle = fullSummary.split('\n')[0]?.replace('[Empire AI 요약]', '').trim() || "시장 영향력 분석";
-                    const insightContent = fullSummary.replace(insightTitle, '').replace('[Empire AI 요약]', '').trim();
+            {/* News Cards Slider */}
+            <div className="relative overflow-hidden px-4 md:px-0 pb-10">
+                <div
+                    className="flex transition-transform duration-500 ease-out gap-6"
+                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
+                    {news.map((item) => (
+                        <div
+                            key={item.id}
+                            style={{ flex: `0 0 calc(${100 / itemsPerPage}% - 16px)` }}
+                            className="group relative bg-white border border-slate-200 rounded-[2.5rem] p-8 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col h-[450px]"
+                        >
+                            {/* Background Decoration */}
+                            <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${item.sentiment === 'Negative' ? 'from-blue-50 to-transparent' : 'from-red-50 to-transparent'} rounded-bl-[100px] opacity-50 transition-all group-hover:scale-110`} />
 
-                    return (
-                        <div key={item.id} className="bg-white border border-slate-300 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-blue-400 transition-all shadow-xl shadow-blue-500/5 flex flex-col justify-between hover:-translate-y-1">
-                            <div>
-                                <div className="flex justify-between items-center mb-6">
-                                    <span className="px-3 py-1 bg-slate-50 rounded-lg text-[10px] font-black text-slate-400 uppercase tracking-widest border border-slate-200">
-                                        NEWS #{startIdx + idx + 1}
-                                    </span>
-                                    <div className="flex items-center gap-1 text-[10px] text-blue-600 font-bold bg-blue-50 px-2 py-1 rounded-full">
-                                        <PlayCircle className="w-3 h-3 fill-current" /> Live
+                            <div className="relative z-10 flex flex-col h-full">
+                                {/* Top Badges */}
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="flex gap-2">
+                                        <div className="bg-slate-100 px-3 py-1 rounded-lg">
+                                            <Newspaper className="w-4 h-4 text-slate-400" />
+                                        </div>
+                                        <div className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 ${(item.vip_tier?.ai_analysis?.impact_score || 0) >= 80
+                                                ? 'bg-red-50 text-red-600 ring-1 ring-red-100'
+                                                : 'bg-slate-50 text-slate-500'
+                                            }`}>
+                                            {(item.vip_tier?.ai_analysis?.impact_score || 0) >= 80 && <Zap className="w-3 h-3 fill-current animate-pulse" />}
+                                            IMPACT {(item.vip_tier?.ai_analysis?.impact_score || 0)}
+                                        </div>
+                                    </div>
+
+                                    <div className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full flex items-center gap-1 ${item.sentiment === 'Positive' ? 'bg-red-50 text-red-600' :
+                                            item.sentiment === 'Negative' ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-500'
+                                        }`}>
+                                        {item.sentiment === 'Positive' ? '호재 (Bullish)' : item.sentiment === 'Negative' ? '악재 (Bearish)' : '중립 (Neutral)'}
                                     </div>
                                 </div>
 
-                                <h3 className="text-lg font-black text-slate-900 mb-4 leading-snug line-clamp-2 min-h-[3.5rem] tracking-tight">
-                                    {item.free_tier.title}
-                                </h3>
+                                {/* Content */}
+                                <div className="flex-1 mb-6">
+                                    <h3 className="text-xl font-black text-slate-900 leading-snug mb-4 line-clamp-3 group-hover:text-blue-600 transition-colors">
+                                        {item.free_tier?.title || "제목 없음"}
+                                    </h3>
 
-                                <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 line-clamp-3 min-h-[4.5rem]">
-                                    {item.free_tier.summary_kr || item.free_tier.summary || "데이터 로딩 중..."}
-                                </p>
-                            </div>
-
-                            <div className="relative group/box mt-auto">
-                                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:bg-blue-50/50 hover:border-blue-200 transition-colors cursor-pointer group-hover/box:shadow-inner">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <div className="flex items-center gap-2">
-                                            <Zap className="w-4 h-4 text-blue-600 fill-blue-600" />
-                                            <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">AI Analysis</span>
+                                    <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative">
+                                        <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] font-black text-blue-600 uppercase tracking-widest border border-blue-100 rounded-md">
+                                            AI 3줄 요약
                                         </div>
-                                        <Link href={`/analysis/news-us-${startIdx + idx}`} className="text-[9px] font-black text-slate-400 hover:text-blue-600 uppercase flex items-center gap-1 transition-colors">
-                                            Full Report <ChevronRight className="w-3 h-3" />
-                                        </Link>
+                                        <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
+                                            {item.vip_tier?.ai_analysis?.summary_kr || item.free_tier?.summary_kr || "AI 분석 중입니다..."}
+                                        </p>
                                     </div>
-                                    <p className="text-xs text-slate-600 font-bold leading-relaxed line-clamp-2">
-                                        {insightContent || insightTitle}
-                                    </p>
+                                </div>
+
+                                {/* Footer */}
+                                <div className="mt-auto pt-6 border-t border-slate-100 flex justify-between items-center relative z-10">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                                            <Terminal className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <div className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">분석 완료</div>
+                                            <div className="text-[10px] font-black text-slate-900">1분 전</div>
+                                        </div>
+                                    </div>
+
+                                    <Link href="/newsroom" className="group/btn flex items-center gap-2 pl-4 pr-2 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all hover:pr-4">
+                                        <span>분석 보기</span>
+                                        <div className="w-5 h-5 bg-white/20 rounded-lg flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-blue-600 transition-colors">
+                                            <ChevronRight className="w-3 h-3" />
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
-                    );
-                })}
+                    ))}
+                </div>
             </div>
+
+            {/* Background Elements */}
+            <div className="absolute top-10 left-10 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl -z-10 animate-pulse" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-100/30 rounded-full blur-3xl -z-10 animate-pulse delay-1000" />
         </section>
     );
 }
