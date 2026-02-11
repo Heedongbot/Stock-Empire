@@ -11,7 +11,6 @@ import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
 import { Ticker } from '@/components/TickerMain';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
-import { QuizWidget } from '@/components/QuizMain';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import NewsTeaser from '@/components/NewsTeaser';
@@ -452,8 +451,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      <QuizWidget />
 
       {/* Analysis Details Modal - Friendly & Clean */}
       {selectedAnalysis && (
