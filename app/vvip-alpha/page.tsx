@@ -239,6 +239,12 @@ function VVIPAlphaContent() {
                                         <FileText className="w-4 h-4" />
                                         전체 리포트 보기
                                     </button>
+
+                                    <div className="mt-4 pt-3 border-t border-dashed border-slate-200 text-[9px] text-slate-400 font-medium text-center leading-tight">
+                                        <ShieldAlert className="w-3 h-3 inline mr-1 mb-0.5" />
+                                        본 정보는 AI 분석 결과로 투자 권유가 아니며,<br />
+                                        투자의 책임은 전적으로 본인에게 있습니다.
+                                    </div>
                                 </div>
                             </div>
                         ))
