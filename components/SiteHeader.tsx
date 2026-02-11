@@ -16,12 +16,12 @@ export default function SiteHeader() {
     const { user, isLoading } = useAuth();
 
     const NAV_ITEMS = [
-        { id: 'dashboard', path: '/dashboard' },
         { id: 'newsroom', path: '/newsroom' },
-        { id: 'analysis', path: '/analysis' },
         { id: 'themes', path: '/themes' },
-        { id: 'pro_alpha', path: '/vvip-alpha' },
         { id: 'market', path: '/market' },
+        { id: 'analysis', path: '/analysis' },
+        { id: 'pro_alpha', path: '/vvip-alpha' },
+        { id: 'dashboard', path: '/dashboard' },
     ];
 
     return (

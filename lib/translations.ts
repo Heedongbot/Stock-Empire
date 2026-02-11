@@ -2,13 +2,13 @@ export const translations = {
     ko: {
         nav: {
             dashboard: "대시보드",
-            newsroom: "LIVE EMPIRE TERMINAL",
+            newsroom: "라이브 뉴스",
             portfolio: "포트폴리오",
             chat: "AI 대가 상담",
-            analysis: "AI 분석 리포트",
-            themes: "테마 인텔리전스",
+            analysis: "종목 분석",
+            themes: "테마 스캐너",
             pro_alpha: "알파 시그널",
-            market: "시장 시그널",
+            market: "시장 확률",
             home: "홈",
             store: "스토어",
             pro_zone: "알파 존"
