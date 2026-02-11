@@ -10,7 +10,8 @@ import SiteHeader from '@/components/SiteHeader';
 import { useAuth } from '@/lib/AuthContext';
 import Link from 'next/link';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
-import StockLogo from '@/components/StockLogo'; // Import added
+import StockLogo from '@/components/StockLogo';
+import { STOCK_LIST } from '@/lib/stocks'; // 한글 종목명 매핑을 위해 추가 // Import added
 
 interface AlphaSignal {
     id: string;
@@ -171,11 +172,11 @@ function VVIPAlphaContent() {
                                     <div className="inline-block px-4 py-1 bg-slate-100 border border-slate-200 rounded-xl text-xs font-black text-slate-700 mb-4 tracking-wider uppercase">
                                         {sig.ticker}
                                     </div>
-                                    <h3 className="text-3xl font-black text-slate-900 italic uppercase tracking-tighter leading-none group-hover:text-blue-600 transition-colors">
-                                        {sig.ticker}
+                                    <h3 className="text-3xl font-black text-slate-900 italic tracking-tighter leading-none group-hover:text-blue-600 transition-colors">
+                                        {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.ticker}
                                     </h3>
                                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-2 truncate">
-                                        {sig.name}
+                                        {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name ? `${sig.ticker} • NASDAQ` : sig.name}
                                     </p>
                                 </div>
 
