@@ -822,64 +822,92 @@ def process_news_batch():
                 
                 title = f"[Stock Empire] {title_text}"
                 
-                # HTML 본문 생성
+                # HTML 본문 생성 (Rich-Design Version)
                 content = f"""
-<div style="font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto;">
-    <h2 style="font-size: 22px; color: #111; border-bottom: 3px solid #3366ff; padding-bottom: 8px; margin-bottom: 20px;">
-        us 미국 증시 AI 속보
-    </h2>
-    <p style="font-size: 15px; color: #555; margin-bottom: 20px;">
-        <strong>Stock Empire AI</strong>가 실시간으로 포착한 미국 시장 핵심 뉴스입니다.
-    </p>
-
-    <div style="background-color: #f0f7ff; border: 1px solid #cce5ff; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
-        <div style="font-size: 18px; font-weight: bold; color: #004085; line-height: 1.4;">
-            <span style="font-size: 24px; vertical-align: middle; margin-right: 8px;">📋</span> {title_text}
+<div style="font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.8; color: #1e293b; max-width: 800px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+    <!-- Header Image/Banner -->
+    <div style="background: linear-gradient(135deg, #0F172A 0%, #2563EB 100%); padding: 40px 30px; text-align: center; color: white;">
+        <div style="font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.8; margin-bottom: 12px;">Stock Empire AI Intelligence</div>
+        <h1 style="font-size: 28px; font-weight: 900; margin: 0; line-height: 1.3; letter-spacing: -0.02em;">
+            🇺🇸 미국 증시 실시간 AI 속보 리포트
+        </h1>
+        <div style="margin-top: 20px; display: inline-block; padding: 6px 15px; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 12px; font-weight: 700;">
+            📅 {datetime.now().strftime('%Y년 %m월 %d일 %H:%M')} 기준
         </div>
     </div>
 
-    <p style="font-size: 16px; color: #444; margin-bottom: 35px; line-height: 1.8;">
-        {summary_main}
-    </p>
+    <div style="padding: 40px 30px;">
+        <!-- Sector Badge -->
+        <div style="display: inline-block; padding: 4px 12px; background: #eff6ff; color: #2563eb; border-radius: 8px; font-size: 11px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase;">
+            MARKET BRIEFING
+        </div>
 
-    <div style="background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 40px;">
-        <h3 style="margin-top: 0; font-size: 19px; color: #2d3436; display: flex; align-items: center;">
-            <span style="margin-right: 10px;">🤖</span> AI 워룸(War Room) 분석
-        </h3>
-        <div style="margin: 20px 0; padding: 15px; border-top: 1px dashed #eee; border-bottom: 1px dashed #eee;">
-            <div style="margin-bottom: 10px; font-size: 16px;">
-                <strong>⚡ 파급력 점수:</strong> <span style="color: #d63031; font-weight: bold;">{score}/100</span>
+        <!-- Main News Title -->
+        <h2 style="font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 25px; line-height: 1.4;">
+             {title_text}
+        </h2>
+
+        <!-- News Summary Box -->
+        <div style="background: #f8fafc; border-radius: 20px; padding: 25px; margin-bottom: 35px; border: 1px solid #f1f5f9;">
+            <p style="font-size: 16px; color: #334155; margin: 0; font-weight: 500;">
+                {summary_main}
+            </p>
+        </div>
+
+        <!-- AI Deep Dive Section -->
+        <div style="border: 2px solid #2563eb; border-radius: 24px; padding: 30px; position: relative;">
+            <div style="position: absolute; top: -15px; left: 25px; background: #2563eb; color: white; padding: 4px 15px; border-radius: 50px; font-[900] font-size: 13px; letter-spacing: 0.05em;">
+                🧠 AI WAR-ROOM ANALYSIS
             </div>
-            <div style="font-size: 16px;">
-                <strong>🧭 시장 풍향:</strong> <span style="color: #0984e3; font-weight: bold;">{sentiment_kr}</span>
+
+            <div style="display: flex; gap: 20px; margin-bottom: 25px; padding-top: 10px;">
+                <div style="flex: 1; text-align: center; border-right: 1px solid #e2e8f0;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">영향력</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #ef4444;">{score}<span style="font-size: 13px;">/100</span></div>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">시장 풍향</div>
+                    <div style="font-size: 18px; font-weight: 900; color: #3b82f6;">{sentiment_kr.split('(')[0]}</div>
+                </div>
+            </div>
+
+            <div style="background: #fdfdfd; padding: 20px; border-left: 5px solid #2563eb; border-radius: 8px;">
+                <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">💡 코부장 Insight:</div>
+                <div style="font-size: 15px; color: #475569; font-weight: 600; font-style: italic;">
+                    "{insight}"
+                </div>
             </div>
         </div>
-        <div style="font-size: 16px; color: #2d3436;">
-            <strong>💡 코부장 Insight:</strong>
-            <div style="background-color: #fdfdfd; padding: 15px; border-left: 4px solid #fab1a0; margin-top: 10px; font-style: italic; color: #636e72;">
-                "{insight}"
+
+        <!-- Call to Action / Web Link -->
+        <div style="margin-top: 40px; background: #0f172a; border-radius: 24px; padding: 35px; text-align: center; color: white;">
+            <h3 style="font-size: 20px; margin-bottom: 10px; font-weight: 800;">🚀 남들보다 1분 빠른 대응, 스탁엠파이어</h3>
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 25px; font-weight: 500;">
+                AI가 전 세계 10,000개 이상의 금융 소스를 24시간 감시합니다.
+            </p>
+            <a href="https://stock-empire.vercel.app" style="display: inline-block; background: #2563eb; color: white; padding: 15px 40px; border-radius: 12px; font-weight: 900; text-decoration: none; font-size: 15px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);">
+                실시간 AI 속보 대시보드 접속하기
+            </a>
+            <div style="margin-top: 20px; font-size: 11px; color: #475569; letter-spacing: 0.1em; font-weight: 700;">
+                WWW.STOCK-EMPIRE.VERCEL.APP
             </div>
+        </div>
+
+        <!-- Sponsorship/Ad Placeholder -->
+        <div style="margin-top: 30px; text-align: center; padding: 20px; border: 1px dashed #cbd5e1; border-radius: 15px;">
+             <p style="font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">Empire Partner Network</p>
+             <div style="font-size: 12px; font-weight: 700; color: #64748b;">
+                본 정보는 투자 참고용이며, 최종 결정의 책임은 본인에게 있습니다.
+             </div>
         </div>
     </div>
-
-    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-
-    <div style="background: linear-gradient(135deg, #2d3436 0%, #000000 100%); padding: 35px 20px; border-radius: 15px; text-align: center; color: white;">
-        <div style="font-size: 19px; font-weight: bold; margin-bottom: 15px;">
-            🚀 더 많은 실시간 분석이 필요하신가요?
-        </div>
-        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 25px;">
-            Stock Empire에서 전 세계 금융 뉴스를 AI가 24시간 분석해 드립니다.
-        </p>
-        <a href="https://stock-empire.vercel.app" style="background-color: #3498db; color: white; padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; transition: background 0.3s;">
-            👉 Stock Empire 무료 접속하기
-        </a>
+    
+    <div style="background: #f8fafc; padding: 15px; text-align: center; border-top: 1px solid #f1f5f9;">
+        <span style="font-size: 10px; color: #94a3b8; font-weight: 700;">© 2026 Stock Empire AI Agent. All rights reserved.</span>
     </div>
-    <p style="text-align: center; font-size: 12px; color: #aaa; margin-top: 20px;">
-        ※ Powered by Stock Empire AI Agent
-    </p>
 </div>
                 """
+
                 
 
                 
