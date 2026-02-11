@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import SiteHeader from '@/components/SiteHeader';
 import { THEMES } from '@/lib/themes';
+import { STOCK_LIST } from '@/lib/stocks';
 import { useAuth } from '@/lib/AuthContext';
 import { AIPerformanceBanner } from '@/components/AIPerformanceBanner';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
@@ -159,22 +160,24 @@ function ThemeContent() {
                                     </div>
                                 </div>
 
-                                <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight truncate relative z-10">{sig.name}</h3>
+                                <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight truncate relative z-10">
+                                    {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.name}
+                                </h3>
                                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-8 relative z-10 italic">Institutional Pulse Sync</p>
 
                                 <div className="grid grid-cols-1 gap-4 mb-8 flex-1 relative z-10">
                                     <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex justify-between items-center">
-                                        <div className="text-[9px] text-slate-500 font-black uppercase">Current Price</div>
+                                        <div className="text-[9px] text-slate-500 font-black uppercase">현재 가격</div>
                                         <div className="text-2xl font-black text-slate-900 font-mono italic">${sig.price}</div>
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-                                            <div className="text-[9px] text-slate-500 font-bold uppercase mb-1">Impact</div>
+                                            <div className="text-[9px] text-slate-500 font-bold uppercase mb-1">영향률</div>
                                             <div className="text-xl font-black text-blue-600 font-mono">{sig.impact_score}%</div>
                                         </div>
                                         <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-                                            <div className="text-[9px] text-slate-500 font-bold uppercase mb-1">Signals</div>
+                                            <div className="text-[9px] text-slate-500 font-bold uppercase mb-1">상태</div>
                                             <div className="text-xl font-black text-slate-900 font-mono italic">LIVE</div>
                                         </div>
                                     </div>

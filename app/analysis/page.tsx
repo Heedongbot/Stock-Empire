@@ -254,7 +254,9 @@ function AnalysisContent() {
                                             </div>
                                         </div>
 
-                                        <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors relative z-10">{sig.name}</h3>
+                                        <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors relative z-10">
+                                            {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.name}
+                                        </h3>
                                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-8 relative z-10">{sig.strategy}</p>
 
                                         <div className="grid grid-cols-2 gap-4 mb-8 relative z-10">
@@ -363,8 +365,8 @@ function AnalysisContent() {
 
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                             {[
-                                                { label: '목표가', value: `$${selectedSignal.target_price}`, color: 'text-blue-600' },
-                                                { label: '손절가', value: `$${selectedSignal.stop_loss}`, color: 'text-red-500' },
+                                                { label: '목표 가격', value: `$${selectedSignal.target_price}`, color: 'text-blue-600' },
+                                                { label: '조심할 가격', value: `$${selectedSignal.stop_loss}`, color: 'text-red-500' },
                                                 { label: '영향력', value: `${selectedSignal.impact_score}%`, color: 'text-slate-900' },
                                                 { label: '전망', value: selectedSignal.sentiment, color: selectedSignal.sentiment === 'BULLISH' ? 'text-red-500' : 'text-blue-600' }
                                             ].map((stat, i) => (
