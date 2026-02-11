@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
-import { Ticker } from '@/components/TickerMain';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
@@ -120,7 +119,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-20 bg-background text-foreground font-sans">
-      <Ticker />
       <SiteHeader />
 
       {/* HERO SECTION - Friendly & Simple */}
