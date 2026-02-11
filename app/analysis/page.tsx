@@ -11,6 +11,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
+import ServerStatusSection from '@/components/ServerStatusSection';
 import { STOCK_LIST } from '@/lib/stocks';
 
 interface AlphaSignal {
@@ -283,9 +284,8 @@ function AnalysisContent() {
                     )
                 }
 
-                {/* 하단 섹션 광고 */}
                 <div className="mt-20">
-                    <AdInFeed />
+                    <ServerStatusSection />
                 </div>
             </main >
 

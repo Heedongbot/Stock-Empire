@@ -14,6 +14,7 @@ import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import AdInFeed from '@/components/ads/AdInFeed';
 import LatestNewsInsights from '@/components/LatestNewsInsights';
+import ServerStatusSection from '@/components/ServerStatusSection';
 import StockLogo from '@/components/StockLogo';
 import FriendlyPrice from '@/components/FriendlyPrice';
 import { STOCK_LIST } from '@/lib/stocks';
@@ -443,6 +444,10 @@ export default function Home() {
           <div><div className="text-5xl font-black text-blue-600 mb-2 tracking-tighter">94.2%</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">AI 분석 정확도</div></div>
           <div><div className="text-5xl font-black text-indigo-600 mb-2 tracking-tighter">1.2M+</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">매일 읽는 뉴스 수</div></div>
           <div><div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">1시간 전</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">최근 분석 업데이트</div></div>
+        </div>
+
+        <div className="mt-20">
+          <ServerStatusSection />
         </div>
       </section>
 

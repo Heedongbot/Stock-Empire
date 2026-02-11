@@ -7,6 +7,7 @@ import SiteHeader from '@/components/SiteHeader';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
 import AdRectangle from '@/components/ads/AdRectangle';
+import ServerStatusSection from '@/components/ServerStatusSection';
 import { useAuth } from '@/lib/AuthContext';
 import { SignInButton } from '@clerk/nextjs';
 import StockLogo from '@/components/StockLogo';
@@ -313,35 +314,39 @@ export default function NewsroomPage() {
                                 상세 분석 리포트 열기
                             </Link>
                         </div>
+
+                        <ServerStatusSection />
                     </aside>
-                </div >
+                </div>
             </main>
 
             {/* Development / Blind Modal */}
-            {showDevModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-                    <div
-                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
-                        onClick={() => setShowDevModal(false)}
-                    />
-                    <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 w-full max-w-md text-center shadow-2xl animate-fade-in-up border border-slate-100">
-                        <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Zap className="w-10 h-10 text-blue-600 animate-pulse" />
-                        </div>
-                        <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">시스템 업그레이드 중</h3>
-                        <p className="text-sm font-medium text-slate-500 leading-relaxed mb-8">
-                            더 강력한 <span className="text-blue-600 font-bold">심층 분석 엔진</span>을 탑재하고 있습니다.<br />
-                            곧 놀라운 인사이트와 함께 돌아오겠습니다!
-                        </p>
-                        <button
+            {
+                showDevModal && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+                        <div
+                            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
                             onClick={() => setShowDevModal(false)}
-                            className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-600 transition-colors shadow-lg shadow-slate-900/20"
-                        >
-                            확인했습니다
-                        </button>
+                        />
+                        <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 w-full max-w-md text-center shadow-2xl animate-fade-in-up border border-slate-100">
+                            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Zap className="w-10 h-10 text-blue-600 animate-pulse" />
+                            </div>
+                            <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">시스템 업그레이드 중</h3>
+                            <p className="text-sm font-medium text-slate-500 leading-relaxed mb-8">
+                                더 강력한 <span className="text-blue-600 font-bold">심층 분석 엔진</span>을 탑재하고 있습니다.<br />
+                                곧 놀라운 인사이트와 함께 돌아오겠습니다!
+                            </p>
+                            <button
+                                onClick={() => setShowDevModal(false)}
+                                className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-600 transition-colors shadow-lg shadow-slate-900/20"
+                            >
+                                확인했습니다
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 }
