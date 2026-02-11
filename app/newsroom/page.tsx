@@ -17,7 +17,7 @@ interface NewsItem {
     sentiment: string;
     free_tier: {
         title: string;
-        title_en: string;
+        title_en?: string;
         summary_kr: string;
         link: string;
         original_source: string;
@@ -39,6 +39,7 @@ interface AlphaSignal {
 export default function NewsroomPage() {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showDevModal, setShowDevModal] = useState(false); // 개발 중 모달 상태
     const { user } = useAuth();
 
     // 한국 전용 테스트: 언어 고정 및 광고 전면 노출
@@ -123,7 +124,7 @@ export default function NewsroomPage() {
                                                         </span>
                                                     </div>
                                                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                                        {item.free_tier.original_source} • {new Date(item.published_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                        {item.free_tier.original_source} • {new Date(item.published_at).toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                                     </span>
                                                     <div className="flex-1"></div>
                                                     <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">
@@ -184,9 +185,12 @@ export default function NewsroomPage() {
                                                                     AI Analyst Insight
                                                                 </span>
                                                             </div>
-                                                            <Link href={`/analysis/news-us-${idx}`} className="text-[11px] font-black text-blue-500 hover:text-blue-700 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-white px-4 py-2 rounded-xl border border-blue-100 shadow-sm">
+                                                            <button
+                                                                onClick={() => setShowDevModal(true)}
+                                                                className="text-[11px] font-black text-blue-500 hover:text-blue-700 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-white px-4 py-2 rounded-xl border border-blue-100 shadow-sm"
+                                                            >
                                                                 자세히 보기 <ChevronRight className="w-4 h-4" />
-                                                            </Link>
+                                                            </button>
                                                         </div>
                                                         <p className="text-[16px] text-slate-800 leading-relaxed font-bold">
                                                             {item.vip_tier.ai_analysis.summary_kr}
@@ -305,7 +309,33 @@ export default function NewsroomPage() {
                         </div>
                     </aside>
                 </div >
-            </main >
-        </div >
+            </main>
+
+            {/* Development / Blind Modal */}
+            {showDevModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+                    <div
+                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+                        onClick={() => setShowDevModal(false)}
+                    />
+                    <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 w-full max-w-md text-center shadow-2xl animate-fade-in-up border border-slate-100">
+                        <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Zap className="w-10 h-10 text-blue-600 animate-pulse" />
+                        </div>
+                        <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">시스템 업그레이드 중</h3>
+                        <p className="text-sm font-medium text-slate-500 leading-relaxed mb-8">
+                            더 강력한 <span className="text-blue-600 font-bold">심층 분석 엔진</span>을 탑재하고 있습니다.<br />
+                            곧 놀라운 인사이트와 함께 돌아오겠습니다!
+                        </p>
+                        <button
+                            onClick={() => setShowDevModal(false)}
+                            className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-600 transition-colors shadow-lg shadow-slate-900/20"
+                        >
+                            확인했습니다
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }

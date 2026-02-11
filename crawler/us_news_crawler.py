@@ -222,14 +222,17 @@ class StockNewsCrawler:
                 if ai_data:
                     processed_news.append({
                         'id': item['id'],
-                        'timestamp': datetime.now().isoformat(),
+                        'published_at': item.get('time') or datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        'crawled_at': datetime.now().isoformat(),
                         'source': item['source'],
                         'link': item['link'],
                         'sentiment': ai_data.get('market_sentiment', 'NEUTRAL'),
                         'is_breaking': item['is_breaking'],
                         'free_tier': {
                             'title': item['title_kr'],
-                            'summary_kr': item['excerpt_kr']
+                            'title_en': item['title'],  # 원문 제목 추가 (UI에서 필요할 수 있음)
+                            'summary_kr': item['excerpt_kr'],
+                            'original_source': item['source']
                         },
                         'vip_tier': {
                             'ai_analysis': {
