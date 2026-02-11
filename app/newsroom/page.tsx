@@ -8,6 +8,8 @@ import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
 import AdRectangle from '@/components/ads/AdRectangle';
 import { useAuth } from '@/lib/AuthContext';
+import { SignInButton } from '@clerk/nextjs';
+import StockLogo from '@/components/StockLogo';
 
 interface NewsItem {
     id: string;
@@ -53,161 +55,180 @@ export default function NewsroomPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#050b14] text-[#e0e6ed]">
+        <div className="min-h-screen bg-[#f8fafc] text-slate-900">
             <SiteHeader />
 
-            <main className="max-w-7xl mx-auto px-4 py-8">
-                {/* 상단 전면 광고 */}
-                <div className="mb-8 overflow-hidden rounded-xl border border-slate-800 shadow-[0_0_30px_rgba(0,0,0,0.4)]">
+            <main className="max-w-7xl mx-auto px-6 py-12">
+                {/* 상단 전면 광고 - 부드러운 마감 */}
+                <div className="mb-12 overflow-hidden rounded-[2.5rem] bg-white border border-slate-100 shadow-xl shadow-blue-500/5">
+                    <div className="p-2 text-center border-b border-slate-50">
+                        <span className="text-[8px] font-bold text-slate-300 tracking-widest uppercase">Premium Partner</span>
+                    </div>
                     <AdLeaderboard />
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-8">
-                    <div className="flex-1 space-y-8">
-                        <header className="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div className="flex flex-col lg:flex-row gap-10">
+                    <div className="flex-1 space-y-10">
+                        <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-slate-200">
                             <div>
-                                <h1 className="text-3xl font-black text-[#00ffbd] tracking-tighter uppercase italic">LIVE EMPIRE TERMINAL</h1>
-                                <p className="text-slate-400 text-sm mt-1 flex items-center gap-2">
-                                    <span className="w-2 h-2 bg-[#00ffbd] rounded-full animate-ping"></span>
-                                    미국 시장 실시간 데이터 분석 엔진 (한국 테스트 버전)
+                                <h1 className="text-4xl font-black text-slate-900 tracking-tighter italic">📰 실시간 <span className="text-blue-600">뉴스룸</span></h1>
+                                <p className="text-slate-500 text-sm mt-2 flex items-center gap-2 font-bold">
+                                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
+                                    AI가 실시간으로 분석 중인 핵심 뉴스들입니다
                                 </p>
                             </div>
-                            <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                            <div className="relative w-full md:w-80">
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 font-black" />
                                 <input
                                     type="text"
-                                    placeholder="종목/키워드 검색"
-                                    className="bg-slate-900/50 border border-slate-800 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-[#00ffbd] transition-all"
+                                    placeholder="궁금한 종목이나 키워드를 검색해보세요"
+                                    className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-4 text-sm font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all shadow-sm"
                                 />
                             </div>
                         </header>
 
                         {loading ? (
-                            <div className="space-y-4">
+                            <div className="space-y-6">
                                 {[1, 2, 3].map(i => (
-                                    <div key={i} className="h-48 bg-slate-900/30 animate-pulse rounded-2xl" />
+                                    <div key={i} className="h-48 bg-white border border-slate-100 animate-pulse rounded-[2.5rem]" />
                                 ))}
                             </div>
                         ) : (
-                            <div className="space-y-6">
+                            <div className="space-y-8">
                                 {news.map((item, idx) => (
                                     <React.Fragment key={item.id}>
-                                        <article className="relative bg-[#0a1120] border border-slate-800/60 rounded-2xl overflow-hidden hover:border-[#00ffbd]/50 transition-all duration-300 group shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
-                                            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,3px_100%] opacity-20"></div>
-
-                                            <div className="p-7 relative z-10">
-                                                <div className="flex flex-wrap items-center gap-3 mb-5">
-                                                    <div className="flex items-center gap-2 bg-[#00ffbd]/10 border border-[#00ffbd]/30 px-2.5 py-1 rounded-lg">
-                                                        <div className="w-1.5 h-1.5 bg-[#00ffbd] rounded-full animate-pulse"></div>
-                                                        <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-wider">
-                                                            Scenario #{100 + (idx * 7) % 899}
+                                        <article className="relative bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden hover:border-blue-200 shadow-xl shadow-blue-500/5 transition-all duration-300 group">
+                                            <div className="p-8 md:p-10">
+                                                <div className="flex flex-wrap items-center gap-4 mb-6">
+                                                    <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-xl">
+                                                        <Sparkles className="w-3 h-3 text-blue-500" />
+                                                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-wider">
+                                                            주요 인사이트 #{idx + 1}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-2">
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                                                         {item.free_tier.original_source} • {new Date(item.published_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                     </span>
                                                     <div className="flex-1"></div>
-                                                    <div className="flex items-center gap-2 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800">
-                                                        <Zap className="w-3 h-3 text-yellow-500" />
-                                                        <span className="text-[10px] font-black text-slate-300 uppercase tracking-tighter">Impact</span>
-                                                        <div className="flex gap-0.5">
+                                                    <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">
+                                                        <Zap className="w-3.5 h-3.5 text-orange-400" />
+                                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-tighter">AI 분석 점수</span>
+                                                        <div className="flex gap-1">
                                                             {[...Array(5)].map((_, i) => (
                                                                 <div
                                                                     key={i}
-                                                                    className={`w-2 h-1.5 rounded-sm ${i < (item.vip_tier.ai_analysis.impact_score / 20) ? 'bg-[#00ffbd] shadow-[0_0_8px_#00ffbd]' : 'bg-slate-800'}`}
+                                                                    className={`w-3 h-2 rounded-full ${i < (item.vip_tier.ai_analysis.impact_score / 20) ? 'bg-blue-500 shadow-sm shadow-blue-500/30' : 'bg-slate-200'}`}
                                                                 ></div>
                                                             ))}
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="mb-5">
-                                                    <h2 className="text-2xl font-black mb-3 group-hover:text-[#00ffbd] transition-colors leading-[1.2] tracking-tight">
+                                                <div className="mb-8">
+                                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors leading-[1.3] tracking-tight">
                                                         {item.free_tier.title}
                                                     </h2>
-                                                    <div className="flex items-start gap-3 bg-[#050b14] border border-slate-800/50 p-3 rounded-xl border-dashed">
-                                                        <div className="mt-1 shrink-0"><CheckCircle2 className="w-4 h-4 text-[#00d4ff]" /></div>
-                                                        <p className="text-xs font-bold text-[#00d4ff] leading-relaxed uppercase tracking-tight italic">
-                                                            FAST ALPHA: {item.free_tier.title_en}
+                                                    <div className="inline-flex items-start gap-3 bg-slate-50 border border-slate-100 p-4 rounded-2xl">
+                                                        <div className="mt-1 shrink-0"><CheckCircle2 className="w-4 h-4 text-slate-400" /></div>
+                                                        <p className="text-xs font-bold text-slate-500 leading-relaxed uppercase tracking-tight italic">
+                                                            TRANSLATION: {item.free_tier.title_en}
                                                         </p>
                                                     </div>
                                                 </div>
 
-                                                {/* PROTECTED CONTENT AREA */}
+                                                {/* PROTECTED CONTENT AREA - FRIENDLY UPGRADE UI */}
                                                 <div className="relative">
                                                     {!user && (
-                                                        <div className="absolute inset-0 z-20 backdrop-blur-md bg-slate-900/60 rounded-xl flex flex-col items-center justify-center text-center p-6 border border-slate-700/50">
-                                                            <Lock className="w-8 h-8 text-amber-500 mb-3" />
-                                                            <h3 className="text-lg font-black text-white mb-1 uppercase italic">Private Intelligence</h3>
-                                                            <p className="text-[10px] text-slate-400 font-bold mb-4 uppercase">이 분석은 정예 대원에게만 공개됩니다.</p>
-                                                            <a href="/sign-in" className="px-6 py-2 bg-[#00ffbd] hover:bg-[#00d4ff] text-black font-black uppercase tracking-widest rounded-lg transition-all text-xs">
-                                                                Portal Login
-                                                            </a>
+                                                        <div className="absolute inset-x-0 bottom-0 top-0 z-20 backdrop-blur-sm bg-white/40 rounded-3xl flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-blue-200 shadow-inner">
+                                                            <div className="w-16 h-16 bg-blue-100 rounded-3xl flex items-center justify-center mb-4">
+                                                                <Lock className="w-8 h-8 text-blue-600" />
+                                                            </div>
+                                                            <h3 className="text-xl font-black text-slate-900 mb-2 tracking-tighter uppercase">AI의 특별한 한 줄 분석</h3>
+                                                            <p className="text-xs text-slate-500 font-bold mb-6 max-w-[280px] leading-relaxed">
+                                                                이 뉴스가 시장에 어떤 영향을 미칠지 <br />
+                                                                AI가 정밀하게 분석한 결과가 숨겨져 있어요.
+                                                            </p>
+                                                            <div className="flex gap-3">
+                                                                <SignInButton mode="modal">
+                                                                    <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-widest rounded-2xl transition-all text-xs shadow-lg shadow-blue-600/20 active:scale-95">
+                                                                        분석 리포트 읽기
+                                                                    </button>
+                                                                </SignInButton>
+                                                            </div>
                                                         </div>
                                                     )}
 
-                                                    <div className={`bg-[#0f172a] border border-blue-500/20 rounded-xl p-5 mb-5 relative overflow-hidden group/insight ${!user ? 'blur-md select-none opacity-50' : ''}`}>
-                                                        <div className="absolute top-0 right-0 p-2 opacity-10">
-                                                            <TrendingUp className="w-12 h-12" />
-                                                        </div>
-                                                        <div className="flex items-center justify-between mb-3">
-                                                            <div className="flex items-center gap-2">
-                                                                <Sparkles className="w-4 h-4 text-[#00ffbd]" />
-                                                                <span className="text-[11px] font-black text-[#00ffbd] uppercase tracking-widest flex items-center gap-2">
-                                                                    Empire Intelligence Report
+                                                    <div className={`bg-blue-50/50 border border-blue-100 rounded-[2rem] p-8 mb-8 relative group/insight ${!user ? 'blur-md select-none opacity-30 h-32 overflow-hidden' : ''}`}>
+                                                        <div className="flex items-center justify-between mb-4">
+                                                            <div className="flex items-center gap-3">
+                                                                <div className="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-sm border border-blue-100">
+                                                                    <Sparkles className="w-4 h-4 text-blue-600" />
+                                                                </div>
+                                                                <span className="text-[12px] font-black text-blue-600 uppercase tracking-widest font-black">
+                                                                    AI Analyst Insight
                                                                 </span>
                                                             </div>
-                                                            <Link href={`/analysis/news-us-${idx}`} className="text-[10px] font-black text-[#00ffbd] hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
-                                                                심층 분석 열기 <ChevronRight className="w-3 h-3" />
+                                                            <Link href={`/analysis/news-us-${idx}`} className="text-[11px] font-black text-blue-500 hover:text-blue-700 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-white px-4 py-2 rounded-xl border border-blue-100 shadow-sm">
+                                                                자세히 보기 <ChevronRight className="w-4 h-4" />
                                                             </Link>
                                                         </div>
-                                                        <p className="text-[14px] text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
+                                                        <p className="text-[16px] text-slate-800 leading-relaxed font-bold">
                                                             {item.vip_tier.ai_analysis.summary_kr}
                                                         </p>
 
-                                                        <div className="mt-4 pt-4 border-t border-slate-800/50 flex flex-wrap gap-4">
-                                                            <div className="flex flex-col">
-                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Accuracy</span>
-                                                                <span className="text-xs font-black text-white">89.4%</span>
+                                                        <div className="mt-8 pt-8 border-t border-slate-200 grid grid-cols-2 md:grid-cols-4 gap-6">
+                                                            <div className="flex flex-col gap-1">
+                                                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest font-black">신뢰도</span>
+                                                                <span className="text-sm font-black text-slate-900">89.4%</span>
                                                             </div>
-                                                            <div className="flex flex-col">
-                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Sentiment</span>
-                                                                <span className={`text-xs font-black ${item.sentiment === 'BULLISH' ? 'text-green-500' : 'text-red-500'}`}>
-                                                                    {item.sentiment}
+                                                            <div className="flex flex-col gap-1">
+                                                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest font-black">분위기</span>
+                                                                <span className={`text-sm font-black ${item.sentiment === 'BULLISH' ? 'text-red-500' : 'text-blue-500'}`}>
+                                                                    {item.sentiment === 'BULLISH' ? '기대됨 (Bullish)' : '주의함 (Bearish)'}
                                                                 </span>
                                                             </div>
-                                                            <div className="flex flex-col">
-                                                                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Level</span>
-                                                                <span className="text-xs font-black text-white px-1.5 py-0.5 rounded bg-green-500/10 border border-green-500/20">STABLE</span>
+                                                            <div className="flex flex-col gap-1">
+                                                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest font-black">위험도</span>
+                                                                <span className="text-[11px] font-black text-emerald-600 px-2.5 py-1 rounded bg-emerald-50 border border-emerald-100 self-start">안정적 (STABLE)</span>
+                                                            </div>
+                                                            <div className="hidden md:flex flex-col gap-1">
+                                                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest font-black">업데이트</span>
+                                                                <span className="text-sm font-black text-slate-900">실시간 반영됨</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex items-center justify-between pt-2">
+                                                <div className="flex items-center justify-between pt-4 border-t border-slate-50">
                                                     <a
                                                         href={item.free_tier.link}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="group/link text-[10px] font-black text-slate-500 hover:text-white flex items-center gap-1.5 transition-all bg-slate-900/50 px-3 py-1.5 rounded-lg border border-transparent hover:border-slate-800"
+                                                        className="group/link text-[11px] font-black text-slate-400 hover:text-slate-900 flex items-center gap-2 transition-all"
                                                     >
-                                                        VIEW SOURCE <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                                                        뉴스 원문 보기 <ExternalLink className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                                                     </a>
                                                     {user && (
-                                                        <div className="flex items-center gap-3">
-                                                            <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><Share2 className="w-4 h-4" /></button>
-                                                            <button className="text-slate-600 hover:text-[#00ffbd] transition-colors p-1.5 hover:bg-slate-900 rounded-lg"><MessageCircle className="w-4 h-4" /></button>
+                                                        <div className="flex items-center gap-4">
+                                                            <button className="text-slate-400 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-xl border border-transparent hover:border-blue-100 flex items-center gap-2 text-[11px] font-black">
+                                                                공유하기 <Share2 className="w-4 h-4" />
+                                                            </button>
+                                                            <button className="text-slate-400 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-xl border border-transparent hover:border-blue-100 flex items-center gap-2 text-[11px] font-black">
+                                                                의견 나누기 <MessageCircle className="w-4 h-4" />
+                                                            </button>
                                                         </div>
                                                     )}
                                                 </div>
                                             </div>
                                         </article>
 
-                                        {/* 광고 배치 강화: 뉴스 2개마다 무조건 광고 노출 */}
+                                        {/* 중간 광고 - 부드러운 화이트 레이아웃 */}
                                         {(idx + 1) % 2 === 0 && (
-                                            <div className="py-6 border-y border-slate-800/20 my-6 bg-slate-900/10">
-                                                <div className="flex justify-center mb-2">
-                                                    <span className="text-[8px] font-bold text-slate-600 tracking-widest uppercase">Sponsored Advertisement</span>
+                                            <div className="py-12 border-y border-slate-100 my-10 bg-white rounded-[3rem] shadow-xl shadow-blue-500/5">
+                                                <div className="flex justify-center mb-6">
+                                                    <div className="px-4 py-1 bg-slate-50 rounded-full border border-slate-100">
+                                                        <span className="text-[9px] font-black text-slate-300 tracking-widest uppercase italic">Sponsored Insight</span>
+                                                    </div>
                                                 </div>
                                                 <AdInFeed />
                                             </div>
@@ -218,28 +239,38 @@ export default function NewsroomPage() {
                         )}
                     </div>
 
-                    <aside className="w-full lg:w-80 space-y-6">
-                        <div className="bg-[#0c121d] border border-slate-800 rounded-2xl p-4">
-                            <h3 className="text-xs font-bold text-slate-500 mb-4 px-2 tracking-widest uppercase">Special Sponsor</h3>
+                    <aside className="w-full lg:w-96 space-y-8">
+                        <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl shadow-blue-500/5 overflow-hidden relative">
+                            <div className="absolute top-0 right-0 p-4 opacity-5">
+                                <TrendingUp className="w-20 h-20" />
+                            </div>
+                            <h3 className="text-xs font-black text-slate-400 mb-6 px-1 tracking-[0.2em] uppercase">Special Partner</h3>
                             <AdRectangle />
                         </div>
 
-                        <div className="bg-gradient-to-br from-[#0c121d] to-[#121b2d] border border-[#00ffbd]/20 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-                            <h3 className="text-sm font-black text-[#00ffbd] mb-4 flex items-center gap-2">
-                                <DollarSign className="w-4 h-4" />
-                                EMPIRE TOP PICKS
+                        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2.5rem] p-8 shadow-2xl shadow-blue-600/20 text-white relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                            <h3 className="text-xl font-black mb-8 flex items-center gap-3 italic tracking-tighter uppercase font-black">
+                                <Sparkles className="w-6 h-6 text-blue-200" />
+                                Weekly Top Picks
                             </h3>
-                            <div className="space-y-4">
-                                {['NVDA', 'TSLA', 'PLTR'].map(ticker => (
-                                    <div key={ticker} className="flex items-center justify-between text-xs border-b border-slate-800 pb-2 hover:border-[#00ffbd]/30 transition-colors">
-                                        <span className="font-bold">{ticker}</span>
-                                        <span className="text-[#ff4d4d] font-bold">+2.4%</span>
+                            <div className="space-y-4 mb-10">
+                                {['NVDA', 'TSLA', 'AAPL'].map((ticker, idx) => (
+                                    <div key={ticker} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/20 transition-all cursor-pointer group/item">
+                                        <div className="flex items-center gap-4 text-xs">
+                                            <StockLogo ticker={ticker} size={40} className="border-0 shadow-lg" />
+                                            <span className="font-black text-lg tracking-tighter">{ticker}</span>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="text-emerald-400 font-extrabold text-sm font-black italic">+{(2.4 + idx).toFixed(1)}%</div>
+                                            <div className="text-[9px] text-white/50 font-bold uppercase tracking-widest">Expected</div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-6 bg-[#00ffbd] text-black font-black py-2.5 rounded-xl text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(0,255,189,0.3)] uppercase">
-                                Full Signal Analysis
-                            </button>
+                            <Link href="/analysis" className="block w-full text-center bg-white text-blue-700 font-black py-4 rounded-2xl text-[11px] hover:bg-blue-50 transition-all shadow-xl shadow-black/20 uppercase tracking-widest active:scale-95">
+                                상세 분석 리포트 열기
+                            </Link>
                         </div>
                     </aside>
                 </div>
