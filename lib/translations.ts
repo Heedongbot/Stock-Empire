@@ -7,7 +7,7 @@ export const translations = {
             chat: "AI 대가 상담",
             analysis: "종목 분석",
             themes: "테마 스캐너",
-            pro_alpha: "알파 시그널",
+            pro_alpha: "LIVE ALPHA SIGNALS",
             market: "시장 확률",
             home: "홈",
             store: "스토어",

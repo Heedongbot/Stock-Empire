@@ -175,8 +175,8 @@ function VVIPAlphaContent() {
                                     <h3 className="text-lg md:text-xl font-black text-slate-800 italic tracking-tighter leading-tight group-hover:text-blue-600 transition-colors break-keep min-h-[3rem] flex items-center">
                                         {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.ticker}
                                     </h3>
-                                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-2 truncate">
-                                        {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name ? `${sig.ticker} • NASDAQ` : sig.name}
+                                    <p className="text-[9px] text-slate-400 font-bold uppercase tracking-[0.1em] mt-1 lg:mt-2 truncate">
+                                        {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name ? `${sig.ticker} • NASDAQ MARKET` : sig.name}
                                     </p>
                                 </div>
 
@@ -203,15 +203,15 @@ function VVIPAlphaContent() {
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
-                                        <div className="flex flex-col gap-2 p-4 bg-red-50 border border-red-100 rounded-2xl">
-                                            <span className="text-[9px] text-red-500 font-black">목표가 (익절)</span>
-                                            <div className="text-xl font-black font-mono text-red-600">${sig.target_price.toFixed(2)}</div>
-                                            <div className="text-[9px] text-red-400 font-semibold">약 {Math.round(sig.target_price * exchangeRate).toLocaleString()}원</div>
+                                        <div className="flex flex-col gap-2 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                                            <span className="text-[9px] text-slate-500 font-black uppercase">목표 가격</span>
+                                            <div className="text-xl font-black font-mono text-blue-600">${sig.target_price.toFixed(2)}</div>
+                                            <div className="text-[9px] text-blue-400 font-semibold">약 {Math.round(sig.target_price * exchangeRate).toLocaleString()}원</div>
                                         </div>
-                                        <div className="flex flex-col gap-2 p-4 bg-blue-50 border border-blue-100 rounded-2xl">
-                                            <span className="text-[9px] text-blue-500 font-black">손절가 (컷)</span>
-                                            <div className="text-xl font-black font-mono text-blue-600">${sig.stop_loss.toFixed(2)}</div>
-                                            <div className="text-[9px] text-blue-400 font-semibold">약 {Math.round(sig.stop_loss * exchangeRate).toLocaleString()}원</div>
+                                        <div className="flex flex-col gap-2 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                                            <span className="text-[9px] text-slate-500 font-black uppercase">조심할 가격</span>
+                                            <div className="text-xl font-black font-mono text-red-500">${sig.stop_loss.toFixed(2)}</div>
+                                            <div className="text-[9px] text-red-400 font-semibold">약 {Math.round(sig.stop_loss * exchangeRate).toLocaleString()}원</div>
                                         </div>
                                     </div>
                                 </div>
