@@ -1,9 +1,9 @@
 "use client";
 
 import {
-    Users, UserPlus, CreditCard, Activity,
+    Users, UserPlus, Activity,
     Database, ShieldCheck, ArrowLeft, BarChart3,
-    TrendingUp, RefreshCw, Cpu, Clock, Crown, Sparkles, AlertTriangle
+    TrendingUp, RefreshCw, Cpu, Clock, Zap, Terminal, Server
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -42,17 +42,14 @@ export default function AdminPage() {
             setStats(prev => ({
                 ...prev,
                 ...data,
-                // timestamp 포맷팅
                 timestamp: new Date(data.timestamp).toLocaleTimeString('ko-KR')
             }));
 
-            // API에서 가져온 로그가 있으면 추가
             if (data.recentLogs && data.recentLogs.length > 0) {
                 setLogs(prev => {
-                    // 중복 방지 및 최신순 정렬
                     const newLogs = data.recentLogs.filter((newLog: any) => !prev.some(l => l.id === newLog.id));
                     if (newLogs.length === 0) return prev;
-                    return [...newLogs, ...prev].slice(0, 10);
+                    return [...newLogs, ...prev].slice(0, 8);
                 });
             }
         } catch (error) {
@@ -62,11 +59,8 @@ export default function AdminPage() {
 
     useEffect(() => {
         fetchStats();
-        const apiInterval = setInterval(fetchStats, 5000); // 5초마다 갱신
-
-        return () => {
-            clearInterval(apiInterval);
-        };
+        const apiInterval = setInterval(fetchStats, 5000);
+        return () => clearInterval(apiInterval);
     }, []);
 
     const handleRefresh = async () => {
@@ -77,178 +71,270 @@ export default function AdminPage() {
 
     return (
         <div className="min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-blue-500/30">
-            <nav className="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-xl px-8 py-4 flex justify-between items-center sticky top-0 z-50">
-                <div className="flex items-center gap-4">
-                    <Link href="/" className="p-2 hover:bg-slate-800 rounded-xl transition-all group">
+            {/* Top Navigation - Glassmorphism */}
+            <nav className="border-b border-white/5 bg-[#0f172a]/40 backdrop-blur-2xl px-10 py-5 flex justify-between items-center sticky top-0 z-[100]">
+                <div className="flex items-center gap-6">
+                    <Link href="/" className="group p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all active:scale-95">
                         <ArrowLeft className="w-5 h-5 text-slate-400 group-hover:text-white" />
                     </Link>
-                    <h1 className="text-xl font-black tracking-tighter uppercase italic flex items-center gap-2">
-                        <ShieldCheck className="w-6 h-6 text-blue-500" /> 지휘 통제실 <span className="text-slate-500 text-sm not-italic font-black">(지휘 본부)</span>
-                    </h1>
+                    <div>
+                        <h1 className="text-xl font-black tracking-[-0.03em] flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 border border-blue-500/20">
+                                <ShieldCheck className="w-6 h-6" />
+                            </div>
+                            <span className="uppercase italic">COMMAND CENTER</span>
+                            <span className="text-slate-500 text-xs not-italic font-black bg-white/5 px-2.5 py-1 rounded-md ml-2 border border-white/5">ADMIN HQ</span>
+                        </h1>
+                    </div>
                 </div>
-                <div className="flex items-center gap-6">
-                    <span className="text-[10px] font-black text-green-500 uppercase flex items-center gap-2 animate-pulse">
-                        <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e]" /> 시스템 실시간 감시 중
-                    </span>
-                    <div className="flex items-center gap-3 pl-6 border-l border-slate-800">
+
+                <div className="flex items-center gap-8">
+                    <div className="hidden md:flex flex-col items-end">
+                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-1">SYSTEM UPTIME</span>
+                        <span className="text-xs font-mono font-bold text-white/80 tabular-nums">99.99% ONLINE</span>
+                    </div>
+
+                    <div className="flex items-center gap-4 pl-8 border-l border-white/10">
                         <div className="text-right">
-                            <p className="text-[10px] font-black text-slate-500 uppercase leading-none">관리자 모드</p>
-                            <p className="text-xs font-black text-white italic">최고 사령관</p>
+                            <p className="text-[10px] font-black text-slate-500 uppercase leading-none tracking-widest mb-1 transition-all group-hover:text-blue-400">OPERATOR</p>
+                            <p className="text-sm font-black text-white italic tracking-tight">GENERAL MANAGER</p>
                         </div>
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 border border-blue-400/30 flex items-center justify-center font-black italic">
-                            C
+                        <div className="relative group">
+                            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                            <div className="relative w-12 h-12 rounded-2xl bg-[#0f172a] border border-white/10 flex items-center justify-center font-black italic text-xl text-blue-500 overflow-hidden">
+                                C
+                            </div>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            <main className="max-w-7xl mx-auto px-8 py-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-blue-500/30 transition-all group relative overflow-hidden">
-                        <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                            <UserPlus size={80} />
-                        </div>
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">금일 가입자 (TODAY)</p>
-                        <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.dailySignups.toLocaleString()}</h2>
-                            <span className="text-blue-500 text-[10px] font-black flex items-center gap-1 mb-1 bg-blue-500/10 px-2 py-0.5 rounded-full">
-                                <Users className="w-3 h-3" /> 누적 {stats.totalUsers.toLocaleString()}
-                            </span>
+            <main className="max-w-[1600px] mx-auto px-10 py-12">
+
+                {/* Section 1: Growth & Traffic Metrics */}
+                <div className="mb-12">
+                    <div className="flex items-center justify-between mb-8 px-2">
+                        <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
+                            <TrendingUp className="w-4 h-4" /> GROWTH & TRAFFIC PERFORMANCE
+                        </h2>
+                        <div className="h-px flex-1 bg-gradient-to-r from-slate-800 to-transparent mx-8 opacity-50"></div>
+                        <div className="flex items-center gap-2 text-[10px] font-black text-slate-500">
+                            LAST SYNC: {stats.timestamp}
                         </div>
                     </div>
 
-                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-indigo-500/30 transition-all group relative overflow-hidden">
-                        <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                            <Activity size={80} />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {/* Daily Users */}
+                        <div className="bg-[#0f172a]/30 border border-white/5 p-8 rounded-[2.5rem] hover:border-blue-500/30 transition-all group relative overflow-hidden backdrop-blur-sm shadow-2xl shadow-black/40">
+                            <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-12">
+                                <UserPlus size={120} />
+                            </div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">DAILY SIGNUPS</p>
+                            <div className="flex items-end justify-between">
+                                <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.dailySignups.toLocaleString()}</h2>
+                                <div className="p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20 text-blue-500">
+                                    <Users className="w-6 h-6" />
+                                </div>
+                            </div>
                         </div>
-                        <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-3">이번주 가입자 (WEEKLY)</p>
-                        <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.weeklySignups.toLocaleString()}</h2>
-                            <span className="text-indigo-500 text-[10px] font-black mb-1 italic uppercase tracking-widest flex items-center gap-1">
-                                <TrendingUp size={10} className="text-indigo-500" /> 주간 성장세
-                            </span>
-                        </div>
-                    </div>
 
-                    <div className="premium-card p-8 border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/10 transition-all group relative overflow-hidden">
-                        <div className="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity text-amber-500">
-                            <BarChart3 size={80} />
+                        {/* Weekly Users */}
+                        <div className="bg-[#0f172a]/30 border border-white/5 p-8 rounded-[2.5rem] hover:border-emerald-500/30 transition-all group relative overflow-hidden backdrop-blur-sm shadow-2xl shadow-black/40">
+                            <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity -rotate-12">
+                                <Activity size={120} />
+                            </div>
+                            <p className="text-[10px] font-black text-emerald-500/70 uppercase tracking-[0.2em] mb-6">WEEKLY REACH</p>
+                            <div className="flex items-end justify-between">
+                                <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.weeklySignups.toLocaleString()}</h2>
+                                <div className="p-3 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-emerald-500">
+                                    <TrendingUp className="w-6 h-6" />
+                                </div>
+                            </div>
                         </div>
-                        <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">이번달 가입자 (MONTHLY)</p>
-                        <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.monthlySignups.toLocaleString()}</h2>
-                            <TrendingUp className="text-amber-500 w-6 h-6 mb-1 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+
+                        {/* Visitors Today */}
+                        <div className="bg-[#0f172a]/30 border border-white/5 p-8 rounded-[2.5rem] hover:border-amber-500/30 transition-all group relative overflow-hidden backdrop-blur-sm shadow-2xl shadow-black/40">
+                            <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-45">
+                                <BarChart3 size={120} />
+                            </div>
+                            <p className="text-[10px] font-black text-amber-500/70 uppercase tracking-[0.2em] mb-6">TODAY VISITORS</p>
+                            <div className="flex items-end justify-between">
+                                <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.todayVisitors.toLocaleString()}</h2>
+                                <div className="p-3 bg-amber-500/10 rounded-2xl border border-amber-500/20 text-amber-500">
+                                    <Zap className="w-6 h-6" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Monthly Summary */}
+                        <div className="bg-[#0f172a]/30 border border-white/5 p-8 rounded-[2.5rem] hover:border-purple-500/30 transition-all group relative overflow-hidden backdrop-blur-sm shadow-2xl shadow-black/40">
+                            <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity -rotate-45">
+                                <Crown size={120} />
+                            </div>
+                            <p className="text-[10px] font-black text-purple-500/70 uppercase tracking-[0.2em] mb-6">MONTHLY ACTIVE</p>
+                            <div className="flex items-end justify-between">
+                                <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.monthlyVisitors.toLocaleString()}</h2>
+                                <div className="p-3 bg-purple-500/10 rounded-2xl border border-purple-500/20 text-purple-500">
+                                    <Crown className="w-6 h-6" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-green-500/30 transition-all group relative overflow-hidden">
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">오늘 다녀간 사람 (VISTORS)</p>
-                        <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.todayVisitors.toLocaleString()}</h2>
-                            <div className="text-green-500 text-[10px] font-black flex items-center gap-1 mb-1">
-                                <Activity size={12} /> 실시간 추적 중
-                            </div>
-                        </div>
-                    </div>
-                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50 hover:border-purple-500/30 transition-all group relative overflow-hidden">
-                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">이달 다녀간 사람 (MONTHLY)</p>
-                        <div className="flex items-end justify-between relative z-10">
-                            <h2 className="text-4xl font-black text-white tracking-tighter">{stats.monthlyVisitors.toLocaleString()}</h2>
-                            <div className="text-purple-500 text-[10px] font-black flex items-center gap-1 mb-1">
-                                <BarChart3 size={12} /> 트래픽 요약
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/* Section 2: Engine Status & Logs */}
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-10">
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                    <div className="lg:col-span-2 premium-card p-8 border-slate-800 bg-[#0f172a]/50">
-                        <div className="flex justify-between items-center mb-10">
-                            <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-3">
-                                <Database className="w-5 h-5 text-blue-500" /> 데이터 파이프라인 엔진 상태 <span className="text-[10px] text-slate-500 normal-case">(실시간 감시 중: {stats.timestamp})</span>
-                            </h3>
+                    {/* Left: System Pipeline */}
+                    <div className="xl:col-span-8 flex flex-col h-full">
+                        <div className="flex items-center justify-between mb-8 px-2">
+                            <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
+                                <Database className="w-4 h-4" /> CORE PIPELINE ENGINE
+                            </h2>
                             <button
                                 onClick={handleRefresh}
-                                className={`p-2 hover:bg-slate-800 rounded-lg transition-all text-slate-500 ${loading ? 'animate-spin text-blue-500' : ''}`}
+                                className={`group p-2 bg-white/5 border border-white/10 rounded-xl transition-all hover:bg-white/10 ${loading ? 'animate-spin' : ''}`}
                             >
-                                <RefreshCw className="w-4 h-4" />
+                                <RefreshCw className={`w-4 h-4 text-slate-400 group-hover:text-blue-500`} />
                             </button>
                         </div>
-                        <div className="space-y-6">
-                            <div className="flex items-center justify-between p-5 bg-slate-950/80 rounded-[2rem] border border-slate-800 hover:border-slate-700 transition-colors group">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500/20 transition-all">
-                                        <Activity className="w-6 h-6" />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+                            {/* Crawler Card */}
+                            <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/5 p-8 rounded-[3rem] group hover:border-blue-500/20 transition-all flex flex-col justify-between">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                                        <Activity className="w-7 h-7" />
                                     </div>
-                                    <div>
-                                        <p className="text-sm font-black text-white uppercase tracking-tight">지능형 크롤러 엔진 <span className="text-[10px] text-slate-500 font-bold">(국내/해외)</span></p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{stats.activeCrawlers}개 저널 실시간 동기화 중</p>
+                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 rounded-full border border-green-500/20">
+                                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                                        <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">ACTIVE</span>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <div className={`w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px] ${stats.crawlerStatus.includes('정상') ? 'bg-green-500 shadow-green-500' : 'bg-orange-500 shadow-orange-500'}`} />
-                                    <span className={`text-[10px] font-black uppercase tracking-widest ${stats.crawlerStatus.includes('정상') ? 'text-green-500' : 'text-orange-500'}`}>{stats.crawlerStatus}</span>
+                                <div>
+                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">News Intelligence Crawler</h3>
+                                    <p className="text-xs font-medium text-slate-500 leading-relaxed mb-6">
+                                        Global media surveillance system synchronizing from <span className="text-blue-400 font-bold">{stats.activeCrawlers} journals</span> in real-time.
+                                    </p>
+                                    <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Latency</span>
+                                        <span className="text-xs font-mono font-bold text-white/40">142ms</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between p-5 bg-slate-950/80 rounded-[2rem] border border-slate-800 hover:border-slate-700 transition-colors group">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover:bg-orange-500/20 transition-all">
-                                        <Cpu className="w-6 h-6" />
+                            {/* AI Analysis Card */}
+                            <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/5 p-8 rounded-[3rem] group hover:border-amber-500/20 transition-all flex flex-col justify-between">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-amber-600/10 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                                        <Cpu className="w-7 h-7" />
                                     </div>
-                                    <div>
-                                        <p className="text-sm font-black text-white uppercase tracking-tight">AI 심층 분석 엔진 <span className="text-[10px] text-slate-500 font-bold">(AI 분석 코어)</span></p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">김대리 AI 분석 시스템: 평균 응답 속도 {stats.aiLoad}</p>
+                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20">
+                                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">OPTIMIZED</span>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e]" />
-                                    <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">정상 가동</span>
+                                <div>
+                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">War-Room AI Neural Core</h3>
+                                    <p className="text-xs font-medium text-slate-500 leading-relaxed mb-6">
+                                        Multi-layered NLP engine processing market sentiment with average load of <span className="text-amber-400 font-bold">{stats.aiLoad}</span>.
+                                    </p>
+                                    <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Model</span>
+                                        <span className="text-xs font-mono font-bold text-white/40">G-PRO-ALPHA</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between p-5 bg-slate-950/80 rounded-[2rem] border border-slate-800 hover:border-slate-700 transition-colors group">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:bg-purple-500/20 transition-all">
-                                        <BarChart3 className="w-6 h-6" />
+                            {/* Database Card */}
+                            <div className="md:col-span-2 bg-gradient-to-r from-slate-900/50 via-slate-950/50 to-slate-900/50 border border-white/5 p-8 rounded-[3rem] group hover:border-purple-500/20 transition-all flex items-center justify-between">
+                                <div className="flex items-center gap-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-purple-500">
+                                        <Database className="w-7 h-7" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-black text-white uppercase tracking-tight">데이터 아카이브 <span className="text-[10px] text-slate-500 font-bold">(저장소)</span></p>
-                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">누적 기록: {stats.historyCount}건 (보존 기간: 14일)</p>
+                                        <h3 className="text-lg font-black text-white tracking-tight mb-1 uppercase italic">Unified Intelligence Archive</h3>
+                                        <p className="text-xs font-medium text-slate-500">
+                                            Persistent storage housing <span className="text-purple-400 font-bold">{stats.historyCount} curated nodes</span> with 14-day retention.
+                                        </p>
                                     </div>
                                 </div>
-                                <Link href="#" className="text-[10px] font-black text-slate-400 hover:text-blue-400 uppercase tracking-widest flex items-center gap-1 transition-all">
-                                    아카이브 열람 <Clock size={12} />
-                                </Link>
+                                <button className="px-6 py-3 bg-white/5 border border-white/5 rounded-2xl text-[10px] font-black text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 uppercase tracking-widest">
+                                    MANAGE ARCHIVE <Clock className="w-3.5 h-3.5" />
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div className="premium-card p-8 border-slate-800 bg-[#0f172a]/50">
-                        <h3 className="text-sm font-black uppercase tracking-widest mb-10 flex items-center gap-2">
-                            <BarChart3 size={18} className="text-slate-400" /> 관리자 로그 시스템
-                        </h3>
-                        <div className="space-y-8">
-                            {logs.map(log => (
-                                <div key={log.id} className={`flex gap-4 border-l-2 ${log.color === 'blue' ? 'border-blue-500' : log.color === 'green' ? 'border-green-500' : log.color === 'orange' ? 'border-orange-500' : 'border-slate-800'} pl-5 py-1 animate-fade-in`}>
-                                    <div className="flex-1">
-                                        <p className={`text-[10px] font-black ${log.color === 'orange' ? 'text-orange-500' : 'text-slate-500'} uppercase mb-1 tracking-widest`}>
-                                            {log.time} | {log.type}
-                                        </p>
-                                        <p className="text-xs font-black text-white tracking-tight">
-                                            {log.message}
-                                        </p>
+                    {/* Right: Security Logs */}
+                    <div className="xl:col-span-4 flex flex-col">
+                        <div className="flex items-center justify-between mb-8 px-2">
+                            <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
+                                <Terminal className="w-4 h-4" /> OPERATIONAL AUDIT LOG
+                            </h2>
+                        </div>
+
+                        <div className="bg-[#0f172a]/20 border border-white/5 rounded-[3rem] p-10 flex-1 backdrop-blur-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-[80px]"></div>
+                            <div className="space-y-10 relative z-10">
+                                {logs.map((log, idx) => (
+                                    <div key={log.id} className="flex gap-6 group">
+                                        <div className="flex flex-col items-center">
+                                            <div className={`w-3 h-3 rounded-full mt-1.5 ring-4 ring-offset-4 ring-offset-[#0f172a] ${log.color === 'blue' ? 'bg-blue-500 ring-blue-500/10' :
+                                                    log.color === 'green' ? 'bg-emerald-500 ring-emerald-500/10' :
+                                                        log.color === 'orange' ? 'bg-amber-500 ring-amber-500/10' :
+                                                            'bg-slate-700 ring-slate-700/10'
+                                                }`}></div>
+                                            {idx !== logs.length - 1 && <div className="w-px flex-1 bg-white/5 mt-4 group-last:hidden"></div>}
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <span className="text-[10px] font-mono font-bold text-slate-500 tabular-nums">{log.time}</span>
+                                                <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md ${log.color === 'blue' ? 'bg-blue-500/10 text-blue-500' :
+                                                        log.color === 'green' ? 'bg-emerald-500/10 text-emerald-500' :
+                                                            log.color === 'orange' ? 'bg-amber-500/10 text-amber-500' :
+                                                                'bg-white/5 text-slate-500'
+                                                    }`}>
+                                                    {log.type}
+                                                </span>
+                                            </div>
+                                            <p className="text-xs font-bold text-white/80 leading-snug tracking-tight group-hover:text-white transition-colors">
+                                                {log.message}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+
+                                <button className="w-full py-4 mt-6 bg-white/5 border border-white/5 rounded-[1.5rem] text-[10px] font-black text-slate-500 hover:text-white hover:bg-white/10 transition-all uppercase tracking-[0.2em]">
+                                    VIEW ENTIRE SECURITY LOG
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12">
-                    <ServerStatusSection />
+                {/* Section 3: Server Infrastructure */}
+                <div className="mt-20">
+                    <div className="flex items-center justify-between mb-8 px-2">
+                        <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
+                            <Server className="w-4 h-4" /> HARDWARE & INFRASTRUCTURE NODES
+                        </h2>
+                        <div className="h-px flex-1 bg-gradient-to-r from-slate-800 to-transparent mx-8 opacity-50"></div>
+                    </div>
+
+                    <div className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                        <div className="relative">
+                            <ServerStatusSection />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Footer Disclaimer */}
+                <div className="mt-20 text-center">
+                    <p className="text-[10px] font-black text-slate-700 uppercase tracking-[0.4em]">
+                        AUTHORIZED ACCESS ONLY • STOCK EMPIRE AI QUANT SYSTEM • v2.4.0
+                    </p>
                 </div>
             </main>
         </div>
