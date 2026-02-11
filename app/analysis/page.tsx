@@ -51,12 +51,26 @@ function AnalysisContent() {
         try {
             const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
             const data = await res.json();
+
+            console.log('API Response:', data); // Debug log
+
             if (data.error) {
                 alert(data.error);
                 return;
             }
-            setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
-            setSelectedSignal(data);
+
+            // Ensure data has all required fields
+            const completeData = {
+                ...data,
+                id: data.id || data.ticker,
+                technical_analysis: data.technical_analysis || data.ai_reason || "기술적 분석 진행 중...",
+                fundamental_analysis: data.fundamental_analysis || "기본적 분석 진행 중...",
+                action_plan: data.action_plan || "실행 전략 수립 중..."
+            };
+
+            setSignals(prev => [completeData, ...prev.filter(s => s.ticker !== completeData.ticker)]);
+            setSelectedSignal(completeData); // Open modal immediately
+            console.log('Modal should open with:', completeData); // Debug log
         } catch (e) {
             console.error("Deep Scan failed", e);
             alert("연결 오류: 서버 상태를 확인해주세요.");
