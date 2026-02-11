@@ -3,7 +3,7 @@
 import {
     Users, UserPlus, Activity,
     Database, ShieldCheck, ArrowLeft, BarChart3,
-    TrendingUp, RefreshCw, Cpu, Clock, Zap, Terminal, Server
+    TrendingUp, RefreshCw, Cpu, Clock, Zap, Terminal, Server, Crown
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -82,7 +82,7 @@ export default function AdminPage() {
                             <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 border border-blue-500/20">
                                 <ShieldCheck className="w-6 h-6" />
                             </div>
-                            <span className="uppercase italic">COMMAND CENTER</span>
+                            <span className="uppercase italic">지휘 통제 본부</span>
                             <span className="text-slate-500 text-xs not-italic font-black bg-white/5 px-2.5 py-1 rounded-md ml-2 border border-white/5">ADMIN HQ</span>
                         </h1>
                     </div>
@@ -90,14 +90,14 @@ export default function AdminPage() {
 
                 <div className="flex items-center gap-8">
                     <div className="hidden md:flex flex-col items-end">
-                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-1">SYSTEM UPTIME</span>
-                        <span className="text-xs font-mono font-bold text-white/80 tabular-nums">99.99% ONLINE</span>
+                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-1">시스템 가동률</span>
+                        <span className="text-xs font-mono font-bold text-white/80 tabular-nums">99.99% 가동 중</span>
                     </div>
 
                     <div className="flex items-center gap-4 pl-8 border-l border-white/10">
                         <div className="text-right">
-                            <p className="text-[10px] font-black text-slate-500 uppercase leading-none tracking-widest mb-1 transition-all group-hover:text-blue-400">OPERATOR</p>
-                            <p className="text-sm font-black text-white italic tracking-tight">GENERAL MANAGER</p>
+                            <p className="text-[10px] font-black text-slate-500 uppercase leading-none tracking-widest mb-1 transition-all group-hover:text-blue-400">오퍼레이터</p>
+                            <p className="text-sm font-black text-white italic tracking-tight">최고 사령관</p>
                         </div>
                         <div className="relative group">
                             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
@@ -115,11 +115,11 @@ export default function AdminPage() {
                 <div className="mb-12">
                     <div className="flex items-center justify-between mb-8 px-2">
                         <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-                            <TrendingUp className="w-4 h-4" /> GROWTH & TRAFFIC PERFORMANCE
+                            <TrendingUp className="w-4 h-4" /> 성장 및 트래픽 현황
                         </h2>
                         <div className="h-px flex-1 bg-gradient-to-r from-slate-800 to-transparent mx-8 opacity-50"></div>
                         <div className="flex items-center gap-2 text-[10px] font-black text-slate-500">
-                            LAST SYNC: {stats.timestamp}
+                            마지막 동기화: {stats.timestamp}
                         </div>
                     </div>
 
@@ -129,7 +129,7 @@ export default function AdminPage() {
                             <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-12">
                                 <UserPlus size={120} />
                             </div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">DAILY SIGNUPS</p>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">일일 가입자</p>
                             <div className="flex items-end justify-between">
                                 <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.dailySignups.toLocaleString()}</h2>
                                 <div className="p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20 text-blue-500">
@@ -143,7 +143,7 @@ export default function AdminPage() {
                             <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity -rotate-12">
                                 <Activity size={120} />
                             </div>
-                            <p className="text-[10px] font-black text-emerald-500/70 uppercase tracking-[0.2em] mb-6">WEEKLY REACH</p>
+                            <p className="text-[10px] font-black text-emerald-500/70 uppercase tracking-[0.2em] mb-6">주간 도달율</p>
                             <div className="flex items-end justify-between">
                                 <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.weeklySignups.toLocaleString()}</h2>
                                 <div className="p-3 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-emerald-500">
@@ -157,7 +157,7 @@ export default function AdminPage() {
                             <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-45">
                                 <BarChart3 size={120} />
                             </div>
-                            <p className="text-[10px] font-black text-amber-500/70 uppercase tracking-[0.2em] mb-6">TODAY VISITORS</p>
+                            <p className="text-[10px] font-black text-amber-500/70 uppercase tracking-[0.2em] mb-6">오늘 방문자</p>
                             <div className="flex items-end justify-between">
                                 <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.todayVisitors.toLocaleString()}</h2>
                                 <div className="p-3 bg-amber-500/10 rounded-2xl border border-amber-500/20 text-amber-500">
@@ -171,7 +171,7 @@ export default function AdminPage() {
                             <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity -rotate-45">
                                 <Crown size={120} />
                             </div>
-                            <p className="text-[10px] font-black text-purple-500/70 uppercase tracking-[0.2em] mb-6">MONTHLY ACTIVE</p>
+                            <p className="text-[10px] font-black text-purple-500/70 uppercase tracking-[0.2em] mb-6">월간 활성 사용자</p>
                             <div className="flex items-end justify-between">
                                 <h2 className="text-5xl font-black text-white tracking-tighter tabular-nums">{stats.monthlyVisitors.toLocaleString()}</h2>
                                 <div className="p-3 bg-purple-500/10 rounded-2xl border border-purple-500/20 text-purple-500">
@@ -189,7 +189,7 @@ export default function AdminPage() {
                     <div className="xl:col-span-8 flex flex-col h-full">
                         <div className="flex items-center justify-between mb-8 px-2">
                             <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-                                <Database className="w-4 h-4" /> CORE PIPELINE ENGINE
+                                <Database className="w-4 h-4" /> 핵심 파이프라인 엔진
                             </h2>
                             <button
                                 onClick={handleRefresh}
@@ -208,16 +208,16 @@ export default function AdminPage() {
                                     </div>
                                     <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 rounded-full border border-green-500/20">
                                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-                                        <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">ACTIVE</span>
+                                        <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">실시간 가동 중</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">News Intelligence Crawler</h3>
+                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">지능형 뉴스 크롤러</h3>
                                     <p className="text-xs font-medium text-slate-500 leading-relaxed mb-6">
-                                        Global media surveillance system synchronizing from <span className="text-blue-400 font-bold">{stats.activeCrawlers} journals</span> in real-time.
+                                        전 세계 금융 미디어를 실시간으로 감시하며 <span className="text-blue-400 font-bold">{stats.activeCrawlers}개 저널</span>과 동기화 중입니다.
                                     </p>
                                     <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Latency</span>
+                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">지연 시간</span>
                                         <span className="text-xs font-mono font-bold text-white/40">142ms</span>
                                     </div>
                                 </div>
@@ -231,16 +231,16 @@ export default function AdminPage() {
                                     </div>
                                     <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20">
                                         <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">OPTIMIZED</span>
+                                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">최적화 완료</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">War-Room AI Neural Core</h3>
+                                    <h3 className="text-lg font-black text-white tracking-tight mb-2 uppercase italic">워룸 AI 신경망 코어</h3>
                                     <p className="text-xs font-medium text-slate-500 leading-relaxed mb-6">
-                                        Multi-layered NLP engine processing market sentiment with average load of <span className="text-amber-400 font-bold">{stats.aiLoad}</span>.
+                                        다중 레이어 NLP 엔진이 시장 심리를 분석하며 평균 부하는 <span className="text-amber-400 font-bold">{stats.aiLoad}</span>입니다.
                                     </p>
                                     <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Model</span>
+                                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">모델</span>
                                         <span className="text-xs font-mono font-bold text-white/40">G-PRO-ALPHA</span>
                                     </div>
                                 </div>
@@ -253,14 +253,14 @@ export default function AdminPage() {
                                         <Database className="w-7 h-7" />
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-black text-white tracking-tight mb-1 uppercase italic">Unified Intelligence Archive</h3>
+                                        <h3 className="text-lg font-black text-white tracking-tight mb-1 uppercase italic">통합 인텔리전스 아카이브</h3>
                                         <p className="text-xs font-medium text-slate-500">
-                                            Persistent storage housing <span className="text-purple-400 font-bold">{stats.historyCount} curated nodes</span> with 14-day retention.
+                                            전략적 데이터를 보관하는 영구 저장소로 현재 <span className="text-purple-400 font-bold">{stats.historyCount}개 노드</span>가 보존 중입니다.
                                         </p>
                                     </div>
                                 </div>
                                 <button className="px-6 py-3 bg-white/5 border border-white/5 rounded-2xl text-[10px] font-black text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2 uppercase tracking-widest">
-                                    MANAGE ARCHIVE <Clock className="w-3.5 h-3.5" />
+                                    아카이브 관리 <Clock className="w-3.5 h-3.5" />
                                 </button>
                             </div>
                         </div>
@@ -270,7 +270,7 @@ export default function AdminPage() {
                     <div className="xl:col-span-4 flex flex-col">
                         <div className="flex items-center justify-between mb-8 px-2">
                             <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-                                <Terminal className="w-4 h-4" /> OPERATIONAL AUDIT LOG
+                                <Terminal className="w-4 h-4" /> 시스템 운영 로그
                             </h2>
                         </div>
 
@@ -306,7 +306,7 @@ export default function AdminPage() {
                                 ))}
 
                                 <button className="w-full py-4 mt-6 bg-white/5 border border-white/5 rounded-[1.5rem] text-[10px] font-black text-slate-500 hover:text-white hover:bg-white/10 transition-all uppercase tracking-[0.2em]">
-                                    VIEW ENTIRE SECURITY LOG
+                                    전체 보안 로그 확인
                                 </button>
                             </div>
                         </div>
@@ -317,7 +317,7 @@ export default function AdminPage() {
                 <div className="mt-20">
                     <div className="flex items-center justify-between mb-8 px-2">
                         <h2 className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-                            <Server className="w-4 h-4" /> HARDWARE & INFRASTRUCTURE NODES
+                            <Server className="w-4 h-4" /> 하드웨어 및 인프라 노드
                         </h2>
                         <div className="h-px flex-1 bg-gradient-to-r from-slate-800 to-transparent mx-8 opacity-50"></div>
                     </div>
@@ -333,7 +333,7 @@ export default function AdminPage() {
                 {/* Footer Disclaimer */}
                 <div className="mt-20 text-center">
                     <p className="text-[10px] font-black text-slate-700 uppercase tracking-[0.4em]">
-                        AUTHORIZED ACCESS ONLY • STOCK EMPIRE AI QUANT SYSTEM • v2.4.0
+                        인가된 사용자 전용 접근 • 스톡 엠파이어 AI 퀀트 시스템 • v2.4.0
                     </p>
                 </div>
             </main>
