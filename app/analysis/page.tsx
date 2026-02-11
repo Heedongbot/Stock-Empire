@@ -11,7 +11,6 @@ import { useAuth } from '@/lib/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdInFeed from '@/components/ads/AdInFeed';
-import { DonationSection } from '@/components/DonationSection';
 import { STOCK_LIST } from '@/lib/stocks';
 
 interface AlphaSignal {
@@ -277,9 +276,6 @@ function AnalysisContent() {
                                         </div>
                                     </div>
                                 ))}
-                            </div>
-                            <div className="mt-20">
-                                <DonationSection />
                             </div>
                         </div>
                     )

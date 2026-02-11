@@ -11,6 +11,7 @@ import BottomNav from "@/components/BottomNav";
 import InstallPWA from "@/components/InstallPWA";
 import VisitorTracker from "@/components/VisitorTracker";
 import BreakingNewsToast from "./components/BreakingNewsToast";
+import SponsorshipSection from "@/components/SponsorshipSection";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -28,7 +29,7 @@ export default function ClientLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const [manualKey, setManualKey] = useState<string | null>(null);
+    const [manualKey, setManualKey] = useState<string | undefined>(undefined);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -47,6 +48,7 @@ export default function ClientLayout({
                         {children}
                     </div>
                     {/* 🔧 플로팅 및 위젯 컴포넌트들 */}
+                    <SponsorshipSection />
                     <SiteFooter />
                     <BottomNav />
                     <InstallPWA />

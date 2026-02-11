@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum Tier {
@@ -36,16 +37,38 @@ enum SubscriptionStatus {
 
 model User {
   id            String    @id @default(cuid())
+  clerkId       String?   @unique // Clerk User ID (e.g., user_2n...)
   email         String    @unique
   name          String?
   image         String?
-  password      String?
   role          String    @default("USER") // USER, ADMIN
   rank          String    @default("TRAINEE") // e.g., CORPORAL, SERGEANT, GENERAL
   
   // Relations
   subscription  Subscription?
   payments      Payment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model News {
+  id            String    @id @default(cuid())
+  source        String    // Yahoo, Investing, Naver
+  title         String
+  title_kr      String?   // Translated title
+  summary_kr    String?   // AI Summary
+  link          String    @unique
+  published_at  DateTime
+  crawled_at    DateTime  @default(now())
+  
+  sentiment     String    // BULLISH, BEARISH, NEUTRAL
+  impact_score  Int       @default(50)
+  
+  is_breaking   Boolean   @default(false)
+  
+  // JSON field for flexible extra data (AI analysis results)
+  ai_analysis   Json?
+  
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

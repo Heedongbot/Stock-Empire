@@ -103,8 +103,8 @@ function VVIPAlphaContent() {
                                 <ShieldCheck className="w-8 h-8" />
                             </div>
                             <div>
-                                <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 leading-none">
-                                    실시간 <span className="text-blue-600">알파 시그널</span>
+                                <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-800 leading-none">
+                                    LIVE <span className="text-blue-600">ALPHA SIGNALS</span>
                                 </h1>
                                 <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.4em] mt-2">
                                     AI가 선별한 고수익 유망 종목 추천
@@ -172,7 +172,7 @@ function VVIPAlphaContent() {
                                     <div className="inline-block px-4 py-1 bg-slate-100 border border-slate-200 rounded-xl text-xs font-black text-slate-700 mb-4 tracking-wider uppercase">
                                         {sig.ticker}
                                     </div>
-                                    <h3 className="text-3xl font-black text-slate-900 italic tracking-tighter leading-none group-hover:text-blue-600 transition-colors">
+                                    <h3 className="text-lg md:text-xl font-black text-slate-800 italic tracking-tighter leading-tight group-hover:text-blue-600 transition-colors break-keep min-h-[3rem] flex items-center">
                                         {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.ticker}
                                     </h3>
                                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-2 truncate">

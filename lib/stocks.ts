@@ -28,6 +28,13 @@ export const TICKER_MAP: Record<string, string> = {
     '에어비앤비': 'ABNB',
     '우버': 'UBER',
     '쿠팡': 'CPNG',
+    '소파이': 'SOFI',
+    '마이크로스트래티지': 'MSTR',
+    '마라톤디지털': 'MARA',
+    '라이엇플랫폼즈': 'RIOT',
+    '마이크로스트레티지': 'MSTR', // Variant spelling
+    'C3.ai': 'AI',
+    '유아이패스': 'PATH',
 };
 
 export const STOCK_LIST = Object.entries(TICKER_MAP).map(([name, ticker]) => ({

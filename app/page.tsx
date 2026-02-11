@@ -14,7 +14,6 @@ import { translations } from '@/lib/translations';
 import { useAuth } from '@/lib/AuthContext';
 import AdInFeed from '@/components/ads/AdInFeed';
 import LatestNewsInsights from '@/components/LatestNewsInsights';
-import SponsorshipSection from '@/components/SponsorshipSection';
 import StockLogo from '@/components/StockLogo';
 import FriendlyPrice from '@/components/FriendlyPrice';
 import { STOCK_LIST } from '@/lib/stocks';
@@ -258,11 +257,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 📰 투데이 마켓 브리핑 */}
       <LatestNewsInsights />
-
-      {/* 💸 후원 및 스폰서십 섹션 */}
-      <SponsorshipSection />
 
       {/* 친근한 종목 추천 섹션 (기존 Live Alpha Signals 개편) */}
       <section className="max-w-7xl mx-auto px-8 py-20">
