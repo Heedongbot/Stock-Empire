@@ -90,14 +90,22 @@ export default function Home() {
     : signals.slice(0, 4);
 
   // Fetch Market Data for Sectors
+  const [sentimentScore, setSentimentScore] = useState(65);
+
   useEffect(() => {
     const fetchMarketData = async () => {
-      const tickers = ['NVDA', 'MSFT', 'PLTR', 'TSLA', 'RIVN', 'ENPH', 'AMD', 'AVGO', 'INTC', 'COIN', 'PYPL', 'SQ'].join(',');
+      const tickers = ['NVDA', 'MSFT', 'PLTR', 'TSLA', 'RIVN', 'ENPH', 'AMD', 'AVGO', 'INTC', 'COIN', 'PYPL', 'SQ', '^GSPC'].join(',');
       try {
         const res = await fetch(`/api/stock-price?tickers=${tickers}`);
         if (res.ok) {
           const data = await res.json();
           setMarketData(data);
+
+          if (data['^GSPC']) {
+            const spChange = data['^GSPC'].change;
+            const calculatedScore = Math.min(100, Math.max(0, Math.round(50 + (spChange * 15))));
+            setSentimentScore(calculatedScore);
+          }
         }
       } catch (e) {
         console.error("Failed to fetch market data", e);
@@ -242,7 +250,12 @@ export default function Home() {
             </div>
             <div>
               <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">시장 분위기</div>
-              <div className="text-xl font-black text-slate-900">따뜻함 ☀️ <span className="text-xs text-green-600 font-bold">(탐욕 지수: 65)</span></div>
+              <div className="text-xl font-black text-slate-900">
+                {sentimentScore > 75 ? '매우 뜨거움 🔥' : sentimentScore > 55 ? '따뜻함 ☀️' : sentimentScore > 45 ? '미지근함 ☁️' : '쌀쌀함 ❄️'}
+                <span className={`text-xs ml-2 font-bold ${sentimentScore > 50 ? 'text-red-500' : 'text-blue-500'}`}>
+                  (탐욕 지수: {sentimentScore})
+                </span>
+              </div>
             </div>
           </div>
           <div className="p-6 bg-white border border-slate-300 rounded-3xl shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow">

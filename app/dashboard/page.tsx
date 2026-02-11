@@ -17,6 +17,52 @@ export default function Dashboard() {
 
     const [score, setScore] = useState(78); // Market Sentiment Score
     const [rank, setRank] = useState(user?.rank || 'CORPORAL'); // User Rank (Gamification)
+    const [sectorData, setSectorData] = useState<Record<string, { change: number }>>({
+        'XLK': { change: 2.5 },
+        'XLF': { change: -1.2 },
+        'XLE': { change: 0.0 },
+        'BTC-USD': { change: 4.8 }
+    });
+
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                // Fetch Sectors (XLK: Tech, XLF: Finance, XLE: Energy, BTC-USD: Crypto)
+                const tickers = ['XLK', 'XLF', 'XLE', 'BTC-USD', '^GSPC'].join(',');
+                const res = await fetch(`/api/stock-price?tickers=${tickers}`);
+                if (res.ok) {
+                    const data = await res.json();
+
+                    // Update Sector Data
+                    const updatedSectors: Record<string, { change: number }> = {};
+                    ['XLK', 'XLF', 'XLE', 'BTC-USD'].forEach(t => {
+                        if (data[t]) {
+                            updatedSectors[t] = { change: Number(data[t].change.toFixed(1)) };
+                        } else {
+                            // Keep fallback if API fails for some reason
+                            updatedSectors[t] = sectorData[t];
+                        }
+                    });
+                    setSectorData(updatedSectors);
+
+                    // Calculate a dynamic sentiment score based on S&P 500 change
+                    // Base 50 + (change * 10), capped at 0-100
+                    if (data['^GSPC']) {
+                        const spChange = data['^GSPC'].change;
+                        const calculatedScore = Math.min(100, Math.max(0, Math.round(50 + (spChange * 15))));
+                        setScore(calculatedScore);
+                    }
+                }
+            } catch (e) {
+                console.error("Dashboard real-time fetch error", e);
+            }
+        };
+
+        fetchDashboardData();
+        // Refresh every 5 minutes
+        const interval = setInterval(fetchDashboardData, 300000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (user?.rank) {
@@ -88,9 +134,9 @@ export default function Dashboard() {
                                 <span className="text-[11px] font-black uppercase tracking-widest text-blue-100">💻 기술주 (Technology)</span>
                                 <div className="flex items-end justify-between">
                                     <div className="flex items-center gap-2 text-white text-[11px] font-black bg-white/20 px-4 py-2 rounded-xl backdrop-blur-sm">
-                                        <ArrowUpRight className="w-4 h-4" /> 아주 좋음 (Bullish)
+                                        <ArrowUpRight className="w-4 h-4" /> {sectorData['XLK'].change >= 0 ? '매우 좋음 (Bullish)' : '조정 중 (Correction)'}
                                     </div>
-                                    <span className="text-5xl font-black tracking-tighter italic">+2.5%</span>
+                                    <span className="text-5xl font-black tracking-tighter italic">{sectorData['XLK'].change > 0 ? '+' : ''}{sectorData['XLK'].change}%</span>
                                 </div>
                             </div>
 
@@ -98,9 +144,10 @@ export default function Dashboard() {
                             <div className="md:col-span-4 rounded-[2rem] p-8 flex flex-col justify-between bg-slate-50 border border-slate-300 hover:border-red-300 hover:bg-red-50 transition-all cursor-pointer group">
                                 <span className="text-[10px] font-black uppercase text-slate-400 group-hover:text-red-400 tracking-widest">💰 금융주 (Finance)</span>
                                 <div className="text-right">
-                                    <span className="block text-4xl font-black text-slate-800 group-hover:text-red-500 tracking-tighter mb-2">-1.2%</span>
-                                    <div className="inline-flex items-center gap-1 text-slate-400 group-hover:text-red-400 text-[10px] font-black">
-                                        <ArrowDownRight className="w-3 h-3" /> 조금 하락
+                                    <span className="block text-4xl font-black text-slate-800 tracking-tighter mb-2">{sectorData['XLF'].change > 0 ? '+' : ''}{sectorData['XLF'].change}%</span>
+                                    <div className="inline-flex items-center gap-1 text-slate-400 text-[10px] font-black">
+                                        {sectorData['XLF'].change >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                        {sectorData['XLF'].change >= 0 ? '상승 중' : '조금 하락'}
                                     </div>
                                 </div>
                             </div>
@@ -109,9 +156,9 @@ export default function Dashboard() {
                             <div className="md:col-span-5 rounded-[2rem] p-8 flex flex-col justify-between bg-slate-50 border border-slate-300 hover:bg-orange-50 hover:border-orange-300 transition-all cursor-pointer group">
                                 <span className="text-[10px] font-black uppercase text-slate-400 group-hover:text-orange-400 tracking-widest">⚡ 에너지 (Energy)</span>
                                 <div className="text-right">
-                                    <span className="block text-4xl font-black text-slate-800 tracking-tighter mb-2 italic">0.0%</span>
+                                    <span className="block text-4xl font-black text-slate-800 tracking-tighter mb-2 italic">{sectorData['XLE'].change > 0 ? '+' : ''}{sectorData['XLE'].change}%</span>
                                     <div className="inline-flex items-center gap-1 text-slate-400 text-[10px] font-black uppercase">
-                                        Neutral (보합)
+                                        {sectorData['XLE'].change === 0 ? 'Neutral (보합)' : sectorData['XLE'].change > 0 ? 'Strong (강세)' : 'Weak (약세)'}
                                     </div>
                                 </div>
                             </div>
@@ -121,9 +168,9 @@ export default function Dashboard() {
                                 <span className="text-[10px] font-black uppercase text-indigo-400 tracking-widest">🪙 코인 (Crypto)</span>
                                 <div className="flex items-end justify-between">
                                     <div className="inline-flex items-center gap-2 text-indigo-600 text-[10px] font-black bg-white px-3 py-1.5 rounded-xl border border-indigo-200">
-                                        <Zap className="w-4 h-4" /> 변동성 높음
+                                        <Zap className="w-4 h-4" /> 실시간 변동성
                                     </div>
-                                    <span className="text-4xl font-black text-indigo-700 tracking-tighter italic">+4.8%</span>
+                                    <span className="text-4xl font-black text-indigo-700 tracking-tighter italic">{sectorData['BTC-USD'].change > 0 ? '+' : ''}{sectorData['BTC-USD'].change}%</span>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +194,7 @@ export default function Dashboard() {
                                     {score}
                                 </span>
                                 <div className="text-lg font-black uppercase tracking-[0.2em] text-blue-500 mt-4 flex items-center justify-center gap-2 italic">
-                                    탐욕 모드 <Sparkles className="w-5 h-5" />
+                                    {score > 75 ? '극심한 탐욕' : score > 55 ? '탐욕 모드' : score > 45 ? '중립 상태' : score > 25 ? '공포 모드' : '극심한 공포'} <Sparkles className="w-5 h-5" />
                                 </div>
                             </div>
 
