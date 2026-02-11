@@ -19,6 +19,7 @@ export default function SiteHeader() {
         { id: 'dashboard', path: '/dashboard' },
         { id: 'newsroom', path: '/newsroom' },
         { id: 'market', path: '/market' },
+        { id: 'themes', path: '/themes' },
         { id: 'analysis', path: '/analysis' },
         { id: 'pro_alpha', path: '/vvip-alpha' },
     ];

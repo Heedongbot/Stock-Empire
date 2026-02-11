@@ -88,13 +88,19 @@ function ThemeContent() {
                     </div>
 
                     <div className="relative w-full md:w-80">
+                        {!user && (
+                            <div className="absolute inset-0 z-20 backdrop-blur-sm bg-white/70 rounded-2xl flex items-center justify-center">
+                                <Lock className="w-5 h-5 text-blue-600" />
+                            </div>
+                        )}
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
                             type="text"
                             placeholder="티커/종목명 검색..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-2xl py-4 pl-12 pr-4 text-sm font-bold text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all shadow-sm"
+                            disabled={!user}
+                            className="w-full bg-white border border-slate-300 rounded-2xl py-4 pl-12 pr-4 text-sm font-bold text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all shadow-sm disabled:opacity-50"
                         />
                     </div>
                 </div>
@@ -134,6 +140,16 @@ function ThemeContent() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredSignals.map((sig, idx) => (
                             <div key={idx} className="group bg-white border border-slate-300 rounded-[3rem] p-8 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-all relative overflow-hidden flex flex-col h-full shadow-sm hover:-translate-y-1">
+                                {!user && (
+                                    <div className="absolute inset-0 z-30 backdrop-blur-md bg-white/60 flex flex-col items-center justify-center p-6 text-center rounded-[3rem]">
+                                        <Lock className="w-10 h-10 text-blue-600 mb-3" />
+                                        <h4 className="text-sm font-black text-slate-900 mb-2">로그인 필요</h4>
+                                        <p className="text-xs text-slate-600 mb-4">회원 전용 테마 분석</p>
+                                        <a href="/sign-in" className="px-6 py-2 bg-blue-600 text-white text-xs font-black rounded-xl hover:bg-blue-700 transition-all">
+                                            무료 시작
+                                        </a>
+                                    </div>
+                                )}
                                 <div className="absolute top-0 right-0 p-8 opacity-5">
                                     <Database className="w-24 h-24 text-slate-900" />
                                 </div>

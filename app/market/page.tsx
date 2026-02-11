@@ -96,6 +96,16 @@ export default function MarketSignalsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                         {signals.map((signal) => (
                             <div key={signal.id} className="bg-white border border-slate-300 rounded-[2.5rem] p-8 hover:border-blue-400 transition-all group shadow-xl shadow-blue-500/5 hover:shadow-blue-500/10 relative overflow-hidden hover:-translate-y-1">
+                                {!user && (
+                                    <div className="absolute inset-0 z-30 backdrop-blur-md bg-white/60 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]">
+                                        <Lock className="w-10 h-10 text-blue-600 mb-3" />
+                                        <h4 className="text-sm font-black text-slate-900 mb-2">로그인 필요</h4>
+                                        <p className="text-xs text-slate-600 mb-4">회원 전용 시장 분석</p>
+                                        <a href="/sign-in" className="px-6 py-2 bg-blue-600 text-white text-xs font-black rounded-xl hover:bg-blue-700 transition-all">
+                                            무료 시작
+                                        </a>
+                                    </div>
+                                )}
                                 <div className="absolute top-0 right-0 p-8 opacity-5">
                                     <BarChart3 className="w-24 h-24 text-slate-900" />
                                 </div>

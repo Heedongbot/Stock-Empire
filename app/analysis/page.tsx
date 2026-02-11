@@ -134,6 +134,18 @@ function AnalysisContent() {
                     </div>
 
                     <div className="max-w-2xl mx-auto mb-10 md:mb-12 relative group">
+                        {!user && (
+                            <div className="absolute inset-0 z-20 backdrop-blur-sm bg-white/70 rounded-[2rem] flex items-center justify-center">
+                                <div className="text-center p-8">
+                                    <Lock className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                                    <h3 className="text-xl font-black text-slate-900 mb-2">로그인이 필요합니다</h3>
+                                    <p className="text-sm text-slate-600 mb-6">AI 종목 분석은 회원 전용 서비스입니다</p>
+                                    <a href="/sign-in" className="inline-block px-8 py-3 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition-all shadow-lg">
+                                        3초만에 무료 시작
+                                    </a>
+                                </div>
+                            </div>
+                        )}
                         <div className="relative">
                             <input
                                 type="text"
@@ -144,11 +156,12 @@ function AnalysisContent() {
                                 onFocus={() => setSearchTerm('')}
                                 onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
                                 placeholder="애플, 테슬라, 엔비디아..."
-                                className="w-full px-6 md:px-8 py-4 md:py-6 rounded-[2rem] bg-white border-2 border-slate-300 shadow-xl shadow-blue-500/5 text-base md:text-xl font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all placeholder:text-slate-300 pr-16 md:pr-40"
+                                disabled={!user}
+                                className="w-full px-6 md:px-8 py-4 md:py-6 rounded-[2rem] bg-white border-2 border-slate-300 shadow-xl shadow-blue-500/5 text-base md:text-xl font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all placeholder:text-slate-300 pr-16 md:pr-40 disabled:opacity-50"
                             />
                             <button
                                 onClick={handleDeepScan}
-                                disabled={scanning}
+                                disabled={scanning || !user}
                                 className="absolute right-2 top-2 bottom-2 md:right-3 md:top-3 md:bottom-3 w-12 md:w-auto px-0 md:px-8 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-full md:rounded-[1.5rem] font-black text-xs md:text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                             >
                                 {scanning ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Search className="w-5 h-5 md:w-4 md:h-4" />}
@@ -163,9 +176,10 @@ function AnalysisContent() {
                             <button
                                 key={s.ticker}
                                 onClick={() => {
-                                    setSearchTerm(s.name);
+                                    if (user) setSearchTerm(s.name);
                                 }}
-                                className="px-4 py-1.5 rounded-full bg-white border border-slate-300 hover:border-blue-400 hover:text-blue-600 transition-all shadow-sm"
+                                disabled={!user}
+                                className="px-4 py-1.5 rounded-full bg-white border border-slate-300 hover:border-blue-400 hover:text-blue-600 transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {s.name}
                             </button>
@@ -220,9 +234,19 @@ function AnalysisContent() {
                                 {filteredSignals.map((sig, idx) => (
                                     <div
                                         key={idx}
-                                        onClick={() => setSelectedSignal(sig)}
+                                        onClick={() => user && setSelectedSignal(sig)}
                                         className="group relative bg-white border border-slate-300 rounded-[2.5rem] p-8 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all cursor-pointer shadow-sm overflow-hidden"
                                     >
+                                        {!user && (
+                                            <div className="absolute inset-0 z-30 backdrop-blur-md bg-white/60 flex flex-col items-center justify-center p-6 text-center rounded-[2.5rem]">
+                                                <Lock className="w-10 h-10 text-blue-600 mb-3" />
+                                                <h4 className="text-sm font-black text-slate-900 mb-2">로그인 필요</h4>
+                                                <p className="text-xs text-slate-600 mb-4">회원 전용 AI 분석</p>
+                                                <a href="/sign-in" className="px-6 py-2 bg-blue-600 text-white text-xs font-black rounded-xl hover:bg-blue-700 transition-all">
+                                                    무료 시작
+                                                </a>
+                                            </div>
+                                        )}
                                         <div className="flex justify-between items-start mb-6 relative z-10">
                                             <div className="px-4 py-2 bg-slate-50 rounded-xl text-xs font-black text-slate-700">{sig.ticker}</div>
                                             <div className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1 ${sig.sentiment === 'BULLISH' ? 'bg-red-50 text-red-600' : sig.sentiment === 'BEARISH' ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-500'}`}>
