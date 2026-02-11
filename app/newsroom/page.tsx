@@ -30,6 +30,12 @@ interface NewsItem {
     };
 }
 
+interface AlphaSignal {
+    ticker: string;
+    price: number;
+    change_pct: number;
+}
+
 export default function NewsroomPage() {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
@@ -39,7 +45,10 @@ export default function NewsroomPage() {
     const lang = 'ko';
     const showAds = true;
 
+    const [topPicks, setTopPicks] = useState<AlphaSignal[]>([]);
+
     useEffect(() => {
+        // News fetch
         const fetchNews = async () => {
             try {
                 const res = await fetch('/api/news');
@@ -51,7 +60,22 @@ export default function NewsroomPage() {
                 setLoading(false);
             }
         };
+
+        // Top Picks fetch (Alpha Signals)
+        const fetchTopPicks = async () => {
+            try {
+                const res = await fetch('/api/alpha-signals?limit=3');
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    setTopPicks(data.slice(0, 3));
+                }
+            } catch (e) {
+                console.error("Failed to fetch top picks", e);
+            }
+        };
+
         fetchNews();
+        fetchTopPicks();
     }, []);
 
     return (
@@ -76,14 +100,6 @@ export default function NewsroomPage() {
                                     <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
                                     AI가 실시간으로 분석 중인 핵심 뉴스들입니다
                                 </p>
-                            </div>
-                            <div className="relative w-full md:w-80">
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 font-black" />
-                                <input
-                                    type="text"
-                                    placeholder="궁금한 종목이나 키워드를 검색해보세요"
-                                    className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-4 text-sm font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all shadow-sm"
-                                />
                             </div>
                         </header>
 
@@ -255,26 +271,41 @@ export default function NewsroomPage() {
                                 Weekly Top Picks
                             </h3>
                             <div className="space-y-4 mb-10">
-                                {['NVDA', 'TSLA', 'AAPL'].map((ticker, idx) => (
-                                    <div key={ticker} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/20 transition-all cursor-pointer group/item">
+                                {topPicks.length > 0 ? topPicks.map((pick, idx) => (
+                                    <div key={pick.ticker} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/20 transition-all cursor-pointer group/item">
                                         <div className="flex items-center gap-4 text-xs">
-                                            <StockLogo ticker={ticker} size={40} className="border-0 shadow-lg" />
-                                            <span className="font-black text-lg tracking-tighter">{ticker}</span>
+                                            <StockLogo ticker={pick.ticker} size={40} className="border-0 shadow-lg bg-white rounded-full" />
+                                            <span className="font-black text-lg tracking-tighter">{pick.ticker}</span>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-emerald-400 font-extrabold text-sm font-black italic">+{(2.4 + idx).toFixed(1)}%</div>
-                                            <div className="text-[9px] text-white/50 font-bold uppercase tracking-widest">Expected</div>
+                                            <div className={`font-extrabold text-sm font-black italic ${pick.change_pct >= 0 ? 'text-red-400' : 'text-blue-300'}`}>
+                                                {pick.change_pct > 0 ? '+' : ''}{pick.change_pct.toFixed(2)}%
+                                            </div>
+                                            <div className="text-[9px] text-white/50 font-bold uppercase tracking-widest">${pick.price.toFixed(2)}</div>
                                         </div>
                                     </div>
-                                ))}
+                                )) : (
+                                    // Loading State or Fallback
+                                    ['NVDA', 'TSLA', 'AAPL'].map((ticker) => (
+                                        <div key={ticker} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:bg-white/20 transition-all animate-pulse">
+                                            <div className="flex items-center gap-4 text-xs">
+                                                <div className="w-10 h-10 bg-white/20 rounded-full" />
+                                                <span className="font-black text-lg tracking-tighter">{ticker}</span>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-white/50 font-extrabold text-sm">Loading...</div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
                             </div>
                             <Link href="/analysis" className="block w-full text-center bg-white text-blue-700 font-black py-4 rounded-2xl text-[11px] hover:bg-blue-50 transition-all shadow-xl shadow-black/20 uppercase tracking-widest active:scale-95">
                                 상세 분석 리포트 열기
                             </Link>
                         </div>
                     </aside>
-                </div>
-            </main>
-        </div>
+                </div >
+            </main >
+        </div >
     );
 }
