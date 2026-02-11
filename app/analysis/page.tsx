@@ -284,11 +284,7 @@ function AnalysisContent() {
                     )
                 }
 
-                {user?.role === 'ADMIN' && (
-                    <div className="mt-20">
-                        <ServerStatusSection />
-                    </div>
-                )}
+
             </main >
 
             {/* Signal Detail Modal - Light Theme */}

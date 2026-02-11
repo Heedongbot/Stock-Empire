@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ServerStatusSection from "@/components/ServerStatusSection";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
@@ -244,6 +245,10 @@ export default function AdminPage() {
                             ))}
                         </div>
                     </div>
+                </div>
+
+                <div className="mt-12">
+                    <ServerStatusSection />
                 </div>
             </main>
         </div>

@@ -315,7 +315,7 @@ export default function NewsroomPage() {
                             </Link>
                         </div>
 
-                        {user?.role === 'ADMIN' && <ServerStatusSection />}
+
                     </aside>
                 </div>
             </main>
