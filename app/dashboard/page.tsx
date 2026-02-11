@@ -7,6 +7,7 @@ import SiteHeader from '@/components/SiteHeader';
 import { translations } from '@/lib/translations';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdRectangle from '@/components/ads/AdRectangle';
+import ServerStatusSection from '@/components/ServerStatusSection';
 
 import { useAuth } from '@/lib/AuthContext';
 
@@ -239,6 +240,10 @@ export default function Dashboard() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                <div className="mb-12">
+                    <ServerStatusSection />
                 </div>
 
                 {/* 하단 스폰서 영역 - 부드러운 화이트 레이아웃 */}
