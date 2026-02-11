@@ -446,9 +446,11 @@ export default function Home() {
           <div><div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">1시간 전</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">최근 분석 업데이트</div></div>
         </div>
 
-        <div className="mt-20">
-          <ServerStatusSection />
-        </div>
+        {user?.role === 'ADMIN' && (
+          <div className="mt-20">
+            <ServerStatusSection />
+          </div>
+        )}
       </section>
 
       {/* Footer - Light & Clean */}

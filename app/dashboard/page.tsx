@@ -242,9 +242,11 @@ export default function Dashboard() {
                     ))}
                 </div>
 
-                <div className="mb-12">
-                    <ServerStatusSection />
-                </div>
+                {user?.role === 'ADMIN' && (
+                    <div className="mb-12">
+                        <ServerStatusSection />
+                    </div>
+                )}
 
                 {/* 하단 스폰서 영역 - 부드러운 화이트 레이아웃 */}
                 <div className="flex justify-center mt-20">
