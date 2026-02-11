@@ -91,11 +91,11 @@ function VVIPAlphaContent() {
                                 <ShieldCheck className="w-8 h-8" />
                             </div>
                             <div>
-                                <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-slate-900 leading-none">
-                                    BOSS <span className="text-blue-600">ALPHA ROOM</span>
+                                <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 leading-none">
+                                    실시간 <span className="text-blue-600">알파 시그널</span>
                                 </h1>
                                 <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.4em] mt-2">
-                                    사령관 전용 고위험/고수익 실시간 시그널 통제실
+                                    AI가 선별한 고수익 유망 종목 추천
                                 </p>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ function VVIPAlphaContent() {
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                             <input
                                 type="text"
-                                placeholder="데이터 즉시 분석 (티커 입력)..."
+                                placeholder="종목 즉시 분석 (애플, 테슬라...)"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
@@ -120,7 +120,7 @@ function VVIPAlphaContent() {
                                 className={`flex-1 md:flex-none px-6 py-3 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-slate-800 hover:scale-105 transition-all shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2 ${scanning ? 'animate-pulse opacity-70' : ''}`}
                             >
                                 {scanning ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 text-blue-400" />}
-                                {scanning ? 'SCANNING' : 'DEEP SCAN'}
+                                {scanning ? '분석 중...' : '긴급 분석'}
                             </button>
                             <button
                                 onClick={fetchSignals}
@@ -146,9 +146,9 @@ function VVIPAlphaContent() {
                                 {!user && (
                                     <div className="absolute inset-0 z-30 backdrop-blur-md bg-white/60 flex flex-col items-center justify-center p-8 text-center">
                                         <Lock className="w-10 h-10 text-slate-400 mb-4" />
-                                        <h4 className="text-slate-900 font-black italic uppercase tracking-widest text-sm mb-4">Elite Alpha Locked</h4>
+                                        <h4 className="text-slate-900 font-black tracking-widest text-sm mb-4">로그인이 필요합니다</h4>
                                         <a href="/sign-in" className="px-6 py-2.5 bg-slate-900 text-white font-black uppercase text-[10px] rounded-xl hover:scale-105 transition-all shadow-lg shadow-slate-900/10">
-                                            Unlock Now
+                                            무료 로그인
                                         </a>
                                     </div>
                                 )}
@@ -156,7 +156,7 @@ function VVIPAlphaContent() {
                                     <div className="flex flex-col items-end gap-2">
                                         <div className="flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full">
                                             <Waves className="w-3 h-3 text-blue-600" />
-                                            <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">BOSS PICK</span>
+                                            <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">AI 추천</span>
                                         </div>
                                         <div className={`flex items-center gap-1 text-xs font-black ${sig.change_pct >= 0 ? 'text-red-500' : 'text-blue-600'}`}>
                                             {sig.change_pct > 0 ? '▲' : '▼'} {Math.abs(sig.change_pct)}%
@@ -178,7 +178,7 @@ function VVIPAlphaContent() {
 
                                 <div className="mb-10 space-y-3">
                                     <div className="flex justify-between items-end">
-                                        <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">AI Confidence</span>
+                                        <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">AI 신뢰도</span>
                                         <span className="text-sm font-black text-slate-900">{sig.impact_score}%</span>
                                     </div>
                                     <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -191,18 +191,23 @@ function VVIPAlphaContent() {
 
                                 <div className="grid grid-cols-1 gap-5 mb-10">
                                     <div className="flex justify-between items-center p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                                        <span className="text-[10px] text-slate-500 font-black uppercase">Entry</span>
-                                        <div className="text-2xl font-black font-mono text-slate-900">${sig.price}</div>
+                                        <span className="text-[10px] text-slate-500 font-black uppercase">현재가</span>
+                                        <div className="text-right">
+                                            <div className="text-2xl font-black font-mono text-slate-900">${sig.price.toFixed(2)}</div>
+                                            <div className="text-[10px] text-slate-400 font-bold">약 {Math.round(sig.price * 1345).toLocaleString()}원</div>
+                                        </div>
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="flex flex-col gap-2 p-4 bg-red-50 border border-red-100 rounded-2xl">
-                                            <span className="text-[9px] text-red-500 font-black">Target</span>
-                                            <div className="text-xl font-black font-mono text-red-600">${sig.target_price}</div>
+                                            <span className="text-[9px] text-red-500 font-black">목표가 (익절)</span>
+                                            <div className="text-xl font-black font-mono text-red-600">${sig.target_price.toFixed(2)}</div>
+                                            <div className="text-[9px] text-red-400 font-semibold">약 {Math.round(sig.target_price * 1345).toLocaleString()}원</div>
                                         </div>
                                         <div className="flex flex-col gap-2 p-4 bg-blue-50 border border-blue-100 rounded-2xl">
-                                            <span className="text-[9px] text-blue-500 font-black">Stop</span>
-                                            <div className="text-xl font-black font-mono text-blue-600">${sig.stop_loss}</div>
+                                            <span className="text-[9px] text-blue-500 font-black">손절가 (컷)</span>
+                                            <div className="text-xl font-black font-mono text-blue-600">${sig.stop_loss.toFixed(2)}</div>
+                                            <div className="text-[9px] text-blue-400 font-semibold">약 {Math.round(sig.stop_loss * 1345).toLocaleString()}원</div>
                                         </div>
                                     </div>
                                 </div>
@@ -211,13 +216,13 @@ function VVIPAlphaContent() {
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="flex items-center gap-2">
                                             <BrainCircuit className="w-4 h-4 text-blue-600" />
-                                            <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">ALPHA INSIGHT</span>
+                                            <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">AI 분석 요약</span>
                                         </div>
                                         <button
                                             onClick={() => setSelectedAnalysis(sig)}
                                             className="text-[9px] font-black text-blue-600 hover:text-slate-900 flex items-center gap-1 transition-colors uppercase"
                                         >
-                                            Report <ChevronRight className="w-3 h-3" />
+                                            상세보기 <ChevronRight className="w-3 h-3" />
                                         </button>
                                     </div>
                                     <p className="text-[11px] leading-relaxed text-slate-500 italic mb-6 line-clamp-2">
@@ -228,7 +233,7 @@ function VVIPAlphaContent() {
                                         className="w-full py-4 bg-slate-900 border border-slate-900 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-white hover:bg-blue-600 hover:border-blue-600 transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10"
                                     >
                                         <FileText className="w-4 h-4" />
-                                        Open Full Report
+                                        전체 리포트 보기
                                     </button>
                                 </div>
                             </div>
@@ -248,8 +253,8 @@ function VVIPAlphaContent() {
                                         <ShieldCheck className="w-10 h-10" />
                                     </div>
                                     <div>
-                                        <h2 className="text-3xl font-black text-slate-900 italic tracking-tighter uppercase">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
-                                        <p className="text-[11px] font-black text-blue-600 uppercase tracking-[0.4em]">Boss Strategic Intelligence Report (Powered by NotebookLM)</p>
+                                        <h2 className="text-3xl font-black text-slate-900 tracking-tighter">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
+                                        <p className="text-[11px] font-black text-blue-600 uppercase tracking-[0.4em]">AI 심층 분석 리포트 · NotebookLM 제공</p>
                                     </div>
                                 </div>
                                 <button
@@ -266,7 +271,7 @@ function VVIPAlphaContent() {
                                     <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200">
                                         <div className="flex items-center gap-2 mb-4">
                                             <BarChart4 className="w-4 h-4 text-slate-400" />
-                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Technical Report</span>
+                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">기술적 분석</span>
                                         </div>
                                         <p className="text-sm text-slate-600 leading-relaxed font-medium">
                                             {selectedAnalysis.technical_analysis || "현 시점 집계된 기술적 지표가 부족합니다."}
@@ -275,7 +280,7 @@ function VVIPAlphaContent() {
                                     <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200">
                                         <div className="flex items-center gap-2 mb-4">
                                             <Activity className="w-4 h-4 text-purple-600" />
-                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Fundamental View</span>
+                                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">기본적 분석</span>
                                         </div>
                                         <p className="text-sm text-slate-600 leading-relaxed font-medium">
                                             {selectedAnalysis.fundamental_analysis || "기업 가치 및 거시 경제 데이터 로드 중..."}
