@@ -43,7 +43,6 @@ export default function Home() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
-  // Filtered stocks for autocomplete
   const filteredSuggestions = searchTerm.trim()
     ? STOCK_LIST.filter(s =>
       s.name.includes(searchTerm) ||
@@ -51,6 +50,16 @@ export default function Home() {
     ).slice(0, 5)
     : [];
   const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
+  const [exchangeRate, setExchangeRate] = useState(1435); // 초기값 실시간 근접 업데이트
+
+  useEffect(() => {
+    fetch('/api/exchange-rate')
+      .then(res => res.json())
+      .then(data => {
+        if (data.rate) setExchangeRate(data.rate);
+      })
+      .catch(err => console.error('Failed to load exchange rate:', err));
+  }, []);
 
   const handleDeepScan = async () => {
     if (!searchTerm) return;
@@ -225,7 +234,7 @@ export default function Home() {
             </div>
             <div>
               <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">실시간 환율</div>
-              <div className="text-xl font-black text-slate-900">₩1,345.50 <span className="text-xs text-red-500 font-bold">▲ 2.50</span></div>
+              <div className="text-xl font-black text-slate-900">₩{exchangeRate.toLocaleString()} <span className="text-xs text-slate-400 font-bold ml-1">USD/KRW</span></div>
             </div>
           </div>
           <div className="p-6 bg-white border border-slate-300 rounded-3xl shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow">
@@ -393,7 +402,7 @@ export default function Home() {
                       {data ? (
                         <div className="text-right">
                           <div className={`text-sm font-black tracking-tighter ${isUp ? 'text-red-500' : 'text-blue-500'}`}>
-                            {Math.round(data.price * 1345).toLocaleString()}원
+                            {Math.round(data.price * exchangeRate).toLocaleString()}원
                           </div>
                           <div className={`text-[10px] font-black ${isUp ? 'text-red-400' : 'text-blue-400'}`}>
                             {data.change > 0 ? '▲' : '▼'}{Math.abs(data.change).toFixed(1)}%
