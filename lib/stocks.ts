@@ -1,0 +1,36 @@
+export const TICKER_MAP: Record<string, string> = {
+    '애플': 'AAPL',
+    '테슬라': 'TSLA',
+    '엔비디아': 'NVDA',
+    '마이크로소프트': 'MSFT',
+    '구글': 'GOOGL',
+    '아마존': 'AMZN',
+    '메타': 'META',
+    '넷플릭스': 'NFLX',
+    '스타벅스': 'SBUX',
+    '나이키': 'NKE',
+    '디즈니': 'DIS',
+    '코카콜라': 'KO',
+    '맥도날드': 'MCD',
+    '팔란티어': 'PLTR',
+    '쇼피파이': 'SHOP',
+    '코인베이스': 'COIN',
+    '리비안': 'RIVN',
+    '루시드': 'LCID',
+    '아이온큐': 'IONQ',
+    '삼성전자': 'SSNLF',
+    'AMD': 'AMD',
+    '인텔': 'INTC',
+    '브로드컴': 'AVGO',
+    '퀄컴': 'QCOM',
+    '마이크론': 'MU',
+    '슈퍼마이크로컴퓨터': 'SMCI',
+    '에어비앤비': 'ABNB',
+    '우버': 'UBER',
+    '쿠팡': 'CPNG',
+};
+
+export const STOCK_LIST = Object.entries(TICKER_MAP).map(([name, ticker]) => ({
+    name,
+    ticker
+}));

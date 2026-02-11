@@ -14,6 +14,25 @@
 }
 
 :root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --border: #e2e8f0;
+  
+  /* Beginner friendly colors */
+  --soft-red: #fff1f2;
+  --soft-red-text: #e11d48;
+  --soft-blue: #eff6ff;
+  --soft-blue-text: #2563eb;
+  --soft-green: #f0fdf4;
+  --soft-green-text: #16a34a;
+}
+
+.dark {
   --background: #050b14;
   --foreground: #e2e8f0;
   --card: #0f172a;

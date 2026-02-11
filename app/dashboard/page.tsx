@@ -9,13 +9,22 @@ import { translations } from '@/lib/translations';
 import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import AdRectangle from '@/components/ads/AdRectangle';
 
+import { useAuth } from '@/lib/AuthContext';
+
 export default function Dashboard() {
+    const { user } = useAuth();
     const lang = 'ko'; // 한국어 전용 테스트
     const t = translations[lang];
 
     const [score, setScore] = useState(78); // Market Sentiment Score
-    const [rank, setRank] = useState('CORPORAL'); // User Rank (Gamification)
+    const [rank, setRank] = useState(user?.rank || 'CORPORAL'); // User Rank (Gamification)
     const [isQuizOpen, setIsQuizOpen] = useState(false); // Quiz Modal State
+
+    useEffect(() => {
+        if (user?.rank) {
+            setRank(user.rank);
+        }
+    }, [user]);
 
     return (
         <div className="min-h-screen bg-[#050b14] text-white font-sans">
@@ -45,7 +54,7 @@ export default function Dashboard() {
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Citizen Status</span>
-                                <span className="text-xs font-black text-[#00ffbd] tracking-widest leading-none">EMPIRE {t.auth.member}</span>
+                                <span className="text-xs font-black text-[#00ffbd] tracking-widest leading-none">EMPIRE {(t.ranks as any)[rank] || t.auth.member}</span>
                             </div>
                         </div>
 

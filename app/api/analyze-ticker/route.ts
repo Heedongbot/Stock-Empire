@@ -1,8 +1,8 @@
-
 import { NextResponse } from 'next/server';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
+import { TICKER_MAP } from '@/lib/stocks';
 
 const execPromise = promisify(exec);
 
@@ -10,7 +10,10 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const ticker = searchParams.get('ticker')?.toUpperCase();
+    const query = searchParams.get('ticker')?.trim() || '';
+
+    // 공유 매핑 데이터 사용
+    const ticker = (TICKER_MAP[query] || query).toUpperCase();
 
     if (!ticker) {
         return NextResponse.json({ error: 'Ticker is required' }, { status: 400 });

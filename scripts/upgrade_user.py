@@ -55,7 +55,8 @@ if user:
     
     new_metadata = {
         "tier": "PRO", 
-        "role": "ADMIN" # Given the request for 'vvvip', giving highest access.
+        "role": "USER",
+        "rank": "GENERAL" # 간부 회원 (Executive)
     }
     
     print(f"Upgrading user to PRO/ADMIN...")

@@ -18,6 +18,9 @@ import NewsTeaser from '@/components/NewsTeaser';
 import AdInFeed from '@/components/ads/AdInFeed';
 import LatestNewsInsights from '@/components/LatestNewsInsights';
 import SponsorshipSection from '@/components/SponsorshipSection';
+import StockLogo from '@/components/StockLogo';
+import FriendlyPrice from '@/components/FriendlyPrice';
+import { STOCK_LIST } from '@/lib/stocks';
 
 interface AlphaSignal {
   ticker: string;
@@ -40,37 +43,40 @@ export default function Home() {
   const [signals, setSignals] = useState<AlphaSignal[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [scanning, setScanning] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+
+  // Filtered stocks for autocomplete
+  const filteredSuggestions = searchTerm.trim()
+    ? STOCK_LIST.filter(s =>
+      s.name.includes(searchTerm) ||
+      s.ticker.toLowerCase().includes(searchTerm.toLowerCase())
+    ).slice(0, 5)
+    : [];
   const [selectedAnalysis, setSelectedAnalysis] = useState<any>(null);
 
   const handleDeepScan = async () => {
     if (!searchTerm) return;
-    setScanning(true);
+    setIsSearching(true); // Changed from setScanning to setIsSearching
+    setShowSuggestions(false); // Hide suggestions after initiating scan
     try {
       const res = await fetch(`/api/analyze-ticker?ticker=${searchTerm}`);
       const contentType = res.headers.get("content-type");
 
-      if (!res.ok || !contentType || !contentType.includes("application/json")) {
-        const text = await res.text();
-        console.error("Analysis API failed:", text);
-        alert(`분석 에러 (${res.status}): API KEY 설정이 필요합니다.`);
-        return;
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("서버 응답이 올바르지 않습니다.");
       }
-
       const data = await res.json();
-      if (data.error) {
-        alert(data.error);
-        return;
-      }
+      if (data.error) throw new Error(data.error);
 
       // 실시간 분석 결과 목록 처음에 추가 및 모달 자동 팝업
       setSignals(prev => [data, ...prev.filter(s => s.ticker !== data.ticker)]);
       setSelectedAnalysis(data);
-    } catch (e) {
-      console.error("Deep Scan failed", e);
-      alert("연결 오류가 발생했습니다.");
+    } catch (err: any) {
+      console.error("Deep Scan failed", err);
+      alert(err.message || "연결 오류가 발생했습니다.");
     } finally {
-      setScanning(false);
+      setIsSearching(false);
     }
   };
 
@@ -114,242 +120,334 @@ export default function Home() {
   }, [lang]);
 
   return (
-    <div className="min-h-screen pb-20 bg-[#050b14] text-[#e2e8f0] font-sans">
+    <div className="min-h-screen pb-20 bg-background text-foreground font-sans">
       <Ticker />
       <SiteHeader />
 
-      {/* HERO SECTION */}
-      <section className="relative pt-20 pb-40 overflow-hidden">
-        {/* HERO BACKGROUND & CONTENT */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-radial from-[#00ffbd]/10 via-transparent to-transparent opacity-50 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center mt-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-[10px] font-black tracking-widest uppercase text-[#00ffbd] mb-8 animate-fade-in">
-            <ActivityIcon className="w-3 h-3" /> {t.stats.statusOnline}
+      {/* HERO SECTION - Friendly & Simple */}
+      <section className="relative pt-32 pb-40 overflow-hidden bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-[10px] font-black tracking-widest uppercase text-blue-600 mb-8 animate-fade-in">
+            <Sparkles className="w-3.5 h-3.5" /> 해외주식, 이제 어렵지 않아요!
           </div>
-          <h1 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-8 leading-[0.9] text-white">
-            <span className="text-[#00ffbd]">데이터</span>로 증명하는 <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffbd] via-blue-400 to-indigo-600">ALPHA EMPIRE</span>
+
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-10 leading-tight text-slate-900">
+            주식 공부 대신 <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Stock Empire</span>에서 <br />
+            쉽게 물어보세요
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-medium mb-12 leading-relaxed">
-            365일 24시간, 보스님이 잠든 사이에도 AI는 전 세계 시장을 분석하여 리포트를 발행합니다.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/newsroom" className="px-10 py-5 bg-[#00ffbd] hover:bg-[#00d4ff] rounded-2xl text-sm font-black uppercase tracking-widest text-black transition-all shadow-xl shadow-[#00ffbd]/20 flex items-center justify-center gap-3 group">
-              터미널 입장 <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Link>
+
+          {/* Google-style Central Search */}
+          <div className="max-w-2xl mx-auto mb-12 relative group">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
+                placeholder="애플, 테슬라, 엔비디아를 검색해보세요"
+                className="w-full px-8 py-6 rounded-[2rem] bg-white border-2 border-slate-100 shadow-2xl shadow-blue-500/5 text-xl font-bold focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all placeholder:text-slate-300 pr-40"
+              />
+              <button
+                onClick={handleDeepScan}
+                disabled={isSearching}
+                className="absolute right-3 top-3 bottom-3 px-8 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-[1.5rem] font-black text-sm uppercase tracking-widest transition-all flex items-center gap-2"
+              >
+                {isSearching ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Search className="w-4 h-4" />}
+                {isSearching ? '분석 중...' : 'DEEP SCAN'}
+              </button>
+            </div>
+
+            {/* Search Autocomplete Dropdown */}
+            {showSuggestions && filteredSuggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-4 bg-white border border-slate-100 rounded-[2rem] shadow-2xl p-4 z-50 animate-fade-in divide-y divide-slate-50">
+                {filteredSuggestions.map((s) => (
+                  <button
+                    key={s.ticker}
+                    onClick={() => {
+                      setSearchTerm(s.name);
+                      setShowSuggestions(false);
+                      // Optional: 바로 검색 시작하려면 handleDeepScan() 호출 가능
+                    }}
+                    className="w-full flex items-center gap-4 p-4 hover:bg-blue-50 transition-all rounded-2xl group text-left"
+                  >
+                    <StockLogo ticker={s.ticker} size={40} className="shadow-sm" />
+                    <div className="flex-1">
+                      <div className="font-black text-slate-900 text-lg tracking-tight group-hover:text-blue-600">
+                        {s.name}
+                      </div>
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {s.ticker} • NASDAQ
+                      </div>
+                    </div>
+                    <div className="text-slate-200 group-hover:text-blue-400">
+                      <ChevronRight className="w-6 h-6" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-500 font-bold">
+            <span className="text-slate-400">🔥 지금 많이 찾는 종목:</span>
+            {STOCK_LIST.slice(0, 5).map(s => (
+              <button
+                key={s.ticker}
+                onClick={() => {
+                  setSearchTerm(s.name);
+                  // Optional: 바로 검색 실행
+                }}
+                className="px-4 py-1.5 rounded-full bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all shadow-sm"
+              >
+                {s.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Floating Decorative Elements */}
+        <div className="absolute top-1/4 left-10 w-24 h-24 bg-blue-200/30 rounded-3xl blur-2xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-purple-200/30 rounded-full blur-3xl animate-pulse delay-700" />
+      </section>
+
+      {/* 💰 중간 광고 배치 */}
+      <div className="max-w-7xl mx-auto px-8 mb-20 -mt-10 relative z-20">
+        <AdLeaderboard />
+      </div>
+
+      {/* 실시간 시장 정보 요약 */}
+      <section className="max-w-7xl mx-auto px-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">실시간 환율</div>
+              <div className="text-xl font-black text-slate-900">₩1,345.50 <span className="text-xs text-red-500 font-bold">▲ 2.50</span></div>
+            </div>
+          </div>
+          <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 group-hover:bg-green-600 group-hover:text-white transition-all">
+              <ActivityIcon className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">시장 분위기</div>
+              <div className="text-xl font-black text-slate-900">따뜻함 ☀️ <span className="text-xs text-green-600 font-bold">(탐욕 지수: 65)</span></div>
+            </div>
+          </div>
+          <div className="p-6 bg-white border border-slate-100 rounded-3xl shadow-sm flex items-center gap-4 group hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">AI 오늘 한줄</div>
+              <div className="text-xl font-black text-slate-900">"기술주들이 힘을 내고 있어요!"</div>
+            </div>
           </div>
         </div>
       </section>
 
-
-
-      {/* 💰 중간 광고 배치 */}
-      <div className="max-w-7xl mx-auto px-8 mb-20">
-        <AdLeaderboard />
-      </div>
-
-      {/* 📰 투데이 마켓 브리핑 (최신 지표 및 뉴스) - 대체 배치 */}
+      {/* 📰 투데이 마켓 브리핑 */}
       <LatestNewsInsights />
 
       {/* 💸 후원 및 스폰서십 섹션 */}
       <SponsorshipSection />
 
-      {/* LIVE ALPHA SIGNALS (MAIN PAGE - FULL OPEN) */}
-      <section className="max-w-7xl mx-auto px-8 py-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10" />
-
+      {/* 친근한 종목 추천 섹션 (기존 Live Alpha Signals 개편) */}
+      <section className="max-w-7xl mx-auto px-8 py-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-5 h-5 text-[#00ffbd] fill-[#00ffbd]" />
-              <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">Live Alpha Signals</span>
+              <Sparkles className="w-5 h-5 text-blue-500" />
+              <span className="text-xs font-black text-blue-500 uppercase tracking-widest">AI Pick 추천 종목</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
-              Market <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffbd] to-blue-500">Breakthroughs</span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 italic tracking-tighter">
+              지금 사람들이 <span className="text-blue-600">가장 많이 보는</span> 종목
             </h2>
           </div>
 
-          <div className="flex flex-col gap-4 w-full md:w-auto items-end">
-            <div className="flex gap-2 w-full md:w-auto">
-              <div className="relative flex-1 md:w-64 group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500" />
-                <input
-                  type="text"
-                  className="block w-full pl-10 pr-4 py-2.5 bg-slate-900/50 border border-slate-800 rounded-xl text-xs font-bold text-white placeholder-slate-600 focus:border-[#00ffbd] transition-all"
-                  placeholder="티커 검색 및 즉시 분석"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleDeepScan()}
-                />
-              </div>
-              <button
-                onClick={handleDeepScan}
-                disabled={scanning}
-                className={`px-5 py-2.5 bg-slate-900 border border-slate-800 text-[#00ffbd] text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#00ffbd]/50 transition-all flex items-center gap-2 ${scanning ? 'animate-pulse' : ''}`}
-              >
-                {scanning ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
-                {scanning ? 'Analyzing' : 'Deep Scan'}
-              </button>
-            </div>
-            <Link href="/analysis" className="text-[10px] font-black text-slate-600 hover:text-[#00ffbd] uppercase tracking-widest flex items-center gap-2 transition-colors">
-              전체 분석 보기 <ChevronRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          <Link href="/analysis" className="px-6 py-3 bg-slate-100 rounded-xl text-xs font-black text-slate-600 hover:bg-slate-200 transition-all flex items-center gap-2">
+            전체 분석 보러가기 <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {loading ? (
           <div className="flex gap-4 overflow-hidden">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="min-w-[300px] h-64 bg-slate-900/30 border border-slate-800 rounded-3xl animate-pulse" />
+              <div key={i} className="min-w-[300px] h-64 bg-slate-100 animate-pulse rounded-3xl" />
             ))}
           </div>
         ) : filteredSignals.length === 0 ? (
-          <div className="py-20 text-center bg-slate-900/20 border border-slate-800/50 rounded-[3rem]">
-            <Search className="w-12 h-12 text-slate-800 mx-auto mb-6" />
-            <h3 className="text-xl font-black text-white italic uppercase mb-4">No Signals Found</h3>
-            <p className="text-slate-500 text-sm font-bold uppercase tracking-widest max-w-md mx-auto mb-8">
-              "{searchTerm}" 에 대한 로컬 분석 데이터가 없습니다. <br />
-              상단의 <span className="text-[#00ffbd]">Deep Scan</span> 버튼을 눌러보세요!
+          <div className="py-20 text-center bg-slate-50 border border-slate-200 rounded-[3rem]">
+            <Search className="w-12 h-12 text-slate-300 mx-auto mb-6" />
+            <h3 className="text-xl font-black text-slate-900 mb-4 uppercase">검색 결과가 없어요</h3>
+            <p className="text-slate-500 text-sm font-bold max-w-md mx-auto mb-8">
+              "{searchTerm}" 에 대해 궁금하시다면 <br />
+              상단의 <span className="text-blue-600">쉽게 분석하기</span> 버튼을 눌러보세요!
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredSignals.map((sig, idx) => (
-              <div key={idx} className="group bg-[#0a1120] border border-slate-800 rounded-3xl p-6 hover:border-[#00ffbd]/50 transition-all shadow-xl relative overflow-hidden flex flex-col">
+              <div key={idx} className="group bg-white border border-slate-100 rounded-3xl p-6 hover:shadow-xl transition-all shadow-sm relative overflow-hidden flex flex-col">
                 {(sig as any).is_real_time && (
-                  <div className="absolute top-0 left-0 px-3 py-1 bg-[#00ffbd] text-black text-[8px] font-black uppercase tracking-tighter rounded-br-lg z-10 animate-pulse">
-                    Live Analyzed
+                  <div className="absolute top-0 left-0 px-3 py-1 bg-blue-600 text-white text-[8px] font-black uppercase tracking-tighter rounded-br-lg z-10 animate-pulse">
+                    방금 분석함
                   </div>
                 )}
                 <div className="flex justify-between items-start mb-6">
-                  <div className="px-2 py-1 bg-slate-950 border border-slate-800 rounded text-[10px] font-black text-white">{sig.ticker}</div>
-                  <div className={`text-[10px] font-black uppercase tracking-widest ${sig.sentiment === 'BULLISH' ? 'text-[#00ffbd]' : 'text-[#ff4d4d]'}`}>
-                    {sig.sentiment}
+                  <StockLogo ticker={sig.ticker} name={sig.name} size={40} />
+                  <div className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-full ${sig.sentiment === 'BULLISH' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'}`}>
+                    {sig.sentiment === 'BULLISH' ? '기대돼요' : '잠시 대기'}
                   </div>
                 </div>
-                <h3 className="text-xl font-black text-white mb-2 uppercase truncate">{sig.name}</h3>
+                <h3 className="text-xl font-black text-slate-900 mb-2 truncate">{sig.name}</h3>
+                <div className="mb-4">
+                  <FriendlyPrice usdPrice={sig.price} />
+                </div>
 
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between text-[10px]">
-                    <span className="text-slate-500 font-bold uppercase">Confidence</span>
-                    <span className="text-[#00ffbd] font-black">{sig.impact_score}%</span>
+                    <span className="text-slate-500 font-bold uppercase">AI 신뢰도</span>
+                    <span className="text-blue-600 font-black">{sig.impact_score}%</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-center">
-                    <div className="bg-slate-950/50 p-2 rounded-xl border border-slate-800">
-                      <div className="text-[7px] text-slate-600 font-bold uppercase mb-0.5">Target</div>
-                      <div className="text-sm font-black text-[#00ffbd] tracking-tighter">${sig.target_price}</div>
+                    <div className="bg-slate-50 p-2 rounded-xl border border-slate-100">
+                      <div className="text-[7px] text-slate-500 font-bold uppercase mb-0.5">목표 가격</div>
+                      <div className="text-sm font-black text-blue-600 tracking-tighter">${sig.target_price}</div>
                     </div>
-                    <div className="bg-slate-950/50 p-2 rounded-xl border border-slate-800">
-                      <div className="text-[7px] text-slate-600 font-bold uppercase mb-0.5">Stop Loss</div>
+                    <div className="bg-slate-50 p-2 rounded-xl border border-slate-100">
+                      <div className="text-[7px] text-slate-500 font-bold uppercase mb-0.5">조심할 가격</div>
                       <div className="text-sm font-black text-red-500 tracking-tighter">${sig.stop_loss}</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-3 bg-black/40 rounded-2xl border border-slate-800/50 mb-6 flex-grow">
-                  <p className="text-[10px] text-slate-400 leading-relaxed italic line-clamp-3">
+                <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 mb-6 flex-grow">
+                  <p className="text-[10px] text-slate-600 leading-relaxed font-medium line-clamp-3">
                     "{sig.ai_reason}"
                   </p>
                 </div>
 
                 <button
                   onClick={() => setSelectedAnalysis(sig)}
-                  className="w-full py-3 bg-slate-900 border border-slate-800 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#00ffbd] group-hover:border-[#00ffbd]/30 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-white border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-600 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all flex items-center justify-center gap-2"
                 >
                   <FileText className="w-3.5 h-3.5" />
-                  Full AI Report
+                  친절한 리포트 읽기
                 </button>
               </div>
             ))}
           </div>
         )}
       </section>
-      {/* Sector Intelligence Section */}
+
+      {/* 🎯 이런 종목은 어때요? (기존 Sector Intelligence 개편) */}
       <section className="max-w-7xl mx-auto px-8 py-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Database className="w-5 h-5 text-[#00ffbd]" />
-              <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">DATA HUB</span>
+              <Zap className="w-5 h-5 text-blue-500" />
+              <span className="text-xs font-black text-blue-500 uppercase tracking-widest">추천 테마</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter">
-              Sector <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-[#00ffbd]">Intelligence</span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 italic tracking-tighter">
+              🎯 이런 종목은 <span className="text-indigo-600">어때요?</span>
             </h2>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
-            { id: 'ai-revolution', name: 'AI 혁명', icon: Cpu, color: 'from-purple-600/20 to-indigo-600/5', tickers: ['NVDA', 'MSFT', 'PLTR'] },
-            { id: 'ev-energy', name: 'EV & 클린 에너지', icon: Zap, color: 'from-green-600/20 to-emerald-600/5', tickers: ['TSLA', 'RIVN', 'ENPH'] },
-            { id: 'semiconductors', name: '반도체 가이츠', icon: ActivityIcon, color: 'from-blue-600/20 to-cyan-600/5', tickers: ['AMD', 'AVGO', 'INTC'] },
-            { id: 'fintech-crypto', name: '핀테크 & 크립토', icon: Milestone, color: 'from-orange-600/20 to-amber-600/5', tickers: ['COIN', 'PYPL', 'SQ'] }
+            { id: 'ai-revolution', name: '매일 쓰는 기술주', sub: '우리의 삶을 바꾸는 거대 IT 기업들', icon: Cpu, color: 'bg-indigo-50 text-indigo-600', tickers: ['NVDA', 'MSFT', 'GOOGL'] },
+            { id: 'brands', name: '먹고 마시는 브랜드', sub: '전 세계 어디서나 사랑받는 익숙한 브랜드', icon: Milestone, color: 'bg-orange-50 text-orange-600', tickers: ['SBUX', 'KO', 'MCD'] },
+            { id: 'dividends', name: '월세처럼 배당받기', sub: '잠자는 동안에도 통장에 꽂히는 달러', icon: Award, color: 'bg-green-50 text-green-600', tickers: ['O', 'JNJ', 'KO'] },
+            { id: 'mobility', name: '미래를 달리는 자동차', sub: '석유 대신 전기로 움직이는 미래 산업', icon: Zap, color: 'bg-blue-50 text-blue-600', tickers: ['TSLA', 'RIVN', 'LCID'] },
+            { id: 'healthcare', name: '건강하게 100세까지', sub: '인류의 수명을 늘려주는 제약/의료 기술', icon: ActivityIcon, color: 'bg-red-50 text-red-600', tickers: ['LLY', 'NVO', 'UNH'] },
           ].map((theme, i) => (
             <Link
               key={i}
               href={`/themes?id=${theme.id}`}
-              className={`group p-8 rounded-[2rem] bg-gradient-to-br ${theme.color} border border-slate-800 hover:border-[#00ffbd]/50 transition-all flex flex-col h-full`}
+              className="group p-8 rounded-[3rem] bg-white border border-slate-100 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-200 transition-all flex flex-col h-full shadow-sm"
             >
-              <theme.icon className="w-8 h-8 text-white mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-black text-white uppercase italic mb-4 group-hover:text-[#00ffbd]">{theme.name}</h3>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform ${theme.color}`}>
+                <theme.icon className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-2 leading-tight">{theme.name}</h3>
+              <p className="text-xs font-bold text-slate-400 mb-8 leading-relaxed">{theme.sub}</p>
 
-              <div className="space-y-3 mb-8">
+              <div className="space-y-3 mb-10 selection-none">
                 {theme.tickers.map(t => {
                   const data = marketData[t];
-                  const isUp = data?.change >= 0;
+                  const isUp = (data?.change || 0) >= 0;
                   return (
-                    <div key={t} className="flex items-center justify-between text-xs bg-black/20 p-2 rounded-lg">
-                      <span className="font-bold text-slate-300">{t}</span>
+                    <div key={t} className="flex items-center justify-between bg-slate-50/50 p-4 rounded-2xl border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
+                      <div className="flex items-center gap-3">
+                        <StockLogo ticker={t} size={36} className="rounded-xl shadow-xs" />
+                        <div>
+                          <div className="font-black text-slate-700 text-sm tracking-tighter">{t}</div>
+                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">US Market</div>
+                        </div>
+                      </div>
                       {data ? (
-                        <div className={`flex items-center gap-1 font-black ${isUp ? 'text-[#00ffbd]' : 'text-[#ff4d4d]'}`}>
-                          <span>{data.price.toFixed(2)}</span>
-                          <span className="text-[10px] opacity-80">({data.change > 0 ? '+' : ''}{data.change.toFixed(2)}%)</span>
+                        <div className="text-right">
+                          <div className={`text-sm font-black tracking-tighter ${isUp ? 'text-red-500' : 'text-blue-500'}`}>
+                            {Math.round(data.price * 1345).toLocaleString()}원
+                          </div>
+                          <div className={`text-[10px] font-black ${isUp ? 'text-red-400' : 'text-blue-400'}`}>
+                            {data.change > 0 ? '▲' : '▼'}{Math.abs(data.change).toFixed(1)}%
+                          </div>
                         </div>
                       ) : (
-                        <span className="text-slate-600 animate-pulse">...</span>
+                        <div className="w-12 h-8 bg-slate-100 animate-pulse rounded-lg" />
                       )}
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-auto text-[10px] font-black text-slate-500 uppercase group-hover:text-white transition-colors">분석 리포트 보기 →</div>
+              <div className="mt-auto flex items-center justify-between">
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-blue-600 transition-colors">
+                  분석 리포트 더보기
+                </span>
+                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <ChevronRight className="w-5 h-5" />
+                </div>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* 💰 피드 중간 대형 광고 */}
-      <div className="max-w-4xl mx-auto px-8 py-20">
-        <div className="text-center mb-6">
-          <span className="text-[9px] font-bold text-slate-700 tracking-[0.4em] uppercase">Private Sponsor</span>
-        </div>
-        <AdInFeed />
-      </div>
-
-      {/* Stats Summary Area */}
+      {/* Stats Summary Area - Simple & Warm */}
       <section className="py-24 px-8 max-w-7xl mx-auto text-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-          <div><div className="text-5xl font-black text-[#00ffbd] mb-2 tracking-tighter">94.2%</div><div className="text-[10px] font-black text-slate-600 tracking-widest uppercase">AI 실시간 적중률</div></div>
-          <div><div className="text-5xl font-black text-blue-500 mb-2 tracking-tighter">1.2M+</div><div className="text-[10px] font-black text-slate-600 tracking-widest uppercase">분석된 글로벌 뉴스</div></div>
-          <div><div className="text-5xl font-black text-white mb-2 tracking-tighter">₩4.2B+</div><div className="text-[10px] font-black text-slate-600 tracking-widest uppercase">처리된 데이터 자산</div></div>
+          <div><div className="text-5xl font-black text-blue-600 mb-2 tracking-tighter">94.2%</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">AI 분석 정확도</div></div>
+          <div><div className="text-5xl font-black text-indigo-600 mb-2 tracking-tighter">1.2M+</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">매일 읽는 뉴스 수</div></div>
+          <div><div className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">1시간 전</div><div className="text-[10px] font-black text-slate-400 tracking-widest uppercase">최근 분석 업데이트</div></div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-[#020617] py-20 text-center relative z-10">
+      {/* Footer - Light & Clean */}
+      <footer className="border-t border-slate-100 bg-white py-20 text-center relative z-10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-center gap-8 mb-8 text-slate-700">
-            <BookOpen className="w-5 h-5 hover:text-[#00ffbd] cursor-pointer" />
-            <MessageSquare className="w-5 h-5 hover:text-[#00ffbd] cursor-pointer" />
-            <Award className="w-5 h-5 hover:text-[#00ffbd] cursor-pointer" />
+          <div className="flex justify-center gap-8 mb-8 text-slate-300">
+            <BookOpen className="w-5 h-5 hover:text-blue-600 cursor-pointer" />
+            <MessageSquare className="w-5 h-5 hover:text-blue-600 cursor-pointer" />
+            <Award className="w-5 h-5 hover:text-blue-600 cursor-pointer" />
           </div>
-          <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em] mb-8">
-            &copy; 2026 STOCK EMPIRE INC. GLOBAL ALPHA TEST VERSION.
+          <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em] mb-8">
+            &copy; 2026 STOCK EMPIRE. 전 세계 주식 정보를 가장 쉽게 전달합니다.
           </p>
-          <div className="max-w-3xl mx-auto border-t border-slate-900 pt-8 opacity-50">
-            <p className="text-[10px] text-slate-600 leading-relaxed font-medium">
-              본 서비스는 투자 자문이 아닌 정보 제공 목적이며, 모든 리스크에 대한 책임은 이용자 본인에게 있습니다. 리스크가 높은 알파 시그널은 보스 전용 통제실에서만 관리됩니다.
+          <div className="max-w-3xl mx-auto border-t border-slate-100 pt-8 opacity-50">
+            <p className="text-[10px] text-slate-400 leading-relaxed font-medium">
+              본 서비스가 제공하는 정보는 참고용이며, 실제 투자 결과에 대한 책임은 투자 본인에게 있습니다. <br />
+              무리한 투자는 금물! 여유 자금으로 건강한 투자를 시작해보세요. 🌱
             </p>
           </div>
         </div>
@@ -357,69 +455,127 @@ export default function Home() {
 
       <QuizWidget />
 
-      {/* Analysis Details Modal */}
+      {/* Analysis Details Modal - Friendly & Clean */}
       {selectedAnalysis && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={() => setSelectedAnalysis(null)} />
-          <div className="relative w-full max-w-4xl max-h-[90vh] bg-[#0a1120] border border-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col animate-zoom-in">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedAnalysis(null)} />
+          <div className="relative w-full max-w-4xl max-h-[90vh] bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col animate-zoom-in">
             {/* Modal Header */}
-            <div className="p-8 border-b border-slate-800 flex justify-between items-center bg-slate-900/30">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-[#00ffbd]/10 rounded-2xl border border-[#00ffbd]/30">
-                  <ShieldCheck className="w-8 h-8 text-[#00ffbd]" />
-                </div>
+            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+              <div className="flex items-center gap-6">
+                <StockLogo ticker={selectedAnalysis.ticker} name={selectedAnalysis.name} size={64} className="rounded-2xl shadow-md border-2 border-white" />
                 <div>
-                  <h2 className="text-2xl font-black text-white italic tracking-tighter uppercase">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
-                  <p className="text-[10px] font-black text-[#00ffbd] uppercase tracking-[0.3em]">Deep Analysis via NotebookLM Intelligent Engine</p>
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tighter uppercase mb-1">{selectedAnalysis.name} ({selectedAnalysis.ticker})</h2>
+                  <FriendlyPrice usdPrice={selectedAnalysis.price} className="flex-row items-baseline gap-2" />
                 </div>
               </div>
               <button
                 onClick={() => setSelectedAnalysis(null)}
-                className="p-3 bg-slate-800 hover:bg-slate-700 rounded-2xl text-slate-400 hover:text-white transition-all"
+                className="p-3 bg-white border border-slate-200 hover:bg-slate-50 rounded-2xl text-slate-400 hover:text-slate-900 transition-all shadow-sm"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800">
-                  <div className="text-[10px] font-black text-slate-500 uppercase mb-2">Technical Analysis</div>
-                  <p className="text-sm text-slate-300 leading-relaxed font-medium">
-                    {selectedAnalysis.technical_analysis || "기술적 지표 분석 데이터가 없습니다."}
-                  </p>
+            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar bg-white">
+              {/* AI Intelligence Score Section */}
+              <div className="mb-12 text-center">
+                <div className="inline-block px-4 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
+                  AI 인공지능 분석 점수
                 </div>
-                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800">
-                  <div className="text-[10px] font-black text-slate-500 uppercase mb-2">Fundamental Analysis</div>
-                  <p className="text-sm text-slate-300 leading-relaxed font-medium">
-                    {selectedAnalysis.fundamental_analysis || "기본적 분석 데이터가 없습니다."}
-                  </p>
-                </div>
-                <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 border-[#00ffbd]/30 shadow-lg shadow-[#00ffbd]/5">
-                  <div className="text-[10px] font-black text-[#00ffbd] uppercase mb-2 italic">Master's Action Plan</div>
-                  <p className="text-sm text-white leading-relaxed font-bold">
-                    {selectedAnalysis.action_plan || "대응 계획 데이터가 없습니다."}
+                <div className="flex flex-col items-center">
+                  <div className="text-7xl font-black text-slate-900 tracking-tighter mb-4 animate-pulse">
+                    {selectedAnalysis.impact_score}<span className="text-2xl text-slate-400">점</span>
+                  </div>
+                  {/* Progress Gauge */}
+                  <div className="w-full max-w-md h-4 bg-slate-100 rounded-full overflow-hidden mb-4 p-1 shadow-inner">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-red-400 via-yellow-400 to-green-500 transition-all duration-1000 ease-out"
+                      style={{ width: `${selectedAnalysis.impact_score}%` }}
+                    />
+                  </div>
+                  <p className="text-sm font-bold text-slate-500">
+                    {selectedAnalysis.impact_score > 80 ? '🌟 "지금 바로 장바구니에 담아도 좋을 만큼 매력적이에요!"' :
+                      selectedAnalysis.impact_score > 60 ? '👍 "나쁘지 않아요! 좀 더 지켜보며 기회를 노려볼까요?"' :
+                        '🤔 "아직은 조심할 때예요. 천천히 다시 생각해보는 게 어떨까요?"'}
                   </p>
                 </div>
               </div>
 
-              <div className="p-6 bg-[#00ffbd]/5 rounded-3xl border border-[#00ffbd]/20">
-                <div className="flex items-center gap-2 mb-4">
-                  <Zap className="w-4 h-4 text-[#00ffbd]" />
-                  <span className="text-xs font-black text-[#00ffbd] uppercase tracking-widest">AI Strategic Summary</span>
+              {/* Analysis Cards - MBTI Style */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="relative group p-8 rounded-[2.5rem] bg-indigo-50/50 border border-indigo-100 hover:shadow-xl hover:bg-indigo-50 transition-all flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-500 text-white flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+                    <ActivityIcon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">차트가 말해주는 <br />지금의 분위기 📈</h3>
+                  <p className="text-xs font-bold text-indigo-500 mb-6 uppercase">Technical View</p>
+                  <p className="text-sm text-slate-700 leading-relaxed font-bold flex-grow">
+                    {selectedAnalysis.technical_analysis || "분석 데이터를 불러오는 중입니다."}
+                  </p>
                 </div>
-                <p className="text-lg font-black text-white italic leading-snug">
-                  "{selectedAnalysis.ai_reason}"
-                </p>
+
+                <div className="relative group p-8 rounded-[2.5rem] bg-emerald-50/50 border border-emerald-100 hover:shadow-xl hover:bg-emerald-50 transition-all flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                    <Database className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">이 회사의 진짜 실력은 <br />어느 정도인가요? 🏢</h3>
+                  <p className="text-xs font-bold text-emerald-500 mb-6 uppercase">Fundamental View</p>
+                  <p className="text-sm text-slate-700 leading-relaxed font-bold flex-grow">
+                    {selectedAnalysis.fundamental_analysis || "분석 데이터를 불러오는 중입니다."}
+                  </p>
+                </div>
+
+                <div className="relative group p-8 rounded-[2.5rem] bg-orange-50/50 border border-orange-100 hover:shadow-xl hover:bg-orange-50 transition-all flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20 group-hover:scale-110 transition-transform">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">코다리 부장이 제안하는 <br />실행 가이드 🎯</h3>
+                  <p className="text-xs font-bold text-orange-500 mb-6 uppercase">Action Plan</p>
+                  <div className="p-4 bg-white/50 rounded-2xl border border-orange-200">
+                    <p className="text-sm text-orange-800 leading-relaxed font-black italic">
+                      {selectedAnalysis.action_plan || "대응 전략을 준비 중입니다."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Strategic Summary Banner */}
+              <div className="p-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[3rem] text-white relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Sparkles className="w-5 h-5 text-blue-200" />
+                    <span className="text-xs font-black text-blue-200 uppercase tracking-widest">AI의 결론</span>
+                  </div>
+                  <p className="text-2xl md:text-3xl font-black italic leading-tight mb-4">
+                    "{selectedAnalysis.ai_reason}"
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 bg-slate-900/30 border-t border-slate-800 flex justify-center">
-              <p className="text-[9px] text-slate-600 font-bold uppercase tracking-widest">
-                본 리포트는 NotebookLM에 의해 생성된 마스터 지능형 포트폴리오 전략입니다.
+            <div className="p-8 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-xs text-slate-400 font-bold flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                Stock Empire는 대표님의 안전한 투자를 항상 응원합니다!
               </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setSelectedAnalysis(null)}
+                  className="px-6 py-3 bg-white border border-slate-200 rounded-xl text-xs font-black text-slate-600 hover:bg-slate-50 transition-all"
+                >
+                  나중에 다시 읽기
+                </button>
+                <Link
+                  href="/analysis"
+                  className="px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20"
+                >
+                  더 많은 리포트 보기
+                </Link>
+              </div>
             </div>
           </div>
         </div>

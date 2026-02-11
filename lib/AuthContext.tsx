@@ -11,6 +11,7 @@ interface User {
     email: string;
     tier: UserTier;
     role: 'USER' | 'ADMIN';
+    rank: string;
     avatar: string;
 }
 
@@ -44,6 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Use local tier override OR metadata if available (future proofing)
         tier: localTier,
         role: clerkUser.publicMetadata.role as 'ADMIN' | 'USER' || 'USER',
+        rank: clerkUser.publicMetadata.rank as string || 'CORPORAL',
         avatar: clerkUser.imageUrl,
     } : null;
 
@@ -52,6 +54,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (user.email === '66683300hd@gmail.com') {
             user.role = 'ADMIN';
             user.tier = 'PRO';
+            user.rank = 'GENERAL';
+        }
+        // 간부 회원 (lgh425) - 모든 페이지 열람 가능, 관리자 아님
+        if (user.email === 'lgh425@gmail.com') {
+            user.role = 'USER';
+            user.tier = 'PRO';
+            user.rank = 'EXECUTIVE';
         }
     }
 

@@ -17,6 +17,7 @@ export const translations = {
             CORPORAL: "CITIZEN",
             SERGEANT: "ELITE",
             GENERAL: "EMPEROR",
+            EXECUTIVE: "간부 회원",
             FREE: "CITIZEN"
         },
         hero: {
