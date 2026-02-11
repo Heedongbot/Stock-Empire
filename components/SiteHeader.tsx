@@ -25,7 +25,7 @@ export default function SiteHeader() {
     ];
 
     return (
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 h-20 transition-all duration-300">
+        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-300 h-20 transition-all duration-300">
             <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
                 {/* Logo Section */}
                 <div className="flex-shrink-0 flex items-center min-w-[160px]">
@@ -62,7 +62,7 @@ export default function SiteHeader() {
 
                 {/* Right Utility Zone - Pinned Right */}
                 <div className="flex-shrink-0 flex items-center gap-2 xl:gap-4 ml-4 min-w-max">
-                    <div className="hidden xl:block w-[1px] h-6 bg-slate-100"></div>
+                    <div className="hidden xl:block w-[1px] h-6 bg-slate-200"></div>
 
                     {/* Admin HQ Button */}
                     {user?.role === 'ADMIN' && (
@@ -76,13 +76,13 @@ export default function SiteHeader() {
                     )}
 
                     {/* Auth / Avatar Section */}
-                    <div className="flex items-center gap-3 pl-2 xl:pl-4 border-l border-slate-100">
+                    <div className="flex items-center gap-3 pl-2 xl:pl-4 border-l border-slate-200">
                         {!isLoading && (
                             user ? (
                                 <div className="flex items-center gap-3">
                                     <div className="hidden xl:flex flex-col items-end">
                                         <span className="text-[10px] font-black text-slate-900 leading-none mb-1">{user.name}</span>
-                                        <span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded bg-slate-50 border ${user.role === 'ADMIN' ? 'text-red-500 border-red-100' : 'text-blue-600 border-blue-100'}`}>
+                                        <span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded bg-slate-50 border ${user.role === 'ADMIN' ? 'text-red-500 border-red-200' : 'text-blue-600 border-blue-200'}`}>
                                             {user.role === 'ADMIN' ? t.auth.commander : `EMPIRE ${t.auth.member}`}
                                         </span>
                                     </div>
@@ -90,7 +90,7 @@ export default function SiteHeader() {
                                         <UserButton
                                             appearance={{
                                                 elements: {
-                                                    avatarBox: "w-8 h-8 rounded-[10px] ring-2 ring-slate-100 hover:ring-blue-500 transition-all"
+                                                    avatarBox: "w-8 h-8 rounded-[10px] ring-2 ring-slate-200 hover:ring-blue-500 transition-all"
                                                 }
                                             }}
                                             afterSignOutUrl="/"

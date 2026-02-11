@@ -36,7 +36,7 @@ export default function StockLogo({ ticker, name, size = 48, className = "" }: S
 
     return (
         <div
-            className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-sm ${className}`}
+            className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm ${className}`}
             style={{ width: size, height: size }}
         >
             {!error ? (

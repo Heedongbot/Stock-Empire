@@ -6,7 +6,6 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { koKR } from "@clerk/localizations";
 import { AuthProvider } from "@/lib/AuthContext";
-import TickerTape from "@/components/TickerTape";
 import SiteFooter from "@/components/SiteFooter";
 import BottomNav from "@/components/BottomNav";
 import InstallPWA from "@/components/InstallPWA";
@@ -94,7 +93,6 @@ export default function RootLayout({
           <ClerkProvider publishableKey={publishableKey} localization={koKR}>
             <AuthProvider>
               <VisitorTracker />
-              <TickerTape />
               <div className="pb-20 lg:pb-0">
                 {children}
               </div>

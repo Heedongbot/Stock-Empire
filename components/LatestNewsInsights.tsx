@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Newspaper, Zap, Lock, ArrowRight, PlayCircle, Terminal, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Zap, ChevronRight, ChevronLeft, Terminal, Newspaper, Globe, PlayCircle, BarChart3, TrendingUp } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 
 interface NewsItem {
@@ -77,13 +77,13 @@ export default function LatestNewsInsights() {
 
     if (loading) {
         return (
-            <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20 animate-pulse">
+            <section className="max-w-7xl mx-auto px-6 relative z-30 mb-20 animate-pulse">
                 <div className="flex items-center justify-between mb-8">
-                    <div className="h-10 w-64 bg-slate-800 rounded-xl"></div>
+                    <div className="h-10 w-64 bg-slate-200 rounded-xl"></div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[1, 2, 3].map(i => (
-                        <div key={i} className="h-96 bg-[#0a1120] border border-slate-800 rounded-3xl p-6"></div>
+                        <div key={i} className="h-96 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm"></div>
                     ))}
                 </div>
             </section>
@@ -92,11 +92,11 @@ export default function LatestNewsInsights() {
 
     if (news.length === 0) {
         return (
-            <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20">
-                <div className="bg-[#0a1120] border border-slate-800 rounded-3xl p-12 text-center">
-                    <Terminal className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                    <h3 className="text-xl font-black text-slate-500 mb-2">데이터 수신 대기 중...</h3>
-                    <p className="text-slate-600 text-sm">미국 시장 데이터를 실시간으로 수집하고 있습니다.</p>
+            <section className="max-w-7xl mx-auto px-6 relative z-30 mb-20">
+                <div className="bg-white border border-slate-300 rounded-[2.5rem] p-12 text-center shadow-xl shadow-blue-500/5">
+                    <Terminal className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                    <h3 className="text-xl font-black text-slate-900 mb-2">데이터 수신 대기 중...</h3>
+                    <p className="text-slate-500 text-sm font-bold">미국 시장 데이터를 실시간으로 수집하고 있습니다.</p>
                 </div>
             </section>
         );
@@ -105,98 +105,99 @@ export default function LatestNewsInsights() {
     // Calculate visible items for current page
     const startIdx = currentIndex * itemsPerPage;
     const visibleNews = news.slice(startIdx, startIdx + itemsPerPage);
-    // If not enough items to fill the page (e.g. last page has 1 item but we want 3), 
-    // we can pad it or just list what we have. `slice` handles out of bounds gracefully.
 
     return (
-        <section className="max-w-7xl mx-auto px-8 relative z-30 mb-20 animate-fade-in-up">
+        <section className="max-w-7xl mx-auto px-6 relative z-30 mb-24 animate-fade-in-up">
             {/* Header */}
-            <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
                 <div className="flex items-center gap-4">
-                    <div className="bg-[#00ffbd]/10 p-3 rounded-xl border border-[#00ffbd]/30">
-                        <Terminal className="w-6 h-6 text-[#00ffbd]" />
+                    <div className="bg-blue-50 p-3 rounded-2xl border border-blue-100 shadow-sm">
+                        <Terminal className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
-                        <h2 className="text-3xl font-black text-white italic tracking-tighter">LIVE EMPIRE TERMINAL</h2>
+                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter">LIVE EMPIRE TERMINAL</h2>
                         <div className="flex items-center gap-2 mt-1">
-                            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Real-time Market Intelligence</span>
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                            </span>
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Real-time Market Intelligence</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-3 bg-slate-900/50 p-1.5 rounded-xl border border-slate-800">
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center bg-white p-1 rounded-2xl border border-slate-200 shadow-sm">
                         <button
                             onClick={prevSlide}
-                            className="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#00ffbd] transition-all hover:scale-105 active:scale-95 border border-slate-700 shadow-lg"
+                            className="p-3 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-all active:scale-95"
                             title="이전 기사"
                         >
-                            <ChevronLeft className="w-6 h-6" />
+                            <ChevronLeft className="w-5 h-5" />
                         </button>
 
                         <div className="px-4 flex flex-col items-center">
-                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-tighter">Terminal Feed</span>
-                            <span className="text-xs font-black text-white italic">
-                                PAGE {currentIndex + 1} <span className="text-slate-700 mx-1">/</span> {Math.ceil(news.length / itemsPerPage)}
+                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Feed</span>
+                            <span className="text-xs font-black text-slate-900">
+                                {currentIndex + 1} <span className="text-slate-300 mx-1">/</span> {Math.ceil(news.length / itemsPerPage)}
                             </span>
                         </div>
 
                         <button
                             onClick={nextSlide}
-                            className="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-[#00ffbd] transition-all hover:scale-105 active:scale-95 border border-slate-700 shadow-lg"
+                            className="p-3 rounded-xl hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-all active:scale-95"
                             title="다음 기사"
                         >
-                            <ChevronRight className="w-6 h-6" />
+                            <ChevronRight className="w-5 h-5" />
                         </button>
                     </div>
 
-                    <Link href="/newsroom" className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-black uppercase tracking-widest border border-slate-700 hover:border-[#00ffbd]/50 transition-all group">
-                        Full View <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    <Link href="/newsroom" className="flex md:flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-slate-900/10 transition-all group hover:-translate-y-0.5 w-full md:w-auto">
+                        More News <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                 </div>
             </div>
 
             {/* Grid / Carousel Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {visibleNews.map((item, idx) => {
                     const fullSummary = item.vip_tier?.ai_analysis?.summary_kr || "";
                     const insightTitle = fullSummary.split('\n')[0]?.replace('[Empire AI 요약]', '').trim() || "시장 영향력 분석";
                     const insightContent = fullSummary.replace(insightTitle, '').replace('[Empire AI 요약]', '').trim();
 
                     return (
-                        <div key={item.id} className="bg-[#0a1120] border border-slate-800 rounded-3xl p-6 relative overflow-hidden group hover:border-[#00ffbd]/50 transition-all shadow-2xl flex flex-col justify-between animate-fade-in">
+                        <div key={item.id} className="bg-white border border-slate-300 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-blue-400 transition-all shadow-xl shadow-blue-500/5 flex flex-col justify-between hover:-translate-y-1">
                             <div>
                                 <div className="flex justify-between items-center mb-6">
-                                    <span className="px-3 py-1 bg-slate-900 rounded-lg text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                                    <span className="px-3 py-1 bg-slate-50 rounded-lg text-[10px] font-black text-slate-400 uppercase tracking-widest border border-slate-200">
                                         NEWS #{startIdx + idx + 1}
                                     </span>
-                                    <div className="flex items-center gap-1 text-[10px] text-blue-400 font-bold">
-                                        <PlayCircle className="w-3 h-3" /> Live
+                                    <div className="flex items-center gap-1 text-[10px] text-blue-600 font-bold bg-blue-50 px-2 py-1 rounded-full">
+                                        <PlayCircle className="w-3 h-3 fill-current" /> Live
                                     </div>
                                 </div>
 
-                                <h3 className="text-xl font-black text-white mb-4 leading-snug line-clamp-2 min-h-[3.5rem]">
+                                <h3 className="text-lg font-black text-slate-900 mb-4 leading-snug line-clamp-2 min-h-[3.5rem] tracking-tight">
                                     {item.free_tier.title}
                                 </h3>
 
-                                <p className="text-sm text-slate-400 leading-relaxed mb-6 line-clamp-3 min-h-[4.5rem]">
+                                <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 line-clamp-3 min-h-[4.5rem]">
                                     {item.free_tier.summary_kr || item.free_tier.summary || "데이터 로딩 중..."}
                                 </p>
                             </div>
 
                             <div className="relative group/box mt-auto">
-                                <div className={`bg-[#050b14] border border-slate-800 rounded-xl p-5 hover:border-[#00ffbd]/30 transition-colors cursor-pointer`}>
+                                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:bg-blue-50/50 hover:border-blue-200 transition-colors cursor-pointer group-hover/box:shadow-inner">
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-2">
-                                            <Zap className="w-3 h-3 text-[#00ffbd] fill-[#00ffbd]" />
-                                            <span className="text-[10px] font-black text-[#00ffbd] uppercase tracking-widest">AI Analysis</span>
+                                            <Zap className="w-4 h-4 text-blue-600 fill-blue-600" />
+                                            <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">AI Analysis</span>
                                         </div>
-                                        <Link href={`/analysis/news-us-${startIdx + idx}`} className="text-[9px] font-black text-slate-500 hover:text-[#00ffbd] uppercase flex items-center gap-1 transition-colors">
+                                        <Link href={`/analysis/news-us-${startIdx + idx}`} className="text-[9px] font-black text-slate-400 hover:text-blue-600 uppercase flex items-center gap-1 transition-colors">
                                             Full Report <ChevronRight className="w-3 h-3" />
                                         </Link>
                                     </div>
-                                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                                    <p className="text-xs text-slate-600 font-bold leading-relaxed line-clamp-2">
                                         {insightContent || insightTitle}
                                     </p>
                                 </div>
