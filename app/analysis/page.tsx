@@ -164,7 +164,7 @@ function AnalysisContent() {
                                 className="absolute right-2 top-2 bottom-2 md:right-3 md:top-3 md:bottom-3 w-12 md:w-auto px-0 md:px-8 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-full md:rounded-[1.5rem] font-black text-xs md:text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                             >
                                 {scanning ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Search className="w-5 h-5 md:w-4 md:h-4" />}
-                                <span className="hidden md:inline">{scanning ? '분석 중...' : 'DEEP SCAN'}</span>
+                                <span className="hidden md:inline">{scanning ? '분석 중...' : '심층 분석기'}</span>
                             </button>
                         </div>
                     </div>

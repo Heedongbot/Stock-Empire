@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+import hashlib
 from datetime import datetime
 import time
 import random
@@ -109,8 +110,14 @@ class StockNewsCrawler:
                 pub_date = item.pubDate.text
                 description = item.description.text if item.description else ""
                 
+                # Use stable MD5 hash for ID
+                link_hash = hashlib.md5(link.encode()).hexdigest()[:12]
+                
+                # Use stable MD5 hash for ID
+                link_hash = hashlib.md5(link.encode()).hexdigest()[:12]
+                
                 news_items.append({
-                    'id': f"yh_{hash(link)}",
+                    'id': f"yh_{link_hash}",
                     'source': 'Yahoo Finance',
                     'title': title,
                     'excerpt': description,
@@ -141,8 +148,11 @@ class StockNewsCrawler:
                 time_span = text_div.find('span', class_='date')
                 pub_time = time_span.text if time_span else ""
                 
+                # Use stable MD5 hash for ID
+                link_hash = hashlib.md5(link.encode()).hexdigest()[:12]
+                
                 news_items.append({
-                    'id': f"iv_{hash(link)}",
+                    'id': f"iv_{link_hash}",
                     'source': 'Investing.com',
                     'title': title,
                     'excerpt': excerpt,

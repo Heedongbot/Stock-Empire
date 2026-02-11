@@ -83,9 +83,9 @@ function ThemeContent() {
                             <span className="text-xs font-black text-blue-600 uppercase tracking-[0.3em]">테마 인텔리전스</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter text-slate-900 uppercase leading-none">
-                            Sector <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Scanner</span>
+                            테마 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">스캐너</span>
                         </h1>
-                        <p className="text-slate-500 text-sm mt-4 font-bold uppercase tracking-widest italic">섹터별 흐름과 기관 수급 분석 결과 공유 (Public Access)</p>
+                        <p className="text-slate-500 text-sm mt-4 font-bold uppercase tracking-widest italic">섹터별 흐름과 기관 수급 분석 결과 공유 (실시간)</p>
                     </div>
 
                     <div className="relative w-full md:w-80">
@@ -163,7 +163,7 @@ function ThemeContent() {
                                 <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight truncate relative z-10">
                                     {STOCK_LIST.find(s => s.ticker === sig.ticker)?.name || sig.name}
                                 </h3>
-                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-8 relative z-10 italic">Institutional Pulse Sync</p>
+                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-8 relative z-10 italic">기관 수급 실시간 동기화</p>
 
                                 <div className="grid grid-cols-1 gap-4 mb-8 flex-1 relative z-10">
                                     <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex justify-between items-center">

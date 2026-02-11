@@ -54,7 +54,13 @@ export default function NewsroomPage() {
             try {
                 const res = await fetch('/api/news');
                 const data = await res.json();
-                setNews(data);
+
+                // 중복 제거 (ID 기준)
+                const uniqueNews = data.filter((item: NewsItem, index: number, self: NewsItem[]) =>
+                    index === self.findIndex((t) => t.id === item.id)
+                );
+
+                setNews(uniqueNews);
             } catch (error) {
                 console.error('Failed to fetch news:', error);
             } finally {
