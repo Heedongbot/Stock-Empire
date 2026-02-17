@@ -2,7 +2,7 @@
   {
     "id": "yh_1b2f832404c3",
     "published_at": "2026-02-17T14:34:17Z",
-    "crawled_at": "2026-02-17T23:44:53.027401",
+    "crawled_at": "2026-02-17T23:51:29.595873",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/live/stock-market-today-nasdaq-sp-500-slide-to-kick-off-shortened-week-with-ai-fears-in-focus-143417547.html",
     "sentiment": "BEARISH",
@@ -15,9 +15,32 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 90,
-        "summary_kr": "주식 시장이 단기 주간의 첫날인 오늘 나스닥과 S&P 500에서 하락세를 보이고 있는 가운데, 인공지능(AI)에 대한 우려가 커지고 있습니다.",
-        "valuable_insight": "AI 관련 종목들이 하락세를 보이는 것은 시장의 전반적인 불안감을 나타냅니다. 특히, 엔비디아(Nvidia)와 테슬라(Tesla) 같은 주요 기업들이 AI와 관련하여 낮은 실적이나 조정 우려로 인해 타격을 받을 수 있습니다. 향후 몇 주간의 시장 흐름은 고용 데이터와 인플레이션 지표에 따라 큰 변화를 겪을 수 있으며, 이러한 키 데이터 포인트들이 시장 심리에 미치는 영향이 중요할 것으로 예상됩니다.",
+        "impact_score": 88,
+        "summary_kr": "AI 우려로 Nasdaq 및 S&P 500이 하락세를 보이며 주간 거래를 시작했습니다. 주식 시장의 기술주가 이번 주의 주목해야 할 주요 포인트로 부각되고 있습니다.",
+        "valuable_insight": "AI 기술에 대한 우려가 시장에 부정적인 영향을 미치고 있으며, 특히 Nvidia와 Tesla와 같은 기술주가 이에 따라 시장에서 주요한 변동성을 보이고 있습니다. 투자자들은 이러한 초기 하락세가 과도한 반응인지, 아니면 AI 투자에 대한 보다 근본적인 리스크를 반영하고 있는지를 면밀히 관찰해야 합니다. 주요 데이터 포인트인 소비자 물가 지수(CPI) 발표가 다가오고 있어, 이는 향후 금리 정책과 연관되어 더욱 중요한 시장의 방향성을 예측하게 될 것입니다.",
+        "is_indicator": true
+      }
+    }
+  },
+  {
+    "id": "yh_731c9bd84b39",
+    "published_at": "2026-02-17T12:31:18Z",
+    "crawled_at": "2026-02-17T23:51:53.450684",
+    "source": "Yahoo Finance",
+    "link": "https://finance.yahoo.com/research/reports/ARGUS_46171_TopBottomInsiderActivity_1771331478000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+    "sentiment": "BULLISH",
+    "is_breaking": true,
+    "free_tier": {
+      "title": "일일 – 2026년 2월 17일 Vickers 상위 구매자 및 판매자",
+      "title_en": "Daily – Vickers Top Buyers & Sellers for 02/17/2026",
+      "summary_kr": "",
+      "original_source": "Yahoo Finance"
+    },
+    "vip_tier": {
+      "ai_analysis": {
+        "impact_score": 95,
+        "summary_kr": "이번 Vickers Top Buyers & Sellers의 발표는 상대적으로 민감한 시장 주식들의 움직임을 반영하고 있습니다. 특히, Nvidia, Tesla, Apple과 같은 대형 기술주의 매매 패턴이 주목됩니다.",
+        "valuable_insight": "Vickers의 매수 및 매도 데이터는 대형 기술주가 다시 한 번 시장을 선도할 가능성을 시사합니다. 특히, AI 및 전기차 섹터의 강세가 지속될 경우, Nvidia와 Tesla 같은 주식은 수익 증가의 기회를 높일 수 있습니다. Key Data Point로는 최근 기업 실적 발표가 주가에 미치는 영향이 있으며, 그에 따라 발생할 수 있는 변동성을 투자자들이 주목해야 할 시점입니다.",
         "is_indicator": true
       }
     }
@@ -25,7 +48,7 @@
   {
     "id": "yh_2a7f1a615de2",
     "published_at": "2026-02-17T13:59:38Z",
-    "crawled_at": "2026-02-17T23:45:21.894880",
+    "crawled_at": "2026-02-17T23:51:58.455830",
     "source": "Yahoo Finance",
     "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-nvidia-stock-nvda-extends-losses/?src=A00220&yptr=yahoo",
     "sentiment": "BEARISH",
@@ -38,9 +61,9 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 85,
-        "summary_kr": "오늘 주식 시장에서 다우지수와 기술 주식 선물은 하락세를 보이고 있으며, 특히 Nvidia, Palantir, Tesla가 추가적인 손실을 겪고 있습니다.",
-        "valuable_insight": "현재의 연속적인 하락세 속에서 반도체 및 전기차 섹터는 심각한 압박을 받고 있습니다. Nvidia와 같은 기업은 높은 평가 이익비율에도 불구하고 지속적으로 하락하고 있으며, 이는 시장의 신뢰도가 약해지고 있음을 나타냅니다. 향후 발표될 소비자 물가지수(CPI)는 이러한 하락세에 큰 영향을 미칠 것으로 예상되며, 이는 투자자들이 다시 시장을 평가하는 데 중요한 'Key Data Point'가 될 것입니다.",
+        "impact_score": 90,
+        "summary_kr": "미국 주식 시장은 다우와 기술주 선물이 하락하며 인베이디아, 팔란티어, 테슬라가 손실 폭을 확장하고 있습니다.",
+        "valuable_insight": "이번 손실은 기술주와 반도체 산업 전반에 걸친 우려를 반영하고 있습니다. 특히 인베이디아는 반도체 공급망 및 수요는 COVID-19 이후 회복세에 있음에도 불구하고, 금리 인상과 인플레이션 우려로 투자자들의 심리가 위축되고 있습니다. 주요 경제 지표인 CPI는 통화 정책에 결정적인 영향을 미칠 것으로 보이며, 이는 향후 기술주에 대한 투자 심리를 더욱 위축시킬 수 있습니다.",
         "is_indicator": true
       }
     }
@@ -48,7 +71,7 @@
   {
     "id": "yh_f275ee9957b8",
     "published_at": "2026-02-17T13:59:23Z",
-    "crawled_at": "2026-02-17T23:45:33.505869",
+    "crawled_at": "2026-02-17T23:52:04.337020",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/cloudflare-net-builds-global-edge-135923696.html",
     "sentiment": "BULLISH",
@@ -61,9 +84,9 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "Cloudflare가 글로벌 엣지 플랫폼을 통해 보안 및 성능 수요를 포착하고 있다는 소식.",
-        "valuable_insight": "클라우드 컴퓨팅 및 사이버 보안 분야는 최근 급격한 성장을 보여주고 있으며, Cloudflare의 새로운 플랫폼은 이 두 가지의 수요를 동시에 충족시키려는 전략으로 해석될 수 있습니다. 특히, 엔터프라이즈 고객의 증가와 함께 보안 솔루션의 중요성이 부각되면서, 해당 부문에서의 경쟁력이 더욱 강화될 것입니다. 향후 데이터 유출이나 사이버 공격이 증가할 것으로 예상되는 만큼, Cloudflare의 전략은 자산 가치를 더욱 높일 가능성이 큽니다. 주요 데이터 포인트로는 최근 3개월 동안 Cloudflare의 매출 성장률이 15%에 이른 점을 들 수 있겠습니다.",
+        "impact_score": 65,
+        "summary_kr": "클라우드플레어가 글로벌 엣지 플랫폼을 구축함으로써 보안 및 성능 수요를 포착하려고 합니다. 이는 기술주와 사이버 보안 산업에 긍정적인 영향을 미칠 수 있습니다.",
+        "valuable_insight": "클라우드플레어의 새로운 플랫폼은 사이버 보안과 데이터 전송 속도를 동시에 개선하고자 하며, 이는 고객의 판로를 확장하고 이익률을 향상시킬 수 있는 기회를 제공합니다. 특히, 클라우드 기반 서비스에 대한 수요가 증가하는 가운데 전 세계적으로 데이터 보호와 네트워크 성능은 기업들의 중요한 투자 요소로 작용하고 있습니다. 'Key Data Point'로는 최근 기업들의 IT 보안 투자 증가 추세를 들 수 있습니다.",
         "is_indicator": false
       }
     }
@@ -71,10 +94,10 @@
   {
     "id": "yh_b5041ff7cb41",
     "published_at": "2026-02-17T13:57:28Z",
-    "crawled_at": "2026-02-17T23:45:43.739381",
+    "crawled_at": "2026-02-17T23:52:15.358930",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/software-stock-bulls-are-still-making-a-lethal-assumption-135728557.html",
-    "sentiment": "NEUTRAL",
+    "sentiment": "BEARISH",
     "is_breaking": true,
     "free_tier": {
       "title": "소프트웨어 주식 강세론자들은 여전히 ​​치명적인 가정을 하고 있습니다.",
@@ -84,9 +107,9 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "소프트웨어 주식의 상승세가 지속되고 있지만, 투자자들은 경고 신호를 간과하고 있는 듯하다.",
-        "valuable_insight": "소프트웨어 주식의 상승세가 지속되는 가운데, 투자자들이 이러한 주식의 실질적인 가치를 평가하기보다 기술 혁신과 시장 점유율의 확대만을 집중하고 있다. 하지만 경제 지표인 CPI 상승, 금리 인상 가능성 등은 소프트웨어 기업의 이익 마진에 부정적인 영향을 미칠 수 있다. 특히, NVIDIA와 같은 AI 중심 기업들은 메모리 칩 수급 전망에 따라 파생되는 리스크를 고민해야 하며, 앞으로의 투자 결정에서 이러한 '핵심 데이터 포인트'를 반드시 고려해야 한다.",
+        "impact_score": 85,
+        "summary_kr": "소프트웨어 주식 투자자들은 여전히 치명적인 가정을 하고 있다.",
+        "valuable_insight": "소프트웨어 주식의 상승세는 인공지능 및 클라우드 컴퓨팅의 수요 증가에 기반하고 있지만, 이러한 가정이 지속될 것이라는 믿음은 불확실하다. 최근의 고용 지표 및 소비자 물가 지수(CPI)는 인플레이션 압력이 여전히 존재함을 보여주며, 이는 추가 금리 인상을 초래할 수 있다. 이러한 환경에서 소프트웨어 주식이 과대 평가될 위험이 있으므로 투자자들은 변동성에 대비해야 한다. '핵심 데이터 포인트'는 현재 물가 상승률로, 이는 중기적으로 기술주 성과에 큰 영향을 미칠 것이다.",
         "is_indicator": true
       }
     }
@@ -94,7 +117,7 @@
   {
     "id": "yh_c05ed82ba63d",
     "published_at": "2026-02-17T13:52:33Z",
-    "crawled_at": "2026-02-17T23:45:50.028416",
+    "crawled_at": "2026-02-17T23:52:20.773487",
     "source": "Yahoo Finance",
     "link": "https://finance.yahoo.com/news/carvana-co-cvna-sustains-rapid-135233904.html",
     "sentiment": "BULLISH",
@@ -107,78 +130,9 @@
     },
     "vip_tier": {
       "ai_analysis": {
-        "impact_score": 70,
-        "summary_kr": "카바나는 빠른 유닛 성장을 유지하며 대출 불안이 완화되고 있습니다.",
-        "valuable_insight": "카바나의 상승세는 중고차 시장의 전반적인 회복세와 소비자 신뢰 지표의 개선과 함께 뒷받침되고 있습니다. 특히, 대출 불안이 해소되면서 소비자들의 구매력이 증대하고 있으며, 이는 CVNA의 매출 증가에도 긍정적인 영향을 미칠 것으로 예상됩니다. 향후 몇 분기 동안 업계의 이자율 변화와 공급망 회복 여부를 주의 깊게 살펴보는 것이 중요합니다. Key Data Point: 카바나의 지난 분기 유닛 판매 증가율은 25%로 기록되었습니다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_bcbf5bb2b500",
-    "published_at": "2026-02-17T13:50:29Z",
-    "crawled_at": "2026-02-17T23:45:56.702084",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/klaviyo-kvyo-revenue-acceleration-international-135029625.html",
-    "sentiment": "BULLISH",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "Klaviyo(KVYO) 수익 가속화 및 국제 모멘텀 하이라이트 플랫폼 진화",
-      "title_en": "Klaviyo (KVYO) Revenue Acceleration and International Momentum Highlight Platform Evolution",
-      "summary_kr": "",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 75,
-        "summary_kr": "Klaviyo는 수익 가속과 국제 시장에서의 모멘텀을 강조하며 플랫폼의 진화를 보여주고 있습니다.",
-        "valuable_insight": "Klaviyo의 성장세는 디지털 마케팅 및 SaaS(Software as a Service) 섹터에 긍정적인 신호를 보냅니다. 고객 기반의 확장과 해외 진출은 회사의 장기적 성장을 위한 전략적 요소이며, 마케팅 자동화 솔루션에 대한 수요의 증가가 원인 중 하나입니다. 'Key Data Point': 최근 분기 기준 연간 매출 성장률이 30%에 달하며, 이는 업계 평균을 크게 웃도는 수치입니다. 이러한 성과는 경쟁사인 Salesforce 및 HubSpot에도 압박을 가할 것으로 예상됩니다.",
-        "is_indicator": false
-      }
-    }
-  },
-  {
-    "id": "yh_36615474dbfa",
-    "published_at": "2026-02-17T12:31:18Z",
-    "crawled_at": "2026-02-17T23:46:01.639467",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/research/reports/ARGUS_46170_InsiderActivity_1771331478000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
-    "sentiment": "BULLISH",
-    "is_breaking": true,
-    "free_tier": {
-      "title": "일일 – 2026년 2월 17일 Vickers 최고 내부자 추천",
-      "title_en": "Daily – Vickers Top Insider Picks for 02/17/2026",
-      "summary_kr": "",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 90,
-        "summary_kr": "2026년 2월 17일 Vickers의 상위 내부자 주식 추천에 대한 분석입니다.",
-        "valuable_insight": "이번 내부자 거래 데이터는 특히 기술 및 자동차 산업 내의 주요 기업들에 대한 긍정적인 신호를 보여줍니다. NVIDIA와 Tesla의 내부자들이 대량 매수에 나섰으며, 이는 해당 기업의 미래 성장 가능성에 대한 강한 믿음을 시사합니다. 또한 이번 추천 주식들은 AI 및 전기차 시장의 발전과 밀접하게 연결되어 있어 향후 업계 트렌드에도 영향을 미칠 수 있습니다. 키 데이터 포인트로는 NVIDIA의 그래픽 처리 시장 점유율이 계속 증가하고 있다는 점이 있습니다.",
-        "is_indicator": true
-      }
-    }
-  },
-  {
-    "id": "yh_464100062808",
-    "published_at": "2026-02-17T14:31:00Z",
-    "crawled_at": "2026-02-17T23:46:13.838619",
-    "source": "Yahoo Finance",
-    "link": "https://finance.yahoo.com/news/shopifys-whiplash-day-143100860.html",
-    "sentiment": "NEUTRAL",
-    "is_breaking": false,
-    "free_tier": {
-      "title": "Shopify의 위플래시 데이(Whiplash Day)",
-      "title_en": "Shopify's Whiplash Day",
-      "summary_kr": "",
-      "original_source": "Yahoo Finance"
-    },
-    "vip_tier": {
-      "ai_analysis": {
-        "impact_score": 70,
-        "summary_kr": "쇼피파이의 주가가 하루 동안 급등락하며 시장의 주목을 받았다.",
-        "valuable_insight": "이번 쇼피파이의 주가는 전자상거래 및 주식 시장의 전반적인 변동성을 반영하는 중요한 사례로 볼 수 있다. 특히, e커머스 분야가 얼마나 빠르게 회복세를 보이는지, 그리고 기업의 실적 발표가 개별 주식에 미치는 영향을 시사한다. 향후 주요 기업들의 실적 발표가 예정되어 있으며, 이는 전체 소매업체 및 테크 중심의 주식에 큰 영향을 미칠 것으로 예상된다. '핵심 데이터 포인트'로는 쇼피파이의 월간 활성 사용자 수 증가율이 있으며, 이는 향후 전자상거래 성장을 가늠하는 중요한 지표가 될 것이다.",
+        "impact_score": 65,
+        "summary_kr": "Carvana Co.는 대출 우려가 완화됨에 따라 빠른 유닛 성장을 지속하고 있으며, 이는 자동차 렌탈 및 중고차 시장의 회복 신호를 나타냅니다.",
+        "valuable_insight": "Carvana의 유닛 성장은 소비자 신뢰 회복과 함께 리테일 자동차 시장의 회복을 반영하며, 이는 중고차 가격의 안정화를 시사합니다. 더욱이, 특히 금리가 안정세를 보일 경우, 중고차 구매 수요가 증가할 가능성이 큽니다. 'Key Data Point'로, 최근의 소비자 신뢰 지수가 자동차 구매 결정에 중요한 역할을 할 것이라는 점이 주목할 만합니다.",
         "is_indicator": false
       }
     }
