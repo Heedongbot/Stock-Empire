@@ -6,25 +6,29 @@ import { useEffect } from 'react';
 export default function AdInFeed() {
     useEffect(() => {
         try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            if (typeof window !== 'undefined') {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            }
         } catch (err) {
             console.error('AdSense error', err);
         }
     }, []);
 
+    const adClientId = process.env.NEXT_PUBLIC_ADSENSE_ID || '9538835439937351';
+
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden group hover:border-slate-700 transition-all">
+        <div className="w-full bg-slate-50/50 border border-slate-200 rounded-[2.5rem] p-6 md:p-10 relative overflow-hidden group transition-all">
             <div className="flex justify-between items-start mb-4">
-                <span className="text-[10px] font-black text-slate-500 bg-slate-950 px-2 py-1 rounded">SPONSORED</span>
+                <span className="text-[9px] font-black text-slate-300 bg-white border border-slate-100 px-3 py-1 rounded-full tracking-widest uppercase">Sponsored</span>
             </div>
 
-            <div className="min-h-[200px] flex items-center justify-center bg-slate-950/30 rounded-2xl">
+            <div className="min-h-[250px] flex items-center justify-center bg-white/50 rounded-3xl border border-dashed border-slate-200">
                 <ins
                     className="adsbygoogle"
-                    style={{ display: 'block', width: '100%' }}
+                    style={{ display: 'block', minWidth: '250px', minHeight: '250px' }}
                     data-ad-format="fluid"
                     data-ad-layout-key="-fb+5w+4e-db+86"
-                    data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_ADSENSE_ID || '0000000000000000'}`}
+                    data-ad-client={`ca-pub-${adClientId}`}
                     data-ad-slot="0987654321"
                 />
             </div>
