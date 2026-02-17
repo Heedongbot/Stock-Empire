@@ -18,6 +18,7 @@ interface NewsItem {
         ai_analysis: {
             summary_kr: string;
             impact_score: number;
+            valuable_insight?: string;
         };
     };
 }
@@ -167,8 +168,8 @@ export default function LatestNewsInsights() {
                                             <Newspaper className="w-4 h-4 text-slate-400" />
                                         </div>
                                         <div className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 ${(item.vip_tier?.ai_analysis?.impact_score || 0) >= 80
-                                                ? 'bg-red-50 text-red-600 ring-1 ring-red-100'
-                                                : 'bg-slate-50 text-slate-500'
+                                            ? 'bg-red-50 text-red-600 ring-1 ring-red-100'
+                                            : 'bg-slate-50 text-slate-500'
                                             }`}>
                                             {(item.vip_tier?.ai_analysis?.impact_score || 0) >= 80 && <Zap className="w-3 h-3 fill-current animate-pulse" />}
                                             IMPACT {(item.vip_tier?.ai_analysis?.impact_score || 0)}
@@ -176,7 +177,7 @@ export default function LatestNewsInsights() {
                                     </div>
 
                                     <div className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full flex items-center gap-1 ${item.sentiment === 'Positive' ? 'bg-red-50 text-red-600' :
-                                            item.sentiment === 'Negative' ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-500'
+                                        item.sentiment === 'Negative' ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-500'
                                         }`}>
                                         {item.sentiment === 'Positive' ? '호재 (Bullish)' : item.sentiment === 'Negative' ? '악재 (Bearish)' : '중립 (Neutral)'}
                                     </div>
@@ -192,8 +193,11 @@ export default function LatestNewsInsights() {
                                         <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] font-black text-blue-600 uppercase tracking-widest border border-blue-100 rounded-md">
                                             AI 3줄 요약
                                         </div>
-                                        <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-4">
-                                            {item.vip_tier?.ai_analysis?.summary_kr || item.free_tier?.summary_kr || "AI 분석 중입니다..."}
+                                        <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-5">
+                                            <span className="font-black text-slate-800">{item.vip_tier?.ai_analysis?.summary_kr}</span>
+                                            {item.vip_tier?.ai_analysis?.valuable_insight && (
+                                                <span className="block mt-2 opacity-80 italic">“{item.vip_tier.ai_analysis.valuable_insight}”</span>
+                                            )}
                                         </p>
                                     </div>
                                 </div>

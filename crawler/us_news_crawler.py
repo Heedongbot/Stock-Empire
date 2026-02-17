@@ -173,19 +173,22 @@ class StockNewsCrawler:
             }
         
         prompt = f"""
-        Analyze this US market news for professional stock traders:
+        Analyze this US market news for professional stock traders and retail investors. 
+        Your goal is to provide 'High Value' unique insights that aren't visible from the headline alone.
+        
         Title: {item['title']}
         Excerpt: {item['excerpt']}
         
         CRITICAL RULES:
         1. Focus ONLY on things that move STOCK PRICES (Nvidia, Tesla, Apple, etc.) or macro-economic indicators (CPI, Jobs, FOMC, GDP).
-        2. If the news is about politics (unless it impacts stocks), celebrity, general tech not related to investment, or low-impact news, return impact_score: 0.
-        3. For economic indicators (e.g., Inflation, Jobs report, Interest rates), give it a HIGH score (>85).
+        2. If the news is low-impact, return impact_score: 0.
+        3. For economic indicators, give it a HIGH score (>85).
         
         Return JSON format: 
         {{
             "impact_score": int (0-100),
-            "summary_kr": "1-sentence sharp expert analysis in Korean (Expert Boss style). Why does this matter for MONEY?",
+            "summary_kr": "Sharp expert analysis in Korean (Expert Boss style).",
+            "valuable_insight": "A unique, deep financial perspective (3-4 sentences in Korean) that adds significant value beyond basic summary. Mention sector impact, future outlook, and 'Key Data Point'.",
             "market_sentiment": "BULLISH/BEARISH/NEUTRAL",
             "is_indicator": boolean (true if this is a macro-economic indicator announcement)
         }}
@@ -248,6 +251,7 @@ class StockNewsCrawler:
                             'ai_analysis': {
                                 'impact_score': ai_data.get('impact_score', 50),
                                 'summary_kr': ai_data.get('summary_kr', '분석 중...'),
+                                'valuable_insight': ai_data.get('valuable_insight', ''),
                                 'is_indicator': ai_data.get('is_indicator', False)
                             }
                         }

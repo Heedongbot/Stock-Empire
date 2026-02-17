@@ -779,8 +779,8 @@ def process_news_batch():
     # 3. 포스팅 대상 선정 (아직 안 올린 것 중 최신순)
     target_news_list = []
     for news in news_list:
-        news_id = news.get('link') or news.get('title')
-        if news_id not in history:
+        news_id = news.get('id') or news.get('link') or news.get('title')
+        if news_id and news_id not in history:
             target_news_list.append(news)
     
     if not target_news_list:
@@ -804,7 +804,7 @@ def process_news_batch():
 
         # 5. 순차 포스팅 (한 번에 최대 3개까지만 - 계정 보호)
         count = 0
-        for news in target_news_list[:3]:
+        for news in target_news_list[:1]:
             try:
                 # 데이터 추출
                 free_data = news.get('free_tier', {})
@@ -925,8 +925,9 @@ def process_news_batch():
                 
                 # 포스팅 실행
                 if poster.post(title, content, tags):
-                    news_id = news.get('link') or news.get('title')
-                    history.append(news_id)
+                    news_id = news.get('id') or news.get('link') or news.get('title')
+                    if news_id:
+                        history.append(news_id)
                     save_history(history)
                     count += 1
                     print(f"[SUCCESS] 포스팅 성공! (이번 배치: {count}개)")
@@ -986,6 +987,10 @@ if __name__ == "__main__":
     print("   - 긴급 특보: 주요 지표/속보 발생 시 즉시 가동      ")
     print("   - 상태: 1분 단위로 모니터링 중... (Ctrl+C로 중단)  ")
     print("="*60 + "\n")
+
+    print("[START] 시작과 동시에 최신 뉴스 유무를 먼저 확인합니다...")
+    process_news_batch()
+    print("\n[INFO] 초기 점검 완료. 실시간 모니터링 체제로 전환합니다.\n")
 
     while True:
         try:

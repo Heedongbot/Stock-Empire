@@ -60,8 +60,8 @@ export default function Dashboard() {
         };
 
         fetchDashboardData();
-        // Refresh every 5 minutes
-        const interval = setInterval(fetchDashboardData, 300000);
+        // Refresh every 30 seconds for a real-time feel
+        const interval = setInterval(fetchDashboardData, 30000);
         return () => clearInterval(interval);
     }, []);
 

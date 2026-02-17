@@ -14,8 +14,9 @@ export default function SiteFooter() {
 
                 <div className="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-500">
                     <Link href="/about" className="hover:text-[#00ffbd] transition-colors">About Us</Link>
-                    <Link href="/terms" className="hover:text-[#00ffbd] transition-colors">Terms & Operations</Link>
-                    <a href="mailto:support@stockempire.com" className="hover:text-[#00ffbd] transition-colors">Contact</a>
+                    <Link href="/terms" className="hover:text-[#00ffbd] transition-colors">Terms of Service</Link>
+                    <Link href="/privacy" className="hover:text-[#00ffbd] transition-colors">Privacy Policy</Link>
+                    <a href="mailto:66683@naver.com" className="hover:text-[#00ffbd] transition-colors">Contact</a>
                 </div>
             </div>
         </footer>

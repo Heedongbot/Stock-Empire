@@ -113,6 +113,8 @@ export default function Home() {
       }
     };
     fetchMarketData();
+    const interval = setInterval(fetchMarketData, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   // 알파 시그널 페칭 (전면 무료화에 따라 모든 유저에게 공개)
@@ -131,6 +133,8 @@ export default function Home() {
       }
     };
     fetchSignals();
+    const interval = setInterval(fetchSignals, 60000);
+    return () => clearInterval(interval);
   }, [lang]);
 
   return (

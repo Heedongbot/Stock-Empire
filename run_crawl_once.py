@@ -1,5 +1,5 @@
 from crawler.us_news_crawler import StockNewsCrawler
-from crawler.kr_crawler import KRNewsCrawler
+# from crawler.kr_crawler import KRNewsCrawler
 from crawler.alpha_analyzer import AlphaAnalyzer
 import sys
 
@@ -12,9 +12,9 @@ def run_once():
         crawler.save(news)
         
         # 2. Update KR Market News
-        print("\n--- [2/3] Updating KR Market News ---")
-        kr_crawler = KRNewsCrawler()
-        kr_crawler.crawl()
+        # print("\n--- [2/3] Updating KR Market News ---")
+        # kr_crawler = KRNewsCrawler()
+        # kr_crawler.crawl()
 
         # 3. Update VVIP Alpha Signals
         print("\n--- [3/3] Updating VVIP Alpha Stock Signals ---")

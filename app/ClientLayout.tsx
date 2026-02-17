@@ -12,6 +12,7 @@ import InstallPWA from "@/components/InstallPWA";
 import VisitorTracker from "@/components/VisitorTracker";
 import BreakingNewsToast from "./components/BreakingNewsToast";
 import SponsorshipSection from "@/components/SponsorshipSection";
+import LiveTicker from "@/components/LiveTicker";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -44,6 +45,7 @@ export default function ClientLayout({
         <ClerkProvider publishableKey={publishableKey} localization={koKR} afterSignOutUrl="/">
             <AuthProvider>
                 <div className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+                    <LiveTicker />
                     <div className="flex-grow">
                         {children}
                     </div>

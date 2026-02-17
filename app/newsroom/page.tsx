@@ -27,6 +27,7 @@ interface NewsItem {
         ai_analysis: {
             summary_kr: string;
             impact_score: number;
+            valuable_insight?: string;
         };
     };
 }
@@ -199,9 +200,17 @@ export default function NewsroomPage() {
                                                                 자세히 보기 <ChevronRight className="w-4 h-4" />
                                                             </button>
                                                         </div>
-                                                        <p className="text-[16px] text-slate-800 leading-relaxed font-bold">
+                                                        <p className="text-[16px] text-slate-800 leading-relaxed font-bold mb-4">
                                                             {item.vip_tier.ai_analysis.summary_kr}
                                                         </p>
+
+                                                        {item.vip_tier.ai_analysis.valuable_insight && (
+                                                            <div className="bg-white/60 p-5 rounded-2xl border border-blue-100 shadow-sm mb-4">
+                                                                <p className="text-sm font-medium text-slate-700 leading-relaxed italic">
+                                                                    {item.vip_tier.ai_analysis.valuable_insight}
+                                                                </p>
+                                                            </div>
+                                                        )}
 
                                                         <div className="mt-8 pt-8 border-t border-slate-200 grid grid-cols-2 md:grid-cols-4 gap-6">
                                                             <div className="flex flex-col gap-1">
